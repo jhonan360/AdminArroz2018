@@ -11,7 +11,7 @@ import Interfaces.Bascula;
 import Interfaces.Tipo_Arroz;
 import Interfaces.Conductor;
 import Interfaces.Agricultor;
-import Interfaces.Zona;
+import Interfaces.Lote;
 import Interfaces.Login;
 import Interfaces.Vehiculo;
 import Interfaces.BusquedasTiquete;
@@ -34,7 +34,7 @@ public class bascula {
     public static Conductor Conductor;
     public static Agricultor Agricultor;
     public static Vehiculo Vehiculo;
-    public static Zona Zona;
+    public static Lote Zona;
     public static Login Login;
     public static login login;
     public static BusquedasTiquete BusTiquete;
@@ -96,8 +96,8 @@ public class bascula {
     }
 
     public static void abrirZona() {
-        if (!(Zona instanceof Zona)) {
-            Zona = new Zona();
+        if (!(Zona instanceof Lote)) {
+            Zona = new Lote();
             Zona.setVisible(true);
         } else {
             Zona.setVisible(true);
@@ -174,12 +174,12 @@ public class bascula {
             Con.Conectar();
             st = Con.conexion.createStatement();
             Bas.cmbZona.removeAllItems();
-            rszona = st.executeQuery("SELECT idZona,nombre FROM zona");
+            rszona = st.executeQuery("SELECT idLote,nombre FROM lote");
             while (rszona.next()) {
                 Bas.cmbZona.addItem(rszona.getString(2));
             }
             String seleccion = (Bas.cmbZona.getSelectedItem().toString());
-            rszona2 = st.executeQuery("SELECT idZona FROM zona WHERE nombre='" + seleccion + "' ");
+            rszona2 = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + seleccion + "' ");
             while (rszona2.next()) {
                 String zona = rszona2.getString(1);
                 //System.out.println("zona" + zona);
@@ -194,7 +194,7 @@ public class bascula {
         try {
             Con.Conectar();
             st = Con.conexion.createStatement();
-            rszonas = st.executeQuery("SELECT idZona FROM zona WHERE nombre='" + nombre + "'");
+            rszonas = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + nombre + "'");
             while (rszonas.next()) {
                 return rszonas.getString(1);
             }

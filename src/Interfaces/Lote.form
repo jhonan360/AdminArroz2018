@@ -95,7 +95,7 @@
               <Font name="Tahoma" size="30" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="ZONA DE CULTIVOS"/>
+            <Property name="text" type="java.lang.String" value="LOTE DE CULTIVOS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">

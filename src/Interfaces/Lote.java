@@ -5,10 +5,10 @@
  */
 package Interfaces;
 
-//import Logica.Bascula.zona;
+//import Logica.Bascula.lote;
 
 
-import Logica.Bascula.zona;
+import Logica.Bascula.lote;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.validaciones;
 
@@ -23,12 +23,12 @@ import java.awt.event.ActionListener;
  * @author jhonansmith
  */
 
-public class Zona extends javax.swing.JFrame {
+public class Lote extends javax.swing.JFrame {
 
-//public static zona zona;
+//public static lote lote;
 
 
-    public static zona zona;
+    public static lote lote;
     public static validaciones vali;
     public static cargarCombo cargar;
 
@@ -36,10 +36,10 @@ public class Zona extends javax.swing.JFrame {
     /**
      * Creates new form Zona
      */
-    public Zona() {
+    public Lote() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        zona = new zona();
+        lote = new lote();
         cargar = new cargarCombo();
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
@@ -97,7 +97,7 @@ public class Zona extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("ZONA DE CULTIVOS");
+        jLabel17.setText("LOTE DE CULTIVOS");
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/zona.png"))); // NOI18N
         jLabel18.setPreferredSize(new java.awt.Dimension(80, 90));
@@ -442,52 +442,52 @@ public class Zona extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
 
-        //zona.crear_Zona();
+        //lote.crear_Zona();
 
-        zona.crearZona();
+        lote.crearLote();
 
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        //zona.row = jTable1.rowAtPoint(evt.getPoint());
+        //lote.row = jTable1.rowAtPoint(evt.getPoint());
 
-        //zona.tabla_campos();
+        //lote.tabla_campos();
 
 
 
         
 
-        zona.limpiar_registros();
-        zona.tabla_campos();
+        lote.limpiar_registros();
+        lote.tabla_campos();
 
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
 
-        //zona.consultar();
+        //lote.consultar();
 
-        zona.crearModelo();
+        lote.crearModelo();
 
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
 
-        //zona.limpiar_campos();
+        //lote.limpiar_campos();
 
-        zona.limpiar_registros();
+        lote.limpiar_registros();
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
 
-        zona.modificar();
+        lote.modificar();
 
 
-       zona.modificar();
+       lote.modificar();
 
 
 
@@ -495,8 +495,8 @@ public class Zona extends javax.swing.JFrame {
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
         // TODO add your handling code here:
-        zona.limpiar_registros();
-        zona.tabla_campos();
+        lote.limpiar_registros();
+        lote.tabla_campos();
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void chNombreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNombreItemStateChanged
@@ -531,14 +531,14 @@ public class Zona extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        zona.buscar();
+        lote.buscar();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     public void municipio() {
         cmbDepartamento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
-               //zona.cargarMunicipio((String) cmbDepartamento.getSelectedItem());    
+               //lote.cargarMunicipio((String) cmbDepartamento.getSelectedItem());    
 
                 cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
 
@@ -562,21 +562,23 @@ public class Zona extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Zona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Zona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Zona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Zona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Lote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Zona().setVisible(true);
+                new Lote().setVisible(true);
             }
         });
     }
@@ -593,10 +595,6 @@ public class Zona extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> cmbDepartamento;
     public static javax.swing.JComboBox<String> cmbMunicipio;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
@@ -607,8 +605,6 @@ public class Zona extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

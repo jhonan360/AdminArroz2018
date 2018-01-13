@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Andre/Documents/GitHub/AdmiArrozTry/src/Interfaces/Vehiculo.java</file>
-            <file>file:/C:/Users/Andre/Documents/GitHub/AdmiArrozTry/src/Interfaces/Tipo_Arroz.java</file>
-            <file>file:/C:/Users/Andre/Documents/GitHub/AdmiArrozTry/src/Logica/Bascula/agricultor.java</file>
-            <file>file:/C:/Users/Andre/Documents/GitHub/AdmiArrozTry/src/Interfaces/Agricultor.java</file>
-            <file>file:/C:/Users/Andre/Documents/GitHub/AdmiArrozTry/src/Interfaces/Zona.java</file>
+            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Empleado.java</file>
+            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Laboratorio.java</file>
+            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/laboratorio.java</file>
+            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Administracion/empleado.java</file>
+            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Administracion.java</file>
         </group>
     </open-files>
 </project-private>

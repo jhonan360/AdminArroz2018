@@ -567,6 +567,7 @@ public class Agricultor extends javax.swing.JFrame {
         // TODO add your handling code here:
         agr.crearModelo();
         agr.estado="crear";
+        agr.limpiar_registros();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
