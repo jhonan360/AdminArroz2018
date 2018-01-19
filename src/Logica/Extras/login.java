@@ -12,6 +12,9 @@ package Logica.Extras;
 import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 
+import Interfaces.Laboratorio_menu;
+import Logica.Laboratorio.laboratorio;
+
 import Logica.Bascula.conductor;
 import Logica.Gerencia.gerencia;
 
@@ -39,6 +42,8 @@ public class login {
     public static bascula Bas;
     public static conductor cond;
     public static Administracion admi;
+    
+    public static Laboratorio_menu Lab;
 
     public static Gerencia Ger;
     public boolean bandera = false;
@@ -116,7 +121,16 @@ public class login {
                             admi.setVisible(true);
                         }
                         bandera = true;
-                    } else if (priv.equals("gerencia") && estado.equals("activo") && priv.equals(perfil)) {
+                    }else if (priv.equals("laboratorio") && estado.equals("activo") && priv.equals(perfil)) {
+                        if (Lab == null) {
+                            Lab = new Laboratorio_menu();
+                            Lab.setVisible(true);
+                            enviarUsuario();
+                        } else {
+                            Lab.setVisible(true);
+                        }
+                        bandera = true;
+                    }  else if (priv.equals("gerencia") && estado.equals("activo") && priv.equals(perfil)) {
                         if (Ger == null) {
                             Ger = new Gerencia();
                             Ger.setVisible(true);

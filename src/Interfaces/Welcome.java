@@ -70,6 +70,11 @@ public class Welcome extends javax.swing.JFrame {
 
         btnLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/laboratorista.png"))); // NOI18N
         btnLab.setPreferredSize(new java.awt.Dimension(220, 220));
+        btnLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLabActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 20)); // NOI18N
         jLabel4.setText("Laboratorio");
@@ -188,6 +193,14 @@ public class Welcome extends javax.swing.JFrame {
         Login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnBasActionPerformed
+
+    private void btnLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabActionPerformed
+        // TODO add your handling code here:
+        Login.perfil = "laboratorio";
+        Login = new Login();
+        Login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLabActionPerformed
 
     /**
      * @param args the command line arguments

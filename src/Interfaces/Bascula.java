@@ -212,6 +212,12 @@ public class Bascula extends javax.swing.JFrame {
 
         txtPlaca.setEditable(false);
 
+        cmbTipoArroz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoArrozActionPerformed(evt);
+            }
+        });
+
         btnBuscarAgricultor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscarAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
         btnBuscarAgricultor.setText("Buscar");
@@ -519,6 +525,10 @@ public class Bascula extends javax.swing.JFrame {
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void cmbTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoArrozActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoArrozActionPerformed
 
     /**
      * @param args the command line arguments

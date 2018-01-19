@@ -38,6 +38,9 @@ public class Login extends javax.swing.JFrame {
         if (perfil.equals("bascula")) {
                 lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/bascula.png")));;
         }
+        if (perfil.equals("laboratorio")) {
+                lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/laboratorista.png")));;
+        }
     }
 
     /**
