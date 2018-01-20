@@ -17,13 +17,16 @@
 *.zip
 *.tar.gz
 *.rar
-nbproject/build-impl.xml
-nbproject/genfiles.properties
-nbproject/private/private.properties
-
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+<<<<<<< Updated upstream
 /nbproject/private/
+=======
+
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/private/private.properties
+>>>>>>> Stashed changes
 /build/
 /dist/

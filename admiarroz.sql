@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-11-2017 a las 04:36:35
+-- Tiempo de generación: 08-01-2018 a las 18:36:15
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.30
 
@@ -19,68 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `molino`
+-- Base de datos: `admiarroz`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logAgricultor` (IN `tipo` VARCHAR(2), IN `usuario` VARCHAR(30), IN `ccAgricultor1` VARCHAR(15), IN `nombres1` VARCHAR(45), IN `apellidos1` VARCHAR(45), IN `direccion1` VARCHAR(45), IN `idMunicipio1` INT(11))  MODIFIES SQL DATA
-IF tipo ='i' THEN
-INSERT INTO agricultorlog VALUES (0,tipo, NOW(),usuario,ccAgricultor1,nombres1,apellidos1,direccion1,idMunicipio1);
-ELSEIF tipo = 'a' THEN
-INSERT INTO agricultorlog VALUES (0,tipo, NOW(),usuario,ccAgricultor1,(SELECT nombres FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT apellidos FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT direccion FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT idMunicipio FROM agricultor WHERE ccAgricultor=ccAgricultor1));
-ELSEIF tipo = 'e' THEN
-INSERT INTO agricultorlog VALUES (0,tipo, NOW(),usuario,ccAgricultor1,(SELECT nombres FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT apellidos FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT direccion FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT idMunicipio FROM agricultor WHERE ccAgricultor=ccAgricultor1));
-ELSEIF tipo = 'ie' THEN
-INSERT INTO agricultorlog VALUES (0,tipo, NOW(),usuario,ccAgricultor1,(SELECT nombres FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT apellidos FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT direccion FROM agricultor WHERE ccAgricultor=ccAgricultor1),(SELECT idMunicipio FROM agricultor WHERE ccAgricultor=ccAgricultor1));
-END IF$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logBloqueado` (IN `user` VARCHAR(30))  NO SQL
-INSERT INTO bloqueado VALUES (0,NOW(),user)$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logConductor` (IN `tipo` VARCHAR(2), IN `usuario` VARCHAR(30), IN `ccConductor1` VARCHAR(15), IN `nombres1` VARCHAR(45), IN `apellidos1` VARCHAR(45), IN `telefono1` VARCHAR(12), IN `direccion1` VARCHAR(45), IN `idMunicipio1` INT(11))  NO SQL
-IF tipo ='i' THEN 
-INSERT INTO conductorlog VALUES (0,tipo, NOW(),usuario,ccConductor1,nombres1,apellidos1,telefono1,direccion1,idMunicipio1);
-ELSEIF tipo = 'a' THEN
-INSERT INTO conductorlog VALUES (0,tipo,NOW(),usuario,ccConductor1,(SELECT nombres FROM conductor WHERE ccConductor=ccConductor1),(SELECT apellidos FROM conductor WHERE ccConductor=ccConductor1),(SELECT telefono FROM conductor WHERE ccConductor=ccConductor1),(SELECT direccion FROM conductor WHERE ccConductor=ccConductor1),(SELECT idMunicipio FROM conductor WHERE ccConductor=ccConductor1));
-ELSEIF tipo = 'e' THEN
-INSERT INTO conductorlog VALUES (0,tipo,NOW(),usuario,ccConductor1,(SELECT nombres FROM conductor WHERE ccConductor=ccConductor1),(SELECT apellidos FROM conductor WHERE ccConductor=ccConductor1),(SELECT telefono FROM conductor WHERE ccConductor=ccConductor1),(SELECT direccion FROM conductor WHERE ccConductor=ccConductor1),(SELECT idMunicipio FROM conductor WHERE ccConductor=ccConductor1));
-ELSEIF tipo = 'ie' THEN
-INSERT INTO conductorlog VALUES (0,tipo,NOW(),usuario,ccConductor1,(SELECT nombres FROM conductor WHERE ccConductor=ccConductor1),(SELECT apellidos FROM conductor WHERE ccConductor=ccConductor1),(SELECT telefono FROM conductor WHERE ccConductor=ccConductor1),(SELECT direccion FROM conductor WHERE ccConductor=ccConductor1),(SELECT idMunicipio FROM conductor WHERE ccConductor=ccConductor1));
-END IF$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logTelAgri` (IN `tipo` VARCHAR(2), IN `usuario` VARCHAR(30), IN `idTelAgri1` INT(11), IN `telefono1` VARCHAR(12), IN `ccAgricultor1` VARCHAR(12))  NO SQL
-IF tipo ='i' THEN
-INSERT INTO telagrilog VALUES (0,tipo, NOW(),usuario,idTelAgri1,telefono1,ccAgricultor1);
-ELSEIF tipo = 'a' THEN
-INSERT INTO telagrilog VALUES (0,tipo, NOW(),usuario,idTelAgri1,(SELECT telefono FROM telagri WHERE idTelAgri),ccAgricultor1);
-ELSEIF tipo = 'e' THEN
-INSERT INTO telagrilog VALUES (0,tipo, NOW(),usuario,idTelAgri1,(SELECT telefono FROM telagri WHERE idTelAgri=idTelAgri1),ccAgricultor1);
-END IF$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logVehiculo` (IN `tipo` VARCHAR(2), IN `usuario` VARCHAR(30), IN `idplaca1` VARCHAR(6), IN `color1` VARCHAR(30), IN `modelo1` VARCHAR(30), IN `marca1` VARCHAR(30))  NO SQL
-IF tipo ='i' THEN
-INSERT INTO vehiculog VALUES (0,tipo,NOW(),usuario,idplaca1,color,modelo,marca);
-ELSEIF tipo = 'a' THEN 
-INSERT INTO vehiculog VALUES (0,tipo,NOW(),usuario,idplaca1,(SELECT color FROM vehiculo WHERE idplaca=idplaca1),(SELECT modelo FROM vehiculo WHERE idplaca=idplaca1),(SELECT marca FROM vehiculo WHERE idplaca=idplaca1));
-ELSEIF tipo = 'e' THEN 
-INSERT INTO vehiculog VALUES (0,tipo,NOW(),usuario,idplaca1,(SELECT color FROM vehiculo WHERE idplaca=idplaca1),(SELECT modelo FROM vehiculo WHERE idplaca=idplaca1),(SELECT marca FROM vehiculo WHERE idplaca=idplaca1));
-END IF$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `logZona` (IN `tipo` VARCHAR(2), IN `usuario` VARCHAR(30), IN `idZona1` INT(11), IN `nombre1` INT(45), IN `descrpcion1` TEXT, IN `idMunicipio1` INT(11))  NO SQL
-IF tipo ='i' THEN
-INSERT INTO zonalog VALUES (0,tipo, NOW(),usuario,idZona1,nombre1,descripcion1,idMunicipio1);
-ELSEIF tipo = 'a' THEN
-INSERT INTO zonalog VALUES (0,tipo, NOW(),usuario,(SELECT nombre FROM zona WHERE idZona=idZona1),(SELECT descripcion FROM zona WHERE idZona=idZona1),(SELECT idMunicipio FROM zona WHERE idZona=idZona1));
-ELSEIF tipo = 'e' THEN
-INSERT INTO zonalog VALUES (0,tipo, NOW(),usuario,(SELECT nombre FROM zona WHERE idZona=idZona1),(SELECT descripcion FROM zona WHERE idZona=idZona1),(SELECT idMunicipio FROM zona WHERE idZona=idZona1));
-ELSEIF tipo = 'ie' THEN
-INSERT INTO zonalog VALUES (0,tipo, NOW(),usuario,(SELECT nombre FROM zona WHERE idZona=idZona1),(SELECT descripcion FROM zona WHERE idZona=idZona1),(SELECT idMunicipio FROM zona WHERE idZona=idZona1));
-END IF$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -89,35 +29,16 @@ DELIMITER ;
 --
 
 CREATE TABLE `agricultor` (
+  `idAgricultor` int(11) NOT NULL,
   `ccAgricultor` varchar(15) NOT NULL,
   `nombres` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
-  `telefono1` varchar(12) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
   `telefono2` varchar(12) DEFAULT NULL,
   `telefono3` varchar(12) DEFAULT NULL,
   `idMunicipio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `agricultor`
---
-
-INSERT INTO `agricultor` (`ccAgricultor`, `nombres`, `apellidos`, `direccion`, `telefono1`, `telefono2`, `telefono3`, `idMunicipio`) VALUES
-('101392930', 'Oscar German', 'Rodriguez Niño', 'calle 19 Santa Margarita', '3123432112', '321246644', '3222567643', 1021),
-('11023893848', 'Roberto ', 'Quiroga', 'cra 7 12-12', '', NULL, NULL, 1021),
-('1109342899', 'Jose Hernan', 'Orjuela Prada', '31248903849', '', NULL, NULL, 1021),
-('123', 'Fabio Andres', 'Sandova', 'Veredacolegio', '', NULL, NULL, 9),
-('123789245', 'Edgar de Jesus', 'Ramirez Perdomo', 'cra9 10-25 B/Rondon', '', NULL, NULL, 1021),
-('14248322', 'Jhonan', 'Vargas', 'Cra 25 # 11-95', '3133885186', '1232343434', '', 1021),
-('28710378', 'Teresa', 'Gomez Diaz', '31289034', '', NULL, NULL, 1021),
-('28846', 'Marco', 'Vargas', 'CL 2 ', '', NULL, NULL, 1021),
-('312', 'jhonan Gohan', 'vargas Bernal', 'cra 29 log', '', NULL, NULL, 1028),
-('321', 'jhonan log', 'vargas log', 'cra 33 log', '', NULL, NULL, 1033),
-('423', 'Rosalia', 'Barrero', 'erc', '', NULL, NULL, 4),
-('4555', 'Eduardo', 'Garzon', 'cara 5', '', NULL, NULL, 329),
-('555', 'Smith logs', 'herran logs', 'cra  log', '', NULL, NULL, 1021),
-('931245893', 'Alvaro', 'Cardozo Rios', 'mza 4  barrio La cascada', '', NULL, NULL, 1021);
 
 -- --------------------------------------------------------
 
@@ -150,8 +71,7 @@ INSERT INTO `cargo` (`idCargo`, `nombre`) VALUES
 (2, 'basculista'),
 (3, 'laboratorista'),
 (4, 'contador'),
-(5, 'administrador'),
-(6, 'auditor');
+(5, 'auditor');
 
 -- --------------------------------------------------------
 
@@ -160,29 +80,14 @@ INSERT INTO `cargo` (`idCargo`, `nombre`) VALUES
 --
 
 CREATE TABLE `conductor` (
+  `idConductor` int(11) NOT NULL,
+  `idMunicipio` int(11) NOT NULL,
   `ccConductor` varchar(15) NOT NULL,
   `nombres` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
   `telefono` varchar(12) NOT NULL,
-  `Direccion` varchar(45) NOT NULL,
-  `idMunicipio` int(11) NOT NULL
+  `direccion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `conductor`
---
-
-INSERT INTO `conductor` (`ccConductor`, `nombres`, `apellidos`, `telefono`, `Direccion`, `idMunicipio`) VALUES
-('1234', 'Jose', 'Perez', '3212346789', 'calle 6 1-23', 172),
-('321', 'Jhonan logs', 'Vargas log', '3132360', 'cra Rata', 1025),
-('32134567809', 'Edgar', 'Ramirez', '340000', 'Mza 4 Barrio Rondon', 1023),
-('345', 'Carlos', 'Lopez', '32145890', 'cra9 10-02', 2),
-('345678', 'Efrain', 'Perdomo', '789', 'mas56', 6),
-('360', 'Leidy Julieth', 'Gualtero Bernal', '3212460515', 'cra 29 12-14', 1033),
-('56789', 'Alejandro', 'Vargas', '678', 'calle 7 3-23', 4),
-('678', 'Jaime', 'Rodriguez', '213456789', 'calle 12 4-23', 542),
-('890', 'Cristian', 'Vasquez', '567', 'calle 4 B Betania', 172),
-('931245789', 'Edgar', 'Ramirez', '3214359021', 'mza 5 barrio Rondon', 1021);
 
 -- --------------------------------------------------------
 
@@ -255,26 +160,9 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`idEmpleado`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`, `idCargo`, `idMunicipio`) VALUES
-(1, '1106896645', 'Jhonan Smith', 'Vargas Herran', 'Cra 29 # 11-95', '31338385186', 1, 1033),
-(2, '12345', 'Uriel Alejandro', 'Esguerra', 'Cra 10', '31233223', 2, 5),
-(3, '122', 'Mauricio', 'Lopez Murillo', 'cra 78', '3122345690', 3, 1034),
-(4, '142470', 'Marco', 'Vargas', 'Cra 20 # 11', '314421', 2, 1014),
-(5, '2345', 'Leonardo', 'Prada Rodriguez', 'Barrio Jordan', '3152134567', 3, 172),
-(6, '2345445', 'Yolanda', 'Triana Otalora', 'Barrio San Rafael', '3214678923', 3, 45),
-(7, '1223232', 'Leidy', 'Gualtero', 'cra 29 # 11-95', '312435273', 2, 517),
-(8, '1', 'u', 'udddddd', 'u', '2', 2, 1021),
-(9, '2', 'jorge', 'huertas rodriguez', 'm6 c 5 ', '321111111', 6, 554),
-(10, '3', 'urirl', 'esguerra', 'gggggggggggg', '2222', 2, 1098),
-(11, '1171717171', 'uueueueu', 'uw', 'hdhdhdh', '65432', 1, 634),
-(12, '1111111', 'uriel', 'esguerra', 'jdjddjdjd', '22222', 3, 1023),
-(13, '00000', 'uriel', 'esguerr', 'dddd', '22322', 3, 1021),
-(14, '1223232333', 'Leidy', 'Gualtero', 'cra 29 # 11-95', '312435273', 2, 517),
-(15, '2333', 'jorge', 'huertas rodriguez', 'm6 c 5 ', '321111111', 1, 554),
-(16, '11111', 'u', 'udddddd', 'u', '2', 2, 1021),
-(17, '4341', 'u', 'udddddd', 'u', '2', 2, 1021),
-(18, '12232323445', 'Leidy', 'Gualtero', 'cra 29 # 11-95', '312435273', 2, 517),
-(19, '345345', 'urirl', 'esguerra', 'gggggggggggg', '2222', 2, 1098),
-(20, '134543', 'u', 'udddddd', 'u', '2', 2, 1021);
+(1, '1105689625', 'Lizeth Fernanda', 'Ramirez Cortez', 'no se', '3223006069', 1, 1021),
+(2, '1070616933', 'Uriel', 'Esguerra Elianegua', 'no se', '3112185321', 2, 554),
+(3, '1106896645', 'Jhonan Smith', 'Vargas Herran', 'cra 29 # 11-95', '3133885186', 3, 1033);
 
 -- --------------------------------------------------------
 
@@ -283,9 +171,8 @@ INSERT INTO `empleado` (`idEmpleado`, `ccEmpleado`, `nombres`, `apellidos`, `dir
 --
 
 CREATE TABLE `laboratorio` (
-  `numeroTiquete` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `agricultor` varchar(45) NOT NULL,
+  `idLaboratorio` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
   `variedad` varchar(45) NOT NULL,
   `humedad` decimal(3,2) NOT NULL,
   `impureza` decimal(3,2) NOT NULL,
@@ -300,20 +187,98 @@ CREATE TABLE `laboratorio` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `lote`
+--
+
+CREATE TABLE `lote` (
+  `idLote` int(11) NOT NULL,
+  `idMunicipio` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marca`
+--
+
+CREATE TABLE `marca` (
+  `idmarca` int(11) NOT NULL,
+  `marca` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`idmarca`, `marca`) VALUES
+(1, 'AGRALE'),
+(2, 'ALFA ROMEO'),
+(3, 'AUDI'),
+(4, 'BMW'),
+(5, 'CHERY'),
+(6, 'CHEVROLET'),
+(7, 'CHRYSLER'),
+(8, 'CITROEN'),
+(9, 'DACIA'),
+(10, 'DAEWO'),
+(11, 'DAIHATSU'),
+(12, 'DODGE'),
+(13, 'FERRARI'),
+(14, 'FIAT'),
+(15, 'FORD'),
+(16, 'GALLOPER'),
+(17, 'HEIBAO'),
+(18, 'HONDA'),
+(19, 'HYUNDAI'),
+(20, 'ISUZU'),
+(21, 'JAGUAR'),
+(22, 'JEEP'),
+(23, 'KIA'),
+(24, 'LADA'),
+(25, 'LAND ROVER'),
+(26, 'LEXUS'),
+(27, 'MASERATI'),
+(28, 'MAZDA'),
+(29, 'MERCEDES BENZ'),
+(30, 'MG'),
+(31, 'MINI'),
+(32, 'MITSUBISHI'),
+(33, 'NISSAN'),
+(34, 'PEUGEOT'),
+(35, 'PORSCHE'),
+(36, 'RAM'),
+(37, 'RENAULT'),
+(38, 'ROVER'),
+(39, 'SAAB'),
+(40, 'SEAT'),
+(41, 'SMART'),
+(42, 'SSANGYONG'),
+(43, 'SUBARU'),
+(44, 'SUZUKI'),
+(45, 'TATA'),
+(46, 'TOYOTA'),
+(47, 'VOLKSWAGEN'),
+(48, 'VOLVO');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `municipios`
 --
 
 CREATE TABLE `municipios` (
   `idMunicipio` int(11) NOT NULL,
   `idDepartamento` int(11) NOT NULL,
-  `Nombre` varchar(40) NOT NULL
+  `nombre` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `municipios`
 --
 
-INSERT INTO `municipios` (`idMunicipio`, `idDepartamento`, `Nombre`) VALUES
+INSERT INTO `municipios` (`idMunicipio`, `idDepartamento`, `nombre`) VALUES
 (1, 1, 'Leticia'),
 (2, 1, 'Puerto Nariño'),
 (3, 2, 'Abejorral'),
@@ -1443,6 +1408,18 @@ INSERT INTO `privilegios` (`idPrivilegios`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `registroLaboratorio`
+--
+
+CREATE TABLE `registroLaboratorio` (
+  `idRegistroLab` int(11) NOT NULL,
+  `idLaboratorioIni` int(11) NOT NULL,
+  `idLaboratorioFin` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `silos`
 --
 
@@ -1470,10 +1447,7 @@ CREATE TABLE `tipodearroz` (
 INSERT INTO `tipodearroz` (`idTipoDeArroz`, `nombre`, `descripcion`) VALUES
 (1, 'Rojo', 'Es uno de los arroces más comunes, \nde grano corto o medio.'),
 (2, 'pady', 'originario de las regiones del Himalaya y muy utilizado en la cocina india.'),
-(3, 'partidos', 'E de grano largo, y además de tener\n un mayor número de proteínas que\n el arroz, requiere de más tiempo\n para ser cocinado.'),
-(4, 'Amarillo', 'a'),
-(5, 'Verde', 'prueba ok'),
-(6, 'Morado', 'prueba de crear');
+(3, 'partidos', 'E de grano largo, y además de tener\n un mayor número de proteínas que\n el arroz, requiere de más tiempo\n para ser cocinado.');
 
 -- --------------------------------------------------------
 
@@ -1483,63 +1457,19 @@ INSERT INTO `tipodearroz` (`idTipoDeArroz`, `nombre`, `descripcion`) VALUES
 
 CREATE TABLE `tiquete` (
   `idTiquete` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `ccAgricultor` varchar(15) NOT NULL,
-  `idZona` int(11) NOT NULL,
+  `idAgricultor` int(11) NOT NULL,
   `idTipoDeArroz` int(11) NOT NULL,
+  `idConductor` int(11) NOT NULL,
+  `idVehiculo` int(11) NOT NULL,
   `user` varchar(30) NOT NULL,
-  `ccConductor` varchar(15) NOT NULL,
-  `idplaca` varchar(6) NOT NULL
+  `idLote` int(11) NOT NULL,
+  `idRegistroLab` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `kilosBrutos` decimal(5,2) NOT NULL,
+  `destare` decimal(5,2) NOT NULL,
+  `kilosNetos` decimal(5,2) NOT NULL,
+  `observacion` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tiquete`
---
-
-INSERT INTO `tiquete` (`idTiquete`, `fecha`, `ccAgricultor`, `idZona`, `idTipoDeArroz`, `user`, `ccConductor`, `idplaca`) VALUES
-(5, '2016-11-10', '423', 2, 3, 'b', '345', 'TQK13D'),
-(6, '2016-11-10', '423', 3, 2, 'b', '345', 'TQK13D'),
-(7, '2016-11-10', '423', 2, 2, 'b', '345', 'TQK13D'),
-(8, '2016-11-10', '4555', 2, 2, 'b', '1234', 'ZHX01C'),
-(9, '2016-11-10', '423', 2, 3, 'b', '345', 'KSA13B'),
-(10, '2016-11-10', '423', 3, 2, 'b', '345', 'TQK13D'),
-(11, '2016-11-10', '123', 2, 3, 'b', '678', 'ZHX01C'),
-(12, '2016-11-10', '123', 2, 2, 'b', '678', 'KSA13B'),
-(13, '2016-11-10', '423', 2, 2, 'b', '345', 'KSA13B'),
-(14, '2016-11-10', '423', 2, 2, 'b', '345', 'TQK13D'),
-(15, '2016-11-10', '423', 2, 1, 'b', '345', 'ZHX01C'),
-(16, '2016-11-10', '423', 2, 3, 'b', '345', 'KSA13B'),
-(17, '2016-11-10', '123', 3, 2, 'b', '345', 'ZHX01C'),
-(18, '2016-11-10', '4555', 3, 2, 'b', '1234', 'KSA13B'),
-(19, '2016-11-10', '4555', 3, 2, 'b', '1234', 'TQK13D'),
-(20, '2016-11-10', '423', 1, 1, 'b', '1234', 'ZHX01C'),
-(21, '2017-01-18', '123', 2, 2, 'b', '345', 'TQK13D'),
-(22, '2017-01-18', '123', 2, 3, 'b', '345', 'ZHX01C'),
-(23, '2017-01-19', '123', 3, 3, 'b', '345', 'ZGF77C'),
-(30, '2017-01-27', '1109342899', 1, 1, 'b', '56789', 'ZGF77C'),
-(32, '2017-01-29', '123', 1, 1, 'b', '56789', 'TQK13D'),
-(33, '2017-01-29', '101392930', 1, 1, 'b', '890', 'KSA13B'),
-(34, '2017-01-29', '11023893848', 1, 1, 'b', '345678', 'TQK13D'),
-(35, '2017-01-29', '123789245', 1, 1, 'b', '56789', 'KSA13B'),
-(36, '2017-01-29', '123789245', 5, 3, 'b', '345', 'ZGF77C'),
-(37, '2017-01-29', '123789245', 1, 1, 'b', '678', 'ZHX01C'),
-(38, '2017-01-29', '1109342899', 1, 1, 'b', '56789', 'KSA13B'),
-(39, '2017-01-29', '1109342899', 1, 1, 'b', '345678', 'ZHX01C'),
-(41, '2017-01-29', '1109342899', 1, 1, 'b', '678', 'ZGF77C'),
-(42, '2017-01-29', '123', 1, 1, 'b', '345', 'TQK13D'),
-(43, '2017-01-30', '101392930', 1, 1, 'b', '56789', 'KSA13B'),
-(44, '2017-01-30', '1109342899', 1, 1, 'b', '678', 'ZGF77C'),
-(45, '2017-01-30', '123', 1, 1, 'uriel05', '345678', 'ZHX01C'),
-(46, '2017-01-30', '28710378', 6, 2, 'liz', '345', 'ZGF77C'),
-(47, '2017-01-30', '123789245', 1, 1, 'b', '345678', 'ZHX01C'),
-(49, '2017-01-30', '123', 1, 1, 'liz', '32134567809', 'WMW113'),
-(50, '2017-01-30', '11023893848', 1, 1, 'b', '32134567809', 'WMW113'),
-(52, '2017-01-30', '123', 1, 1, 'liz', '56789', 'ZHX01C'),
-(53, '2017-05-10', '123', 5, 2, 'b', '345678', 'ZHX01C'),
-(54, '2017-09-20', '101392930', 9, 1, 'b', '890', 'RGN016'),
-(55, '2017-09-20', '101392930', 1, 1, 'b', '32134567809', 'RGN016'),
-(56, '2017-11-04', '101392930', 1, 1, 'b', '1234', 'RGN016'),
-(57, '2017-11-04', '123', 5, 2, 'b', '32134567809', 'RGN016');
 
 -- --------------------------------------------------------
 
@@ -1550,33 +1480,10 @@ INSERT INTO `tiquete` (`idTiquete`, `fecha`, `ccAgricultor`, `idZona`, `idTipoDe
 CREATE TABLE `usuario` (
   `user` varchar(30) NOT NULL,
   `contrasena` tinytext NOT NULL,
-  `estado` varchar(8) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
   `idPrivilegios` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`user`, `contrasena`, `estado`, `idEmpleado`, `idPrivilegios`) VALUES
-('asasas', '18e2d447541f6d3375365f5f1bfc8', 'activo', 18, 1),
-('audi', '6ad794deae14e67d8ad516821fc1', 'activo', 9, 6),
-('b', '6ad794deae14e67d8ad516821fc1', 'activo', 2, 2),
-('ccacac', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('hshsh', '6ad794deae14e67d8ad516821fc1', 'activo', 3, 1),
-('jhon', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('jhonan05', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('leidyb', '6ad794deae14e67d8ad516821fc1', 'activo', 14, 2),
-('liz', '6ad794deae14e67d8ad516821fc1', 'inactivo', 2, 2),
-('q', '6ad794deae14e67d8ad516821fc1', '', 1, 1),
-('qqq', '6ad794deae14e67d8ad516821fc1', 'inactivo', 1, 1),
-('ssss', '6ad794deae14e67d8ad516821fc1', 'activo', 2, 1),
-('uriel05', '6ad794deae14e67d8ad516821fc1', 'activo', 2, 2),
-('x', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('x2', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('xx', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1),
-('xxx', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1585,57 +1492,12 @@ INSERT INTO `usuario` (`user`, `contrasena`, `estado`, `idEmpleado`, `idPrivileg
 --
 
 CREATE TABLE `vehiculo` (
-  `idplaca` varchar(6) NOT NULL,
-  `color` varchar(30) DEFAULT NULL,
-  `modelo` varchar(30) DEFAULT NULL,
-  `marca` varchar(30) DEFAULT NULL
+  `idVehiculo` int(11) NOT NULL,
+  `marca` int(11) NOT NULL,
+  `modelo` varchar(45) DEFAULT NULL,
+  `placa` varchar(6) NOT NULL,
+  `color` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `vehiculo`
---
-
-INSERT INTO `vehiculo` (`idplaca`, `color`, `modelo`, `marca`) VALUES
-('KSA13B', 'Azul', '2400', 'Chevrolet'),
-('MWM14F', 'Negro', '1700', 'Dodge'),
-('RGN016', 'Negro Titan ok', '2011', 'Chevrolet'),
-('TQK13D', 'Verde', '3600', 'Ford'),
-('WMW113', 'Negro', '3589', 'Chevrolet'),
-('ZGF77C', 'Rojo', 'FZ1500', 'Ford'),
-('ZHX01C', 'Negro', '1800', 'Dodge');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `zona`
---
-
-CREATE TABLE `zona` (
-  `idZona` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `descripcion` text NOT NULL,
-  `idMunicipio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `zona`
---
-
-INSERT INTO `zona` (`idZona`, `nombre`, `descripcion`, `idMunicipio`) VALUES
-(1, 'Santa ana', 'Zona con mayor producción', 3),
-(2, 'La joya', 'Alto indice de Proteinas y minerales', 6),
-(3, 'Las delicias', 'Alto indice de fosforo', 3),
-(4, 'madrid', 'Zona agricultora', 1021),
-(5, 'Colegio', 'Alto indice de fosoforo', 1021),
-(6, 'La caimanera', 'Alto indice de fosoforo', 1021),
-(7, 'Patio Bonito', 'Alto indice de fosoforo', 1021),
-(8, 'Palocabildo', 'Alto indice de fosoforo', 1022),
-(9, 'Barzalosa', 'Zona agricola', 1096),
-(10, 'La cajita', 'Alto indice de fosoforo', 1024),
-(11, 'Baja', 'parte baja del Espinal', 1021),
-(12, 'ok', 'ok', 1021),
-(13, 'arriba ', 'prueba', 1021),
-(14, 'prueba create', 'ok', 1021);
 
 --
 -- Índices para tablas volcadas
@@ -1645,8 +1507,9 @@ INSERT INTO `zona` (`idZona`, `nombre`, `descripcion`, `idMunicipio`) VALUES
 -- Indices de la tabla `agricultor`
 --
 ALTER TABLE `agricultor`
-  ADD PRIMARY KEY (`ccAgricultor`),
-  ADD KEY `fk_agricultor_municipios1_idx` (`idMunicipio`);
+  ADD PRIMARY KEY (`idAgricultor`),
+  ADD UNIQUE KEY `ccAgricultor_UNIQUE` (`ccAgricultor`),
+  ADD KEY `fk_agricultor_municipios1` (`idMunicipio`);
 
 --
 -- Indices de la tabla `bateria`
@@ -1664,7 +1527,8 @@ ALTER TABLE `cargo`
 -- Indices de la tabla `conductor`
 --
 ALTER TABLE `conductor`
-  ADD PRIMARY KEY (`ccConductor`),
+  ADD PRIMARY KEY (`idConductor`),
+  ADD UNIQUE KEY `ccConductor_UNIQUE` (`ccConductor`),
   ADD KEY `idMunicipio` (`idMunicipio`);
 
 --
@@ -1679,21 +1543,34 @@ ALTER TABLE `departamentos`
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`idEmpleado`),
   ADD UNIQUE KEY `ccEmpleado_UNIQUE` (`ccEmpleado`),
-  ADD KEY `fk_empleado_cargo1_idx` (`idCargo`),
-  ADD KEY `fk_empleado_municipios1_idx` (`idMunicipio`);
+  ADD KEY `fk_empleado_municipios1` (`idMunicipio`),
+  ADD KEY `fk_empleado_cargo1` (`idCargo`);
 
 --
 -- Indices de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  ADD PRIMARY KEY (`numeroTiquete`);
+  ADD PRIMARY KEY (`idLaboratorio`);
+
+--
+-- Indices de la tabla `lote`
+--
+ALTER TABLE `lote`
+  ADD PRIMARY KEY (`idLote`),
+  ADD KEY `fk_zona_municipios1_idx` (`idMunicipio`);
+
+--
+-- Indices de la tabla `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`idmarca`);
 
 --
 -- Indices de la tabla `municipios`
 --
 ALTER TABLE `municipios`
   ADD PRIMARY KEY (`idMunicipio`),
-  ADD KEY `fk_municipios_departamentos1_idx` (`idDepartamento`);
+  ADD KEY `fk_municipios_departamentos1` (`idDepartamento`);
 
 --
 -- Indices de la tabla `privilegios`
@@ -1702,11 +1579,19 @@ ALTER TABLE `privilegios`
   ADD PRIMARY KEY (`idPrivilegios`);
 
 --
+-- Indices de la tabla `registroLaboratorio`
+--
+ALTER TABLE `registroLaboratorio`
+  ADD PRIMARY KEY (`idRegistroLab`),
+  ADD KEY `fk_registroLaboratorio_laboratorio1_idx` (`idLaboratorioIni`),
+  ADD KEY `fk_registroLaboratorio_laboratorio2_idx` (`idLaboratorioFin`);
+
+--
 -- Indices de la tabla `silos`
 --
 ALTER TABLE `silos`
   ADD PRIMARY KEY (`idSilos`),
-  ADD KEY `fk_silos_bateria1_idx` (`idBateria`);
+  ADD KEY `fk_silos_bateria1_idx1` (`idBateria`);
 
 --
 -- Indices de la tabla `tipodearroz`
@@ -1719,12 +1604,13 @@ ALTER TABLE `tipodearroz`
 --
 ALTER TABLE `tiquete`
   ADD PRIMARY KEY (`idTiquete`),
-  ADD KEY `fk_tiquete_agricultor1_idx` (`ccAgricultor`),
-  ADD KEY `fk_tiquete_zona1_idx` (`idZona`),
   ADD KEY `fk_tiquete_tipoDeArroz1_idx` (`idTipoDeArroz`),
   ADD KEY `fk_tiquete_usuario1_idx` (`user`),
-  ADD KEY `fk_tiquete_conductor1_idx` (`ccConductor`),
-  ADD KEY `fk_tiquete_placas1_idx` (`idplaca`);
+  ADD KEY `fk_tiquete_conductor1_idx` (`idConductor`),
+  ADD KEY `fk_tiquete_vehiculo1_idx` (`idVehiculo`),
+  ADD KEY `fk_tiquete_agricultor1_idx` (`idAgricultor`),
+  ADD KEY `fk_tiquete_registroLaboratorio1_idx` (`idRegistroLab`),
+  ADD KEY `fk_tiquete_lote1_idx` (`idLote`);
 
 --
 -- Indices de la tabla `usuario`
@@ -1738,64 +1624,59 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  ADD PRIMARY KEY (`idplaca`);
-
---
--- Indices de la tabla `zona`
---
-ALTER TABLE `zona`
-  ADD PRIMARY KEY (`idZona`),
-  ADD KEY `fk_zona_municipios1_idx` (`idMunicipio`);
+  ADD PRIMARY KEY (`idVehiculo`),
+  ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
+  ADD KEY `fk_vehiculo_marca1_idx` (`marca`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `bateria`
+-- AUTO_INCREMENT de la tabla `agricultor`
 --
-ALTER TABLE `bateria`
-  MODIFY `idBateria` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `agricultor`
+  MODIFY `idAgricultor` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `idCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `conductor`
+--
+ALTER TABLE `conductor`
+  MODIFY `idConductor` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  MODIFY `numeroTiquete` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idLaboratorio` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `privilegios`
+-- AUTO_INCREMENT de la tabla `lote`
 --
-ALTER TABLE `privilegios`
-  MODIFY `idPrivilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `lote`
+  MODIFY `idLote` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `silos`
+-- AUTO_INCREMENT de la tabla `marca`
 --
-ALTER TABLE `silos`
-  MODIFY `idSilos` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `marca`
+  MODIFY `idmarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT de la tabla `tipodearroz`
 --
 ALTER TABLE `tipodearroz`
-  MODIFY `idTipoDeArroz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idTipoDeArroz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `tiquete`
+-- AUTO_INCREMENT de la tabla `vehiculo`
 --
-ALTER TABLE `tiquete`
-  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
---
--- AUTO_INCREMENT de la tabla `zona`
---
-ALTER TABLE `zona`
-  MODIFY `idZona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `vehiculo`
+  MODIFY `idVehiculo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -1820,16 +1701,23 @@ ALTER TABLE `empleado`
   ADD CONSTRAINT `fk_empleado_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `laboratorio`
+-- Filtros para la tabla `lote`
 --
-ALTER TABLE `laboratorio`
-  ADD CONSTRAINT `laboratorio_ibfk_1` FOREIGN KEY (`numeroTiquete`) REFERENCES `tiquete` (`idTiquete`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `lote`
+  ADD CONSTRAINT `fk_zona_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `municipios`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `fk_municipios_departamentos1` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `registroLaboratorio`
+--
+ALTER TABLE `registroLaboratorio`
+  ADD CONSTRAINT `fk_registroLaboratorio_laboratorio1` FOREIGN KEY (`idLaboratorioIni`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_registroLaboratorio_laboratorio2` FOREIGN KEY (`idLaboratorioFin`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `silos`
@@ -1841,12 +1729,13 @@ ALTER TABLE `silos`
 -- Filtros para la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  ADD CONSTRAINT `fk_tiquete_agricultor1` FOREIGN KEY (`ccAgricultor`) REFERENCES `agricultor` (`ccAgricultor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_conductor1` FOREIGN KEY (`ccConductor`) REFERENCES `conductor` (`ccConductor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_placas1` FOREIGN KEY (`idplaca`) REFERENCES `vehiculo` (`idplaca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_agricultor1` FOREIGN KEY (`idAgricultor`) REFERENCES `agricultor` (`idAgricultor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_conductor1` FOREIGN KEY (`idConductor`) REFERENCES `conductor` (`idConductor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_registroLaboratorio1` FOREIGN KEY (`idRegistroLab`) REFERENCES `registroLaboratorio` (`idRegistroLab`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tiquete_tipoDeArroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_zona1` FOREIGN KEY (`idZona`) REFERENCES `zona` (`idZona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario`
@@ -1856,10 +1745,10 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_usuario_privilegios1` FOREIGN KEY (`idPrivilegios`) REFERENCES `privilegios` (`idPrivilegios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `zona`
+-- Filtros para la tabla `vehiculo`
 --
-ALTER TABLE `zona`
-  ADD CONSTRAINT `fk_zona_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `vehiculo`
+  ADD CONSTRAINT `fk_vehiculo_marca1` FOREIGN KEY (`marca`) REFERENCES `marca` (`idmarca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

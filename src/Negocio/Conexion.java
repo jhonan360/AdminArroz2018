@@ -28,7 +28,11 @@ public class Conexion {
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
+<<<<<<< Updated upstream
             conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/admiarroz","root","molino");
+=======
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/admiarroz","root","root");
+>>>>>>> Stashed changes
             //JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch(Exception e){
             e.printStackTrace();

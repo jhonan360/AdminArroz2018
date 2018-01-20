@@ -27,15 +27,17 @@ public class tipo_arroz {
     public static Tipo_Arroz Tipo_Arroz;
     public static Conexion Con;
     public static DefaultTableModel modeloTabla;
-    public String columnas[] = new String[]{"Tipo de arroz", "Descripcion"};
+    public String columnas[] = new String[]{"N", "Tipo de arroz", "Variedad", "Descripcion"};
     public String idGlobal;
     public static ResultSet rs, rsid;
     public static Statement st, stvalidar, stmodificar, stid;
-    public static tablas tablas;
-    public static String nombre, descripcion;
+    public static tablas tbl;
+    public static String nombre, variedad, descripcion;
     public static validaciones val;
     public static bascula bas;
+
     public tipo_arroz() {
+        tbl = new tablas();
         crearModelo();
     }
 
@@ -45,17 +47,17 @@ public class tipo_arroz {
                 return false;
             }
         };
-
-        tablas = new tablas();
-        tablas.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT nombre,descripcion FROM tipodearroz");
+        tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz");
+        desactivar_checkbox();
     }
 
     public void crear_tipo_de_arroz() {
         nombre = Tipo_Arroz.txtNombre.getText();
+        variedad = Tipo_Arroz.txtVariedad.getText();
         descripcion = Tipo_Arroz.txtDescripcion.getText();
         if (!nombre.equals("") && !descripcion.equals("")) {
             if (validar(nombre) == false) {
-                insertar(nombre, descripcion);
+                insertar(nombre, variedad, descripcion);
                 crearModelo();
             } else {
                 JOptionPane.showMessageDialog(null, "El tipo de arroz que intenta crear ya se encuentra registrado");
@@ -92,11 +94,11 @@ public class tipo_arroz {
         return false;
     }
 
-    public void insertar(String nombre, String descripcion) {
+    public void insertar(String nombre, String variedad, String descripcion) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,descripcion) VALUES (0,'" + nombre + "','" + descripcion + "')");
+            st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,variedad,descripcion) VALUES (0,'" + nombre + "','" + variedad + "','" + descripcion + "')");
             JOptionPane.showMessageDialog(null, "El tipo de arroz ha sido ingresado");
             bas = new bascula();
         } catch (Exception e) {
@@ -107,8 +109,9 @@ public class tipo_arroz {
     public void modificar() {
         nombre = Tipo_Arroz.txtNombre.getText();
         descripcion = Tipo_Arroz.txtDescripcion.getText();
+        variedad = Tipo_Arroz.txtVariedad.getText();
         if (!nombre.equals("") && !descripcion.equals("")) {
-            actualizar(nombre, descripcion);
+            actualizar(nombre, variedad, descripcion);
             crearModelo();
             limpiar_campos();
         } else {
@@ -117,11 +120,11 @@ public class tipo_arroz {
 
     }
 
-    public void actualizar(String nombre, String descripcion) {
+    public void actualizar(String nombre, String variedad, String descripcion) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idGlobal + "' ");
+            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "'variedad='" + variedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idGlobal + "' ");
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             idGlobal = "";
             System.out.println("id" + idGlobal);
@@ -132,45 +135,53 @@ public class tipo_arroz {
 
     public void limpiar_campos() {
         Tipo_Arroz.txtNombre.setText("");
+        Tipo_Arroz.txtVariedad.setText("");
         Tipo_Arroz.txtDescripcion.setText("");
-        Tipo_Arroz.txtBuscar.setText("");
-        Tipo_Arroz.txtNombre.setEnabled(true);
+        Tipo_Arroz.txtBNombre.setText("");
+        Tipo_Arroz.txtBVariedad.setText("");
     }
 
     public void tablas_campos() {
         int rec = Tipo_Arroz.jTable1.getSelectedRow();
-        Tipo_Arroz.txtNombre.setText(Tipo_Arroz.jTable1.getValueAt(rec, 0).toString());
-        Tipo_Arroz.txtDescripcion.setText(Tipo_Arroz.jTable1.getValueAt(rec, 1).toString());
-        idGlobal = idArroz(Tipo_Arroz.jTable1.getValueAt(rec, 0).toString(), Tipo_Arroz.jTable1.getValueAt(rec, 1).toString());
+        idGlobal = Tipo_Arroz.jTable1.getValueAt(rec, 0).toString();
+        Tipo_Arroz.txtNombre.setText(Tipo_Arroz.jTable1.getValueAt(rec, 1).toString());
+        Tipo_Arroz.txtVariedad.setText(Tipo_Arroz.jTable1.getValueAt(rec, 2).toString());
+        Tipo_Arroz.txtDescripcion.setText(Tipo_Arroz.jTable1.getValueAt(rec, 3).toString());
         System.out.println("El idGlobal es=" + idGlobal);
         Tipo_Arroz.txtNombre.setEnabled(false);
     }
 
-    public String idArroz(String nombre, String descripcion) {
-        try {
-            Con = new Conexion();
-            stid = Con.conexion.createStatement();
-            rsid = stid.executeQuery("SELECT idTipoDeArroz FROM tipodearroz WHERE nombre='" + nombre + "' and descripcion='" + descripcion + "'");
-            while (rsid.next()) {
-                return rsid.getString(1);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     public void buscar() {
-        String nombre = Tipo_Arroz.txtBuscar.getText();
+        String nombre = Tipo_Arroz.txtBNombre.getText();
+        String variedad = Tipo_Arroz.txtBVariedad.getText();
         modeloTabla = new DefaultTableModel(null, columnas) {
             public boolean isCellEditable(int filas, int columnas) {
                 return false;
             }
         };
-        tablas = new tablas();
-        tablas.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length,"SELECT nombre,descripcion FROM tipodearroz WHERE nombre like '%"+nombre+"%'");
-        limpiar_campos();
+        if (Tipo_Arroz.chNombre.isSelected() == true && Tipo_Arroz.chVariedad.isSelected() == true) {
+            if (!nombre.equals("") && !variedad.equals("")) {
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE nombre like '%" + nombre + "%' AND variedad LIKE '%" + variedad + "%'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (Tipo_Arroz.chNombre.isSelected() == true) {
+            if (!nombre.equals("")) {
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE nombre like '%" + nombre + "%'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (Tipo_Arroz.chVariedad.isSelected() == true) {
+            if (!variedad.equals("")) {
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE variedad LIKE '%" + variedad + "%'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        }
     }
 
+    public void desactivar_checkbox() { // desactiva las checkbox
+        Tipo_Arroz.chNombre.setSelected(false);
+        Tipo_Arroz.chVariedad.setSelected(false);
+    }
 }
