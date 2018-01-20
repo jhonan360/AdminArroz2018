@@ -43,7 +43,7 @@ public class busquedasTiquete {
      */
     public void cerrar(){
         Bas.btnBuscarConductor.setEnabled(true);
-        Bas.btnBuscarAgricultor.setEnabled(true);
+        Bas.btnEditarAgricultor.setEnabled(true);
         Bas.btnBuscarPlaca.setEnabled(true);
     }
     
@@ -60,9 +60,8 @@ public class busquedasTiquete {
     }
 
     public void tabla_camposAgricultor() {
-            int rec = BusTiquete.jTable3.getSelectedRow();
-            Bas.txtAgricultor.setText((BusTiquete.jTable3.getValueAt(rec, 2).toString()) + (" " + BusTiquete.jTable3.getValueAt(rec, 1).toString()));
-            bas.ccAgricultor = BusTiquete.jTable3.getValueAt(rec, 0).toString();
+        
+            
             //System.out.println("jjj"+ccAgricultor);
                       
     }
@@ -147,10 +146,11 @@ public class busquedasTiquete {
     }
 
     public void tabla_camposConductor() {
-            int rec = BusTiquete.jTable2.getSelectedRow();
-            Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 2).toString()) + (" " + BusTiquete.jTable2.getValueAt(rec, 1).toString()));
+            //int rec = BusTiquete.jTable2.getSelectedRow();
+        
+            //  Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 2).toString()) + (" " + BusTiquete.jTable2.getValueAt(rec, 1).toString()));
             //Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 1).toString()));
-            bas.ccConductor = BusTiquete.jTable2.getValueAt(rec, 0).toString();
+            //bas.ccConductor = BusTiquete.jTable2.getValueAt(rec, 0).toString();
             //nomConductor =BusTiquete.jTable2.getValueAt(rec, 1).toString();
             //System.out.println("Log"+nomConductor);
             

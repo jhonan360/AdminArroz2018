@@ -63,7 +63,7 @@ public class extras {
                 sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,conductor WHERE conductor.ccConductor='" + cedula + "' and conductor.idMunicipio=municipios.idMunicipio)";
                 break;
             case "z":
-                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,zona WHERE zona.idZona='"+cedula+"' and zona.idMunicipio=municipios.idMunicipio)";
+                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,lote WHERE lote.idLote='"+cedula+"' and lote.idMunicipio=municipios.idMunicipio)";
                 break;
         }
         try {
@@ -132,10 +132,12 @@ public class extras {
                 sentencia = "SELECT ccConductor FROM conductor WHERE ccConductor = '" + cedula + "'";
                 break;
             case "z":
-                sentencia = "SELECT nombre FROM zona WHERE nombre='" + cedula + "'";
+                sentencia = "SELECT nombre FROM lote WHERE nombre='" + cedula + "'";
                 break;
-            
-
+                
+            case "v":
+                sentencia = "SELECT placa FROM vehiculo WHERE placa='" + cedula + "'";
+                break;
         }
         try {
             Con = new Conexion();

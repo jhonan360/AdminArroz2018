@@ -3,43 +3,17 @@ package Logica.Bascula;
 
 import Negocio.Conexion;
 import Interfaces.Conductor;
+import static Logica.Bascula.agricultor.ext;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Logica.Extras.extras;
-
-import Logica.Extras.login;
 import static Logica.Extras.login.priv;
 import static Logica.Extras.login.rsbas;
 import Logica.Extras.log;
 import Logica.Extras.login;
-
-import Logica.Extras.login;
-import static Logica.Extras.login.priv;
-import static Logica.Extras.login.rsbas;
-import Logica.Extras.login;
-import static Logica.Extras.login.priv;
-import static Logica.Extras.login.rsbas;
-
-
-
-
-import Logica.Extras.login;
-import static Logica.Extras.login.priv;
-import static Logica.Extras.login.rsbas;
-
-
-
-import Logica.Extras.login;
-import static Logica.Extras.login.priv;
-import static Logica.Extras.login.rsbas;
-
-
-import Logica.Extras.log;
-import Logica.Extras.login;
-
 
 /**
  *
@@ -55,24 +29,18 @@ public class conductor {
     public static Statement st;
     public static Conexion Con;
     public tablas tbl;
-    public static String cedula, nombres, apellidos, telefono, ciudad, direccion, eli;
+    public static String cedula, nombres, apellidos, telefono, ciudad, direccion, eli,idConductor;
     public String idDepartamento;
     public static DefaultTableModel modelCdt;
-    public static String columnas[] = new String[]{"cedula", "nombres", "apellidos", "telefono", "ciudad", "direccion"};
+    public static String columnas[] = new String[]{"N","Cedula", "Nombres", "Apellidos", "Telefono", "Ciudad", "Direccion"};
     public static int row;
-    public static log logs;
-
-
+    //public static log logs;
     public String estado ="crear"; 
-
-
-
-    
 
 
     public conductor() { //constructor de la clase
         ext = new extras();
-        logs = new log();
+        //logs = new log();
         crearModelo();
         Cdt.btnEliminar.setVisible(false);
         ocultarbtnEliminar();
@@ -96,7 +64,7 @@ public class conductor {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.idMunicipio=municipios.idMunicipio");
+        tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.idMunicipio=municipios.idMunicipio");
     }
 
     public void crearConductor() {//Metodo para crear un nuevo conductor 
@@ -112,7 +80,7 @@ public class conductor {
         if (!cedula.equals("") && !nombres.equals("") && !apellidos.equals("") && !telefono.equals("") && !ciudad.equals("") && !direccion.equals("")) {
 
             //Llamado al metodo validar enviando parametro cedula
-            if (!validar(cedula)) {
+            if (!ext.validar("c",cedula)) {
                 ciudad = ext.getIdMunicipio(ciudad, String.valueOf(Cdt.cmbDepartamento.getSelectedIndex() + 1));
                 insertar(cedula, nombres, apellidos, telefono, ciudad, direccion);//Llamado al metodo insertar
                 crearModelo();
@@ -125,7 +93,7 @@ public class conductor {
         }
     }
 
-    public static boolean validar(String cedula) {//Metodo que valida si el conductor existe
+   /** public static boolean validar(String cedula) {//Metodo que valida si el conductor existe
         String res;
         try {
             Con = new Conexion();
@@ -149,7 +117,7 @@ public class conductor {
             e.printStackTrace();
         }
         return false;
-    }
+    }**/
 
     //Metodo que inserta un nuevo conductor
     public void insertar(String cedula, String nombres, String apellidos, String telefono, String ciudad, String direccion) {
@@ -158,7 +126,7 @@ public class conductor {
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO conductor (ccConductor,nombres,apellidos,telefono,Direccion,idMunicipio) VALUES ('" + cedula + "','" + nombres + "','" + apellidos + "','" + telefono + "','" + direccion + "','" + ciudad + "')");
             JOptionPane.showMessageDialog(null, "Conductor registrado");
-            logs.logConductor("i", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
+//          logs.logConductor("i", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +144,8 @@ public class conductor {
         //Valida que ningun campo este vacio
         if (!cedula.equals("") && !nombres.equals("") && !apellidos.equals("") && !telefono.equals("") && !ciudad.equals("") && !direccion.equals("")) {
             //Llamado al metodo validar enviando parametro cedula
-            if (validar(cedula) == false) {
+            
+            if (!ext.validar("c",cedula)) {
                 JOptionPane.showMessageDialog(null, "El conductor que intenta modificar no se encuentra en el sistema");
             } else {
                 //Lamado al metodo actualizar enviando parametros a modificar
@@ -185,6 +154,9 @@ public class conductor {
                     eliminar(cedula, nombres, apellidos, telefono, ciudad, direccion);
                 } else {
                     actualizar(cedula, nombres, apellidos, telefono, ciudad, direccion);
+                    tabla_campos();
+                    Cdt.jTable1.changeSelection(row, 1, false, false); // cambia la selección del la tabla 
+                    limpiarRegistros();
                 }
                 crearModelo();
                 limpiarRegistros();
@@ -197,10 +169,10 @@ public class conductor {
     //Metodo que actualiza los campos a modificar
     public void actualizar(String cedula, String nombres, String apellidos, String telefono, String ciudad, String direccion) {
         try {
-            Con.Conectar();
+            Con= new Conexion();
             st = Con.conexion.createStatement();
-            logs.logConductor("a", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
-            st.executeUpdate("UPDATE conductor SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE ccConductor='" + cedula + "'");
+            //logs.logConductor("a", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
+            st.executeUpdate("UPDATE conductor SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idConductor='" + idConductor + "'");
             JOptionPane.showMessageDialog(null, "El conductor fue modificado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -212,7 +184,7 @@ public class conductor {
         try {
             Con.Conectar();
             st = Con.conexion.createStatement();
-            rseli = st.executeQuery("SELECT ccConductor FROM tiquete WHERE ccConductor = '" + cedula + "'");
+            rseli = st.executeQuery("SELECT idConductor FROM tiquete WHERE idConductor = '" + idConductor + "'");
             System.out.println("tri" + cedula);
             while (rseli.next()) {
                 eli = rseli.getObject(1) + "";
@@ -221,12 +193,12 @@ public class conductor {
             if (cedula.equals(eli)) {
                 System.out.println(eli);
                 JOptionPane.showMessageDialog(null, "Por seguridad no puede ser eliminado");
-                logs.logConductor("ie", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direcion, Integer.parseInt(ciudad));
+                //logs.logConductor("ie", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direcion, Integer.parseInt(ciudad));
             } else {
                 int decision = JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar un conductor?", "Eliminar conductor", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (decision == 0) {
-                    logs.logConductor("e", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direcion, Integer.parseInt(ciudad));
-                    st.executeUpdate("DELETE FROM conductor WHERE ccConductor='" + cedula + "'");
+                  //  logs.logConductor("e", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direcion, Integer.parseInt(ciudad));
+                    st.executeUpdate("DELETE FROM conductor WHERE idConductor='" + idConductor + "'");
                     JOptionPane.showMessageDialog(null, "El conductor fue ELIMINADO");
                     Con.Desconectar();
                 } 
@@ -248,17 +220,20 @@ public class conductor {
 
     public void tabla_campos() {
         int rec = Cdt.jTable1.getSelectedRow();
-        Cdt.txtCedula.setText(Cdt.jTable1.getValueAt(rec, 0).toString());
-        Cdt.txtNombres.setText(Cdt.jTable1.getValueAt(rec, 1).toString());
-        Cdt.txtApellidos.setText(Cdt.jTable1.getValueAt(rec, 2).toString());
-        Cdt.txtTelefono.setText(Cdt.jTable1.getValueAt(rec, 3).toString());
-        String ciudad = Cdt.jTable1.getValueAt(rec, 4).toString();
-        Cdt.cmbDepartamento.setSelectedItem(getDepartamento(Cdt.txtCedula.getText()));
+        String cc = Cdt.jTable1.getValueAt(rec, 1).toString();
+        String ciudad = Cdt.jTable1.getValueAt(rec, 5).toString();
+        
+        idConductor=Cdt.jTable1.getValueAt(rec, 0).toString();
+        Cdt.txtCedula.setText(Cdt.jTable1.getValueAt(rec, 1).toString());
+        Cdt.txtNombres.setText(Cdt.jTable1.getValueAt(rec, 2).toString());
+        Cdt.txtApellidos.setText(Cdt.jTable1.getValueAt(rec,3).toString());
+        Cdt.txtTelefono.setText(Cdt.jTable1.getValueAt(rec, 4).toString());
+        Cdt.cmbDepartamento.setSelectedItem(ext.getDepartamento("c",cc));
         Cdt.cmbCiudad.setSelectedItem(ciudad);
-        Cdt.txtDireccion.setText(Cdt.jTable1.getValueAt(rec, 5).toString());
+        Cdt.txtDireccion.setText(Cdt.jTable1.getValueAt(rec, 6).toString());
     }
 
-    public String getDepartamento(String cedula) {// Recibe el nombre del municipio y retorna el idDepartamento
+    /**public String getDepartamento(String cedula) {// Recibe el nombre del municipio y retorna el idDepartamento
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -271,7 +246,7 @@ public class conductor {
             e.printStackTrace();
         }
         return "";
-    }
+    }**/
 
     public void desactivar_checkbox() {
         Cdt.chCedula.setSelected(false);
@@ -293,50 +268,50 @@ public class conductor {
 
         if (Cdt.chCedula.isSelected() == true && Cdt.chApellidos.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true && Cdt.chApellidos.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chApellidos.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chApellidos.isSelected() == true) {
             if (!apellidos.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
-        desactivar_checkbox();
+        //desactivar_checkbox();
 
     }
 

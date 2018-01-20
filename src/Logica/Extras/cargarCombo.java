@@ -15,8 +15,8 @@ import javax.swing.JComboBox;
 public class cargarCombo {
     
     public static Conexion Con;
-    public static Statement st, st1,st2,st3;
-    public static ResultSet rs, rs1,rs2,rs3;
+    public static Statement st, st1,st2,st3,st4,st5,st6;
+    public static ResultSet rs, rs1,rs2,rs3,rs4,rs5,rs6;
     public static String idDepartamento;// tener encuenta  
     
     public boolean CargarDepa(JComboBox combo){
@@ -107,15 +107,64 @@ public class cargarCombo {
             st3 = Con.conexion.createStatement();
             rs3=st3.executeQuery("SELECT user FROM usuario");
             combo.removeAllItems();
+            
             while(rs3.next()){
                 combo.addItem(rs3.getString(1));
                 //System.out.println(rs.getString(1));
             }
             
-            
+            Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+    public void marcas(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st4 = Con.conexion.createStatement();
+            rs4=st4.executeQuery("SELECT marca FROM marca");
+            combo.removeAllItems();
+            while(rs4.next()){
+                combo.addItem(rs4.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void lote(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st5 = Con.conexion.createStatement();
+            rs5=st5.executeQuery("SELECT nombre FROM lote");
+            combo.removeAllItems();
+            while(rs5.next()){
+                combo.addItem(rs5.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void tipoArroz(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st6 = Con.conexion.createStatement();
+            rs6=st6.executeQuery("SELECT CONCAT(nombre,' - ',variedad) FROM tipodearroz");
+            combo.removeAllItems();
+            while(rs6.next()){
+                combo.addItem(rs6.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
     
 }

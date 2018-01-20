@@ -3,20 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Empleado.java</file>
-            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Laboratorio.java</file>
-            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/laboratorio.java</file>
-            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Administracion/empleado.java</file>
-            <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Administracion.java</file>
-=======
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Bascula/agricultor.java</file>
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Bascula/tipo_arroz.java</file>
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Extras/tablas.java</file>
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Interfaces/Agricultor.java</file>
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Interfaces/Usuarios.java</file>
-            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Interfaces/Tipo_Arroz.java</file>
->>>>>>> Stashed changes
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/Bascula.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/tiqueteVarios.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/Empleado.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Negocio/Conexion.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/bascula.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/TiqueteVarios.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Laboratorio/laboratorio.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/Lote.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/agricultor.java</file>
         </group>
     </open-files>
 </project-private>
