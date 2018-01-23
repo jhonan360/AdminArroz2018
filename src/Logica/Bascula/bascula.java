@@ -374,8 +374,8 @@ public class bascula {
      * Con.Desconectar(); } catch (Exception e) { e.printStackTrace(); } return
      * ""; }
      */
-    public static void abrirBusquedasTiquete(int num) {
-        BusTiquete = new BusquedasTiquete();
+    public static void abrirBusquedasTiquete(int num,String TiqPrincipal) {
+        BusTiquete = new BusquedasTiquete(TiqPrincipal);
         BusTiquete.setVisible(true);
 
         switch (num) {

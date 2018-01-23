@@ -8,6 +8,8 @@ package Logica.Bascula;
 import Logica.Extras.tablas;
 import Interfaces.BusquedasTiquete;
 import Interfaces.Bascula;
+import static Interfaces.Bascula.busTiquete;
+import Interfaces.TiqueteVarios;
 import Interfaces.Vehiculo;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -23,31 +25,42 @@ public class busquedasTiquete {
     public static BusquedasTiquete BusTiquete;
     public static Bascula Bas;
     public static bascula bas;
+    public static TiqueteVarios TiqVarios;
     public static agricultor agri;
     public static Vehiculo Vehiculo;
-    public static String nomConductor,ccAgricultor;
+    public static String nomConductor, ccAgricultor;
     public static tablas tbl;
     public static DefaultTableModel modeloagr, modelCdt;
     public static String columnasAgri[] = new String[]{"Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
-    public static String columnas[] = new String[]{"Cedula", "Nombres", "Apellidos","Telefono", "Direccion", "Municipio"};
+    public static String columnas[] = new String[]{"Cedula", "Nombres", "Apellidos", "Telefono", "Direccion", "Municipio"};
+    public static String claseTiquete;
 
     public busquedasTiquete() {
         crearModeloAgricultor();
         crearModeloConductor();
-        
+
         //tabla_camposAgricultor();
     }
 
     /**
      * Busqueda Agricultor
      */
-    public void cerrar(){
-        Bas.btnBuscarConductor.setEnabled(true);
-        Bas.btnEditarAgricultor.setEnabled(true);
-        Bas.btnBuscarPlaca.setEnabled(true);
+    public void cerrar(String tiquete) {
+
+        switch (tiquete) {
+            case "TiqPrincipal":
+                Bas.btnBuscarConductor.setEnabled(true);
+                Bas.btnEditarAgricultor.setEnabled(true);
+                Bas.btnBuscarPlaca.setEnabled(true);
+                break;
+                        
+            case "TiqVarios":
+                TiqVarios.btnBuscarConductor.setEnabled(true);
+                TiqVarios.btnBuscarPlaca.setEnabled(true);
+                break;
     }
-    
-  
+    }
+
     public void crearModeloAgricultor() {
         //System.out.println("2");
         modeloagr = new DefaultTableModel(null, columnasAgri) {
@@ -59,18 +72,32 @@ public class busquedasTiquete {
         tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT ccAgricultor,nombres,apellidos,municipios.nombre,direccion FROM agricultor,municipios WHERE agricultor.idMunicipio=municipios.idMunicipio");
     }
 
-    public void tabla_camposAgricultor() {
+    public void tabla_camposAgricultor(String tiquete) {
+        /**int rec = BusTiquete.jTable3.getSelectedRow();
+
+        System.out.println(tiquete);
         
-            
-            //System.out.println("jjj"+ccAgricultor);
-                      
+        claseTiquete=tiquete;
+        
+        switch (claseTiquete) {
+            case "TiqPrincipal":
+                Bas.txtAgricultor.setText((BusTiquete.jTable3.getValueAt(rec, 1).toString()) + (" " + BusTiquete.jTable3.getValueAt(rec, 2).toString()));
+                cerrar(claseTiquete);
+                break;
+
+            case "TiqVarios":
+                TiqVarios.txtConductor.setText((BusTiquete.jTable3.getValueAt(rec, 1).toString()) + (" " + BusTiquete.jTable3.getValueAt(rec, 2).toString()));
+                cerrar(claseTiquete);
+                break;
+        }**/
+
     }
-        
+
     public static void desactivar_checkboxAgricultor() { // desactiva las checkbox
         BusTiquete.chCedulaAgricultor.setSelected(false);
         BusTiquete.chApellidosAgricultor.setSelected(false);
         BusTiquete.chCiudadAgricultor.setSelected(false);
-        
+
     }
 
     public void buscarAgricultor() {
@@ -146,14 +173,13 @@ public class busquedasTiquete {
     }
 
     public void tabla_camposConductor() {
-            //int rec = BusTiquete.jTable2.getSelectedRow();
-        
-            //  Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 2).toString()) + (" " + BusTiquete.jTable2.getValueAt(rec, 1).toString()));
-            //Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 1).toString()));
-            //bas.ccConductor = BusTiquete.jTable2.getValueAt(rec, 0).toString();
-            //nomConductor =BusTiquete.jTable2.getValueAt(rec, 1).toString();
-            //System.out.println("Log"+nomConductor);
-            
+        //int rec = BusTiquete.jTable2.getSelectedRow();
+
+        //  Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 2).toString()) + (" " + BusTiquete.jTable2.getValueAt(rec, 1).toString()));
+        //Bas.txtConductor.setText((BusTiquete.jTable2.getValueAt(rec, 1).toString()));
+        //bas.ccConductor = BusTiquete.jTable2.getValueAt(rec, 0).toString();
+        //nomConductor =BusTiquete.jTable2.getValueAt(rec, 1).toString();
+        //System.out.println("Log"+nomConductor);
     }
 
     public void desactivar_checkboxConductor() { // desactiva las checkbox

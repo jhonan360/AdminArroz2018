@@ -19,20 +19,22 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
     public static busquedasTiquete busTiquete;
     public static bascula bascula;
+    public static String claseTiquete;
+    public static TiqueteVarios TiqVarios;
 
     /**
      * Creates new form BusquedasTiquete
      */
-    public BusquedasTiquete() {
+    public BusquedasTiquete(String tiquete) {
         initComponents();
         setLocationRelativeTo(null);
         busTiquete = new busquedasTiquete();
+        claseTiquete = tiquete;
 
     }
 
-    public void cerrar() {
-        super.setVisible(false);
-        super.dispose();
+    public BusquedasTiquete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -649,7 +651,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2KeyReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        busTiquete.cerrar();
+        busTiquete.cerrar(claseTiquete);
     }//GEN-LAST:event_formWindowClosing
 
     private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
@@ -668,10 +670,22 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         } else {
             int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
-                Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
-                //bas.ccAgricultor = BusTiquete.jTable3.getValueAt(rec, 0).toString();
-                busTiquete.cerrar();
-                dispose();
+
+                switch (claseTiquete) {
+
+                    case "TiqPrincipal":
+                        Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                        busTiquete.cerrar(claseTiquete);
+                        dispose();
+                        break;
+
+                    case "TiqVarios":
+                        TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                        busTiquete.cerrar(claseTiquete);
+                        dispose();
+                        break;
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
@@ -680,24 +694,30 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarConductorActionPerformed
 
     private void btnGuardarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAgricultorActionPerformed
-        //busTiquete.tabla_camposAgricultor();
-        //dispose();
-
         int rec = jTable3.getSelectedRow();
         if (rec == -1) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila");
         } else {
             int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
-                Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                //bas.ccAgricultor = BusTiquete.jTable3.getValueAt(rec, 0).toString();
-                busTiquete.cerrar();
-                dispose();
+
+                switch (claseTiquete) {
+                    case "TiqPrincipal":
+                        Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                        busTiquete.cerrar(claseTiquete);
+                        dispose();
+                        break;    
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         }
     }//GEN-LAST:event_btnGuardarAgricultorActionPerformed
+
+    public void btnGuardarAgricultor(String claseTiquete) {
+
+    }
 
     /**
      * @param args the command line arguments

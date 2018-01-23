@@ -244,11 +244,7 @@
                           <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-<<<<<<< HEAD
                       <EmptySpace max="32767" attributes="0"/>
-=======
-                      <EmptySpace pref="101" max="32767" attributes="0"/>
->>>>>>> c73b50a1cb0570d9eea4dce553e463bd662310a2
                   </Group>
               </Group>
             </DimensionLayout>
@@ -442,11 +438,7 @@
                               <Component id="btnEliminar" min="-2" pref="118" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-<<<<<<< HEAD
                       <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
-=======
-                      <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
->>>>>>> c73b50a1cb0570d9eea4dce553e463bd662310a2
                   </Group>
               </Group>
             </DimensionLayout>
@@ -620,7 +612,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
