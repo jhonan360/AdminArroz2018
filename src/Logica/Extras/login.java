@@ -42,7 +42,7 @@ public class login {
     public static bascula Bas;
     public static conductor cond;
     public static Administracion admi;
-    
+
     public static Laboratorio_menu Lab;
 
     public static Gerencia Ger;
@@ -58,7 +58,7 @@ public class login {
 
     public login() {
         logs = new log();
-        perfil=log.perfil;
+        perfil = log.perfil;
         usu = log.txtusuario.getText();
         char[] Pass = log.txtcontra.getPassword();
         con = new String(Pass);
@@ -93,14 +93,13 @@ public class login {
                     while (rs1.next()) {
                         priv = rs1.getObject(1) + "";
                         System.out.println("Privilegio encontrado " + priv);
-
                     }
                     rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
                     while (rs2.next()) {
                         estado = rs2.getObject(1) + "";
                         System.out.print("estado" + estado);
                     }
-                    if (priv.equals("bascula") && estado.equals("activo") && priv.equals(perfil)) {
+                    if (priv.equals("basculista") && estado.equals("activo") ) {
                         if (bas == null) {
                             bas = new Bascula();
                             bas.setVisible(true);
@@ -113,7 +112,7 @@ public class login {
                             bas.setVisible(true);
                         }
                         bandera = true;
-                    } else if (priv.equals("administracion") && estado.equals("activo") && priv.equals(perfil)) {
+                    } else if (priv.equals("administrador") && estado.equals("activo") ) {
                         if (admi == null) {
                             admi = new Administracion();
                             admi.setVisible(true);
@@ -121,7 +120,7 @@ public class login {
                             admi.setVisible(true);
                         }
                         bandera = true;
-                    }else if (priv.equals("laboratorio") && estado.equals("activo") && priv.equals(perfil)) {
+                    } else if (priv.equals("laboratorista") && estado.equals("activo")) {
                         if (Lab == null) {
                             Lab = new Laboratorio_menu();
                             Lab.setVisible(true);
@@ -130,27 +129,36 @@ public class login {
                             Lab.setVisible(true);
                         }
                         bandera = true;
-                    }  else if (priv.equals("gerencia") && estado.equals("activo") && priv.equals(perfil)) {
+                    } else if (priv.equals("gerente") && estado.equals("activo")) {
                         if (Ger == null) {
                             Ger = new Gerencia();
                             Ger.setVisible(true);
+                            enviarUsuario();
                         } else {
                             Ger.setVisible(true);
                         }
-                        bandera = true; 
-                    }else if (priv.equals("auditor") && estado.equals("activo") && priv.equals(perfil)) {
+                        bandera = true;
+                    } else if (priv.equals("auditor") && estado.equals("activo") ) {
 
                         if (audi == null) {
                             audi = new Auditor();
                             audi.setVisible(true);
+                            enviarUsuario();
                         } else {
                             audi.setVisible(true);
                         }
                         bandera = true;
-                    }else {
-                       if (!priv.equals(perfil)) {
-                            JOptionPane.showMessageDialog(null, "El usuario no corresponde a este perfil");
-                        }else if (!estado.equals("activo")) {
+                    /*} else if (priv.equals("supervisor") && estado.equals("activo")) {
+                        if (supe == null) {
+                            supe = new Auditor();
+                            supe.setVisible(true);
+                        enviarUsuario();
+                        } else {
+                            audi.setVisible(true);
+                        }
+                        bandera = true;*/
+                    } else {
+                        if (!estado.equals("activo")) {
                             JOptionPane.showMessageDialog(null, "El usuario se encuentra inactivo por favor hable con el administrador del sistema");
                         }
                         limpiar_campos();

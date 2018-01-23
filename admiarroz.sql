@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-01-2018 a las 18:36:15
+-- Tiempo de generación: 22-01-2018 a las 21:56:16
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.30
 
@@ -25,68 +25,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `agricultor`
---
-
-CREATE TABLE `agricultor` (
-  `idAgricultor` int(11) NOT NULL,
-  `ccAgricultor` varchar(15) NOT NULL,
-  `nombres` varchar(45) NOT NULL,
-  `apellidos` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL,
-  `telefono` varchar(12) NOT NULL,
-  `telefono2` varchar(12) DEFAULT NULL,
-  `telefono3` varchar(12) DEFAULT NULL,
-  `idMunicipio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `bateria`
 --
 
 CREATE TABLE `bateria` (
   `idBateria` int(11) NOT NULL,
   `nombre` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cargo`
---
-
-CREATE TABLE `cargo` (
-  `idCargo` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `cargo`
---
-
-INSERT INTO `cargo` (`idCargo`, `nombre`) VALUES
-(1, 'administrador'),
-(2, 'basculista'),
-(3, 'laboratorista'),
-(4, 'contador'),
-(5, 'auditor');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `conductor`
---
-
-CREATE TABLE `conductor` (
-  `idConductor` int(11) NOT NULL,
-  `idMunicipio` int(11) NOT NULL,
-  `ccConductor` varchar(15) NOT NULL,
-  `nombres` varchar(45) NOT NULL,
-  `apellidos` varchar(45) NOT NULL,
-  `telefono` varchar(12) NOT NULL,
-  `direccion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -146,23 +90,87 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombre`) VALUES
 
 CREATE TABLE `empleado` (
   `idEmpleado` int(11) NOT NULL,
+  `user` varchar(30) NOT NULL,
+  `idMunicipio` int(11) NOT NULL,
   `ccEmpleado` varchar(15) NOT NULL,
   `nombres` varchar(45) NOT NULL,
   `apellidos` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL,
-  `telefono` varchar(12) NOT NULL,
-  `idCargo` int(11) NOT NULL,
-  `idMunicipio` int(11) NOT NULL
+  `direccion` varchar(255) NOT NULL,
+  `telefono` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`idEmpleado`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`, `idCargo`, `idMunicipio`) VALUES
-(1, '1105689625', 'Lizeth Fernanda', 'Ramirez Cortez', 'no se', '3223006069', 1, 1021),
-(2, '1070616933', 'Uriel', 'Esguerra Elianegua', 'no se', '3112185321', 2, 554),
-(3, '1106896645', 'Jhonan Smith', 'Vargas Herran', 'cra 29 # 11-95', '3133885186', 3, 1033);
+INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES
+(1, 'x', 1033, '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'),
+(2, 'b', 5, '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
+(3, 'l', 639, '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entradas`
+--
+
+CREATE TABLE `entradas` (
+  `idEntradas` int(11) NOT NULL,
+  `idTiqueteVarios` int(11) NOT NULL,
+  `cantidad` decimal(5,2) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `etapas`
+--
+
+CREATE TABLE `etapas` (
+  `idEtapas` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `funciones`
+--
+
+CREATE TABLE `funciones` (
+  `idFunciones` int(11) NOT NULL,
+  `funcion` varchar(255) NOT NULL,
+  `detalle` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `funcionesprivilegios`
+--
+
+CREATE TABLE `funcionesprivilegios` (
+  `idFuncionesPrivilegio` int(11) NOT NULL,
+  `idFunciones` int(11) NOT NULL,
+  `idPrivilegios` int(11) NOT NULL,
+  `estado` enum('activo','inactivo') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historialetapa`
+--
+
+CREATE TABLE `historialetapa` (
+  `idHistorialEtapa` int(11) NOT NULL,
+  `idProcedimiento` int(11) NOT NULL,
+  `idEtapas` int(11) NOT NULL,
+  `fecha` varchar(45) NOT NULL,
+  `hora` varchar(45) NOT NULL,
+  `humedad` decimal(3,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -172,16 +180,20 @@ INSERT INTO `empleado` (`idEmpleado`, `ccEmpleado`, `nombres`, `apellidos`, `dir
 
 CREATE TABLE `laboratorio` (
   `idLaboratorio` int(11) NOT NULL,
+  `idTiquete` int(11) NOT NULL,
+  `user` varchar(30) NOT NULL,
+  `estado` enum('abierto','cerrado') DEFAULT NULL,
   `fecha` datetime NOT NULL,
-  `variedad` varchar(45) NOT NULL,
   `humedad` decimal(3,2) NOT NULL,
   `impureza` decimal(3,2) NOT NULL,
-  `humedadEstufa` decimal(3,2) NOT NULL,
   `integralRes` decimal(3,2) NOT NULL,
   `cascarillaRes` decimal(3,2) NOT NULL,
   `blancoRes` decimal(3,2) NOT NULL,
   `partidoRes` decimal(3,2) NOT NULL,
-  `enteroRes` decimal(3,2) NOT NULL
+  `enteroRes` decimal(3,2) NOT NULL,
+  `yeso` decimal(3,2) DEFAULT NULL,
+  `danado` decimal(3,2) DEFAULT NULL,
+  `ip` decimal(3,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -197,6 +209,23 @@ CREATE TABLE `lote` (
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `lote`
+--
+
+INSERT INTO `lote` (`idLote`, `idMunicipio`, `nombre`, `descripcion`) VALUES
+(1, 3, 'Santa ana', 'Zona con mayor producción'),
+(2, 6, 'La joya', 'Alto indice de Proteinas y minerales'),
+(3, 3, 'Las delicias', 'Alto indice de fosforo'),
+(4, 1021, 'Madrid', 'Zona agricultora'),
+(5, 1021, 'Colegio', 'Alto indice de fosoforo'),
+(6, 1021, 'La caimanera', 'Alto indice de fosoforo'),
+(7, 1021, 'Patio Bonito', 'Alto indice de fosoforo'),
+(8, 1022, 'Palocabildo', 'Alto indice de fosoforo'),
+(9, 1096, 'Barzalosa', 'Zona agricola'),
+(10, 1024, 'La cajita', 'Alto indice de fosoforo'),
+(11, 1021, 'Baja', 'parte baja del Espinal');
+
 -- --------------------------------------------------------
 
 --
@@ -204,7 +233,7 @@ CREATE TABLE `lote` (
 --
 
 CREATE TABLE `marca` (
-  `idmarca` int(11) NOT NULL,
+  `idMarca` int(11) NOT NULL,
   `marca` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -212,55 +241,70 @@ CREATE TABLE `marca` (
 -- Volcado de datos para la tabla `marca`
 --
 
-INSERT INTO `marca` (`idmarca`, `marca`) VALUES
-(1, 'AGRALE'),
-(2, 'ALFA ROMEO'),
-(3, 'AUDI'),
-(4, 'BMW'),
-(5, 'CHERY'),
-(6, 'CHEVROLET'),
-(7, 'CHRYSLER'),
-(8, 'CITROEN'),
-(9, 'DACIA'),
-(10, 'DAEWO'),
-(11, 'DAIHATSU'),
-(12, 'DODGE'),
-(13, 'FERRARI'),
-(14, 'FIAT'),
-(15, 'FORD'),
-(16, 'GALLOPER'),
-(17, 'HEIBAO'),
-(18, 'HONDA'),
-(19, 'HYUNDAI'),
-(20, 'ISUZU'),
-(21, 'JAGUAR'),
-(22, 'JEEP'),
-(23, 'KIA'),
-(24, 'LADA'),
-(25, 'LAND ROVER'),
-(26, 'LEXUS'),
-(27, 'MASERATI'),
-(28, 'MAZDA'),
-(29, 'MERCEDES BENZ'),
-(30, 'MG'),
-(31, 'MINI'),
-(32, 'MITSUBISHI'),
-(33, 'NISSAN'),
-(34, 'PEUGEOT'),
-(35, 'PORSCHE'),
-(36, 'RAM'),
-(37, 'RENAULT'),
-(38, 'ROVER'),
-(39, 'SAAB'),
-(40, 'SEAT'),
-(41, 'SMART'),
-(42, 'SSANGYONG'),
-(43, 'SUBARU'),
-(44, 'SUZUKI'),
-(45, 'TATA'),
-(46, 'TOYOTA'),
-(47, 'VOLKSWAGEN'),
-(48, 'VOLVO');
+INSERT INTO `marca` (`idMarca`, `marca`) VALUES
+(1, ' NO APLICA'),
+(2, 'AGRALE'),
+(3, 'ALFA ROMEO'),
+(4, 'AUDI'),
+(5, 'BMW'),
+(6, 'CHERY'),
+(7, 'CHEVROLET'),
+(8, 'CHRYSLER'),
+(9, 'CITROEN'),
+(10, 'DACIA'),
+(11, 'DAEWO'),
+(12, 'DAIHATSU'),
+(13, 'DODGE'),
+(14, 'FERRARI'),
+(15, 'FIAT'),
+(16, 'FORD'),
+(17, 'GALLOPER'),
+(18, 'HEIBAO'),
+(19, 'HONDA'),
+(20, 'HYUNDAI'),
+(21, 'ISUZU'),
+(22, 'JAGUAR'),
+(23, 'JEEP'),
+(24, 'KIA'),
+(25, 'LADA'),
+(26, 'LAND ROVER'),
+(27, 'LEXUS'),
+(28, 'MASERATI'),
+(29, 'MAZDA'),
+(30, 'MERCEDES BENZ'),
+(31, 'MG'),
+(32, 'MINI'),
+(33, 'MITSUBISHI'),
+(34, 'NISSAN'),
+(35, 'PEUGEOT'),
+(36, 'PORSCHE'),
+(37, 'RAM'),
+(38, 'RENAULT'),
+(39, 'ROVER'),
+(40, 'SAAB'),
+(41, 'SEAT'),
+(42, 'SMART'),
+(43, 'SSANGYONG'),
+(44, 'SUBARU'),
+(45, 'SUZUKI'),
+(46, 'TATA'),
+(47, 'TOYOTA'),
+(48, 'VOLKSWAGEN'),
+(49, 'VOLVO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `muetraestufa`
+--
+
+CREATE TABLE `muetraestufa` (
+  `idmuetraestufa` int(11) NOT NULL,
+  `idLaboratorio` int(11) NOT NULL,
+  `muestreo` int(11) NOT NULL,
+  `hora` time NOT NULL,
+  `humedad` decimal(3,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1385,11 +1429,72 @@ INSERT INTO `municipios` (`idMunicipio`, `idDepartamento`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `nivel`
+--
+
+CREATE TABLE `nivel` (
+  `idnivel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `nivel`
+--
+
+INSERT INTO `nivel` (`idnivel`) VALUES
+(0),
+(1),
+(2),
+(3),
+(4);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personalexterno`
+--
+
+CREATE TABLE `personalexterno` (
+  `idPersonalExterno` int(11) NOT NULL,
+  `idMunicipio` int(11) NOT NULL,
+  `tipo` enum('agricultor','conductor') NOT NULL,
+  `cedula` varchar(15) NOT NULL,
+  `nombres` varchar(45) NOT NULL,
+  `apellidos` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
+  `telefono2` varchar(12) DEFAULT NULL,
+  `telefono3` varchar(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `personalexterno`
+--
+
+INSERT INTO `personalexterno` (`idPersonalExterno`, `idMunicipio`, `tipo`, `cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `telefono2`, `telefono3`) VALUES
+(1, 1021, 'agricultor', '1105689625', 'Jose Hernanda', 'Orjuela Vasquez', 'La caimanera', '3145433423', '', ''),
+(2, 1022, 'agricultor', '1105680851', 'Jonathan David', 'Perez Guzman', 'Calle 2 ##7-23 B/San Rafael', '3156057003', '2484369', ''),
+(3, 1023, 'agricultor', '93135529', 'Edgar de Jesus ', 'Ramirez Perdomo', 'Vereda La Joya', '3202924407', '', ''),
+(4, 1025, 'agricultor', '28710378', 'Juan Pablo', 'Capera Cortes', 'Vereda Santa Ana', '3123420087', '2483456', '2487023'),
+(5, 1021, 'agricultor', '65692470', 'Jorge Diego', 'Trujillo Guzman', 'Manzana D Casa 18 B/ San Francisco', '3214652051', '', ''),
+(6, 1023, 'agricultor', '110768956', 'Edwin Mauricio', 'Melo Cartagena', 'Calle 6 #4-32', '3208007887', '', ''),
+(7, 1021, 'agricultor', '1106789667', 'Ana Beatriz', 'Aguirre Borja', 'Vereda Coello', '3214534545', '2486087', ''),
+(8, 1021, 'agricultor', '65456786', 'Holman Geovanny', 'Reyes Buitrago', 'Cra 4 #4-57', '3234524545', '', ''),
+(9, 1021, 'agricultor', '93134567', 'Carlos Andres', 'Ospina Buitrago', 'Calle 6 #12-34', '3004323345', '', ''),
+(10, 1021, 'agricultor', '1101089667', 'Edwin Oswaldo', 'Perea Rojas', 'Vereda Pasoancho', '3224534545', '', ''),
+(11, 1021, 'conductor', '2205680851', 'Jorge Andres', 'Barragan Barreto', 'Mza 1 casa 23 B/ La Magdalena', '3242386756', '', ''),
+(12, 1022, 'conductor', '98366453', 'Cristhian Alberto', 'Vasquez Villarraga', 'Cra 8 #11-22', '314415500', '', ''),
+(13, 1023, 'conductor', '72345678', 'Victor Andres', 'Orjuela Vargas', 'Mza 6 casa 9 B/Belen', '3214567800', '', ''),
+(14, 1021, 'conductor', '11010204543', 'Luis Alejandro', 'Sandoval Castro', 'Vda Colegio', '305903234', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `privilegios`
 --
 
 CREATE TABLE `privilegios` (
   `idPrivilegios` int(11) NOT NULL,
+  `idnivel` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1397,24 +1502,37 @@ CREATE TABLE `privilegios` (
 -- Volcado de datos para la tabla `privilegios`
 --
 
-INSERT INTO `privilegios` (`idPrivilegios`, `nombre`) VALUES
-(1, 'administracion'),
-(2, 'bascula'),
-(3, 'laboratorio'),
-(4, 'contador'),
-(5, 'gerencia'),
-(6, 'auditor');
+INSERT INTO `privilegios` (`idPrivilegios`, `idnivel`, `nombre`) VALUES
+(1, 0, 'basculista'),
+(2, 0, 'laboratorista'),
+(3, 0, 'contador'),
+(4, 1, 'supervisor'),
+(5, 2, 'gerente'),
+(6, 3, 'administrador'),
+(7, 4, 'auditor');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `registroLaboratorio`
+-- Estructura de tabla para la tabla `procedimiento`
 --
 
-CREATE TABLE `registroLaboratorio` (
-  `idRegistroLab` int(11) NOT NULL,
-  `idLaboratorioIni` int(11) NOT NULL,
-  `idLaboratorioFin` int(11) DEFAULT NULL
+CREATE TABLE `procedimiento` (
+  `idProcedimiento` int(11) NOT NULL,
+  `idSilos` int(11) NOT NULL,
+  `fechahora` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seccion`
+--
+
+CREATE TABLE `seccion` (
+  `idSeccion` int(11) NOT NULL,
+  `idBateria` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1425,7 +1543,9 @@ CREATE TABLE `registroLaboratorio` (
 
 CREATE TABLE `silos` (
   `idSilos` int(11) NOT NULL,
-  `idBateria` int(11) NOT NULL
+  `idSeccion` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `estado` enum('vacio','lleno','con contenido') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1436,6 +1556,7 @@ CREATE TABLE `silos` (
 
 CREATE TABLE `tipodearroz` (
   `idTipoDeArroz` int(11) NOT NULL,
+  `idVariedad` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1444,10 +1565,10 @@ CREATE TABLE `tipodearroz` (
 -- Volcado de datos para la tabla `tipodearroz`
 --
 
-INSERT INTO `tipodearroz` (`idTipoDeArroz`, `nombre`, `descripcion`) VALUES
-(1, 'Rojo', 'Es uno de los arroces más comunes, \nde grano corto o medio.'),
-(2, 'pady', 'originario de las regiones del Himalaya y muy utilizado en la cocina india.'),
-(3, 'partidos', 'E de grano largo, y además de tener\n un mayor número de proteínas que\n el arroz, requiere de más tiempo\n para ser cocinado.');
+INSERT INTO `tipodearroz` (`idTipoDeArroz`, `idVariedad`, `nombre`, `descripcion`) VALUES
+(1, 1, 'Rojo', 'Es uno de los arroces más comunes, \\nde grano corto o medio.'),
+(2, 2, 'Pady', 'Originario de las regiones del Himalaya y muy utilizado en la cocina india.'),
+(3, 1, 'Partidos', 'E de grano largo, y además de tener\\n un mayor número de proteínas que\\n el arroz, requiere de más tiempo\\n para ser cocinado.');
 
 -- --------------------------------------------------------
 
@@ -1459,16 +1580,49 @@ CREATE TABLE `tiquete` (
   `idTiquete` int(11) NOT NULL,
   `idAgricultor` int(11) NOT NULL,
   `idTipoDeArroz` int(11) NOT NULL,
+  `idLote` int(11) DEFAULT NULL,
+  `idVehiculo` int(11) DEFAULT NULL,
+  `idConductor` int(11) DEFAULT NULL,
+  `user` varchar(30) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `kilosBrutos` decimal(5,2) DEFAULT NULL,
+  `destare` decimal(5,2) DEFAULT NULL,
+  `kilosNetos` decimal(5,2) DEFAULT NULL,
+  `observacion` text,
+  `humedadUno` decimal(3,2) NOT NULL,
+  `impurezaUno` decimal(3,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiqueteensilos`
+--
+
+CREATE TABLE `tiqueteensilos` (
+  `idTiqueteSilos` int(11) NOT NULL,
+  `idTiquete` int(11) NOT NULL,
+  `idSilos` int(11) NOT NULL,
+  `estado` enum('en espera','finalizado') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tiqueteVarios`
+--
+
+CREATE TABLE `tiqueteVarios` (
+  `idTiqueteVarios` int(11) NOT NULL,
   `idConductor` int(11) NOT NULL,
-  `idVehiculo` int(11) NOT NULL,
   `user` varchar(30) NOT NULL,
-  `idLote` int(11) NOT NULL,
-  `idRegistroLab` int(11) NOT NULL,
+  `idVehiculo` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
+  `destino` text,
+  `observacion` text,
   `kilosBrutos` decimal(5,2) NOT NULL,
-  `destare` decimal(5,2) NOT NULL,
-  `kilosNetos` decimal(5,2) NOT NULL,
-  `observacion` text
+  `destare` decimal(5,2) DEFAULT NULL,
+  `kilosNetos` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1479,11 +1633,38 @@ CREATE TABLE `tiquete` (
 
 CREATE TABLE `usuario` (
   `user` varchar(30) NOT NULL,
+  `idPrivilegios` int(11) NOT NULL,
   `contrasena` tinytext NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `idEmpleado` int(11) NOT NULL,
-  `idPrivilegios` int(11) NOT NULL
+  `estado` enum('activo','inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
+('b', 1, '6ad794deae14e67d8ad516821fc1', 'activo'),
+('l', 2, '6ad794deae14e67d8ad516821fc1', 'activo'),
+('x', 6, '6ad794deae14e67d8ad516821fc1', 'activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `variedad`
+--
+
+CREATE TABLE `variedad` (
+  `idVariedad` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `variedad`
+--
+
+INSERT INTO `variedad` (`idVariedad`, `nombre`) VALUES
+(1, 'thana'),
+(2, 'fedearroz');
 
 -- --------------------------------------------------------
 
@@ -1493,7 +1674,7 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE `vehiculo` (
   `idVehiculo` int(11) NOT NULL,
-  `marca` int(11) NOT NULL,
+  `idMarca` int(11) NOT NULL,
   `modelo` varchar(45) DEFAULT NULL,
   `placa` varchar(6) NOT NULL,
   `color` varchar(30) DEFAULT NULL
@@ -1504,32 +1685,10 @@ CREATE TABLE `vehiculo` (
 --
 
 --
--- Indices de la tabla `agricultor`
---
-ALTER TABLE `agricultor`
-  ADD PRIMARY KEY (`idAgricultor`),
-  ADD UNIQUE KEY `ccAgricultor_UNIQUE` (`ccAgricultor`),
-  ADD KEY `fk_agricultor_municipios1` (`idMunicipio`);
-
---
 -- Indices de la tabla `bateria`
 --
 ALTER TABLE `bateria`
   ADD PRIMARY KEY (`idBateria`);
-
---
--- Indices de la tabla `cargo`
---
-ALTER TABLE `cargo`
-  ADD PRIMARY KEY (`idCargo`);
-
---
--- Indices de la tabla `conductor`
---
-ALTER TABLE `conductor`
-  ADD PRIMARY KEY (`idConductor`),
-  ADD UNIQUE KEY `ccConductor_UNIQUE` (`ccConductor`),
-  ADD KEY `idMunicipio` (`idMunicipio`);
 
 --
 -- Indices de la tabla `departamentos`
@@ -1543,14 +1702,51 @@ ALTER TABLE `departamentos`
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`idEmpleado`),
   ADD UNIQUE KEY `ccEmpleado_UNIQUE` (`ccEmpleado`),
-  ADD KEY `fk_empleado_municipios1` (`idMunicipio`),
-  ADD KEY `fk_empleado_cargo1` (`idCargo`);
+  ADD KEY `fk_empleado_usuario1_idx` (`user`),
+  ADD KEY `fk_empleado_municipios1` (`idMunicipio`);
+
+--
+-- Indices de la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  ADD PRIMARY KEY (`idEntradas`),
+  ADD KEY `fk_entradas_tiqueteVarios1_idx` (`idTiqueteVarios`);
+
+--
+-- Indices de la tabla `etapas`
+--
+ALTER TABLE `etapas`
+  ADD PRIMARY KEY (`idEtapas`);
+
+--
+-- Indices de la tabla `funciones`
+--
+ALTER TABLE `funciones`
+  ADD PRIMARY KEY (`idFunciones`);
+
+--
+-- Indices de la tabla `funcionesprivilegios`
+--
+ALTER TABLE `funcionesprivilegios`
+  ADD PRIMARY KEY (`idFuncionesPrivilegio`),
+  ADD KEY `fk_funciones_has_privilegios_privilegios1_idx` (`idPrivilegios`),
+  ADD KEY `fk_funciones_has_privilegios_funciones1_idx` (`idFunciones`);
+
+--
+-- Indices de la tabla `historialetapa`
+--
+ALTER TABLE `historialetapa`
+  ADD PRIMARY KEY (`idHistorialEtapa`),
+  ADD KEY `fk_procedimiento_has_etapas_etapas1_idx` (`idEtapas`),
+  ADD KEY `fk_procedimiento_has_etapas_procedimiento1_idx` (`idProcedimiento`);
 
 --
 -- Indices de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  ADD PRIMARY KEY (`idLaboratorio`);
+  ADD PRIMARY KEY (`idLaboratorio`),
+  ADD KEY `fk_laboratorio_tiquete1_idx` (`idTiquete`),
+  ADD KEY `fk_laboratorio_usuario1_idx` (`user`);
 
 --
 -- Indices de la tabla `lote`
@@ -1563,7 +1759,14 @@ ALTER TABLE `lote`
 -- Indices de la tabla `marca`
 --
 ALTER TABLE `marca`
-  ADD PRIMARY KEY (`idmarca`);
+  ADD PRIMARY KEY (`idMarca`);
+
+--
+-- Indices de la tabla `muetraestufa`
+--
+ALTER TABLE `muetraestufa`
+  ADD PRIMARY KEY (`idmuetraestufa`),
+  ADD KEY `fk_muetraestufa_laboratorio1_idx` (`idLaboratorio`);
 
 --
 -- Indices de la tabla `municipios`
@@ -1573,52 +1776,95 @@ ALTER TABLE `municipios`
   ADD KEY `fk_municipios_departamentos1` (`idDepartamento`);
 
 --
+-- Indices de la tabla `nivel`
+--
+ALTER TABLE `nivel`
+  ADD PRIMARY KEY (`idnivel`);
+
+--
+-- Indices de la tabla `personalexterno`
+--
+ALTER TABLE `personalexterno`
+  ADD PRIMARY KEY (`idPersonalExterno`),
+  ADD UNIQUE KEY `ccConductor_UNIQUE` (`cedula`),
+  ADD KEY `fk_personalExterno_municipios1_idx` (`idMunicipio`);
+
+--
 -- Indices de la tabla `privilegios`
 --
 ALTER TABLE `privilegios`
-  ADD PRIMARY KEY (`idPrivilegios`);
+  ADD PRIMARY KEY (`idPrivilegios`),
+  ADD KEY `fk_privilegios_nivel1_idx` (`idnivel`);
 
 --
--- Indices de la tabla `registroLaboratorio`
+-- Indices de la tabla `procedimiento`
 --
-ALTER TABLE `registroLaboratorio`
-  ADD PRIMARY KEY (`idRegistroLab`),
-  ADD KEY `fk_registroLaboratorio_laboratorio1_idx` (`idLaboratorioIni`),
-  ADD KEY `fk_registroLaboratorio_laboratorio2_idx` (`idLaboratorioFin`);
+ALTER TABLE `procedimiento`
+  ADD PRIMARY KEY (`idProcedimiento`),
+  ADD KEY `fk_procedimiento_silos1_idx` (`idSilos`);
+
+--
+-- Indices de la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  ADD PRIMARY KEY (`idSeccion`),
+  ADD KEY `fk_seccion_bateria1_idx` (`idBateria`);
 
 --
 -- Indices de la tabla `silos`
 --
 ALTER TABLE `silos`
   ADD PRIMARY KEY (`idSilos`),
-  ADD KEY `fk_silos_bateria1_idx1` (`idBateria`);
+  ADD KEY `fk_silos_seccion1_idx` (`idSeccion`);
 
 --
 -- Indices de la tabla `tipodearroz`
 --
 ALTER TABLE `tipodearroz`
-  ADD PRIMARY KEY (`idTipoDeArroz`);
+  ADD PRIMARY KEY (`idTipoDeArroz`),
+  ADD KEY `fk_tipodearroz_variedad1_idx` (`idVariedad`);
 
 --
 -- Indices de la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
   ADD PRIMARY KEY (`idTiquete`),
-  ADD KEY `fk_tiquete_tipoDeArroz1_idx` (`idTipoDeArroz`),
   ADD KEY `fk_tiquete_usuario1_idx` (`user`),
-  ADD KEY `fk_tiquete_conductor1_idx` (`idConductor`),
   ADD KEY `fk_tiquete_vehiculo1_idx` (`idVehiculo`),
-  ADD KEY `fk_tiquete_agricultor1_idx` (`idAgricultor`),
-  ADD KEY `fk_tiquete_registroLaboratorio1_idx` (`idRegistroLab`),
+  ADD KEY `fk_tiquete_personalExterno1_idx` (`idConductor`),
+  ADD KEY `fk_tiquete_personalExterno2_idx` (`idAgricultor`),
+  ADD KEY `fk_tiquete_tipodearroz1_idx` (`idTipoDeArroz`),
   ADD KEY `fk_tiquete_lote1_idx` (`idLote`);
+
+--
+-- Indices de la tabla `tiqueteensilos`
+--
+ALTER TABLE `tiqueteensilos`
+  ADD PRIMARY KEY (`idTiqueteSilos`),
+  ADD KEY `fk_tiquete_has_silos_silos1_idx` (`idSilos`),
+  ADD KEY `fk_tiquete_has_silos_tiquete1_idx` (`idTiquete`);
+
+--
+-- Indices de la tabla `tiqueteVarios`
+--
+ALTER TABLE `tiqueteVarios`
+  ADD PRIMARY KEY (`idTiqueteVarios`),
+  ADD KEY `fk_tiqueteVarios_vehiculo1_idx` (`idVehiculo`),
+  ADD KEY `fk_tiqueteVarios_usuario1_idx` (`user`),
+  ADD KEY `fk_tiqueteVarios_personalExterno1_idx` (`idConductor`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`user`),
-  ADD KEY `fk_usuario_empleado1_idx` (`idEmpleado`),
   ADD KEY `fk_usuario_privilegios1_idx` (`idPrivilegios`);
+
+--
+-- Indices de la tabla `variedad`
+--
+ALTER TABLE `variedad`
+  ADD PRIMARY KEY (`idVariedad`);
 
 --
 -- Indices de la tabla `vehiculo`
@@ -1626,32 +1872,47 @@ ALTER TABLE `usuario`
 ALTER TABLE `vehiculo`
   ADD PRIMARY KEY (`idVehiculo`),
   ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
-  ADD KEY `fk_vehiculo_marca1_idx` (`marca`);
+  ADD KEY `fk_vehiculo_marca1_idx` (`idMarca`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `agricultor`
+-- AUTO_INCREMENT de la tabla `bateria`
 --
-ALTER TABLE `agricultor`
-  MODIFY `idAgricultor` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `cargo`
---
-ALTER TABLE `cargo`
-  MODIFY `idCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `conductor`
---
-ALTER TABLE `conductor`
-  MODIFY `idConductor` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `bateria`
+  MODIFY `idBateria` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
   MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  MODIFY `idEntradas` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `etapas`
+--
+ALTER TABLE `etapas`
+  MODIFY `idEtapas` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `funciones`
+--
+ALTER TABLE `funciones`
+  MODIFY `idFunciones` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `funcionesprivilegios`
+--
+ALTER TABLE `funcionesprivilegios`
+  MODIFY `idFuncionesPrivilegio` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `historialetapa`
+--
+ALTER TABLE `historialetapa`
+  MODIFY `idHistorialEtapa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
@@ -1661,17 +1922,67 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `lote`
 --
 ALTER TABLE `lote`
-  MODIFY `idLote` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idLote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `idmarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+--
+-- AUTO_INCREMENT de la tabla `muetraestufa`
+--
+ALTER TABLE `muetraestufa`
+  MODIFY `idmuetraestufa` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `personalexterno`
+--
+ALTER TABLE `personalexterno`
+  MODIFY `idPersonalExterno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT de la tabla `privilegios`
+--
+ALTER TABLE `privilegios`
+  MODIFY `idPrivilegios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT de la tabla `procedimiento`
+--
+ALTER TABLE `procedimiento`
+  MODIFY `idProcedimiento` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  MODIFY `idSeccion` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `silos`
+--
+ALTER TABLE `silos`
+  MODIFY `idSilos` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `tipodearroz`
 --
 ALTER TABLE `tipodearroz`
   MODIFY `idTipoDeArroz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `tiquete`
+--
+ALTER TABLE `tiquete`
+  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tiqueteensilos`
+--
+ALTER TABLE `tiqueteensilos`
+  MODIFY `idTiqueteSilos` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tiqueteVarios`
+--
+ALTER TABLE `tiqueteVarios`
+  MODIFY `idTiqueteVarios` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `variedad`
+--
+ALTER TABLE `variedad`
+  MODIFY `idVariedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
@@ -1682,23 +1993,38 @@ ALTER TABLE `vehiculo`
 --
 
 --
--- Filtros para la tabla `agricultor`
---
-ALTER TABLE `agricultor`
-  ADD CONSTRAINT `fk_agricultor_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `conductor`
---
-ALTER TABLE `conductor`
-  ADD CONSTRAINT `idMunicipio` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `fk_empleado_cargo1` FOREIGN KEY (`idCargo`) REFERENCES `cargo` (`idCargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_empleado_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_empleado_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_empleado_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  ADD CONSTRAINT `fk_entradas_tiqueteVarios1` FOREIGN KEY (`idTiqueteVarios`) REFERENCES `tiqueteVarios` (`idTiqueteVarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `funcionesprivilegios`
+--
+ALTER TABLE `funcionesprivilegios`
+  ADD CONSTRAINT `fk_funciones_has_privilegios_funciones1` FOREIGN KEY (`idFunciones`) REFERENCES `funciones` (`idFunciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_funciones_has_privilegios_privilegios1` FOREIGN KEY (`idPrivilegios`) REFERENCES `privilegios` (`idPrivilegios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `historialetapa`
+--
+ALTER TABLE `historialetapa`
+  ADD CONSTRAINT `fk_procedimiento_has_etapas_etapas1` FOREIGN KEY (`idEtapas`) REFERENCES `etapas` (`idEtapas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_procedimiento_has_etapas_procedimiento1` FOREIGN KEY (`idProcedimiento`) REFERENCES `procedimiento` (`idProcedimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `laboratorio`
+--
+ALTER TABLE `laboratorio`
+  ADD CONSTRAINT `fk_laboratorio_tiquete1` FOREIGN KEY (`idTiquete`) REFERENCES `tiquete` (`idTiquete`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_laboratorio_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `lote`
@@ -1707,48 +2033,90 @@ ALTER TABLE `lote`
   ADD CONSTRAINT `fk_zona_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `muetraestufa`
+--
+ALTER TABLE `muetraestufa`
+  ADD CONSTRAINT `fk_muetraestufa_laboratorio1` FOREIGN KEY (`idLaboratorio`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `municipios`
 --
 ALTER TABLE `municipios`
   ADD CONSTRAINT `fk_municipios_departamentos1` FOREIGN KEY (`idDepartamento`) REFERENCES `departamentos` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `registroLaboratorio`
+-- Filtros para la tabla `personalexterno`
 --
-ALTER TABLE `registroLaboratorio`
-  ADD CONSTRAINT `fk_registroLaboratorio_laboratorio1` FOREIGN KEY (`idLaboratorioIni`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_registroLaboratorio_laboratorio2` FOREIGN KEY (`idLaboratorioFin`) REFERENCES `laboratorio` (`idLaboratorio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `personalexterno`
+  ADD CONSTRAINT `fk_personalExterno_municipios1` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `privilegios`
+--
+ALTER TABLE `privilegios`
+  ADD CONSTRAINT `fk_privilegios_nivel1` FOREIGN KEY (`idnivel`) REFERENCES `nivel` (`idnivel`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `procedimiento`
+--
+ALTER TABLE `procedimiento`
+  ADD CONSTRAINT `fk_procedimiento_silos1` FOREIGN KEY (`idSilos`) REFERENCES `silos` (`idSilos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  ADD CONSTRAINT `fk_seccion_bateria1` FOREIGN KEY (`idBateria`) REFERENCES `bateria` (`idBateria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `silos`
 --
 ALTER TABLE `silos`
-  ADD CONSTRAINT `fk_silos_bateria1` FOREIGN KEY (`idBateria`) REFERENCES `bateria` (`idBateria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_silos_seccion1` FOREIGN KEY (`idSeccion`) REFERENCES `seccion` (`idSeccion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tipodearroz`
+--
+ALTER TABLE `tipodearroz`
+  ADD CONSTRAINT `fk_tipodearroz_variedad1` FOREIGN KEY (`idVariedad`) REFERENCES `variedad` (`idVariedad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  ADD CONSTRAINT `fk_tiquete_agricultor1` FOREIGN KEY (`idAgricultor`) REFERENCES `agricultor` (`idAgricultor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_conductor1` FOREIGN KEY (`idConductor`) REFERENCES `conductor` (`idConductor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_registroLaboratorio1` FOREIGN KEY (`idRegistroLab`) REFERENCES `registroLaboratorio` (`idRegistroLab`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_tipoDeArroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_personalExterno2` FOREIGN KEY (`idAgricultor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_tipodearroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tiqueteensilos`
+--
+ALTER TABLE `tiqueteensilos`
+  ADD CONSTRAINT `fk_tiquete_has_silos_silos1` FOREIGN KEY (`idSilos`) REFERENCES `silos` (`idSilos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_has_silos_tiquete1` FOREIGN KEY (`idTiquete`) REFERENCES `tiquete` (`idTiquete`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tiqueteVarios`
+--
+ALTER TABLE `tiqueteVarios`
+  ADD CONSTRAINT `fk_tiqueteVarios_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiqueteVarios_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiqueteVarios_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_empleado1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_usuario_privilegios1` FOREIGN KEY (`idPrivilegios`) REFERENCES `privilegios` (`idPrivilegios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  ADD CONSTRAINT `fk_vehiculo_marca1` FOREIGN KEY (`marca`) REFERENCES `marca` (`idmarca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_vehiculo_marca1` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

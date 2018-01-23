@@ -49,26 +49,30 @@ INSERT INTO `marca` (`idMarca`,`marca`) VALUES
  (48,'VOLKSWAGEN'),
  (49,'VOLVO');
 
+INSERT INTO `variedad` (`idVariedad`, `nombre`) VALUES
+(1, 'thana'),
+(2, 'fedearroz');
 
-INSERT INTO `tipodearroz` (`idTipoDeArroz`, `nombre`, `variedad`, `descripcion`) VALUES
-(1, 'Rojo', 'Pady', 'Es uno de los arroces más comunes, \nde grano corto o medio.'),
-(2, 'pady', 'Pady', 'originario de las regiones del Himalaya y muy utilizado en la cocina india.'),
-(3, 'partidos', 'Pady', 'E de grano largo, y además de tener\n un mayor número de proteínas que\n el arroz, requiere de más tiempo\n para ser cocinado.');
+INSERT INTO `tipodearroz` (`idTipoDeArroz`, `idVariedad`, `nombre`, `descripcion`) VALUES
+(1, 1, 'Rojo', 'Es uno de los arroces más comunes, \\nde grano corto o medio.'),
+(2, 2, 'Pady', 'Originario de las regiones del Himalaya y muy utilizado en la cocina india.'),
+(3, 1, 'Partidos', 'E de grano largo, y además de tener\\n un mayor número de proteínas que\\n el arroz, requiere de más tiempo\\n para ser cocinado.');
 
-INSERT INTO `cargo` (`idCargo`, `nombre`) VALUES
-(1, 'administrador'),
-(2, 'basculista'),
-(3, 'laboratorista'),
-(4, 'contador'),
-(5, 'auditor');
+INSERT INTO `nivel` (`idnivel`) VALUES
+(0),
+(1),
+(2),
+(3),
+(4);
 
-INSERT INTO `privilegios` (`idPrivilegios`, `nombre`) VALUES
-(1, 'administracion'),
-(2, 'bascula'),
-(3, 'laboratorio'),
-(4, 'contador'),
-(5, 'gerencia'),
-(6, 'auditor');
+INSERT INTO `privilegios` (`idPrivilegios`, `idnivel`, `nombre`) VALUES
+(1, 0, 'basculista'),
+(2, 0, 'laboratorista'),
+(3, 0, 'contador'),
+(4, 1, 'supervisor'),
+(5, 2, 'gerente'),
+(6, 3, 'administrador'),
+(7, 4, 'auditor');
 
 INSERT INTO `departamentos` (`idDepartamento`, `nombre`) VALUES
 (1, 'Amazonas'),
@@ -1223,28 +1227,28 @@ INSERT INTO `lote` (`idLote`, `nombre`, `descripcion`, `idMunicipio`) VALUES
 (10,'La cajita', 'Alto indice de fosoforo', 1024),
 (11,'Baja', 'parte baja del Espinal', 1021);
 
-INSERT INTO `empleado` (`idEmpleado`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`, `idCargo`, `idMunicipio`) VALUES
-(1, '1106896645', 'Jhonan Smith', 'Vargas Herran', 'Cra 29 # 11-95', '31338385186', 1, 1033),
-(2, '1105689625', 'Lizeh Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio la Esperanza', '3223006069', 2, 5);
+INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES 
+(1, 'x', '1033', '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'), 
+(2, 'b', '5', '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
+(3, 'l', '639', '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211');
 
-INSERT INTO `usuario` (`user`, `contrasena`, `estado`, `idEmpleado`, `idPrivilegios`) VALUES
-('b', '6ad794deae14e67d8ad516821fc1', 'activo', 2, 2),
-('x', '6ad794deae14e67d8ad516821fc1', 'activo', 1, 1);
+INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
+('b', 1, '6ad794deae14e67d8ad516821fc1', 'activo'),
+('l', 2, '6ad794deae14e67d8ad516821fc1', 'activo'),
+('x', 6, '6ad794deae14e67d8ad516821fc1', 'activo');
 
-INSERT INTO `agricultor` (`idAgricultor`, `ccAgricultor`, `nombres`, `apellidos`, `direccion`, `telefono`, `telefono2`, `telefono3`, `idMunicipio`) VALUES
-(1, '1105689625', 'Jose Hernanda', 'Orjuela Vasquez', 'La caimanera', '3145433423', '', '', 1021),
-(2, '1105680851', 'Jonathan David', 'Perez Guzman', 'Calle 2 ##7-23 B/San Rafael', '3156057003', '2484369', '', 1022),
-(3, '93135529', 'Edgar de Jesus ', 'Ramirez Perdomo', 'Vereda La Joya', '3202924407', '', '', 1023),
-(4, '28710378', 'Juan Pablo', 'Capera Cortes', 'Vereda Santa Ana', '3123420087', '2483456', '2487023', 1025),
-(5, '65692470', 'Jorge Diego', 'Trujillo Guzman', 'Manzana D Casa 18 B/ San Francisco', '3214652051', '', '', 1021),
-(6, '110768956', 'Edwin Mauricio', 'Melo Cartagena', 'Calle 6 #4-32', '3208007887', '', '', 1023),
-(7, '1106789667', 'Ana Beatriz', 'Aguirre Borja', 'Vereda Coello', '3214534545', '2486087', '', 1021),
-(8, '65456786', 'Holman Geovanny', 'Reyes Buitrago', 'Cra 4 #4-57', '3234524545', '', '', 1021),
-(9, '93134567', 'Carlos Andres', 'Ospina Buitrago', 'Calle 6 #12-34', '3004323345', '', '', 1021),
-(10, '1101089667', 'Edwin Oswaldo', 'Perea Rojas', 'Vereda Pasoancho', '3224534545', '', '', 1021);
-
-INSERT INTO `conductor` (`idConductor`, `idMunicipio`, `ccConductor`, `nombres`, `apellidos`, `telefono`, `direccion`) VALUES
-(1, 1021, '2205680851', 'Jorge Andres', 'Barragan Barreto', '3242386756', 'Mza 1 casa 23 B/ La Magdalena'),
-(2, 1022, '98366453', 'Cristhian Alberto', 'Vasquez Villarraga', '314415500', 'Cra 8 #11-22'),
-(3, 1023, '72345678', 'Victor Andres', 'Orjuela Vargas', '3214567800', 'Mza 6 casa 9 B/Belen'),
-(4, 1021, '11010204543', 'Luis Alejandro', 'Sandoval Castro', '305903234', 'Vda Colegio');
+INSERT INTO `personalexterno`(`idPersonalExterno`, `idMunicipio`, `tipo`, `cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `telefono2`, `telefono3`) VALUES
+(1,	1021,	'agricultor',	'1105689625', 'Jose Hernanda', 'Orjuela Vasquez', 'La caimanera', '3145433423', '', ''),
+(2,	1022,	'agricultor',	'1105680851', 'Jonathan David', 'Perez Guzman', 'Calle 2 ##7-23 B/San Rafael', '3156057003', '2484369', ''),
+(3,	1023,	'agricultor',	'93135529',   'Edgar de Jesus ', 'Ramirez Perdomo', 'Vereda La Joya', '3202924407', '', ''),
+(4,	1025,	'agricultor',	'28710378',   'Juan Pablo', 'Capera Cortes', 'Vereda Santa Ana', '3123420087', '2483456', '2487023'),
+(5,	1021,	'agricultor',	'65692470',   'Jorge Diego', 'Trujillo Guzman', 'Manzana D Casa 18 B/ San Francisco', '3214652051', '', ''),
+(6,	1023,	'agricultor',	'110768956',  'Edwin Mauricio', 'Melo Cartagena', 'Calle 6 #4-32', '3208007887', '', ''),
+(7,	1021,	'agricultor',	'1106789667', 'Ana Beatriz', 'Aguirre Borja', 'Vereda Coello', '3214534545', '2486087', ''),
+(8,	1021,	'agricultor',	'65456786',   'Holman Geovanny', 'Reyes Buitrago', 'Cra 4 #4-57', '3234524545', '', ''),
+(9,	1021,	'agricultor',	'93134567',   'Carlos Andres', 'Ospina Buitrago', 'Calle 6 #12-34', '3004323345', '', ''),
+(10,1021,	'agricultor',	'1101089667', 'Edwin Oswaldo', 'Perea Rojas', 'Vereda Pasoancho', '3224534545', '', ''),
+(11,1021,   'conductor', '2205680851', 'Jorge Andres', 'Barragan Barreto', 'Mza 1 casa 23 B/ La Magdalena', '3242386756', '', ''),
+(12,1022,   'conductor', '98366453', 'Cristhian Alberto', 'Vasquez Villarraga', 'Cra 8 #11-22', '314415500', '', ''),
+(13,1023,   'conductor', '72345678', 'Victor Andres', 'Orjuela Vargas', 'Mza 6 casa 9 B/Belen', '3214567800', '', ''),
+(14,1021,   'conductor', '11010204543', 'Luis Alejandro', 'Sandoval Castro', 'Vda Colegio', '305903234', '', '');

@@ -31,16 +31,7 @@ public class Login extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         vali = new validaciones();
-        
-        if (perfil.equals("administracion")) {
-                lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/admin.png")));;
-        }
-        if (perfil.equals("bascula")) {
-                lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/bascula.png")));;
-        }
-        if (perfil.equals("laboratorio")) {
-                lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/laboratorista.png")));;
-        }
+        //lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/admin.png")));;
     }
 
     /**
@@ -52,7 +43,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtusuario = new javax.swing.JTextField();
@@ -66,16 +57,16 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
 
-        jButton1.setLabel("Ingresar");
-        jButton1.setName("btningresar"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresar.setLabel("Ingresar");
+        btnIngresar.setName("btningresar"); // NOI18N
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIngresarActionPerformed(evt);
             }
         });
-        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        btnIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton1KeyPressed(evt);
+                btnIngresarKeyPressed(evt);
             }
         });
 
@@ -160,7 +151,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(34, 34, 34))
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnIngresar)
                         .addGap(34, 34, 34)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)))
@@ -176,7 +167,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnIngresar))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
 
@@ -189,18 +180,18 @@ public class Login extends javax.swing.JFrame {
         welcome.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
        log = new login();
        if(log.bandera == true){
            dispose();
        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    private void btnIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-               jButton1ActionPerformed(null);
+               btnIngresarActionPerformed(null);
           }
-    }//GEN-LAST:event_jButton1KeyPressed
+    }//GEN-LAST:event_btnIngresarKeyPressed
 
    
     
@@ -246,7 +237,7 @@ public class Login extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton jButton1;
+    public static javax.swing.JButton btnIngresar;
     public static javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
