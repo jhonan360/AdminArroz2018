@@ -193,7 +193,7 @@ public class lote {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         }
-        desactivar_checkbox();
+        //desactivar_checkbox();
 
     }
 

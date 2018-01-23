@@ -46,7 +46,7 @@ public class vehiculo {
                 }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Vhc.jTable1,modelVhc,columnas.length,"SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.marca=marca.idmarca");
+        tbl.llenarTabla(Vhc.jTable1,modelVhc,columnas.length,"SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.idMarca=marca.idMarca");
     }
     
     public void crearVehiculo() {
@@ -102,7 +102,7 @@ public class vehiculo {
         try {
             Con =new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO vehiculo(idVehiculo,marca,modelo,placa,color) VALUES (0,'" + marca + "','" + modelo + "','" + placa + "','" + color +"')");
+            st.executeUpdate("INSERT INTO vehiculo(idVehiculo,idMarca,modelo,placa,color) VALUES (0,'" + marca + "','" + modelo + "','" + placa + "','" + color +"')");
             JOptionPane.showMessageDialog(null, "Vehiculo registrado");
             //logs.logVehiculo("i", login.enviarUsuario(), placa, color, modelo, marca);
             Con.Desconectar();
@@ -141,7 +141,7 @@ public class vehiculo {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             //logs.logVehiculo("a", login.enviarUsuario(), placa, color, modelo, marca);
-            st.executeUpdate("UPDATE vehiculo SET marca='" + marca + "',modelo='" + modelo +"',placa='" + placa + "',color='" + color + "' WHERE idVehiculo='" + idVehiculo + "'");
+            st.executeUpdate("UPDATE vehiculo SET idMarca='" + marca + "',modelo='" + modelo +"',placa='" + placa + "',color='" + color + "' WHERE idVehiculo='" + idVehiculo + "'");
             JOptionPane.showMessageDialog(null, "El vehiculo fue modificado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -189,43 +189,43 @@ public class vehiculo {
                 
         if (Vhc.chPlaca.isSelected() == true && Vhc.chModelo.isSelected() == true && Vhc.chMarca.isSelected() == true ) {
             if (!placa.equals("") && !modelo.equals("") && !marca.equals("") ) {
-                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%' and vehiculo.marca=marca.idmarca");
+                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%' and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         }  else if (Vhc.chPlaca.isSelected() == true && Vhc.chModelo.isSelected() == true ) {
             if (!placa.equals("") && !modelo.equals("")) {
-               tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%'and marca.marca=marca.idmarca");
+               tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Vhc.chPlaca.isSelected() == true && Vhc.chMarca.isSelected() == true ) {
             if (!placa.equals("") && !marca.equals("")) {
-               tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and marca.marca like '%" + marca + "%'and vehiculo.marca=marca.idmarca");
+               tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Vhc.chModelo.isSelected() == true && Vhc.chMarca.isSelected() == true) {
             if (!modelo.equals("") && !marca.equals("") ) {
-                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%'and vehiculo.marca=marca.idmarca");
+                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         }  else if (Vhc.chPlaca.isSelected() == true) {
              if (!placa.equals("")) {
-                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%'and vehiculo.marca=marca.idmarca");
+                tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Vhc.chModelo.isSelected() == true) {
               if (!modelo.equals("")) {
-                  tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%'and vehiculo.marca=marca.idmarca");
+                  tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Vhc.chMarca.isSelected() == true) {
               if (!marca.equals("")) {
-                 tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE marca.marca like '%" + marca + "%'and vehiculo.marca=marca.idmarca");
+                 tbl.llenarTabla(Vhc.jTable1, modelVhc, columnas.length, "SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

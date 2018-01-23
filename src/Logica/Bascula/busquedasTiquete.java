@@ -69,7 +69,7 @@ public class busquedasTiquete {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT ccAgricultor,nombres,apellidos,municipios.nombre,direccion FROM agricultor,municipios WHERE agricultor.idMunicipio=municipios.idMunicipio");
+        tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT cedula,nombres,apellidos,direccion,municipios.nombre FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor'");
     }
 
     public void tabla_camposAgricultor(String tiquete) {
@@ -113,50 +113,50 @@ public class busquedasTiquete {
 
         if (BusTiquete.chCedulaAgricultor.isSelected() == true && BusTiquete.chApellidosAgricultor.isSelected() == true && BusTiquete.chCiudadAgricultor.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,direccionmunicipios.Nombre FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaAgricultor.isSelected() == true && BusTiquete.chApellidosAgricultor.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE personalexterno.apellidos LIKE '%" + apellidos + "%' AND personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaAgricultor.isSelected() == true && BusTiquete.chCiudadAgricultor.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chApellidosAgricultor.isSelected() == true && BusTiquete.chCiudadAgricultor.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE personalexterno.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaAgricultor.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chApellidosAgricultor.isSelected() == true) {
             if (!apellidos.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE personalexterno.apellidos LIKE '%" + apellidos + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCiudadAgricultor.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.idMunicipio=municipios.idMunicipio GROUP BY cedula AND personalexterno.tipo='agricultor'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
-        desactivar_checkboxAgricultor();
+        //desactivar_checkboxAgricultor();
     }
 
     /**
@@ -169,7 +169,7 @@ public class busquedasTiquete {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.idMunicipio=municipios.idMunicipio");
+        tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor'");
     }
 
     public void tabla_camposConductor() {
@@ -202,50 +202,50 @@ public class busquedasTiquete {
 
         if (BusTiquete.chCedulaConductor.isSelected() == true && BusTiquete.chApellidosConductor.isSelected() == true && BusTiquete.chCiudadConductor.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE cedula like '%" + cedula + "%' and apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaConductor.isSelected() == true && BusTiquete.chApellidosConductor.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE apellidos like '%" + apellidos + "%' and cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaConductor.isSelected() == true && BusTiquete.chCiudadConductor.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE cedula like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chApellidosConductor.isSelected() == true && BusTiquete.chCiudadConductor.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCedulaConductor.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chApellidosConductor.isSelected() == true) {
             if (!apellidos.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE apellidos like '%" + apellidos + "%' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusTiquete.chCiudadConductor.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(BusTiquete.jTable2, modelCdt, columnas.length, "SELECT cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
-        desactivar_checkboxConductor();
+        //desactivar_checkboxConductor();
     }
 
 }

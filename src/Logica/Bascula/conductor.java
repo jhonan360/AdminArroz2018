@@ -64,7 +64,7 @@ public class conductor {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.idMunicipio=municipios.idMunicipio");
+        tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor'");
     }
 
     public void crearConductor() {//Metodo para crear un nuevo conductor 
@@ -124,7 +124,7 @@ public class conductor {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO conductor (ccConductor,nombres,apellidos,telefono,Direccion,idMunicipio) VALUES ('" + cedula + "','" + nombres + "','" + apellidos + "','" + telefono + "','" + direccion + "','" + ciudad + "')");
+            st.executeUpdate("INSERT INTO personalexterno (cedula,nombres,apellidos,telefono,Direccion,idMunicipio,tipo) VALUES ('" + cedula + "','" + nombres + "','" + apellidos + "','" + telefono + "','" + direccion + "','" + ciudad +"','conductor')");
             JOptionPane.showMessageDialog(null, "Conductor registrado");
 //          logs.logConductor("i", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
@@ -172,7 +172,7 @@ public class conductor {
             Con= new Conexion();
             st = Con.conexion.createStatement();
             //logs.logConductor("a", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
-            st.executeUpdate("UPDATE conductor SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idConductor='" + idConductor + "'");
+            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idPersonalExterno='" + idConductor + "'");
             JOptionPane.showMessageDialog(null, "El conductor fue modificado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -198,7 +198,7 @@ public class conductor {
                 int decision = JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar un conductor?", "Eliminar conductor", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (decision == 0) {
                   //  logs.logConductor("e", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direcion, Integer.parseInt(ciudad));
-                    st.executeUpdate("DELETE FROM conductor WHERE idConductor='" + idConductor + "'");
+                    st.executeUpdate("DELETE FROM personalexterno WHERE idPersonalExterno='" + idConductor + "'");
                     JOptionPane.showMessageDialog(null, "El conductor fue ELIMINADO");
                     Con.Desconectar();
                 } 
@@ -268,43 +268,43 @@ public class conductor {
 
         if (Cdt.chCedula.isSelected() == true && Cdt.chApellidos.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true && Cdt.chApellidos.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and personalexterno.cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chApellidos.isSelected() == true && Cdt.chCiudad.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCedula.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.ccConductor like '%" + cedula + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chApellidos.isSelected() == true) {
             if (!apellidos.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE conductor.apellidos like '%" + apellidos + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Cdt.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idConductor,ccConductor,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM conductor,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and conductor.idMunicipio=municipios.idMunicipio ");
+                tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

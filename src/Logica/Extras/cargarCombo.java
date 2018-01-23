@@ -153,7 +153,7 @@ public class cargarCombo {
         try {
             Con = new Conexion();
             st6 = Con.conexion.createStatement();
-            rs6=st6.executeQuery("SELECT CONCAT(nombre,' - ',variedad) FROM tipodearroz");
+            rs6=st6.executeQuery("SELECT CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad");
             combo.removeAllItems();
             while(rs6.next()){
                 combo.addItem(rs6.getString(1));

@@ -5,9 +5,11 @@
  */
 package Interfaces;
 
+import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
 import static Logica.Bascula.bascula.Bas;
 import Logica.Bascula.busquedasTiquete;
+import Logica.Extras.validaciones;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -21,6 +23,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     public static bascula bascula;
     public static String claseTiquete;
     public static TiqueteVarios TiqVarios;
+    public static validaciones val,vali;
 
     /**
      * Creates new form BusquedasTiquete
@@ -30,9 +33,15 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         busTiquete = new busquedasTiquete();
         claseTiquete = tiquete;
-
+        vali=new validaciones();
+        vali.IDENTIFICACION(txtBCedulaAgricultor);
+        vali.NOMBRES(txtBApellidosAgricultor);
+        vali.NOMBRES(txtBCiudadAgricultor);
+        vali.IDENTIFICACION(txtBCedulaConductor);
+        vali.NOMBRES(txtBApellidosConductor);
+        vali.NOMBRES(txtBCiudadConductor);
     }
-
+        
     public BusquedasTiquete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -652,6 +661,8 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         busTiquete.cerrar(claseTiquete);
+        busTiquete.desactivar_checkboxConductor();
+        busTiquete.desactivar_checkboxAgricultor();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed

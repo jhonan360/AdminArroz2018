@@ -148,7 +148,7 @@ public class bascula {
             }
         };
 
-        tbl.llenarTabla(Bas.tblEspera, modeloentrada, columEspera.length, "SELECT tiquete.idTiquete, CONCAT(agricultor.nombres,' ',agricultor.apellidos), CONCAT(tipodearroz.nombre,' - ',tipodearroz.variedad) FROM tiquete,agricultor,tipodearroz WHERE tiquete.idConductor IS NULL AND tiquete.kilosBrutos IS NULL AND tiquete.idAgricultor=agricultor.idAgricultor AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz ORDER BY tiquete.idTiquete DESC;");
+        tbl.llenarTabla(Bas.tblEspera, modeloentrada, columEspera.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tiquete,personalexterno,tipodearroz,variedad WHERE tiquete.idConductor IS NULL AND tiquete.kilosBrutos IS NULL AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad ORDER BY tiquete.idTiquete DESC;");
 
         if (row1 == 0) {
             row1 = modeloentrada.getRowCount();

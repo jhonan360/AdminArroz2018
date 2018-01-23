@@ -68,7 +68,7 @@ public class agricultor {
         };
 
         tbl = new tablas();
-        tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE agricultor.idMunicipio=municipios.idMunicipio");
+        tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE tipo='agricultor' AND personalexterno.idMunicipio=municipios.idMunicipio");
     }
 
     public void crearAgricultor() {//crear el agricultor se ejecuta cuando se da clic el boton crear
@@ -106,7 +106,7 @@ public class agricultor {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("Insert INTO agricultor (idAgricultor,ccAgricultor,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "')");
+            st.executeUpdate("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
             JOptionPane.showMessageDialog(null, "Agricultor registrado");
             //logs.logAgricultor("i", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
@@ -195,7 +195,7 @@ public class agricultor {
         try {
             Con.Conectar();
             st = Con.conexion.createStatement();
-            rseli = st.executeQuery("SELECT idAgricultor FROM tiquete WHERE idAgricultor = '" + idAgricultor + "'");
+            rseli = st.executeQuery("SELECT idPersonlExterno FROM tiquete WHERE idPersonlExterno = '" + idAgricultor + "'");
             System.out.println("tri" + cedula);
             while (rseli.next()) {
                 eli = rseli.getObject(1) + "";
@@ -216,9 +216,9 @@ public class agricultor {
                             //logs.logTelAgri("e",login.enviarUsuario(),Integer.parseInt(idsTel[i]),"",cedula);   
                         }
                     }
-                    st.executeUpdate("DELETE FROM telagri WHERE idAgricultor='" + idAgricultor + "'");
+                    //st.executeUpdate("DELETE FROM telagri WHERE idAgricultor='" + idAgricultor + "'");
                     // logs.logAgricultor("e", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
-                    st.executeUpdate("DELETE FROM agricultor WHERE idAgricultor='" + idAgricultor + "'");
+                    st.executeUpdate("DELETE FROM personalexterno WHERE idPersonalExterno='" + idAgricultor + "'");
                     JOptionPane.showMessageDialog(null, "El agricultor fue ELIMINADO");
                     Con.Desconectar();
                     crearModelo();
@@ -237,7 +237,7 @@ public class agricultor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             //logs.logAgricultor("a", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
-            st.executeUpdate("UPDATE agricultor SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE agricultor.idAgricultor='" + idAgricultor + "'");
+            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
             JOptionPane.showMessageDialog(null, "El Agriculto fue modificado");
             Con.Desconectar();
             limpiar_registros();
@@ -264,45 +264,45 @@ public class agricultor {
                 return false;
             }
         };
-        if (Agr.chCedula.isSelected() == true && Agr.chApellidos.isSelected() == true && Agr.chCiudad.isSelected() == true) {
+         if (Agr.chCedula.isSelected() == true && Agr.chApellidos.isSelected() == true && Agr.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chCedula.isSelected() == true && Agr.chApellidos.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
-                 tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.Apellidos LIKE '%" + apellidos + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                 tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.Apellidos LIKE '%" + apellidos + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chCedula.isSelected() == true && Agr.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chApellidos.isSelected() == true && Agr.chCiudad.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,personalexterno.cedula,nombres,apellidos,municipios.Nombre,direccion FROM personalexterno,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND personalexterno.apellidos LIKE '%" + apellidos + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chCedula.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE personalexterno.cedula LIKE '%" + cedula + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chApellidos.isSelected() == true) {
             if (!apellidos.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE personalexterno.apellidos LIKE '%" + apellidos + "%' AND personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Agr.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM agricultor,municipios WHERE municipios.Nombre LIKE '" + ciudad + "' AND  agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE municipios.Nombre LIKE '" + ciudad + "' AND  personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

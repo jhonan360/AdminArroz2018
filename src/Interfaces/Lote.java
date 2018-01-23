@@ -44,6 +44,9 @@ public class Lote extends javax.swing.JFrame {
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
         vali = new validaciones();
+        vali.NOMBRES(txtBNombre);
+        vali.NOMBRES(txtBDepartamento);
+        vali.NOMBRES(txtBCiudad);
 
         municipio();
         setLocationRelativeTo(null);

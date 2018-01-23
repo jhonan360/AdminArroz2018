@@ -47,7 +47,7 @@ public class tipo_arroz {
                 return false;
             }
         };
-        tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz");
+        tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad");
         desactivar_checkbox();
     }
 
@@ -124,7 +124,7 @@ public class tipo_arroz {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "'variedad='" + variedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idGlobal + "' ");
+            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "'idVariedad='" + variedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idGlobal + "'");
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             idGlobal = "";
             System.out.println("id" + idGlobal);
@@ -161,19 +161,19 @@ public class tipo_arroz {
         };
         if (Tipo_Arroz.chNombre.isSelected() == true && Tipo_Arroz.chVariedad.isSelected() == true) {
             if (!nombre.equals("") && !variedad.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE nombre like '%" + nombre + "%' AND variedad LIKE '%" + variedad + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.nombre like '%" + nombre + "%' AND variedad.nombre LIKE '%" + variedad + "%'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Tipo_Arroz.chNombre.isSelected() == true) {
             if (!nombre.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE nombre like '%" + nombre + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.nombre like '%" + nombre + "%'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Tipo_Arroz.chVariedad.isSelected() == true) {
             if (!variedad.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,nombre,variedad,descripcion FROM tipodearroz WHERE variedad LIKE '%" + variedad + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE variedad.nombre LIKE '%" + variedad + "%'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

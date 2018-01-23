@@ -54,13 +54,13 @@ public class extras {
         String res, sentencia = null;
         switch (opc) {
             case "a":
-                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,agricultor WHERE agricultor.ccAgricultor='" + cedula + "' AND agricultor.idMunicipio=municipios.idMunicipio)";
+                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,personalexterno WHERE personalexterno.cedula='" + cedula + "' AND personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor')";
                 break;
             case "e":
                 sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,empleado WHERE empleado.ccEmpleado='" + cedula + "' and empleado.idMunicipio=municipios.idMunicipio)";
                 break;
             case "c":
-                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,conductor WHERE conductor.ccConductor='" + cedula + "' and conductor.idMunicipio=municipios.idMunicipio)";
+                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,personalexterno WHERE personalexterno.cedula='" + cedula + "' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='cnductor')";
                 break;
             case "z":
                 sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,lote WHERE lote.idLote='"+cedula+"' and lote.idMunicipio=municipios.idMunicipio)";
@@ -87,7 +87,7 @@ public class extras {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT idTelAgri FROM `telagri` WHERE ccAgricultor='" + cedula + "'");
+            //rs = st.executeQuery("SELECT idTelAgri FROM `telagri` WHERE ccAgricultor='" + cedula + "'");
 
             while (rs.next()) {
 
@@ -121,7 +121,7 @@ public class extras {
         String res, sentencia;
         switch (opc) {
             case "a":
-                sentencia = "SELECT ccAgricultor FROM agricultor WHERE ccAgricultor = '" + cedula + "'";
+                sentencia = "SELECT cedula FROM personalexterno WHERE cedula = '" + cedula + "' AND tipo='agricultor'";
                 break;
             default:
             case "e":
@@ -129,7 +129,7 @@ public class extras {
                 break;
 
             case "c":
-                sentencia = "SELECT ccConductor FROM conductor WHERE ccConductor = '" + cedula + "'";
+                sentencia = "SELECT cedula FROM personalexterno WHERE cedula = '" + cedula + "' AND tipo='conductor'";
                 break;
             case "z":
                 sentencia = "SELECT nombre FROM lote WHERE nombre='" + cedula + "'";
