@@ -93,7 +93,15 @@ public class validaciones {
         return matcher.matches();
     }
     
-    
+    public boolean ValidarContrasena(String contrasena){
+        //String match="[A-Za-z][0-9]{7}";
+        String match="^[a-zA-Z0-9]{7,20}";
+        boolean a=contrasena.matches(match);
+        if (!contrasena.matches(match)) {
+            return false;
+        }
+        return true;
+    }
     
 }
 

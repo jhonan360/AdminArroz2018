@@ -19,11 +19,10 @@ public class Usuarios extends javax.swing.JFrame {
      */
     public static usuarios usu;
     public static cargarCombo cargar;
+    public static boolean cerrar=false;
     public Usuarios() {
         
         initComponents();
-        TableColumnModel columnModel = jTable1.getColumnModel();
-       columnModel.getColumn(0).setPreferredWidth(50);
         setLocationRelativeTo(null);
         usu = new usuarios();
         cargar = new cargarCombo();
@@ -40,18 +39,10 @@ public class Usuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtApellidos = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JPasswordField();
@@ -69,47 +60,16 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        chCedula = new javax.swing.JCheckBox();
-        chNombres = new javax.swing.JCheckBox();
-        chApellidos = new javax.swing.JCheckBox();
-        txtBCedula = new javax.swing.JTextField();
-        txtBNombre = new javax.swing.JTextField();
-        txtBApellido = new javax.swing.JTextField();
+        chUsuario = new javax.swing.JCheckBox();
+        chPrivilegio = new javax.swing.JCheckBox();
+        chEstado = new javax.swing.JCheckBox();
+        txtBUsuario = new javax.swing.JTextField();
+        txtBPrivilegio = new javax.swing.JTextField();
+        txtBEstado = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
         btnRefrescar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                " N", "Cédula", "Nombres", "Apellidos"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable1KeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,18 +99,6 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Datos");
 
-        jLabel3.setText("Cedula:");
-
-        txtCedula.setEnabled(false);
-
-        jLabel4.setText("Nombre:");
-
-        txtNombre.setEnabled(false);
-
-        jLabel5.setText("Apellidos:");
-
-        txtApellidos.setEnabled(false);
-
         jLabel6.setText("Usuario:");
 
         jLabel7.setText("Contraseña:");
@@ -177,9 +125,6 @@ public class Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
@@ -188,9 +133,6 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbPrivilegio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCedula)
-                    .addComponent(txtNombre)
-                    .addComponent(txtApellidos)
                     .addComponent(txtUsuario)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -207,21 +149,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(lbliIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -237,7 +165,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         cmbPrivilegio.getAccessibleContext().setAccessibleName("cmbPrivilegio");
@@ -322,37 +250,37 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel10.setText("Busquedas:");
 
-        chCedula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        chCedula.setText("Cedula");
-        chCedula.addItemListener(new java.awt.event.ItemListener() {
+        chUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chUsuario.setText("Usuario");
+        chUsuario.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCedulaItemStateChanged(evt);
+                chUsuarioItemStateChanged(evt);
             }
         });
 
-        chNombres.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        chNombres.setText("Nombres");
-        chNombres.addItemListener(new java.awt.event.ItemListener() {
+        chPrivilegio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chPrivilegio.setText("Privilegio");
+        chPrivilegio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chNombresItemStateChanged(evt);
+                chPrivilegioItemStateChanged(evt);
             }
         });
 
-        chApellidos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        chApellidos.setText("Apellidos");
-        chApellidos.addItemListener(new java.awt.event.ItemListener() {
+        chEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chEstado.setText("Estado");
+        chEstado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chApellidosItemStateChanged(evt);
+                chEstadoItemStateChanged(evt);
             }
         });
 
-        txtBCedula.setEditable(false);
+        txtBUsuario.setEditable(false);
 
-        txtBNombre.setEditable(false);
-        txtBNombre.setSelectedTextColor(new java.awt.Color(240, 240, 240));
+        txtBPrivilegio.setEditable(false);
+        txtBPrivilegio.setSelectedTextColor(new java.awt.Color(240, 240, 240));
 
-        txtBApellido.setEditable(false);
-        txtBApellido.setDisabledTextColor(new java.awt.Color(240, 240, 240));
+        txtBEstado.setEditable(false);
+        txtBEstado.setDisabledTextColor(new java.awt.Color(240, 240, 240));
 
         btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
         btnbuscar.setText("Buscar");
@@ -378,16 +306,16 @@ public class Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chCedula))
+                    .addComponent(txtBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chUsuario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chNombres)
-                    .addComponent(txtBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chPrivilegio)
+                    .addComponent(txtBPrivilegio, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chApellidos))
+                    .addComponent(txtBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -409,16 +337,16 @@ public class Usuarios extends javax.swing.JFrame {
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chNombres, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(chPrivilegio, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(chCedula)
-                                .addComponent(chApellidos)))
+                                .addComponent(chUsuario)
+                                .addComponent(chEstado)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtBCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtBApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBPrivilegio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(19, 19, 19))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -441,11 +369,8 @@ public class Usuarios extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -454,10 +379,9 @@ public class Usuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -468,12 +392,6 @@ public class Usuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        usu.limpiar_campos();
-        usu.tablas_campos();
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         usu.tabla_usuario_campos();
     }//GEN-LAST:event_jTable2MouseClicked
@@ -481,12 +399,16 @@ public class Usuarios extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
         usu.crear_usuario();
+        if(cerrar){
+            dispose();
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
         usu.crearModelo();
         usu.limpiar_campos();
+        usu.desactivar_checkbox();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -503,42 +425,37 @@ public class Usuarios extends javax.swing.JFrame {
         usu.modificar_usuario();
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void chCedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaItemStateChanged
-        if (chCedula.isSelected()==true){
-            txtBCedula.setEditable(true);
+    private void chUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chUsuarioItemStateChanged
+        if (chUsuario.isSelected()==true){
+            txtBUsuario.setEditable(true);
         }else{
-            txtBCedula.setEditable(false);
-            txtBCedula.setText("");
+            txtBUsuario.setEditable(false);
+            txtBUsuario.setText("");
         }
-    }//GEN-LAST:event_chCedulaItemStateChanged
+    }//GEN-LAST:event_chUsuarioItemStateChanged
 
-    private void chNombresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNombresItemStateChanged
-        if (chNombres.isSelected()==true){
-            txtBNombre.setEditable(true);
+    private void chPrivilegioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPrivilegioItemStateChanged
+        if (chPrivilegio.isSelected()==true){
+            txtBPrivilegio.setEditable(true);
         }else{
-            txtBNombre.setEditable(false);
-            txtBNombre.setText("");
+            txtBPrivilegio.setEditable(false);
+            txtBPrivilegio.setText("");
         }
-    }//GEN-LAST:event_chNombresItemStateChanged
+    }//GEN-LAST:event_chPrivilegioItemStateChanged
 
-    private void chApellidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosItemStateChanged
+    private void chEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEstadoItemStateChanged
         // TODO add your handling code here:
-        if (chApellidos.isSelected()==true){
-            txtBApellido.setEditable(true);
+        if (chEstado.isSelected()==true){
+            txtBEstado.setEditable(true);
         }else{
-            txtBApellido.setEditable(false);
-            txtBApellido.setText("");
+            txtBEstado.setEditable(false);
+            txtBEstado.setText("");
         }
-    }//GEN-LAST:event_chApellidosItemStateChanged
+    }//GEN-LAST:event_chEstadoItemStateChanged
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         usu.buscar();
     }//GEN-LAST:event_btnbuscarActionPerformed
-
-    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        usu.limpiar_campos();
-        usu.tablas_campos();
-    }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
         usu.tabla_usuario_campos();
@@ -585,17 +502,14 @@ public class Usuarios extends javax.swing.JFrame {
     public static javax.swing.JButton btnModificar;
     public static javax.swing.JButton btnRefrescar;
     public static javax.swing.JButton btnbuscar;
-    public static javax.swing.JCheckBox chApellidos;
-    public static javax.swing.JCheckBox chCedula;
-    public static javax.swing.JCheckBox chNombres;
+    public static javax.swing.JCheckBox chEstado;
+    public static javax.swing.JCheckBox chPrivilegio;
+    public static javax.swing.JCheckBox chUsuario;
     public static javax.swing.JComboBox<String> cmbEstado;
     public static javax.swing.JComboBox<String> cmbPrivilegio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -604,18 +518,13 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTable jTable1;
     public static javax.swing.JTable jTable2;
     public static javax.swing.JLabel lbliIdEmpleado;
-    public static javax.swing.JTextField txtApellidos;
-    public static javax.swing.JTextField txtBApellido;
-    public static javax.swing.JTextField txtBCedula;
-    public static javax.swing.JTextField txtBNombre;
-    public static javax.swing.JTextField txtCedula;
+    public static javax.swing.JTextField txtBEstado;
+    public static javax.swing.JTextField txtBPrivilegio;
+    public static javax.swing.JTextField txtBUsuario;
     public static javax.swing.JPasswordField txtContrasena;
-    public static javax.swing.JTextField txtNombre;
     public static javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

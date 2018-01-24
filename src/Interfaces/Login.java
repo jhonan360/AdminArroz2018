@@ -31,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         vali = new validaciones();
-        //lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/admin.png")));;
+        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/logoempresa.png")));;
     }
 
     /**
@@ -109,8 +109,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(lblIntentos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,8 +176,6 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        welcome = new Welcome();
-        welcome.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed

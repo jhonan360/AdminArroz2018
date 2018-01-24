@@ -20,7 +20,7 @@ import Logica.Gerencia.gerencia;
 
 import Logica.Auditor.auditor;
 import Interfaces.Auditor;
-
+import Logica.Extras.StringEncrypt;
 import Interfaces.Administracion;
 import Interfaces.Gerencia;
 import Negocio.Conexion;
@@ -53,7 +53,7 @@ public class login {
 
     public static Auditor audi;
     public static String contraencript = "";
-    public static encriptar encrip;
+    public static StringEncrypt encrip;
     private static String perfil;
 
     public login() {
@@ -63,9 +63,9 @@ public class login {
         char[] Pass = log.txtcontra.getPassword();
         con = new String(Pass);
         try {
-            contraencript = encrip.main(con);
+            contraencript = encrip.encrypt(con);
             //   System.out.println("contra"+hope);
-        } catch (Exception e) {
+    } catch (Exception e) {
         }
         if (!usu.equals("") && !con.equals("")) {
             Validar(usu, contraencript);
@@ -77,25 +77,31 @@ public class login {
     public void limpiar_campos() {
         log.txtcontra.setText("");
         log.txtusuario.setText("");
+        
     }
 
     boolean Validar(String usuario, String Contraseña) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT * FROM usuario WHERE user = '" + usuario + "' AND contrasena = '" + Contraseña + "'");
+            rs = st.executeQuery("SELECT * FROM usuario WHERE usuario.user = '" + usuario + "' AND usuario.contrasena = '" + Contraseña + "'");
             while (rs.next()) {
                 if (rs.getString(1) == null) {
                     return false;
                 } else {
                     System.out.println("Usuario encontrado");
+                    rs = st.executeQuery("SELECT * FROM usuario,empleado WHERE usuario.user=empleado.user AND usuario.user = '" + usuario + "'");
+                      if (!rs.next()) {
+                          JOptionPane.showMessageDialog(null, "El usuario no existe o esta inhabilitado");
+                          return false;
+                      }
                     rs1 = st.executeQuery("SELECT privilegios.nombre from usuario, privilegios where usuario.user = '" + usu + "' and usuario.idPrivilegios = privilegios.idPrivilegios");
-                    while (rs1.next()) {
+                    if (rs1.next()) {
                         priv = rs1.getObject(1) + "";
                         System.out.println("Privilegio encontrado " + priv);
                     }
                     rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
-                    while (rs2.next()) {
+                    if (rs2.next()) {
                         estado = rs2.getObject(1) + "";
                         System.out.print("estado" + estado);
                     }
@@ -139,7 +145,6 @@ public class login {
                         }
                         bandera = true;
                     } else if (priv.equals("auditor") && estado.equals("activo") ) {
-
                         if (audi == null) {
                             audi = new Auditor();
                             audi.setVisible(true);
@@ -175,7 +180,7 @@ public class login {
             e.printStackTrace();
             return false;
         }
-        if (usuario2.equals("")) {
+       /* if (usuario2.equals("")) {
             usuario2 = usuario;
         }
         if (contIntentos < 3 && usuario2.equals(usuario)) {
@@ -201,8 +206,9 @@ public class login {
         log.lblIntentos.setText(Integer.toString(contIntentos));
         System.out.println(contIntentos + " " + usuario2 + " " + usuario);
 
-        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
+        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");*/
         return false;
+    
     }
 
     public static String enviarUsuario() {
