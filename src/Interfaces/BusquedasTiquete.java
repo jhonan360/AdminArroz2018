@@ -34,12 +34,13 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         busTiquete = new busquedasTiquete();
         claseTiquete = tiquete;
         vali=new validaciones();
-        vali.IDENTIFICACION(txtBCedulaAgricultor);
+        vali.IDENTIFICACION(txtBCedulaVehiculo);
         vali.NOMBRES(txtBApellidosAgricultor);
         vali.NOMBRES(txtBCiudadAgricultor);
         vali.IDENTIFICACION(txtBCedulaConductor);
         vali.NOMBRES(txtBApellidosConductor);
         vali.NOMBRES(txtBCiudadConductor);
+        vali.NOMBRES(txtBMarcaVehiculo);
     }
         
     public BusquedasTiquete() {
@@ -63,7 +64,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         chCedulaAgricultor = new javax.swing.JCheckBox();
         chApellidosAgricultor = new javax.swing.JCheckBox();
         chCiudadAgricultor = new javax.swing.JCheckBox();
-        txtBCedulaAgricultor = new javax.swing.JTextField();
+        txtBCedulaVehiculo = new javax.swing.JTextField();
         txtBApellidosAgricultor = new javax.swing.JTextField();
         txtBCiudadAgricultor = new javax.swing.JTextField();
         btnBuscarAgricultor = new javax.swing.JButton();
@@ -96,6 +97,26 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         btnGuardarConductor = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        panelVehiculo = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        chPlacaVehiculo = new javax.swing.JCheckBox();
+        chModeloVehiculo = new javax.swing.JCheckBox();
+        chMarcaVehiculo = new javax.swing.JCheckBox();
+        txtBPlacaVehiculo = new javax.swing.JTextField();
+        txtBModeloVehiculo = new javax.swing.JTextField();
+        txtBMarcaVehiculo = new javax.swing.JTextField();
+        btnBuscarVehiculo = new javax.swing.JButton();
+        btnRefrescarVehiculo = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        btnGuardarVehiculo = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,7 +167,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
             }
         });
 
-        txtBCedulaAgricultor.setEditable(false);
+        txtBCedulaVehiculo.setEditable(false);
 
         txtBApellidosAgricultor.setEditable(false);
 
@@ -180,7 +201,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chCedulaAgricultor)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtBCedulaAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBCedulaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chApellidosAgricultor)
@@ -218,7 +239,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBCiudadAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBApellidosAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtBCedulaAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtBCedulaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap(56, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -229,7 +250,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
         chCedulaAgricultor.getAccessibleContext().setAccessibleName("chCedulaAgricultor");
         chApellidosAgricultor.getAccessibleContext().setAccessibleName("chApellidosAgricultor");
-        txtBCedulaAgricultor.getAccessibleContext().setAccessibleName("txtBCedulaAgricultor");
+        txtBCedulaVehiculo.getAccessibleContext().setAccessibleName("txtBCedulaAgricultor");
         txtBApellidosAgricultor.getAccessibleContext().setAccessibleName("txtBApellidosAgricultor");
         txtBCiudadAgricultor.getAccessibleContext().setAccessibleName("txtBCiudadAgricultor");
         btnBuscarAgricultor.getAccessibleContext().setAccessibleName("btnBuscarAgricultor");
@@ -246,16 +267,6 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable3MouseClicked(evt);
-            }
-        });
-        jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable3KeyReleased(evt);
-            }
-        });
         jScrollPane3.setViewportView(jTable3);
 
         jLabel2.setText("*Seleccione el agricultor en el listado y será visualizado en el tiquete de entrada.");
@@ -463,16 +474,6 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
-            }
-        });
-        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable2KeyReleased(evt);
-            }
-        });
         jScrollPane2.setViewportView(jTable2);
 
         jLabel1.setText("*Seleccione el conductor en el listado y será visualizado en el tiquete de entrada.");
@@ -543,9 +544,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelConductorLayout.createSequentialGroup()
-                        .addComponent(btnGuardarConductor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0)))
+                    .addComponent(btnGuardarConductor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(6, 6, 6)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -553,6 +552,225 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
         panel.addTab("Conductor", panelConductor);
         panelConductor.getAccessibleContext().setAccessibleName("panelConductor");
+
+        panelVehiculo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        chPlacaVehiculo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chPlacaVehiculo.setText("Placa");
+        chPlacaVehiculo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chPlacaVehiculoItemStateChanged(evt);
+            }
+        });
+
+        chModeloVehiculo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chModeloVehiculo.setText("Modelo");
+        chModeloVehiculo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chModeloVehiculoItemStateChanged(evt);
+            }
+        });
+
+        chMarcaVehiculo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chMarcaVehiculo.setText("Marca");
+        chMarcaVehiculo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chMarcaVehiculoItemStateChanged(evt);
+            }
+        });
+
+        txtBPlacaVehiculo.setEditable(false);
+
+        txtBModeloVehiculo.setEditable(false);
+
+        txtBMarcaVehiculo.setEditable(false);
+
+        btnBuscarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
+        btnBuscarVehiculo.setText("Buscar");
+        btnBuscarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVehiculoActionPerformed(evt);
+            }
+        });
+
+        btnRefrescarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
+        btnRefrescarVehiculo.setText("Refrescar");
+        btnRefrescarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarVehiculoActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel12.setText("Busquedas:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel12)
+                .addGap(316, 316, 316))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBPlacaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chPlacaVehiculo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chModeloVehiculo)
+                    .addComponent(txtBModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chMarcaVehiculo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(btnRefrescarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chPlacaVehiculo)
+                            .addComponent(chModeloVehiculo)
+                            .addComponent(chMarcaVehiculo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBPlacaVehiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtBMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRefrescarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
+
+        jLabel5.setText("*Seleccione el vehíulo en el listado y será visualizado en el tiquete de entrada.");
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setPreferredSize(new java.awt.Dimension(683, 74));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/vehiculo2.png"))); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("VEHÍCULO");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(272, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel15))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnGuardarVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
+        btnGuardarVehiculo.setText("Guardar");
+        btnGuardarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarVehiculoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelVehiculoLayout = new javax.swing.GroupLayout(panelVehiculo);
+        panelVehiculo.setLayout(panelVehiculoLayout);
+        panelVehiculoLayout.setHorizontalGroup(
+            panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVehiculoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelVehiculoLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelVehiculoLayout.setVerticalGroup(
+            panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVehiculoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 707, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 478, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 4, Short.MAX_VALUE)
+                    .addComponent(panelVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 5, Short.MAX_VALUE)))
+        );
+
+        panel.addTab("Vehículo", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -572,106 +790,12 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
         setBounds(0, 0, 747, 556);
     }// </editor-fold>//GEN-END:initComponents
-    /**
-     *
-     * AGRICULTOR
-     */
-    private void chCedulaAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaAgricultorItemStateChanged
-        if (chCedulaAgricultor.isSelected() == true) {
-            txtBCedulaAgricultor.setEditable(true);
-        } else {
-            txtBCedulaAgricultor.setEditable(false);
-            txtBCedulaAgricultor.setText("");
-        }
-    }//GEN-LAST:event_chCedulaAgricultorItemStateChanged
-
-    private void btnBuscarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgricultorActionPerformed
-        busTiquete.buscarAgricultor();
-
-    }//GEN-LAST:event_btnBuscarAgricultorActionPerformed
-
-    private void chApellidosAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosAgricultorItemStateChanged
-        if (chApellidosAgricultor.isSelected() == true) {
-            txtBApellidosAgricultor.setEditable(true);
-        } else {
-            txtBApellidosAgricultor.setEditable(false);
-            txtBApellidosAgricultor.setText("");
-        }
-    }//GEN-LAST:event_chApellidosAgricultorItemStateChanged
-
-    private void chCiudadAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadAgricultorItemStateChanged
-        if (chCiudadAgricultor.isSelected() == true) {
-            txtBCiudadAgricultor.setEditable(true);
-        } else {
-            txtBCiudadAgricultor.setEditable(false);
-            txtBCiudadAgricultor.setText("");
-        }
-    }//GEN-LAST:event_chCiudadAgricultorItemStateChanged
-
-    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
-        //busTiquete.tabla_camposAgricultor();
-    }//GEN-LAST:event_jTable3MouseClicked
-
-    private void jTable3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable3KeyReleased
-        //busTiquete.tabla_camposAgricultor();
-    }//GEN-LAST:event_jTable3KeyReleased
-
-    /**
-     *
-     * CONDUCTOR
-     */
-    private void chCedulaConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaConductorItemStateChanged
-        if (chCedulaConductor.isSelected() == true) {
-            txtBCedulaConductor.setEditable(true);
-        } else {
-            txtBCedulaConductor.setEditable(false);
-            txtBCedulaConductor.setText("");
-        }
-    }//GEN-LAST:event_chCedulaConductorItemStateChanged
-
-    private void chApellidosConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosConductorItemStateChanged
-        if (chApellidosConductor.isSelected() == true) {
-            txtBApellidosConductor.setEditable(true);
-        } else {
-            txtBApellidosConductor.setEditable(false);
-            txtBApellidosConductor.setText("");
-        }
-    }//GEN-LAST:event_chApellidosConductorItemStateChanged
-
-    private void chCiudadConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadConductorItemStateChanged
-        if (chCiudadConductor.isSelected() == true) {
-            txtBCiudadConductor.setEditable(true);
-        } else {
-            txtBCiudadConductor.setEditable(false);
-            txtBCiudadConductor.setText("");
-        }
-    }//GEN-LAST:event_chCiudadConductorItemStateChanged
-
-    private void btnBuscarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConductorActionPerformed
-        busTiquete.buscarConductor();
-    }//GEN-LAST:event_btnBuscarConductorActionPerformed
-
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        //busTiquete.tabla_camposConductor();
-    }//GEN-LAST:event_jTable2MouseClicked
-
-    private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
-        //busTiquete.tabla_camposConductor();
-    }//GEN-LAST:event_jTable2KeyReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         busTiquete.cerrar(claseTiquete);
         busTiquete.desactivar_checkboxConductor();
         busTiquete.desactivar_checkboxAgricultor();
     }//GEN-LAST:event_formWindowClosing
-
-    private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
-        busTiquete.crearModeloAgricultor();
-    }//GEN-LAST:event_btnRefrescarAgricultorActionPerformed
-
-    private void btnRefrescarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarConductorActionPerformed
-        busTiquete.crearModeloConductor();
-    }//GEN-LAST:event_btnRefrescarConductorActionPerformed
 
     private void btnGuardarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarConductorActionPerformed
 
@@ -685,24 +809,58 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 switch (claseTiquete) {
 
                     case "TiqPrincipal":
-                        Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
-                        busTiquete.cerrar(claseTiquete);
-                        dispose();
-                        break;
+                    Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
 
                     case "TiqVarios":
-                        TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
-                        busTiquete.cerrar(claseTiquete);
-                        dispose();
-                        break;
+                    TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
                 }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         }
-
     }//GEN-LAST:event_btnGuardarConductorActionPerformed
+
+    private void btnRefrescarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarConductorActionPerformed
+        busTiquete.crearModeloConductor();
+    }//GEN-LAST:event_btnRefrescarConductorActionPerformed
+
+    private void btnBuscarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConductorActionPerformed
+        busTiquete.buscarConductor();
+    }//GEN-LAST:event_btnBuscarConductorActionPerformed
+
+    private void chCiudadConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadConductorItemStateChanged
+        if (chCiudadConductor.isSelected() == true) {
+            txtBCiudadConductor.setEditable(true);
+        } else {
+            txtBCiudadConductor.setEditable(false);
+            txtBCiudadConductor.setText("");
+        }
+    }//GEN-LAST:event_chCiudadConductorItemStateChanged
+
+    private void chApellidosConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosConductorItemStateChanged
+        if (chApellidosConductor.isSelected() == true) {
+            txtBApellidosConductor.setEditable(true);
+        } else {
+            txtBApellidosConductor.setEditable(false);
+            txtBApellidosConductor.setText("");
+        }
+    }//GEN-LAST:event_chApellidosConductorItemStateChanged
+
+    private void chCedulaConductorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaConductorItemStateChanged
+        if (chCedulaConductor.isSelected() == true) {
+            txtBCedulaConductor.setEditable(true);
+        } else {
+            txtBCedulaConductor.setEditable(false);
+            txtBCedulaConductor.setText("");
+        }
+    }//GEN-LAST:event_chCedulaConductorItemStateChanged
 
     private void btnGuardarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAgricultorActionPerformed
         int rec = jTable3.getSelectedRow();
@@ -714,10 +872,10 @@ public class BusquedasTiquete extends javax.swing.JFrame {
 
                 switch (claseTiquete) {
                     case "TiqPrincipal":
-                        Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                        busTiquete.cerrar(claseTiquete);
-                        dispose();
-                        break;    
+                    Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
                 }
 
             } else {
@@ -726,9 +884,105 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarAgricultorActionPerformed
 
-    public void btnGuardarAgricultor(String claseTiquete) {
+    private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
+        busTiquete.crearModeloAgricultor();
+    }//GEN-LAST:event_btnRefrescarAgricultorActionPerformed
 
-    }
+    private void btnBuscarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgricultorActionPerformed
+        busTiquete.buscarAgricultor();
+    }//GEN-LAST:event_btnBuscarAgricultorActionPerformed
+
+    private void chCiudadAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadAgricultorItemStateChanged
+        if (chCiudadAgricultor.isSelected() == true) {
+            txtBCiudadAgricultor.setEditable(true);
+        } else {
+            txtBCiudadAgricultor.setEditable(false);
+            txtBCiudadAgricultor.setText("");
+        }
+    }//GEN-LAST:event_chCiudadAgricultorItemStateChanged
+
+    private void chApellidosAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosAgricultorItemStateChanged
+        if (chApellidosAgricultor.isSelected() == true) {
+            txtBApellidosAgricultor.setEditable(true);
+        } else {
+            txtBApellidosAgricultor.setEditable(false);
+            txtBApellidosAgricultor.setText("");
+        }
+    }//GEN-LAST:event_chApellidosAgricultorItemStateChanged
+
+    private void chCedulaAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaAgricultorItemStateChanged
+        if (chCedulaAgricultor.isSelected() == true) {
+            txtBCedulaVehiculo.setEditable(true);
+        } else {
+            txtBCedulaVehiculo.setEditable(false);
+            txtBCedulaVehiculo.setText("");
+        }
+    }//GEN-LAST:event_chCedulaAgricultorItemStateChanged
+
+    private void chPlacaVehiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPlacaVehiculoItemStateChanged
+        if (chPlacaVehiculo.isSelected() == true) {
+            txtBPlacaVehiculo.setEditable(true);
+        } else {
+            txtBPlacaVehiculo.setEditable(false);
+            txtBPlacaVehiculo.setText("");
+        }
+    }//GEN-LAST:event_chPlacaVehiculoItemStateChanged
+
+    private void chModeloVehiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chModeloVehiculoItemStateChanged
+        if (chModeloVehiculo.isSelected() == true) {
+            txtBModeloVehiculo.setEditable(true);
+        } else {
+            txtBModeloVehiculo.setEditable(false);
+            txtBModeloVehiculo.setText("");
+        }
+    }//GEN-LAST:event_chModeloVehiculoItemStateChanged
+
+    private void chMarcaVehiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chMarcaVehiculoItemStateChanged
+        if (chMarcaVehiculo.isSelected() == true) {
+            txtBMarcaVehiculo.setEditable(true);
+        } else {
+            txtBMarcaVehiculo.setEditable(false);
+            txtBMarcaVehiculo.setText("");
+        }
+    }//GEN-LAST:event_chMarcaVehiculoItemStateChanged
+
+    private void btnBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVehiculoActionPerformed
+        busTiquete.buscarVehiculo();
+    }//GEN-LAST:event_btnBuscarVehiculoActionPerformed
+
+    private void btnRefrescarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarVehiculoActionPerformed
+        busTiquete.crearModeloVehiculo();
+    }//GEN-LAST:event_btnRefrescarVehiculoActionPerformed
+
+    private void btnGuardarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarVehiculoActionPerformed
+        int rec3 = jTable4.getSelectedRow();
+        if (rec3 == -1) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila");
+        } else {
+            int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (valor == JOptionPane.YES_OPTION) {
+
+                switch (claseTiquete) {
+
+                    case "TiqPrincipal":
+                    Bas.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
+
+                    case "TiqVarios":
+                    TiqVarios.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+            }
+        }
+    }//GEN-LAST:event_btnGuardarVehiculoActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -768,44 +1022,64 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnBuscarAgricultor;
     public static javax.swing.JButton btnBuscarConductor;
+    public static javax.swing.JButton btnBuscarVehiculo;
     public static javax.swing.JButton btnGuardarAgricultor;
     public static javax.swing.JButton btnGuardarConductor;
+    public static javax.swing.JButton btnGuardarVehiculo;
     public static javax.swing.JButton btnRefrescarAgricultor;
     public static javax.swing.JButton btnRefrescarConductor;
+    public static javax.swing.JButton btnRefrescarVehiculo;
     public static javax.swing.JCheckBox chApellidosAgricultor;
     public static javax.swing.JCheckBox chApellidosConductor;
     public static javax.swing.JCheckBox chCedulaAgricultor;
     public static javax.swing.JCheckBox chCedulaConductor;
     public static javax.swing.JCheckBox chCiudadAgricultor;
     public static javax.swing.JCheckBox chCiudadConductor;
+    public static javax.swing.JCheckBox chMarcaVehiculo;
+    public static javax.swing.JCheckBox chModeloVehiculo;
+    public static javax.swing.JCheckBox chPlacaVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     public static javax.swing.JPanel jPanel4;
     public static javax.swing.JPanel jPanel5;
+    public static javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
     public static javax.swing.JTable jTable2;
     public static javax.swing.JTable jTable3;
+    public static javax.swing.JTable jTable4;
     public static javax.swing.JTabbedPane panel;
     public static javax.swing.JPanel panelAgricultor;
     public static javax.swing.JPanel panelConductor;
+    public static javax.swing.JPanel panelVehiculo;
     public static javax.swing.JTextField txtBApellidosAgricultor;
     public static javax.swing.JTextField txtBApellidosConductor;
-    public static javax.swing.JTextField txtBCedulaAgricultor;
     public static javax.swing.JTextField txtBCedulaConductor;
+    public static javax.swing.JTextField txtBCedulaVehiculo;
     public static javax.swing.JTextField txtBCiudadAgricultor;
     public static javax.swing.JTextField txtBCiudadConductor;
+    public static javax.swing.JTextField txtBMarcaVehiculo;
+    public static javax.swing.JTextField txtBModeloVehiculo;
+    public static javax.swing.JTextField txtBPlacaVehiculo;
     // End of variables declaration//GEN-END:variables
 }

@@ -57,7 +57,7 @@ public class tiqueteVarios {
         tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT idEntradas,cantidad,descripcion FROM entradas");
     }
 
-    public static void numeroTiquete() {
+    public void numeroTiquete() {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement(); //System.out.println("1"); 
@@ -87,7 +87,7 @@ public class tiqueteVarios {
         TiqVarios.txtFecha.setText(a + "/" + m + "/" + d);
     }
 
-    public void buscarPlaca() {
+    /**public void buscarPlaca() {
         String bus = JOptionPane.showInputDialog("Ingrese la placa del vehiculo");
         boolean bandera = false;
         if (bus != null) {
@@ -120,7 +120,7 @@ public class tiqueteVarios {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static void abrirBusquedasTiquete(int num, String tiquete) {
 
@@ -132,9 +132,19 @@ public class tiqueteVarios {
                 BusTiquete.panel.setEnabledAt(0, false);
                 //BusTiquete.panel.remove(0);
                 BusTiquete.panel.setEnabledAt(1, true);
+                BusTiquete.panel.setEnabledAt(2, false);
                 TiqVarios.btnBuscarConductor.setEnabled(false);
                 TiqVarios.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(1);
+                break;
+                
+            case 3:
+                //panel vehiculo
+                BusTiquete.panel.setEnabledAt(0, false);
+                BusTiquete.panel.setEnabledAt(1, false);
+                BusTiquete.panel.setEnabledAt(2, true);
+                TiqVarios.btnBuscarConductor.setEnabled(false);
+                BusTiquete.panel.setSelectedIndex(2);
                 break;
         }
     }
@@ -190,7 +200,6 @@ public class tiqueteVarios {
     }
 
     public void crearTiqueteVarios() {
-
         conductor = TiqVarios.txtConductor.getText();
         user = login.enviarUsuario();
         placa = TiqVarios.txtPlaca.getText();
@@ -266,6 +275,7 @@ public class tiqueteVarios {
             JOptionPane.showMessageDialog(null, "Conductor registrado");
 //          logs.logConductor("i", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
             limpiarRegistros();
+            numeroTiquete();
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();

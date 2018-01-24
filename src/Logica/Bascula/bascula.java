@@ -324,7 +324,7 @@ public class bascula {
         }
         return "";
     }*/
-    public void buscarPlaca() {
+    /**public void buscarPlaca() {
         String bus = JOptionPane.showInputDialog("Ingrese la placa del vehiculo");
         boolean bandera = false;
         if (bus != null) {
@@ -357,7 +357,7 @@ public class bascula {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
         BusTiquete = new BusquedasTiquete(TiqPrincipal);
@@ -368,6 +368,7 @@ public class bascula {
                 //panel agricultor
                 BusTiquete.panel.setEnabledAt(0, true);
                 BusTiquete.panel.setEnabledAt(1, false);
+                BusTiquete.panel.setEnabledAt(2, false);
                 Bas.btnBuscarConductor.setEnabled(false);
                 Bas.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(0);
@@ -376,9 +377,20 @@ public class bascula {
                 //panel vehiculo
                 BusTiquete.panel.setEnabledAt(0, false);
                 BusTiquete.panel.setEnabledAt(1, true);
+                BusTiquete.panel.setEnabledAt(2, false);
                 Bas.btnEditarAgricultor.setEnabled(false);
                 Bas.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(1);
+                break;
+                
+            case 3:
+                //panel vehiculo
+                BusTiquete.panel.setEnabledAt(0, false);
+                BusTiquete.panel.setEnabledAt(1, false);
+                BusTiquete.panel.setEnabledAt(2, true);
+                Bas.btnEditarAgricultor.setEnabled(false);
+                Bas.btnBuscarConductor.setEnabled(false);
+                BusTiquete.panel.setSelectedIndex(2);
                 break;
         }
     }

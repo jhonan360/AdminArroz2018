@@ -765,7 +765,8 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarConductorActionPerformed
 
     private void btnBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPlacaActionPerformed
-        bascula.buscarPlaca();
+        //bascula.buscarPlaca();
+        bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
     }//GEN-LAST:event_btnBuscarPlacaActionPerformed
 
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed

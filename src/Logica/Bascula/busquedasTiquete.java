@@ -30,14 +30,16 @@ public class busquedasTiquete {
     public static Vehiculo Vehiculo;
     public static String nomConductor, ccAgricultor;
     public static tablas tbl;
-    public static DefaultTableModel modeloagr, modelCdt;
+    public static DefaultTableModel modeloagr, modelCdt,modelVhc;
     public static String columnasAgri[] = new String[]{"Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
     public static String columnas[] = new String[]{"Cedula", "Nombres", "Apellidos", "Telefono", "Direccion", "Municipio"};
+    public static String columnasVhc[] = new String[]{"Placa","Marca","Modelo","Color"};
     public static String claseTiquete;
 
     public busquedasTiquete() {
         crearModeloAgricultor();
         crearModeloConductor();
+        crearModeloVehiculo();
 
         //tabla_camposAgricultor();
     }
@@ -101,7 +103,7 @@ public class busquedasTiquete {
     }
 
     public void buscarAgricultor() {
-        String cedula = BusTiquete.txtBCedulaAgricultor.getText();
+        String cedula = BusTiquete.txtBCedulaVehiculo.getText();
         String apellidos = BusTiquete.txtBApellidosAgricultor.getText();
         String ciudad = BusTiquete.txtBCiudadAgricultor.getText();
 
@@ -246,6 +248,86 @@ public class busquedasTiquete {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkboxConductor();
+    }
+    
+    /**
+     * Busqueda vehiculo
+     */
+    public void crearModeloVehiculo() {
+         modelVhc = new DefaultTableModel(null, columnasVhc) {  
+                public boolean isCellEditable(int fila, int columna) {
+                    return false;
+                }
+        };
+        tbl = new tablas();
+        tbl.llenarTabla(BusTiquete.jTable4,modelVhc,columnasVhc.length,"SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.idMarca=marca.idMarca");
+    }
+
+    public void desactivar_checkboxVehiculo() { // desactiva las checkbox
+        BusTiquete.chPlacaVehiculo.setSelected(false);
+        BusTiquete.chModeloVehiculo.setSelected(false);
+        BusTiquete.chMarcaVehiculo.setSelected(false);
+    }
+
+    public void buscarVehiculo() {
+        String placa = BusTiquete.txtBPlacaVehiculo.getText();
+        String modelo = BusTiquete.txtBModeloVehiculo.getText();
+        String marca = BusTiquete.txtBMarcaVehiculo.getText();
+
+        modelVhc = new DefaultTableModel(null, columnasVhc) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+        tbl = new tablas();
+
+        if (BusTiquete.chPlacaVehiculo.isSelected() == true && BusTiquete.chModeloVehiculo.isSelected() == true && BusTiquete.chMarcaVehiculo.isSelected() == true ) {
+            if (!placa.equals("") && !modelo.equals("") && !marca.equals("") ) {
+                tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%' and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        }  else if (BusTiquete.chPlacaVehiculo.isSelected() == true && BusTiquete.chModeloVehiculo.isSelected() == true ) {
+            if (!placa.equals("") && !modelo.equals("")) {
+               tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and vehiculo.modelo like '%" + modelo  + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusTiquete.chPlacaVehiculo.isSelected() == true && BusTiquete.chMarcaVehiculo.isSelected() == true ) {
+            if (!placa.equals("") && !marca.equals("")) {
+               tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%' and marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusTiquete.chModeloVehiculo.isSelected() == true && BusTiquete.chMarcaVehiculo.isSelected() == true) {
+            if (!modelo.equals("") && !marca.equals("") ) {
+                tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%' and marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        }  else if (BusTiquete.chPlacaVehiculo.isSelected() == true) {
+             if (!placa.equals("")) {
+                tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.placa like '%" + placa + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusTiquete.chModeloVehiculo.isSelected() == true) {
+              if (!modelo.equals("")) {
+                  tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.modelo like '%" + modelo  + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusTiquete.chMarcaVehiculo.isSelected() == true) {
+              if (!marca.equals("")) {
+                 tbl.llenarTabla(BusTiquete.jTable4, modelVhc, columnasVhc.length, "SELECT placa,marca.marca,modelo,color FROM vehiculo,marca WHERE marca.marca like '%" + marca + "%'and vehiculo.idMarca=marca.idMarca");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
+        }
+        //desactivar_checkbox();
+        
     }
 
 }

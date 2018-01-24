@@ -598,7 +598,8 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarConductorActionPerformed
 
     private void btnBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPlacaActionPerformed
-        tiqVarios.buscarPlaca();
+        //tiqVarios.buscarPlaca();
+        tiqVarios.abrirBusquedasTiquete(3, "TiqVarios");
     }//GEN-LAST:event_btnBuscarPlacaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

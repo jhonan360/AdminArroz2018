@@ -28,7 +28,7 @@ public class vehiculo {
     public tablas tbl;
     public static String placa, color, modelo, marca, idVehiculo;
     public static DefaultTableModel modelVhc;
-    public static String columnas[] = new String[]{"N","Marca", "Modelo", "Placa", "Color"};
+    public static String columnas[] = new String[]{"N","Placa","Marca","Modelo","Color"};
     public static int row;
     //public static log logs;
     public static login login;
@@ -46,7 +46,7 @@ public class vehiculo {
                 }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Vhc.jTable1,modelVhc,columnas.length,"SELECT idVehiculo,marca.marca,modelo,placa,color FROM vehiculo,marca WHERE vehiculo.idMarca=marca.idMarca");
+        tbl.llenarTabla(Vhc.jTable1,modelVhc,columnas.length,"SELECT idVehiculo,placa,marca.marca,modelo,color FROM vehiculo,marca WHERE vehiculo.idMarca=marca.idMarca");
     }
     
     public void crearVehiculo() {
