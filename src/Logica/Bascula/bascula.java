@@ -47,7 +47,7 @@ public class bascula {
     public static busquedasTiquete busTiquete;
     public static String columEspera[] = new String[]{"N", "Agricultor", "Tipo Arroz"};
     public static DefaultTableModel modeloentrada;
-    public static String fecha, lote, tipoArroz, placa, agricultor, conductor, user, ccAgricultor, ccConductor, observacion;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, agricultor, conductor, user, ccAgricultor, ccConductor, observacion, kilosBrutos,destare,kilosNetos;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -59,6 +59,8 @@ public class bascula {
     public static Conexion Con;
     public static tablas tbl;
     public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
+    public static String idTiqueteEspera;
+    //public static Double kilosBrutoss,destare,kilosNetos;
 
     public bascula() {
         //numeroTiquete();
@@ -170,8 +172,8 @@ public class bascula {
 
     public void tablaCampos_TiquetesEspera() {
         int rec = Bas.tblEspera.getSelectedRow();
-        String idTiqueteEspera = Bas.tblEspera.getValueAt(rec, 0).toString();
-        Bas.lblNumeroTiquete.setText(Bas.tblEspera.getValueAt(rec, 0).toString());
+        idTiqueteEspera = Bas.tblEspera.getValueAt(rec, 0).toString();
+        Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.txtAgricultor.setText(Bas.tblEspera.getValueAt(rec, 1).toString());
         String tipoArroz = Bas.tblEspera.getValueAt(rec, 2).toString();
         Bas.cmbTipoArroz.setSelectedItem(tipoArroz);
@@ -357,24 +359,7 @@ public class bascula {
         }
     }
 
-    /**
-     * public static String getCedulaAgricultor(String nombre) { try {
-     * System.out.println("..." + nombre); Con = new Conexion(); st=
-     * Con.conexion.createStatement(); rsagricultor = st.executeQuery("SELECT
-     * ccAgricultor FROM agricultor WHERE nombres ='" + nombre + "' "); *
-     * while(rsagricultor.next()) { System.out.println("..." + rsagricultor);
-     * return rsagricultor.getString(1); } Con.Desconectar(); } catch (Exception
-     * e) { e.printStackTrace(); } return ""; }
-     *
-     * public static String getCedulaConductor(String nombre) { try {
-     * //System.out.println("..."+nombre); Con = new Conexion(); st =
-     * Con.conexion.createStatement(); rsconductores = st.executeQuery("SELECT
-     * ccConductor FROM conductor WHERE nombres='" + nombre + "'"); while
-     * (rsconductores.next()) { return rsconductores.getString(1); }
-     * Con.Desconectar(); } catch (Exception e) { e.printStackTrace(); } return
-     * ""; }
-     */
-    public static void abrirBusquedasTiquete(int num,String TiqPrincipal) {
+    public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
         BusTiquete = new BusquedasTiquete(TiqPrincipal);
         BusTiquete.setVisible(true);
 
@@ -399,8 +384,8 @@ public class bascula {
     }
 
     public static void capturarPeso(int opc) {
-        int inicial = (int) Math.floor(Math.random() * (5000 - 1500 + 1) + 1500);
-        int fina = (int) Math.floor(Math.random() * (1400 - 800) + 800);
+        double inicial = (double) Math.floor(Math.random() * (5000 - 1500 + 1) + 1500);
+        double fina = (double) Math.floor(Math.random() * (1400 - 800) + 800);
         switch (opc) {
             case 1:
                 Bas.txtPesoInicial.setText("");
@@ -410,7 +395,7 @@ public class bascula {
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.txtPesoFinal.setText("");
                     Bas.txtPesoFinal.setText(String.valueOf(fina));
-                    int ini = Integer.parseInt(Bas.txtPesoInicial.getText());
+                    double ini = Double.parseDouble(Bas.txtPesoInicial.getText());
                     Bas.txtPesoNeto.setText(String.valueOf(ini - fina));
                 } else {
                     JOptionPane.showMessageDialog(null, "Sin peso bruto");
@@ -420,17 +405,31 @@ public class bascula {
     }
 
     public static void crearTiquete() {
-
+        idTiquete = Bas.lblNumeroTiquete.getText();
         fecha = Bas.txtFecha.getText();
-        agricultor = ccAgricultor;
-        lote = Bas.cmbLote.getSelectedItem().toString();
-        tipoArroz = Bas.cmbTipoArroz.getSelectedItem().toString();
+        agricultor = Bas.txtAgricultor.getText();
+        lote = String.valueOf(Bascula.cmbLote.getSelectedIndex() + 1);
+        tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
         user = login.enviarUsuario();
-        conductor = ccConductor;
+        conductor = Bas.txtConductor.getText();
         //conductor = busTiquete.tabla_camposConductor();
         placa = Bas.txtPlaca.getText();
         observacion = Bas.txtObservacion.getText();
-
+        kilosBrutos = Bas.txtPesoInicial.getText(); 
+        destare =Bas.txtPesoFinal.getText();
+        kilosNetos = Bas.txtPesoNeto.getText();
+        
+        if (kilosBrutos.equals("")){
+            kilosBrutos = "0.00";
+        }
+        if (destare.equals("")){
+            destare = "0.00";
+        }
+        if (kilosNetos.equals("")){
+            kilosNetos = "0.00";
+        }
+        
+        System.out.println("idTiq " + idTiquete);
         System.out.println("fecha " + fecha);
         System.out.println("agric " + agricultor);
         System.out.println("lote: " + lote);
@@ -438,35 +437,70 @@ public class bascula {
         System.out.println("user " + user);
         System.out.println("conduc " + conductor);
         System.out.println("placa " + placa);
+        System.out.println("observacion " + observacion);
+        System.out.println("kilosBrutoss " + kilosBrutos);
+        System.out.println("destare " + destare);
+        System.out.println("kilsNetos " + kilosNetos);
 
-        if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("")) {
-            //lote = getIdLote(lote);
+        if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("")) {
+            agricultor = obtenerId(agricultor, 1);
+            conductor = obtenerId(conductor,2);
+            placa = obtenerId(placa,3);
 
-            lote = String.valueOf(Bascula.cmbLote.getSelectedIndex() + 1);
-            //tipoArroz = getIdTipo(tipoArroz);
-            //agricultor = getCedulaAgricultor(agricultor);
-            //conductor = getCedulaConductor(conductor);
-
-            insertar(fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion);//Llamado al metodo insertar
+            insertar(idTiquete,fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion,kilosBrutos,destare,kilosNetos);//Llamado al metodo insertar
             limpiarRegistros();
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
     }
 
-    public static void insertar(String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion) {
+    public static String obtenerId(String nombre, int num) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO tiquete (idTiquete,fecha,idAgricultor,idLote,idTipoDeArroz,user,idConductor,idVehiculo,observacion) VALUES (0,'" + fecha + "','" + agricultor + "','" + lote + "','" + tipoArroz + "','" + usuario + "','" + conductor + "','" + placa + "','" + observacion + "')");
+
+            switch (num) {
+                case 1:
+                    rsagricultor = st.executeQuery("SELECT idPersonalExterno FROM personalExterno WHERE CONCAT(personalexterno.nombres,' ',personalexterno.apellidos) ='" + nombre + "'  ");
+                    while (rsagricultor.next()) {
+                        return rsagricultor.getString(1);
+                    }
+                    break;
+
+                case 2:
+                    rsconductor = st.executeQuery("SELECT idPersonalExterno FROM personalExterno WHERE CONCAT(personalexterno.nombres,' ',personalexterno.apellidos) ='" + nombre + "'  ");
+                    while (rsconductor.next()) {
+                        return rsconductor.getString(1);
+                    }
+                    break;
+                    
+                case 3:
+                    rsplaca = st.executeQuery("SELECT idVehiculo FROM vehiculo WHERE placa ='" + nombre + "'  ");
+                    while (rsplaca.next()) {
+                        return rsplaca.getString(1);
+                    }
+                    break;
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos) {
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            st.executeUpdate("UPDATE tiquete SET idAgricultor='"+agricultor+"',idLote='"+lote+"',idVehiculo='"+placa+"',idConductor='"+conductor+"',user='"+user+"',fecha='"+fecha+"',kilosBrutos='"+kilosBrutos+"',destare='"+destare+"',kilosNetos='"+kilosNetos+"',observacion='"+observacion+"' WHERE idTiquete='" + idTiquete + "'");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
-            //numeroTiquete();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void limpiarRegistros() {
+        Bas.lblNumeroTiquete.setText("");
         Bas.txtAgricultor.setText("");
         Bas.cmbLote.setSelectedIndex(0);
         Bas.cmbTipoArroz.setSelectedIndex(0);

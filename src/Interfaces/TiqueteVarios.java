@@ -5,16 +5,21 @@
  */
 package Interfaces;
 
+import static Interfaces.Conductor.txtTelefono;
+import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
 import Logica.Bascula.tiqueteVarios;
+import Logica.Extras.validaciones;
 
 /**
  *
  * @author Lizeth
  */
 public class TiqueteVarios extends javax.swing.JFrame {
+
     public static bascula bas;
     public static tiqueteVarios tiqVarios;
+    public static int i = 0;
 
     /**
      * Creates new form TiqueteVarios
@@ -24,6 +29,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         tiqVarios = new tiqueteVarios();
+        tiqVarios.numeroTiquete();
+        vali= new validaciones();
+        vali.TELEFONOS(txtCantidad);
     }
 
     /**
@@ -55,11 +63,11 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtKilosBrutos = new javax.swing.JTextField();
+        txtPesoInicial = new javax.swing.JTextField();
         btnCapturarKilosBrutos = new javax.swing.JButton();
-        txtDestare = new javax.swing.JTextField();
+        txtPesoFinal = new javax.swing.JTextField();
         btnCapturarDestare = new javax.swing.JButton();
-        txtKilosNetos = new javax.swing.JTextField();
+        txtPesoNeto = new javax.swing.JTextField();
         lblNumeroTiquete = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -109,6 +117,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jLabel18.setText("Placa:");
 
         txtFecha.setEditable(false);
+
+        txtConductor.setEditable(false);
+
+        txtPlaca.setEditable(false);
 
         txtObservaciones.setColumns(20);
         txtObservaciones.setRows(5);
@@ -205,11 +217,27 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Kilos Netos:");
 
+        txtPesoInicial.setEditable(false);
+
         btnCapturarKilosBrutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/rotate.png"))); // NOI18N
         btnCapturarKilosBrutos.setText("Capturar");
+        btnCapturarKilosBrutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapturarKilosBrutosActionPerformed(evt);
+            }
+        });
+
+        txtPesoFinal.setEditable(false);
 
         btnCapturarDestare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/rotate.png"))); // NOI18N
         btnCapturarDestare.setText("Capturar");
+        btnCapturarDestare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapturarDestareActionPerformed(evt);
+            }
+        });
+
+        txtPesoNeto.setEditable(false);
 
         lblNumeroTiquete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNumeroTiquete.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -222,14 +250,14 @@ public class TiqueteVarios extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtKilosNetos)
+                    .addComponent(txtPesoNeto)
                     .addComponent(jLabel12)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDestare, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtKilosBrutos, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPesoFinal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPesoInicial, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -253,17 +281,17 @@ public class TiqueteVarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCapturarKilosBrutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtKilosBrutos))
+                    .addComponent(txtPesoInicial))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDestare)
-                    .addComponent(btnCapturarDestare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCapturarDestare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPesoFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtKilosNetos)
+                .addComponent(txtPesoNeto, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
 
@@ -271,12 +299,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         tblEntradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Title 1", "Title 2"
             }
         ));
         tblEntradas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -356,6 +384,11 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -561,7 +594,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void btnBuscarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConductorActionPerformed
-        tiqVarios.abrirBusquedasTiquete(2,"TiqVarios");
+        tiqVarios.abrirBusquedasTiquete(2, "TiqVarios");
     }//GEN-LAST:event_btnBuscarConductorActionPerformed
 
     private void btnBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPlacaActionPerformed
@@ -569,7 +602,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarPlacaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       tiqVarios.crearEntradas();
+        tiqVarios.crearEntradas();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradasMouseClicked
@@ -583,6 +616,18 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         tiqVarios.eliminarEntradas();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCapturarKilosBrutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarKilosBrutosActionPerformed
+        tiqVarios.capturarPeso(1);
+    }//GEN-LAST:event_btnCapturarKilosBrutosActionPerformed
+
+    private void btnCapturarDestareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarDestareActionPerformed
+        tiqVarios.capturarPeso(2);
+    }//GEN-LAST:event_btnCapturarDestareActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        tiqVarios.crearTiqueteVarios();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -664,12 +709,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
     public static javax.swing.JTextField txtCantidad;
     public static javax.swing.JTextField txtConductor;
     public static javax.swing.JTextField txtDescripcion;
-    public static javax.swing.JTextField txtDestare;
     public static javax.swing.JTextField txtDestino;
     public static javax.swing.JTextField txtFecha;
-    public static javax.swing.JTextField txtKilosBrutos;
-    public static javax.swing.JTextField txtKilosNetos;
     public static javax.swing.JTextArea txtObservaciones;
+    public static javax.swing.JTextField txtPesoFinal;
+    public static javax.swing.JTextField txtPesoInicial;
+    public static javax.swing.JTextField txtPesoNeto;
     public static javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }
