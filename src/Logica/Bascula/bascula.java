@@ -46,8 +46,9 @@ public class bascula {
     public static BusquedasTiquete BusTiquete;
     public static busquedasTiquete busTiquete;
     public static String columEspera[] = new String[]{"N", "Agricultor", "Tipo Arroz"};
-    public static DefaultTableModel modeloentrada;
-    public static String idTiquete, fecha, lote, tipoArroz, placa, agricultor, conductor, user, ccAgricultor, ccConductor, observacion, kilosBrutos,destare,kilosNetos;
+    public static String columSegundoPesaje[] = new String[]{"N", "Agricultor", "KL Brutos"};
+    public static DefaultTableModel modeloentrada, modeloSegundoPesaje;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, agricultor, conductor, user, ccAgricultor, ccConductor, observacion, kilosBrutos, destare, kilosNetos;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -195,6 +196,50 @@ public class bascula {
     }
 
     /**
+     *
+     * TIQUETES PENDIENTES POR REGISTRAR SEGUNDO PESAJE
+     */
+    public static void tiquetesEsperandoSegundoPesaje(boolean visible) {
+
+        modeloSegundoPesaje = new DefaultTableModel(null, columSegundoPesaje) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+
+        tbl.llenarTabla(Bas.tblSegundoPesaje, modeloSegundoPesaje, columSegundoPesaje.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosBrutos FROM tiquete,personalexterno,tipodearroz,variedad,lote WHERE tiquete.destare=0.00 AND tiquete.kilosNetos=0.00 AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad and tiquete.idLote=lote.idLote ORDER BY tiquete.idTiquete DESC;");
+    }
+
+    public void tablaCampos_SegundoPesaje() {
+        int rec = Bas.tblSegundoPesaje.getSelectedRow();
+        idTiqueteEspera = Bas.tblSegundoPesaje.getValueAt(rec, 0).toString();
+        Bas.lblNumeroTiquete.setText(idTiqueteEspera);
+        Bas.txtAgricultor.setText(Bas.tblSegundoPesaje.getValueAt(rec, 1).toString());
+        Bas.txtPesoInicial.setText(Bas.tblSegundoPesaje.getValueAt(rec, 2).toString());
+
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+
+            rsTiquete = st.executeQuery("SELECT CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,vehiculo.placa,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.observacion,humedadUno,impurezaUno FROM tiquete,personalexterno,tipodearroz,variedad,lote,vehiculo WHERE idTiquete='" + idTiqueteEspera +"' AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.idConductor=personalexterno.idPersonalExterno");
+            
+            while (rsTiquete.next()) {
+                Bas.cmbTipoArroz.setSelectedItem(rsTiquete.getString(1));
+                Bas.cmbLote.setSelectedItem(rsTiquete.getString(2));
+                Bas.txtPlaca.setText(rsTiquete.getString(3));
+                Bas.txtConductor.setText(rsTiquete.getString(4));
+                Bas.txtObservacion.setText(rsTiquete.getString(5));
+                Bas.lblHumedad.setText(rsTiquete.getString(6));
+                Bas.lblImpureza.setText(rsTiquete.getString(7));         
+            }
+
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * ------------------------------------TIQUETE DE ENTRADA DE MATERIA
      * PRIMA----------------------------------------------
      */
@@ -324,41 +369,30 @@ public class bascula {
         }
         return "";
     }*/
-    /**public void buscarPlaca() {
-        String bus = JOptionPane.showInputDialog("Ingrese la placa del vehiculo");
-        boolean bandera = false;
-        if (bus != null) {
-            try {
-                Con.Conectar();
-                st = Con.conexion.createStatement();
-                rsplaca = st.executeQuery("SELECT placa FROM vehiculo WHERE placa='" + bus + "'");
-
-                while (rsplaca.next()) {
-                    if (rsplaca.getString(1) == null) {
-                    } else {
-                        String resultado = rsplaca.getString(1);
-                        // System.out.println(resultado);
-                        bandera = true;
-                        Bas.txtPlaca.setText(resultado);
-
-                    }
-                }
-
-                if (bandera == false) {
-                    int valor = JOptionPane.showConfirmDialog(null, "La placa no pertenece a un vehiculo registrado" + "\n               Desea registrarlo ahora?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                    if (valor == JOptionPane.YES_OPTION) {
-                        abrirVehiculo();
-                        Vehiculo.txtPlaca.setText(bus);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
-
+    /**
+     * public void buscarPlaca() { String bus =
+     * JOptionPane.showInputDialog("Ingrese la placa del vehiculo"); boolean
+     * bandera = false; if (bus != null) { try { Con.Conectar(); st =
+     * Con.conexion.createStatement(); rsplaca = st.executeQuery("SELECT placa
+     * FROM vehiculo WHERE placa='" + bus + "'");
+     *
+     * while (rsplaca.next()) { if (rsplaca.getString(1) == null) { } else {
+     * String resultado = rsplaca.getString(1); //
+     * System.out.println(resultado); bandera = true;
+     * Bas.txtPlaca.setText(resultado);
+     *
+     * }
+     * }
+     *
+     * if (bandera == false) { int valor = JOptionPane.showConfirmDialog(null,
+     * "La placa no pertenece a un vehiculo registrado" + "\n Desea registrarlo
+     * ahora?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+     * if (valor == JOptionPane.YES_OPTION) { abrirVehiculo();
+     * Vehiculo.txtPlaca.setText(bus); } else {
+     * JOptionPane.showMessageDialog(null, "Se ha cancelado la operación."); } }
+     * } catch (SQLException e) { e.printStackTrace(); } }
+    }
+     */
     public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
         BusTiquete = new BusquedasTiquete(TiqPrincipal);
         BusTiquete.setVisible(true);
@@ -382,7 +416,7 @@ public class bascula {
                 Bas.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(1);
                 break;
-                
+
             case 3:
                 //panel vehiculo
                 BusTiquete.panel.setEnabledAt(0, false);
@@ -427,20 +461,20 @@ public class bascula {
         //conductor = busTiquete.tabla_camposConductor();
         placa = Bas.txtPlaca.getText();
         observacion = Bas.txtObservacion.getText();
-        kilosBrutos = Bas.txtPesoInicial.getText(); 
-        destare =Bas.txtPesoFinal.getText();
+        kilosBrutos = Bas.txtPesoInicial.getText();
+        destare = Bas.txtPesoFinal.getText();
         kilosNetos = Bas.txtPesoNeto.getText();
-        
-        if (kilosBrutos.equals("")){
+
+        if (kilosBrutos.equals("")) {
             kilosBrutos = "0.00";
         }
-        if (destare.equals("")){
+        if (destare.equals("")) {
             destare = "0.00";
         }
-        if (kilosNetos.equals("")){
+        if (kilosNetos.equals("")) {
             kilosNetos = "0.00";
         }
-        
+
         System.out.println("idTiq " + idTiquete);
         System.out.println("fecha " + fecha);
         System.out.println("agric " + agricultor);
@@ -456,10 +490,10 @@ public class bascula {
 
         if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("")) {
             agricultor = obtenerId(agricultor, 1);
-            conductor = obtenerId(conductor,2);
-            placa = obtenerId(placa,3);
+            conductor = obtenerId(conductor, 2);
+            placa = obtenerId(placa, 3);
 
-            insertar(idTiquete,fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion,kilosBrutos,destare,kilosNetos);//Llamado al metodo insertar
+            insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
             limpiarRegistros();
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -485,7 +519,7 @@ public class bascula {
                         return rsconductor.getString(1);
                     }
                     break;
-                    
+
                 case 3:
                     rsplaca = st.executeQuery("SELECT idVehiculo FROM vehiculo WHERE placa ='" + nombre + "'  ");
                     while (rsplaca.next()) {
@@ -504,7 +538,7 @@ public class bascula {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tiquete SET idAgricultor='"+agricultor+"',idLote='"+lote+"',idVehiculo='"+placa+"',idConductor='"+conductor+"',user='"+user+"',fecha='"+fecha+"',kilosBrutos='"+kilosBrutos+"',destare='"+destare+"',kilosNetos='"+kilosNetos+"',observacion='"+observacion+"' WHERE idTiquete='" + idTiquete + "'");
+            st.executeUpdate("UPDATE tiquete SET idAgricultor='" + agricultor + "',idLote='" + lote + "',idVehiculo='" + placa + "',idConductor='" + conductor + "',user='" + user + "',fecha='" + fecha + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "',observacion='" + observacion + "' WHERE idTiquete='" + idTiquete + "'");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
         } catch (Exception e) {
             e.printStackTrace();
