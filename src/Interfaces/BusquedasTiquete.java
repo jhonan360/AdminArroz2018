@@ -15,7 +15,7 @@ import Logica.Extras.validaciones;
 import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import Interfaces.Laboratorio_tiquete_inicial;
 import Logica.Extras.validaciones;
 
 import javax.swing.JFrame;
@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  * @author Andre
  */
 public class BusquedasTiquete extends javax.swing.JFrame {
-
+    public static Laboratorio_tiquete_inicial Lab;
     public static busquedasTiquete busTiquete;
     public static bascula bascula;
     public static String claseTiquete;
@@ -841,6 +841,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                     case "TiqVarios":
                     TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
                     busTiquete.cerrar(claseTiquete);
+                    
                     dispose();
                     break;
 
@@ -901,6 +902,13 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
+                    
+                    case "TiqLab":
+                    Lab.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                    String id =   (jTable3.getValueAt(rec, 0).toString());
+                    id_agricultor(id);
+                    dispose();
+                    break;                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");

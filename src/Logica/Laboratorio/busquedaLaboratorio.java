@@ -98,7 +98,7 @@ public class busquedaLaboratorio {
     
 
     public void buscarAgricultor() {
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
         Date Fechainicial = BusT.jDateinicial.getDate();
         String FechaIni = formato.format(Fechainicial);
         Date FechaFinal = BusT.jDatefinal.getDate();
@@ -122,19 +122,19 @@ public class busquedaLaboratorio {
 
         if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true && BusT.chcedula.isSelected() == true) {
             if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("") && !numtiquete.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete= (SELECT idTiquete FROM tiquete WHERE idAgricultor='"+id+"')AND laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete= (SELECT idTiquete FROM tiquete WHERE idAgricultor='"+id+"')AND laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha > '"+FechaIni+"' AND laboratorio.fecha <'"+FechaFin+"' and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true) {
             if (!FechaIni.equals("") &&!FechaFin.equals("") && !numtiquete.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha > '"+FechaIni+"' AND laboratorio.fecha <'"+FechaFin+"' and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (BusT.chfecha.isSelected() == true && BusT.chcedula.isSelected() == true) {
             if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE tiquete.idAgricultor='"+id+"'AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE tiquete.idAgricultor='"+id+"'AND  laboratorio.fecha > '"+FechaIni+"' AND laboratorio.fecha <'"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
@@ -146,7 +146,7 @@ public class busquedaLaboratorio {
             }
         } else if (BusT.chfecha.isSelected() == true) {
             if (!FechaIni.equals("") &&!FechaFin.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.fecha > '"+FechaIni+"' AND laboratorio.fecha <'"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

@@ -12,7 +12,7 @@ package Logica.Extras;
 import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 
-import Interfaces.Laboratorio_menu;
+
 import Logica.Laboratorio.laboratorio;
 
 import Logica.Bascula.conductor;
@@ -28,10 +28,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Logica.Extras.log;
+import Logica.Laboratorio.laboratorio_menu;
+
 
 public class login {
 
     public static Interfaces.Login log;
+    public static laboratorio_menu labor;
     public static Conexion Con;
     public static String usu, con, priv, estado, usua;
     public static Statement st;
@@ -43,7 +46,7 @@ public class login {
     public static conductor cond;
     public static Administracion admi;
 
-    public static Laboratorio_menu Lab;
+    
 
     public static Gerencia Ger;
     public boolean bandera = false;
@@ -127,12 +130,11 @@ public class login {
                         }
                         bandera = true;
                     } else if (priv.equals("laboratorista") && estado.equals("activo")) {
-                        if (Lab == null) {
-                            Lab = new Laboratorio_menu();
-                            Lab.setVisible(true);
+                        if (labor == null) {
+                            labor.tiquete1();
                             enviarUsuario();
                         } else {
-                            Lab.setVisible(true);
+                            labor.tiquete1();
                         }
                         bandera = true;
                     } else if (priv.equals("gerente") && estado.equals("activo")) {
