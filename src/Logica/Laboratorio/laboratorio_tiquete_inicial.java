@@ -6,6 +6,7 @@
 package Logica.Laboratorio;
 
 
+import Interfaces.BusquedasTiquete;
 import Interfaces.BusquedasTiqueteInicial;
 import Interfaces.Laboratorio_tiquete_inicial;
 import Logica.Extras.login;
@@ -23,13 +24,15 @@ import javax.swing.JOptionPane;
  * @author uriel
  */
 public class laboratorio_tiquete_inicial {
-    public static ResultSet rstipo,rstipo2,rsconsecutivo,rstipos;
+   
     public static login login;
     public String user;
     public static Laboratorio_tiquete_inicial labo;
-    public static BusquedasTiqueteInicial Bust;
+    public static BusquedasTiquete BusTiquete;
+    public static BusquedasTiqueteInicial BusInicial;
     public static Statement st,st1,st2,st3;
      public static Conexion Con;
+      public static ResultSet rstipo,rstipo2,rsconsecutivo,rstipos;
      public static String consecutivo,idTiquete,ccAgricultor,idTipoDeArroz,idAgricultor,humedadUno,impurezaUno;
     
     public laboratorio_tiquete_inicial(){
@@ -38,7 +41,7 @@ public class laboratorio_tiquete_inicial {
         
         System.out.println("usuario es = "+ user);
     }
-    
+   
      public void cargarTipoArroz() {
         try {
             Con = new Conexion();
@@ -60,24 +63,23 @@ public class laboratorio_tiquete_inicial {
             e.printStackTrace();
         }
     }
-     public static void abrirBusquedasTiquete() {
-        Bust = new BusquedasTiqueteInicial();
-        Bust.setVisible(true);
-
-        
+     public static void abrirBusquedasTiquete(String TiqLab) {
+        BusTiquete = new BusquedasTiquete(TiqLab);
+        BusTiquete.setVisible(true);
                 //panel agricultor
-                Bust.panel.setEnabledAt(0, true);
-                Bust.panel.setEnabledAt(1, false);
-               
-                Bust.panel.setSelectedIndex(0);
-                
+                BusTiquete.panel.setEnabledAt(0, true);
+                BusTiquete.panel.setEnabledAt(1, false);
+                BusTiquete.panel.setEnabledAt(2, false);;
+                BusTiquete.panel.setSelectedIndex(0);
     }
+     
      public static void limpiarCampos(){
          labo.txtAgricultor.setText("");
          labo.TxtHumedadUno.setText("");
          labo.TxtImpurezaUno.setText("");
          labo.cmbTipoArroz.setSelectedIndex(0);
      }
+     
      public void consecutivo() {// Recibe la cedula del empleado y retorna el nombre del departamento de recidencia 
         try {
             Con = new Conexion();

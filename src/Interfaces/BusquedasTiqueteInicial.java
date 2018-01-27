@@ -21,7 +21,9 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
      */
     public BusquedasTiqueteInicial() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
         busT = new busquedaLaboratorio();
     }
     
@@ -37,19 +39,21 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        panel = new javax.swing.JTabbedPane();
         panelAgricultor = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        chCedulaAgricultor = new javax.swing.JCheckBox();
-        chApellidosAgricultor = new javax.swing.JCheckBox();
-        chCiudadAgricultor = new javax.swing.JCheckBox();
-        txtBCedulaAgricultor = new javax.swing.JTextField();
-        txtBApellidosAgricultor = new javax.swing.JTextField();
-        txtBCiudadAgricultor = new javax.swing.JTextField();
+        chfecha = new javax.swing.JCheckBox();
+        chtiquete = new javax.swing.JCheckBox();
+        txttiquete = new javax.swing.JTextField();
         btnBuscarAgricultor = new javax.swing.JButton();
+        jDateinicial = new com.toedter.calendar.JDateChooser();
+        jDatefinal = new com.toedter.calendar.JDateChooser();
+        chcedula = new javax.swing.JCheckBox();
+        txtcedula = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        panelConductor = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,37 +79,58 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        chCedulaAgricultor.setText("Cedula");
-        chCedulaAgricultor.addItemListener(new java.awt.event.ItemListener() {
+        chfecha.setText("Fecha");
+        chfecha.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCedulaAgricultorItemStateChanged(evt);
+                chfechaItemStateChanged(evt);
+            }
+        });
+        chfecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chfechaActionPerformed(evt);
             }
         });
 
-        chApellidosAgricultor.setText("Apellidos");
-        chApellidosAgricultor.addItemListener(new java.awt.event.ItemListener() {
+        chtiquete.setText("Tiquete");
+        chtiquete.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chApellidosAgricultorItemStateChanged(evt);
+                chtiqueteItemStateChanged(evt);
             }
         });
 
-        chCiudadAgricultor.setText("Ciudad");
-        chCiudadAgricultor.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCiudadAgricultorItemStateChanged(evt);
-            }
-        });
+        txttiquete.setEditable(false);
 
-        txtBCedulaAgricultor.setEditable(false);
-
-        txtBApellidosAgricultor.setEditable(false);
-
-        txtBCiudadAgricultor.setEditable(false);
-
+        btnBuscarAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
         btnBuscarAgricultor.setText("Buscar");
         btnBuscarAgricultor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarAgricultorActionPerformed(evt);
+            }
+        });
+
+        jDateinicial.setEnabled(false);
+
+        jDatefinal.setEnabled(false);
+
+        chcedula.setText("Cedula");
+        chcedula.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chcedulaItemStateChanged(evt);
+            }
+        });
+        chcedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chcedulaActionPerformed(evt);
+            }
+        });
+
+        txtcedula.setEditable(false);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
+        jButton1.setText("Reiniciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -116,42 +141,51 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chCedulaAgricultor)
-                    .addComponent(chApellidosAgricultor)
-                    .addComponent(chCiudadAgricultor))
-                .addGap(55, 55, 55)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBApellidosAgricultor, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                    .addComponent(txtBCiudadAgricultor)
-                    .addComponent(txtBCedulaAgricultor))
-                .addGap(38, 38, 38)
-                .addComponent(btnBuscarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(chcedula)
+                        .addGap(55, 55, 55)
+                        .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chfecha)
+                            .addComponent(chtiquete))
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jDatefinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txttiquete, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBuscarAgricultor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(chfecha)
+                    .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDatefinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBCedulaAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chCedulaAgricultor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBApellidosAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chApellidosAgricultor)
-                    .addComponent(btnBuscarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBCiudadAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chCiudadAgricultor))
-                .addContainerGap())
+                    .addComponent(txttiquete, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chtiquete)
+                    .addComponent(btnBuscarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(chcedula)
+                    .addComponent(txtcedula)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
-        chCedulaAgricultor.getAccessibleContext().setAccessibleName("chCedulaAgricultor");
-        chApellidosAgricultor.getAccessibleContext().setAccessibleName("chApellidosAgricultor");
-        txtBCedulaAgricultor.getAccessibleContext().setAccessibleName("txtBCedulaAgricultor");
-        txtBApellidosAgricultor.getAccessibleContext().setAccessibleName("txtBApellidosAgricultor");
-        txtBCiudadAgricultor.getAccessibleContext().setAccessibleName("txtBCiudadAgricultor");
+        chfecha.getAccessibleContext().setAccessibleName("chCedulaAgricultor");
+        chtiquete.getAccessibleContext().setAccessibleName("chApellidosAgricultor");
+        txttiquete.getAccessibleContext().setAccessibleName("txtBApellidosAgricultor");
         btnBuscarAgricultor.getAccessibleContext().setAccessibleName("btnBuscarAgricultor");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,12 +211,12 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
         panelAgricultor.setLayout(panelAgricultorLayout);
         panelAgricultorLayout.setHorizontalGroup(
             panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAgricultorLayout.createSequentialGroup()
+            .addGroup(panelAgricultorLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                .addGroup(panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         panelAgricultorLayout.setVerticalGroup(
             panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,47 +224,47 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel5.getAccessibleContext().setAccessibleName("chApelliidosAgricultor");
 
-        panel.addTab("Agricultor", panelAgricultor);
-        panelAgricultor.getAccessibleContext().setAccessibleName("panelAgricultor");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setText("BUSQUEDAS DEL LABORATORIO");
 
-        panelConductor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout panelConductorLayout = new javax.swing.GroupLayout(panelConductor);
-        panelConductor.setLayout(panelConductorLayout);
-        panelConductorLayout.setHorizontalGroup(
-            panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
-        );
-        panelConductorLayout.setVerticalGroup(
-            panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
-        );
-
-        panel.addTab("", panelConductor);
-        panelConductor.getAccessibleContext().setAccessibleName("panelConductor");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Logo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addComponent(panelAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(40, 40, 40)))
+                .addComponent(panelAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        panelAgricultor.getAccessibleContext().setAccessibleName("panelAgricultor");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -246,41 +280,59 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnBuscarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgricultorActionPerformed
+        busT.cedula();
         busT.buscarAgricultor();
+       
 
     }//GEN-LAST:event_btnBuscarAgricultorActionPerformed
 
-    private void chCiudadAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadAgricultorItemStateChanged
-        if (chCiudadAgricultor.isSelected()==true){
-            txtBCiudadAgricultor.setEditable(true);
+    private void chtiqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chtiqueteItemStateChanged
+        if (chtiquete.isSelected()==true){
+            txttiquete.setEditable(true);
         }else{
-            txtBCiudadAgricultor.setEditable(false);
-            txtBCiudadAgricultor.setText("");
+            txttiquete.setEditable(false);
+            txttiquete.setText("");
         }
-    }//GEN-LAST:event_chCiudadAgricultorItemStateChanged
+    }//GEN-LAST:event_chtiqueteItemStateChanged
 
-    private void chApellidosAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosAgricultorItemStateChanged
-        if (chApellidosAgricultor.isSelected()==true){
-            txtBApellidosAgricultor.setEditable(true);
+    private void chfechaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chfechaItemStateChanged
+        if (chfecha.isSelected()==true){
+            jDateinicial.setEnabled(true);
+            jDatefinal.setEnabled(true);
         }else{
-            txtBApellidosAgricultor.setEditable(false);
-            txtBApellidosAgricultor.setText("");
+           jDateinicial.setEnabled(false);
+           jDatefinal.setEnabled(false);
         }
-    }//GEN-LAST:event_chApellidosAgricultorItemStateChanged
-
-    private void chCedulaAgricultorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaAgricultorItemStateChanged
-        if (chCedulaAgricultor.isSelected()==true){
-            txtBCedulaAgricultor.setEditable(true);
-        }else{
-            txtBCedulaAgricultor.setEditable(false);
-            txtBCedulaAgricultor.setText("");
-        }
-    }//GEN-LAST:event_chCedulaAgricultorItemStateChanged
+    }//GEN-LAST:event_chfechaItemStateChanged
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        busT.tabla_camposAgricultor();
+        
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void chfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chfechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chfechaActionPerformed
+
+    private void chcedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chcedulaItemStateChanged
+        // TODO add your handling code here:
+            if (chcedula.isSelected()==true){
+            txtcedula.setEditable(true);
+        }else{
+            txtcedula.setEditable(false);
+            txtcedula.setText("");
+        }
+    
+    }//GEN-LAST:event_chcedulaItemStateChanged
+
+    private void chcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chcedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chcedulaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        busT.crearModeloAgricultor();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,20 +371,22 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarAgricultor;
-    public static javax.swing.JCheckBox chApellidosAgricultor;
-    public static javax.swing.JCheckBox chCedulaAgricultor;
-    public static javax.swing.JCheckBox chCiudadAgricultor;
-    private javax.swing.JPanel jPanel5;
+    public static javax.swing.JButton btnBuscarAgricultor;
+    public static javax.swing.JCheckBox chcedula;
+    public static javax.swing.JCheckBox chfecha;
+    public static javax.swing.JCheckBox chtiquete;
+    private javax.swing.JButton jButton1;
+    public static com.toedter.calendar.JDateChooser jDatefinal;
+    public static com.toedter.calendar.JDateChooser jDateinicial;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    public static javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     public static javax.swing.JTable jTable2;
-    public static javax.swing.JTabbedPane panel;
-    private javax.swing.JPanel panelAgricultor;
-    private javax.swing.JPanel panelConductor;
-    public static javax.swing.JTextField txtBApellidosAgricultor;
-    public static javax.swing.JTextField txtBCedulaAgricultor;
-    public static javax.swing.JTextField txtBCiudadAgricultor;
+    public static javax.swing.JPanel panelAgricultor;
+    public static javax.swing.JTextField txtcedula;
+    public static javax.swing.JTextField txttiquete;
     // End of variables declaration//GEN-END:variables
 }

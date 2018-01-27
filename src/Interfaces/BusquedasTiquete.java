@@ -9,7 +9,15 @@ import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
 import static Logica.Bascula.bascula.Bas;
 import Logica.Bascula.busquedasTiquete;
+import Logica.Laboratorio.laboratorio_tiquete_inicial;
+import Interfaces.Laboratorio_tiquete_inicial;
 import Logica.Extras.validaciones;
+import Negocio.Conexion;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import Logica.Extras.validaciones;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -25,6 +33,17 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     public static TiqueteVarios TiqVarios;
     public static validaciones val,vali;
 
+    public static String consecutivo;
+    
+    public static Laboratorio_tiquete_inicial TiqLab;
+    public static laboratorio_tiquete_inicial tiqLab;
+    
+    public static Statement st;
+     public static Conexion Con;
+      public static ResultSet rsconsecutivo;
+
+    
+
     /**
      * Creates new form BusquedasTiquete
      */
@@ -33,7 +52,11 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         busTiquete = new busquedasTiquete();
         claseTiquete = tiquete;
-        vali=new validaciones();
+
+
+        vali = new validaciones();
+
+
         vali.IDENTIFICACION(txtBCedulaVehiculo);
         vali.NOMBRES(txtBApellidosAgricultor);
         vali.NOMBRES(txtBCiudadAgricultor);
@@ -42,7 +65,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         vali.NOMBRES(txtBCiudadConductor);
         vali.NOMBRES(txtBMarcaVehiculo);
     }
-        
+
     public BusquedasTiquete() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -809,6 +832,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 switch (claseTiquete) {
 
                     case "TiqPrincipal":
+
                     Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
                     busTiquete.cerrar(claseTiquete);
                     dispose();
@@ -819,6 +843,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
+
                 }
 
             } else {
@@ -877,13 +902,30 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                     dispose();
                     break;
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         }
     }//GEN-LAST:event_btnGuardarAgricultorActionPerformed
 
+public void id_agricultor(String cedula){
+    try {
+            Con = new Conexion();
+
+            st = Con.conexion.createStatement();
+            rsconsecutivo = st.executeQuery("SELECT idPersonalExterno FROM personalexterno where cedula ='"+cedula+"'");
+            while (rsconsecutivo.next()) {
+                String res = rsconsecutivo.getString(1);
+               consecutivo = (Integer.parseInt(res)+1)+"";
+            }
+            
+            tiqLab.ccAgricultor=consecutivo;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
     private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
         busTiquete.crearModeloAgricultor();
     }//GEN-LAST:event_btnRefrescarAgricultorActionPerformed
@@ -965,6 +1007,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                 switch (claseTiquete) {
 
                     case "TiqPrincipal":
+
                     Bas.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
                     busTiquete.cerrar(claseTiquete);
                     dispose();

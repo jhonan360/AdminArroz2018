@@ -254,6 +254,11 @@ public class Bascula extends javax.swing.JFrame {
 
         cmbLote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----SELECCIONE UNO----" }));
         cmbLote.setToolTipText("");
+        cmbLote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLoteActionPerformed(evt);
+            }
+        });
 
         btnEditarAgricultor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/edit.png"))); // NOI18N
@@ -903,6 +908,13 @@ public class Bascula extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoArrozActionPerformed
 
+
+
+    private void cmbLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbLoteActionPerformed
+
+
     private void tblSegundoPesajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSegundoPesajeMouseClicked
         bascula.limpiarRegistros();
         bascula.tablaCampos_SegundoPesaje();
@@ -993,7 +1005,7 @@ public class Bascula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

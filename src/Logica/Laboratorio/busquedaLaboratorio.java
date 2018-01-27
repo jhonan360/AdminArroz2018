@@ -11,31 +11,42 @@ import Interfaces.Bascula;
 import Interfaces.Laboratorio_tiquete_inicial;
 import Logica.Laboratorio.laboratorio_tiquete_inicial;
 import Interfaces.Vehiculo;
+import Negocio.Conexion;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author uriel
  */
 public class busquedaLaboratorio {
+    public static Statement st4;
+    
+    public static Conexion Con;
     public static BusquedasTiquete BusTiquete;
     public static BusquedasTiqueteInicial BusT;
-    public static Bascula Bas;
+    public static ResultSet rs;
+    
     public static Laboratorio_tiquete_inicial LabT;
    // public static bascula bas;
     public static laboratorio_tiquete_inicial labt;
     
-    public static Vehiculo Vehiculo;
-    public static String nomConductor,ccAgricultor;
+  
+    public static String cedula,id;
     public static tablas tbl;
-    public static DefaultTableModel modeloagr, modelCdt;
-    public static String columnasAgri[] = new String[]{"id","Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
-    public static String columnas[] = new String[]{"Cedula", "Nombres", "Apellidos","Telefono", "Direccion", "Municipio"};
+    public static DefaultTableModel mdelolab;
+    public static String columnasAgr[] = new String[]{"id","Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
+    public static String columnasAgri[] = new String[]{"idLaboratorio","idTiquete","fecha","humedad", "impureza","integralRes", "cascarillaRes", "blancoRes","partidoRes","enteroRes","yeso","dañado","ip"};
+    
+    
 
     public busquedaLaboratorio() {
-        crearModeloAgricultor();
+        tbl = new tablas();
+       crearModeloAgricultor();
         
         
         //tabla_camposAgricultor();
@@ -46,88 +57,108 @@ public class busquedaLaboratorio {
      */
     public void cerrar(){
         
-        LabT.btnBuscarAgricultor.setEnabled(true);
+        //LabT.btnBuscarAgricultor.setEnabled(true);
       
     }
-    
-  
+    public void cedula(){
+        try {
+            cedula=BusT.txtcedula.getText();
+            Con = new Conexion();
+
+            st4 = Con.conexion.createStatement();
+            rs = st4.executeQuery("SELECT idPersonalExterno FROM personalexterno WHERE cedula = '" + cedula + "'");
+            while (rs.next()) {
+                id = rs.getString(1);
+                
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+   
     public void crearModeloAgricultor() {
         //System.out.println("2");
-        modeloagr = new DefaultTableModel(null, columnasAgri) {
+        mdelolab = new DefaultTableModel(null, columnasAgri) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
         tbl = new tablas(); 
-        tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT idAgricultor,ccAgricultor,nombres,apellidos,municipios.nombre,direccion FROM agricultor,municipios WHERE agricultor.idMunicipio=municipios.idMunicipio");
-    }
-
-    public void tabla_camposAgricultor() {
-            int rec = BusT.jTable2.getSelectedRow();
-            LabT.txtAgricultor.setText((BusT.jTable2.getValueAt(rec, 3).toString()) + (" " + BusT.jTable2.getValueAt(rec, 2).toString()));
-            labt.ccAgricultor = BusT.jTable2.getValueAt(rec, 0).toString();
-            //System.out.println("jjj"+ccAgricultor);
-                      
-    }
-        
+        tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT idLaboratorio,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio");
+}
+       
     public static void desactivar_checkboxAgricultor() { // desactiva las checkbox
-        BusT.chCedulaAgricultor.setSelected(false);
-        BusT.chApellidosAgricultor.setSelected(false);
-        BusT.chCiudadAgricultor.setSelected(false);
+        BusT.chfecha.setSelected(false);
+        BusT.chtiquete.setSelected(false);
+        BusT.chcedula.setSelected(false);
         
     }
     
 
     public void buscarAgricultor() {
-        String cedula = BusT.txtBCedulaAgricultor.getText();
-        String apellidos = BusT.txtBApellidosAgricultor.getText();
-        String ciudad = BusT.txtBCiudadAgricultor.getText();
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+        Date Fechainicial = BusT.jDateinicial.getDate();
+        String FechaIni = formato.format(Fechainicial);
+        Date FechaFinal = BusT.jDatefinal.getDate();
+        String FechaFin = formato.format(FechaFinal);
+        //Date date = BusT.jDatefinal.getDate();
+       // String fecha_final = "2018/01/02";
+       // String fecha_final = BusT.jDatefinal.toString();
+        //String fecha_inicial = BusT.jDateinicial.getDateFormatString();
+        //String fecha_inicial = "2018/01/02";
+        String cedula = BusT.txtcedula.getText();
+        String numtiquete = BusT.txttiquete.getText();
+        System.out.println("num"+numtiquete);
+        System.out.println("id"+id);
+        System.out.print("FechaIni "+FechaIni);
 
-        modeloagr = new DefaultTableModel(null, columnasAgri) {
+        mdelolab = new DefaultTableModel(null, columnasAgri) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
 
-        if (BusT.chCedulaAgricultor.isSelected() == true && BusT.chApellidosAgricultor.isSelected() == true && BusT.chCiudadAgricultor.isSelected() == true) {
-            if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+        if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true && BusT.chcedula.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("") && !numtiquete.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete= (SELECT idTiquete FROM tiquete WHERE idAgricultor='"+id+"')AND laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (BusT.chCedulaAgricultor.isSelected() == true && BusT.chApellidosAgricultor.isSelected() == true) {
-            if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+        } else if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("") && !numtiquete.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete='"+numtiquete+"' AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (BusT.chCedulaAgricultor.isSelected() == true && BusT.chCiudadAgricultor.isSelected() == true) {
-            if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+        } else if (BusT.chfecha.isSelected() == true && BusT.chcedula.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE tiquete.idAgricultor='"+id+"'AND laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (BusT.chApellidosAgricultor.isSelected() == true && BusT.chCiudadAgricultor.isSelected() == true) {
-            if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+        } else if (BusT.chtiquete.isSelected() == true && BusT.chcedula.isSelected() == true) {
+            if (!numtiquete.equals("") && !cedula.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete= (SELECT idTiquete FROM tiquete WHERE tiquete.idAgricultor='"+id+"' AND laboratorio.idTiquete='"+numtiquete+"'and tiquete.idTiquete=laboratorio.idTiquete");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (BusT.chCedulaAgricultor.isSelected() == true) {
+        } else if (BusT.chfecha.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.fecha BETWEEN '"+FechaIni+"' AND '"+FechaFin+"'and tiquete.idTiquete=laboratorio.idTiquete");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusT.chtiquete.isSelected() == true) {
+            if (!numtiquete.equals("")) {
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE laboratorio.idTiquete='"+numtiquete+"' and tiquete.idTiquete=laboratorio.idTiquete");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (BusT.chcedula.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.ccAgricultor LIKE '%" + cedula + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
-            } else {
-                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
-            }
-        } else if (BusT.chApellidosAgricultor.isSelected() == true) {
-            if (!apellidos.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE agricultor.apellidos LIKE '%" + apellidos + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
-            } else {
-                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
-            }
-        } else if (BusT.chCiudadAgricultor.isSelected() == true) {
-            if (!ciudad.equals("")) {
-                tbl.llenarTabla(BusT.jTable2, modeloagr, columnasAgri.length, "SELECT agricultor.ccAgricultor,nombres,apellidos,municipios.Nombre,direccion FROM agricultor,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND agricultor.idMunicipio=municipios.idMunicipio GROUP BY ccAgricultor");
+                tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT laboratorio.idLaboratorio,laboratorio.idTiquete,laboratorio.fecha,laboratorio.humedad,laboratorio.impureza,laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip FROM laboratorio,tiquete WHERE tiquete.idTiquete=laboratorio.idTiquete AND tiquete.idAgricultor='"+id+"'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

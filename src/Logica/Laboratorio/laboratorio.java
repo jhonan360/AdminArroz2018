@@ -12,10 +12,17 @@ import Logica.Extras.login;
 import Logica.Extras.tablas;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Interfaces.BusquedasTiqueteInicial;
 import lu.tudor.santec.jtimechooser.JTimeChooser;
 
 /**
@@ -24,24 +31,33 @@ import lu.tudor.santec.jtimechooser.JTimeChooser;
  */
 public class laboratorio {
     public static Laboratorio Laboratorio;
+    public static BusquedasTiqueteInicial BusInicial;
     public static tablas tbl;
-    public DefaultTableModel modeloemp,modeloestufa;
+    public DefaultTableModel modeloemp,modeloestufa,modelo3;
     public login login;
     public String columnas[] = new String[]{"idLaboratorio","idTiquete","fecha","humedad", "impureza","integralRes", "cascarillaRes", "blancoRes","partidoRes","enteroRes","yeso","dañado","ip"};
     public String columnas2[] = new String[]{"idLaboratorio","idTiquete","muestreo","hora","humedad"};
+    public String columnas3[] = new String[]{"tiquete","agricultor","fecha"};
     
     public String user;
-     public static Statement st,st4;
-     public static ResultSet rs,rsconsecutivo;
+     public static Statement st,st3,st4,st5;
+     public static ResultSet rs,rs3,rsconsecutivo,rscantidaad;
     public static Conexion Con;
-    public String IDLaboratorio,muestreo,hora,humedadEstufa;
-    public String idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip,consecutivo;
+    public String IDLaboratorio,muestreo,hora,humedadEstufa,res;
+    public String idTiquete,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip,consecutivo;
+    public int cantEstado;
     
     public laboratorio(){
         fecha();
        crearModelo();
+       crearModelo3();
         consecutivo();
+        campos_desabilitados();
        // time();
+    }
+     public void busqueda(){
+        BusInicial = new  BusquedasTiqueteInicial();
+        BusInicial.setVisible(true);
     }
     
     public void crearModelo() {
@@ -63,10 +79,129 @@ public class laboratorio {
         tbl.llenarTabla(Laboratorio.jTable2, modeloestufa, columnas2.length, "SELECT idmuetraestufa,idLaboratorio,muestreo,hora,humedad FROM muetraestufa where idLaboratorio ='" + id + "' ");
 
     }
-    
-    
-    
-     public void fecha() {
+     public void crearModelo3() {
+        modelo3 = new DefaultTableModel(null, columnas3) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+        tbl = new tablas();
+        tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete,idAgricultor,fecha from tiquete where idTiquete not in (select idTiquete from laboratorio group by idTiquete)");
+
+    }
+     public void estado_tiquete() {
+        try {
+            String id= Laboratorio.TxtIDTiqueteEstufa.getText();
+            Con = new Conexion();
+
+            st5 = Con.conexion.createStatement();
+            rscantidaad = st5.executeQuery("SELECT estado FROM laboratorio WHERE idLaboratorio = '" + id + "'");
+            while (rscantidaad.next()) {
+                res = rscantidaad.getString(1);
+                System.out.println("res+" + res);
+                
+            }
+            if (res.equals("cerrado")){
+                 JOptionPane.showMessageDialog(null,"No se pueden agregar mas registros");
+            
+            }else{
+                insertar_humedad_estufa(IDLaboratorio, muestreo, hora, humedadEstufa);
+            crearModelo2(IDLaboratorio);
+            }
+            
+            Con.Desconectar();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+     
+     public void estado(){
+            try {
+            String id = Laboratorio.TxtIDTiqueteEstufa.getText();
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            st.executeUpdate("UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
+            JOptionPane.showMessageDialog(null, "El tiquete fue cerrado");
+            actualizar();
+            crearModelo2(IDLaboratorio);
+            Con.Desconectar();
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+     public void calculos(){
+         double integral =0.0;
+         if (!Laboratorio.TxtIntegral.getText().equals("")){
+            integral =Double.parseDouble(Laboratorio.TxtIntegral.getText());
+         double cascarilla = 1000- integral;
+         Laboratorio.TxtCascarilla.setText(String.valueOf(cascarilla));  
+         }else{
+             JOptionPane.showMessageDialog(null, "El campo Integral no puede quedar vacio");
+         }
+        
+     }
+     public void calculo_entero(){
+          double partido = 0.0;
+          if (!Laboratorio.TxtPartido.getText().equals("")){
+               partido = Double.parseDouble(Laboratorio.TxtPartido.getText());
+         double entero = 100-partido;
+         Laboratorio.enteroRes.setText(String.valueOf(entero));
+         calculo_ip(entero);
+          }else{
+              JOptionPane.showMessageDialog(null,"El campo partido no se puede encontrar vacio");
+          }
+        
+     }
+     public void calculo_ip(double entero){
+         double ip = 0.0;
+         double blanco = 0.0;
+         blanco = Double.parseDouble(Laboratorio.TxtBlanco.getText());
+         ip= (entero*blanco)/1000;
+         Laboratorio.TxtIp.setText(String.valueOf(ip));
+     }
+     public void campos_desabilitados(){
+         Laboratorio.TxtFecha.setEnabled(false);
+         Laboratorio.TxtHumedad.setEnabled(false);
+         Laboratorio.TxtImpureza.setEnabled(false);
+         Laboratorio.TxtIntegral.setEnabled(false);
+         Laboratorio.TxtBlanco.setEnabled(false);
+         Laboratorio.TxtPartido.setEnabled(false);
+         Laboratorio.TxtYeso.setEnabled(false);
+         Laboratorio.TxtIp.setEnabled(false);
+         Laboratorio.TxtIntegral.setEnabled(false);
+         Laboratorio.TxtBlanco.setEnabled(false);
+         Laboratorio.enteroRes.setEnabled(false);
+         Laboratorio.TxtIdTiquete.setEnabled(false);
+         Laboratorio.TxtCascarilla.setEnabled(false);
+         Laboratorio.TxtDanado.setEnabled(false);
+         
+     }
+     public void campos_habilitados(){
+         Laboratorio.TxtFecha.setEnabled(true);
+         Laboratorio.TxtHumedad.setEnabled(true);
+         Laboratorio.TxtImpureza.setEnabled(true);
+         Laboratorio.TxtIntegral.setEnabled(true);
+         Laboratorio.TxtBlanco.setEnabled(true);
+         Laboratorio.TxtPartido.setEnabled(true);
+         Laboratorio.TxtYeso.setEnabled(true);
+         Laboratorio.TxtIp.setEnabled(true);
+         Laboratorio.TxtIntegral.setEnabled(true);
+         Laboratorio.TxtBlanco.setEnabled(true);
+         Laboratorio.enteroRes.setEnabled(true);
+         Laboratorio.TxtIdTiquete.setEnabled(true);
+         Laboratorio.TxtCascarilla.setEnabled(true);
+         Laboratorio.TxtDanado.setEnabled(true);
+         
+     }
+     public void idTiquete_campo(){
+         int rec = Laboratorio.jTable3.getSelectedRow();
+        Laboratorio.TxtIdTiquete.setText(Laboratorio.jTable3.getValueAt(rec, 0).toString());
+        campos_habilitados();
+     }
+      public void fecha() {
         Calendar c;
         c = Calendar.getInstance();
         int d = c.get(Calendar.DATE), m = 1 + (c.get(Calendar.MONTH)), a = c.get(Calendar.YEAR);
@@ -76,31 +211,15 @@ public class laboratorio {
      
      public void actualizar(){
           Laboratorio.TxtIDTiqueteEstufa.setText("");
-        Laboratorio.TxtHora.setText("");
+                       
+        
         Laboratorio.TxtHumedadEstufa.setText("");
         Laboratorio.TxtMuestreo.setText("");
         
         crearModelo();
          crearModelo2(ip);
      }
-     /*
-      public void tablas_campos() {
-        int rec = Laboratorio.jTable1.getSelectedRow();
-        Laboratorio.LabelTiquete.setText(Laboratorio.jTable1.getValueAt(rec, 0).toString());
-        Laboratorio.TxtFecha.setText(Laboratorio.jTable1.getValueAt(rec, 1).toString());
-        //Laboratorio.TxtVariedad.setText(Laboratorio.jTable1.getValueAt(rec, 2).toString());
-        Laboratorio.TxtHumedad.setText(Laboratorio.jTable1.getValueAt(rec, 3).toString());
-        Laboratorio.TxtImpureza.setText(Laboratorio.jTable1.getValueAt(rec, 4).toString());
-       // Laboratorio.TxtHumedadRes.setText(Laboratorio.jTable1.getValueAt(rec, 5).toString());
-        Laboratorio.TxtIntegral.setText(Laboratorio.jTable1.getValueAt(rec, 6).toString());
-        Laboratorio.TxtCascarilla.setText(Laboratorio.jTable1.getValueAt(rec, 7).toString());
-        Laboratorio.TxtBlanco.setText(Laboratorio.jTable1.getValueAt(rec, 8).toString());
-        Laboratorio.TxtPartido.setText(Laboratorio.jTable1.getValueAt(rec, 9).toString());
-        //Laboratorio.enteroRes.setText(Laboratorio.jTable1.getValueAt(rec, 10).toString());
-        Laboratorio.enteroRes.setText(Laboratorio.jTable1.getValueAt(rec, 10).toString());
-    }
-    */
-    
+   
     public void guardar_inicial(){
         idTiquete = Laboratorio.TxtIdTiquete.getText();
         fecha = Laboratorio.TxtFecha.getText();
@@ -108,6 +227,8 @@ public class laboratorio {
         humedad = Laboratorio.TxtHumedad.getText();
         impureza = Laboratorio.TxtImpureza.getText();
         //humedadEst = Laboratorio.TxtHumedadRes.getText();
+        estado = Laboratorio.CmbEstado.getSelectedItem().toString();
+        System.out.println("hola "+estado);
         user = login.enviarUsuario();
         integralRes = Laboratorio.TxtIntegral.getText();
         cascarillaRes = Laboratorio.TxtCascarilla.getText();
@@ -120,19 +241,19 @@ public class laboratorio {
         
         
         if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!danado.equals("")&&!ip.equals("")){
-            insertar_inicial(idTiquete,user,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
+            insertar_inicial(idTiquete,user,estado,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
             limpiar_campos();
             
         }else{
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
     }
-    public void insertar_inicial(String idTiquete,String user,String fecha,String humedad,String impureza,String integralRes,String cascarillaRes,String blancoRes,String partidoRes,String enteroRes,String yeso,String danado, String ip){
+    public void insertar_inicial(String idTiquete,String user,String estado,String fecha,String humedad,String impureza,String integralRes,String cascarillaRes,String blancoRes,String partidoRes,String enteroRes,String yeso,String danado, String ip){
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            
-            st.executeUpdate("Insert Into laboratorio (idLaboratorio,idTiquete,user,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
+            System.out.println("Insert Into laboratorio (idLaboratorio,idTiquete,user,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + estado + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
+            st.executeUpdate("Insert Into laboratorio (idLaboratorio,idTiquete,user,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + estado + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -158,51 +279,7 @@ public class laboratorio {
         
         
     }
-    /*
-    public void actualizar(){
-        String c=Laboratorio.LabelTiquete.getText();
-           fecha = Laboratorio.TxtFecha.getText();
-//        variedad = Laboratorio.TxtVariedad.getText();
-        humedad = Laboratorio.TxtHumedad.getText();
-        impureza = Laboratorio.TxtImpureza.getText();
-       // humedadEst = Laboratorio.TxtHumedadRes.getText();
-        integralRes = Laboratorio.TxtIntegral.getText();
-        cascarillaRes = Laboratorio.TxtCascarilla.getText();
-        blancoRes = Laboratorio.TxtBlanco.getText();
-        partidoRes = Laboratorio.TxtPartido.getText();
-        enteroRes= Laboratorio.enteroRes.getText();
-        
-        
-        if (!fecha.equals("")&&!variedad.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!humedadEst.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")){
-     int aceptar = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere modificar la informacion del empleado", "Confirmacion", JOptionPane.CANCEL_OPTION);
-                if (aceptar == JOptionPane.YES_OPTION) {
-                    try {
-            Con = new Conexion();
-            st = Con.conexion.createStatement();
-            
-            st.executeUpdate("Update laboratorio set fecha='" + fecha + "', variedad= '" + variedad + "',humedad='" + humedad + "',impureza='" + impureza + "',humedadEstufa='" + humedadEst + "',integralRes='" + integralRes + "',cascarillaRes='" + cascarillaRes + "',blancoRes='" + blancoRes + "',partidoRes='" + partidoRes + "',enteroRes='" + enteroRes + "'where idLaboratorio='" + c + "'");
-            JOptionPane.showMessageDialog(null, "El registro ha sido modificado");
-            fecha();
-            limpiar_campos();
-            crearModelo();
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-                }else{
-                    JOptionPane.showMessageDialog(null, "ha canselado");
-                    fecha();
-            limpiar_campos();
-            crearModelo();
-                }
-            
-            
-        
-        }else{
-            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
-        } 
-        }
-*/
+   
     public void limpiar_campos(){
         
         Laboratorio.TxtFecha.setText("");
@@ -236,8 +313,8 @@ public class laboratorio {
         humedadEstufa=Laboratorio.TxtHumedadEstufa.getText();
         
         if (!IDLaboratorio.equals("")&&!muestreo.equals("")&&!hora.equals("")&&!humedadEstufa.equals("")){
-            insertar_humedad_estufa(IDLaboratorio, muestreo, hora, humedadEstufa);
-            crearModelo2(IDLaboratorio);
+            estado_tiquete();
+            actualizar();
             
         }
         
@@ -254,21 +331,5 @@ public class laboratorio {
             e.printStackTrace();
         }
     }
-    /*
-    public void time(){
-        JTimeChooser hora;
-        hora = new JTimeChooser();
-		
-		hora.setBounds(100, 100, 1000, 1000);
-        hora.setVisible(true);
-        hora.setEnabled(true);
-        hora.getAutoscrolls();
-        //hora.setShowSeconds(false);
-        hora.getTimeField();
-            Calendar calendar = new GregorianCalendar();
-        hora.getCalendarWithTime(calendar);
-        
-        Laboratorio.jPanel3.add(hora);
-    }
-*/
+    
 }
