@@ -12,7 +12,7 @@ package Logica.Extras;
 import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 
-
+import Interfaces.Gerente;
 import Logica.Laboratorio.laboratorio;
 
 import Logica.Bascula.conductor;
@@ -32,7 +32,7 @@ import Logica.Laboratorio.laboratorio_menu;
 
 
 public class login {
-
+    public static Gerente ger;
     public static Interfaces.Login log;
     public static laboratorio_menu labor;
     public static Conexion Con;
@@ -137,7 +137,15 @@ public class login {
                             labor.tiquete1();
                         }
                         bandera = true;
-                    } else if (priv.equals("gerente") && estado.equals("activo")) {
+                    } else if (priv.equals("gerencia") && estado.equals("activo")) {
+                        if (ger == null) {
+                            ger = new Gerente();
+                            ger.setVisible(true);
+                        } else {
+                            ger.setVisible(true);
+                        }
+                        bandera = true;
+                    }else if (priv.equals("gerente") && estado.equals("activo")) {
                         if (Ger == null) {
                             Ger = new Gerencia();
                             Ger.setVisible(true);
