@@ -68,7 +68,7 @@ public class login {
         try {
             contraencript = encrip.encrypt(con);
             //   System.out.println("contra"+hope);
-    } catch (Exception e) {
+        } catch (Exception e) {
         }
         if (!usu.equals("") && !con.equals("")) {
             Validar(usu, contraencript);
@@ -87,6 +87,7 @@ public class login {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
+            String cadenatemporal = "SELECT * FROM usuario WHERE usuario.user = '" + usuario + "' AND usuario.contrasena = '" + Contraseña + "'";
             rs = st.executeQuery("SELECT * FROM usuario WHERE usuario.user = '" + usuario + "' AND usuario.contrasena = '" + Contraseña + "'");
             while (rs.next()) {
                 if (rs.getString(1) == null) {

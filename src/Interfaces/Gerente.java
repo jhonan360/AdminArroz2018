@@ -7,7 +7,8 @@ package Interfaces;
 
 import Interfaces.AgricultorGerencia;
 import Interfaces.ConductorGerencia;
-import Logica.Gerencia.gerencia;
+import Logica.Gerente.gerente;
+
 //import static Interfaces.Administracion.Cdt;
 
 /**
@@ -15,13 +16,14 @@ import Logica.Gerencia.gerencia;
  * @author Andre
  */
 public class Gerente extends javax.swing.JFrame {
-   
+   public static gerente gerente;
     /**
      * Creates new form Gerencia
      */
     public Gerente() {
         initComponents();
         setLocationRelativeTo(null);
+        gerente = new gerente();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +119,11 @@ public class Gerente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaPendiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaPendienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaPendiente);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -375,6 +382,11 @@ public class Gerente extends javax.swing.JFrame {
     private void TxtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNombreActionPerformed
+
+    private void TablaPendienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPendienteMouseClicked
+        // TODO add your handling code here:
+        gerente.enviarInformacionALosCampos();
+    }//GEN-LAST:event_TablaPendienteMouseClicked
 
     /**
      * @param args the command line arguments
