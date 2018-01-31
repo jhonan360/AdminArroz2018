@@ -28,11 +28,10 @@ public class tipo_arroz {
     public static Conexion Con;
     public static DefaultTableModel modeloTabla;
     public String columnas[] = new String[]{"N", "Tipo de arroz", "Variedad", "Descripcion"};
-    public String idGlobal;
     public static ResultSet rs, rsid;
     public static Statement st, stvalidar, stmodificar, stid;
     public static tablas tbl;
-    public static String nombre, variedad, descripcion;
+    public static String idTipoDeArroz,nombre, idVariedad, descripcion;
     public static validaciones val;
     public static bascula bas;
 
@@ -53,12 +52,13 @@ public class tipo_arroz {
 
     public void crear_tipo_de_arroz() {
         nombre = Tipo_Arroz.txtNombre.getText();
-        variedad = Tipo_Arroz.txtVariedad.getText();
+         idVariedad = String.valueOf(Tipo_Arroz.cmbVariedad.getSelectedIndex() + 1);
         descripcion = Tipo_Arroz.txtDescripcion.getText();
         if (!nombre.equals("") && !descripcion.equals("")) {
-            if (validar(nombre) == false) {
-                insertar(nombre, variedad, descripcion);
+            if (!validar(nombre,idVariedad)) {
+                insertar(nombre, idVariedad, descripcion);
                 crearModelo();
+                limpiar_campos();
             } else {
                 JOptionPane.showMessageDialog(null, "El tipo de arroz que intenta crear ya se encuentra registrado");
             }
@@ -67,12 +67,12 @@ public class tipo_arroz {
         }
     }
 
-    public boolean validar(String nombre) {
+    public boolean validar(String nombre, String idVariedad ) {
         String resultado;
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT nombre FROM tipodearroz WHERE nombre='" + nombre + "'");
+            rs = st.executeQuery("SELECT nombre FROM tipodearroz WHERE nombre='" + nombre + "'AND idVariedad='"+idVariedad+"'AND idTipoDeArroz<>'"+idTipoDeArroz+"'");
             while (rs.next()) {
                 resultado = rs.getObject(1) + "";
                 if (rs.getString(1) == null) {
@@ -94,11 +94,11 @@ public class tipo_arroz {
         return false;
     }
 
-    public void insertar(String nombre, String variedad, String descripcion) {
+    public void insertar(String nombre, String idVariedad, String descripcion) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,variedad,descripcion) VALUES (0,'" + nombre + "','" + variedad + "','" + descripcion + "')");
+            st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
             JOptionPane.showMessageDialog(null, "El tipo de arroz ha sido ingresado");
             bas = new bascula();
         } catch (Exception e) {
@@ -109,25 +109,28 @@ public class tipo_arroz {
     public void modificar() {
         nombre = Tipo_Arroz.txtNombre.getText();
         descripcion = Tipo_Arroz.txtDescripcion.getText();
-        variedad = Tipo_Arroz.txtVariedad.getText();
+        idVariedad = String.valueOf(Tipo_Arroz.cmbVariedad.getSelectedIndex() + 1);
         if (!nombre.equals("") && !descripcion.equals("")) {
-            actualizar(nombre, variedad, descripcion);
+            if (!validar(nombre,idVariedad)) {
+            actualizar(nombre, idVariedad, descripcion);
             crearModelo();
             limpiar_campos();
+            }else{
+                JOptionPane.showMessageDialog(null, "El tipo de arroz que intenta modificar coincide con un tipo de arroz registrado");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede quedar vacio");
         }
 
     }
 
-    public void actualizar(String nombre, String variedad, String descripcion) {
+    public void actualizar(String nombre, String idVariedad, String descripcion) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "'idVariedad='" + variedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idGlobal + "'");
+            st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
-            idGlobal = "";
-            System.out.println("id" + idGlobal);
+            Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,19 +138,20 @@ public class tipo_arroz {
 
     public void limpiar_campos() {
         Tipo_Arroz.txtNombre.setText("");
-        Tipo_Arroz.txtVariedad.setText("");
+        Tipo_Arroz.cmbVariedad.setSelectedIndex(0);
         Tipo_Arroz.txtDescripcion.setText("");
         Tipo_Arroz.txtBNombre.setText("");
         Tipo_Arroz.txtBVariedad.setText("");
+        Tipo_Arroz.txtNombre.setEnabled(true);
+        idTipoDeArroz="";
     }
 
     public void tablas_campos() {
         int rec = Tipo_Arroz.jTable1.getSelectedRow();
-        idGlobal = Tipo_Arroz.jTable1.getValueAt(rec, 0).toString();
+        idTipoDeArroz = Tipo_Arroz.jTable1.getValueAt(rec, 0).toString();
         Tipo_Arroz.txtNombre.setText(Tipo_Arroz.jTable1.getValueAt(rec, 1).toString());
-        Tipo_Arroz.txtVariedad.setText(Tipo_Arroz.jTable1.getValueAt(rec, 2).toString());
+        Tipo_Arroz.cmbVariedad.setSelectedItem(Tipo_Arroz.jTable1.getValueAt(rec, 2).toString());
         Tipo_Arroz.txtDescripcion.setText(Tipo_Arroz.jTable1.getValueAt(rec, 3).toString());
-        System.out.println("El idGlobal es=" + idGlobal);
         Tipo_Arroz.txtNombre.setEnabled(false);
     }
 

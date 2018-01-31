@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-01-2018 a las 21:56:16
+-- Tiempo de generación: 28-01-2018 a las 16:27:42
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.30
 
@@ -81,6 +81,26 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombre`) VALUES
 (30, 'Valle del Cauca'),
 (31, 'Vaupés'),
 (32, 'Vichada');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleliquidacion`
+--
+
+CREATE TABLE `detalleliquidacion` (
+  `idDetalleLiquidacion` int(11) NOT NULL,
+  `idliquidaciones` int(11) DEFAULT NULL,
+  `idTiquete` int(11) NOT NULL,
+  `humedad` decimal(5,2) DEFAULT NULL,
+  `impureza` decimal(5,2) DEFAULT NULL,
+  `castigoHumedad` decimal(4,3) DEFAULT NULL,
+  `castigoImpureza` decimal(4,3) DEFAULT NULL,
+  `pesoCompra` decimal(7,2) DEFAULT NULL,
+  `valorCarga` decimal(14,2) NOT NULL,
+  `valorKilo` decimal(14,2) DEFAULT NULL,
+  `valorTotal` decimal(14,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,18 +202,42 @@ CREATE TABLE `laboratorio` (
   `idLaboratorio` int(11) NOT NULL,
   `idTiquete` int(11) NOT NULL,
   `user` varchar(30) NOT NULL,
-  `estado` enum('abierto','cerrado') DEFAULT NULL,
+  `estado` enum('abierto','cerrado') NOT NULL,
   `fecha` datetime NOT NULL,
-  `humedad` decimal(3,2) NOT NULL,
-  `impureza` decimal(3,2) NOT NULL,
-  `integralRes` decimal(3,2) NOT NULL,
-  `cascarillaRes` decimal(3,2) NOT NULL,
-  `blancoRes` decimal(3,2) NOT NULL,
-  `partidoRes` decimal(3,2) NOT NULL,
-  `enteroRes` decimal(3,2) NOT NULL,
-  `yeso` decimal(3,2) DEFAULT NULL,
-  `danado` decimal(3,2) DEFAULT NULL,
-  `ip` decimal(3,2) NOT NULL
+  `humedad` decimal(5,2) NOT NULL,
+  `impureza` decimal(5,2) NOT NULL,
+  `integralRes` decimal(5,2) NOT NULL,
+  `cascarillaRes` decimal(5,2) NOT NULL,
+  `blancoRes` decimal(5,2) NOT NULL,
+  `partidoRes` decimal(5,2) NOT NULL,
+  `enteroRes` decimal(5,2) NOT NULL,
+  `yeso` decimal(5,2) DEFAULT NULL,
+  `danado` decimal(5,2) DEFAULT NULL,
+  `ip` decimal(5,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `liquidaciones`
+--
+
+CREATE TABLE `liquidaciones` (
+  `idLiquidaciones` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `humedadIdeal` decimal(5,2) NOT NULL,
+  `impurezaIdeal` decimal(5,2) NOT NULL,
+  `kilosNeto` decimal(7,2) DEFAULT NULL,
+  `kilosCompra` decimal(7,2) DEFAULT NULL,
+  `subTotal` decimal(14,2) DEFAULT NULL,
+  `fomArrocero` decimal(3,2) NOT NULL,
+  `valorFomArrocero` decimal(14,2) DEFAULT NULL,
+  `impuesto` enum('retefuente','comision bolsa') NOT NULL,
+  `porcenImpuesto` decimal(9,6) NOT NULL,
+  `valorImpuesto` decimal(14,2) DEFAULT NULL,
+  `descuentoAnticipo` decimal(14,2) DEFAULT NULL,
+  `estado` enum('en proceso','aprobado') NOT NULL,
+  `netoPagar` decimal(14,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1450,6 +1494,18 @@ INSERT INTO `nivel` (`idnivel`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `parametros`
+--
+
+CREATE TABLE `parametros` (
+  `idParametros` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `valor` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `personalexterno`
 --
 
@@ -1585,12 +1641,13 @@ CREATE TABLE `tiquete` (
   `idConductor` int(11) DEFAULT NULL,
   `user` varchar(30) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
-  `kilosBrutos` decimal(5,2) DEFAULT NULL,
-  `destare` decimal(5,2) DEFAULT NULL,
-  `kilosNetos` decimal(5,2) DEFAULT NULL,
+  `kilosBrutos` decimal(7,2) DEFAULT NULL,
+  `destare` decimal(7,2) DEFAULT NULL,
+  `kilosNetos` decimal(7,2) DEFAULT NULL,
   `observacion` text,
-  `humedadUno` decimal(3,2) NOT NULL,
-  `impurezaUno` decimal(3,2) NOT NULL
+  `empaque` enum('granel','bultos') DEFAULT NULL,
+  `humedadUno` decimal(5,2) NOT NULL,
+  `impurezaUno` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1643,9 +1700,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
-('b', 1, '6ad794deae14e67d8ad516821fc1', 'activo'),
-('l', 2, '6ad794deae14e67d8ad516821fc1', 'activo'),
-('x', 6, '6ad794deae14e67d8ad516821fc1', 'activo');
+('b', 1, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
+('l', 2, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
+('x', 6, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo');
 
 -- --------------------------------------------------------
 
@@ -1695,6 +1752,14 @@ ALTER TABLE `bateria`
 --
 ALTER TABLE `departamentos`
   ADD PRIMARY KEY (`idDepartamento`);
+
+--
+-- Indices de la tabla `detalleliquidacion`
+--
+ALTER TABLE `detalleliquidacion`
+  ADD PRIMARY KEY (`idDetalleLiquidacion`),
+  ADD KEY `fk_liquidaciones_has_tiquete_tiquete1_idx` (`idTiquete`),
+  ADD KEY `fk_liquidaciones_has_tiquete_liquidaciones1_idx` (`idliquidaciones`);
 
 --
 -- Indices de la tabla `empleado`
@@ -1749,6 +1814,12 @@ ALTER TABLE `laboratorio`
   ADD KEY `fk_laboratorio_usuario1_idx` (`user`);
 
 --
+-- Indices de la tabla `liquidaciones`
+--
+ALTER TABLE `liquidaciones`
+  ADD PRIMARY KEY (`idLiquidaciones`);
+
+--
 -- Indices de la tabla `lote`
 --
 ALTER TABLE `lote`
@@ -1780,6 +1851,12 @@ ALTER TABLE `municipios`
 --
 ALTER TABLE `nivel`
   ADD PRIMARY KEY (`idnivel`);
+
+--
+-- Indices de la tabla `parametros`
+--
+ALTER TABLE `parametros`
+  ADD PRIMARY KEY (`idParametros`);
 
 --
 -- Indices de la tabla `personalexterno`
@@ -1884,6 +1961,11 @@ ALTER TABLE `vehiculo`
 ALTER TABLE `bateria`
   MODIFY `idBateria` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `detalleliquidacion`
+--
+ALTER TABLE `detalleliquidacion`
+  MODIFY `idDetalleLiquidacion` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
@@ -1919,6 +2001,11 @@ ALTER TABLE `historialetapa`
 ALTER TABLE `laboratorio`
   MODIFY `idLaboratorio` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `liquidaciones`
+--
+ALTER TABLE `liquidaciones`
+  MODIFY `idLiquidaciones` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `lote`
 --
 ALTER TABLE `lote`
@@ -1933,6 +2020,11 @@ ALTER TABLE `marca`
 --
 ALTER TABLE `muetraestufa`
   MODIFY `idmuetraestufa` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `parametros`
+--
+ALTER TABLE `parametros`
+  MODIFY `idParametros` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `personalexterno`
 --
@@ -1991,6 +2083,13 @@ ALTER TABLE `vehiculo`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `detalleliquidacion`
+--
+ALTER TABLE `detalleliquidacion`
+  ADD CONSTRAINT `fk_liquidaciones_has_tiquete_liquidaciones1` FOREIGN KEY (`idliquidaciones`) REFERENCES `liquidaciones` (`idLiquidaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_liquidaciones_has_tiquete_tiquete1` FOREIGN KEY (`idTiquete`) REFERENCES `tiquete` (`idTiquete`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `empleado`
