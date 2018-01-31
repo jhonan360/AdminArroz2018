@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,15 +16,17 @@ import Interfaces.Login;
 import Interfaces.Vehiculo;
 import Interfaces.BusquedasTiquete;
 import Interfaces.TiqueteVarios;
+import Logica.Extras.extras;
 import Logica.Extras.login;
 import Logica.Extras.tablas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import java.util.Date;
 
 /**
  *
@@ -48,7 +49,7 @@ public class bascula {
     public static String columEspera[] = new String[]{"N", "Agricultor", "Tipo Arroz"};
     public static String columSegundoPesaje[] = new String[]{"N", "Agricultor", "KL Brutos"};
     public static DefaultTableModel modeloentrada, modeloSegundoPesaje;
-    public static String idTiquete, fecha, lote, tipoArroz, placa, agricultor, conductor, user, ccAgricultor, ccConductor, observacion, kilosBrutos, destare, kilosNetos;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -56,16 +57,19 @@ public class bascula {
     public static ResultSet rsplaca, rsplaca2, rsinsertar;
     public static ResultSet rsnum, rsTiquete;
     public String idLotes;
+    public static extras ext;
     public static Statement st;
     public static Conexion Con;
     public static tablas tbl;
     public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
-    public static String idTiqueteEspera;
+    public static String idTiqueteEspera,estadoTiquete;
+    public static boolean estado;
     //public static Double kilosBrutoss,destare,kilosNetos;
 
     public bascula() {
         //numeroTiquete();
         fecha();
+        ext = new extras();
         //cargarLote();
         //cargarTipoArroz();
         tbl = new tablas();
@@ -172,6 +176,8 @@ public class bascula {
     }
 
     public void tablaCampos_TiquetesEspera() {
+
+        estado = true;
         int rec = Bas.tblEspera.getSelectedRow();
         idTiqueteEspera = Bas.tblEspera.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
@@ -183,10 +189,13 @@ public class bascula {
             Con = new Conexion();
             st = Con.conexion.createStatement();
 
-            rsTiquete = st.executeQuery("SELECT humedadUno,impurezaUno FROM tiquete WHERE idTiquete='" + idTiqueteEspera + "'");
+            rsTiquete = st.executeQuery("SELECT humedadUno,impurezaUno,idAgricultor FROM tiquete WHERE idTiquete='" + idTiqueteEspera + "'");
             while (rsTiquete.next()) {
+
                 Bas.lblHumedad.setText(rsTiquete.getString(1));
                 Bas.lblImpureza.setText(rsTiquete.getString(2));
+                idAgricultor = rsTiquete.getString(3);
+                estadoTiquete="enEspera";
             }
 
             Con.Desconectar();
@@ -210,7 +219,8 @@ public class bascula {
         tbl.llenarTabla(Bas.tblSegundoPesaje, modeloSegundoPesaje, columSegundoPesaje.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosBrutos FROM tiquete,personalexterno,tipodearroz,variedad,lote WHERE tiquete.destare=0.00 AND tiquete.kilosNetos=0.00 AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad and tiquete.idLote=lote.idLote ORDER BY tiquete.idTiquete DESC;");
     }
 
-    public void tablaCampos_SegundoPesaje() {
+    public void tablaCampos_SegundoPesaje(String SegundoPeso) {
+        estado = false;
         int rec = Bas.tblSegundoPesaje.getSelectedRow();
         idTiqueteEspera = Bas.tblSegundoPesaje.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
@@ -221,8 +231,8 @@ public class bascula {
             Con = new Conexion();
             st = Con.conexion.createStatement();
 
-            rsTiquete = st.executeQuery("SELECT CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,vehiculo.placa,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.observacion,humedadUno,impurezaUno FROM tiquete,personalexterno,tipodearroz,variedad,lote,vehiculo WHERE idTiquete='" + idTiqueteEspera +"' AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.idConductor=personalexterno.idPersonalExterno");
-            
+            rsTiquete = st.executeQuery("SELECT CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,vehiculo.placa,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.observacion,humedadUno,impurezaUno,idAgricultor,idConductor FROM tiquete,personalexterno,tipodearroz,variedad,lote,vehiculo WHERE idTiquete='" + idTiqueteEspera + "' AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.idConductor=personalexterno.idPersonalExterno");
+
             while (rsTiquete.next()) {
                 Bas.cmbTipoArroz.setSelectedItem(rsTiquete.getString(1));
                 Bas.cmbLote.setSelectedItem(rsTiquete.getString(2));
@@ -230,7 +240,11 @@ public class bascula {
                 Bas.txtConductor.setText(rsTiquete.getString(4));
                 Bas.txtObservacion.setText(rsTiquete.getString(5));
                 Bas.lblHumedad.setText(rsTiquete.getString(6));
-                Bas.lblImpureza.setText(rsTiquete.getString(7));         
+                Bas.lblImpureza.setText(rsTiquete.getString(7));
+
+                idAgricultor = rsTiquete.getString(8);
+                idConductor = rsTiquete.getString(9);
+                estadoTiquete="segundoPesaje";
             }
 
             Con.Desconectar();
@@ -239,160 +253,16 @@ public class bascula {
         }
     }
 
-    /**
-     * ------------------------------------TIQUETE DE ENTRADA DE MATERIA
-     * PRIMA----------------------------------------------
-     */
-    /*public static void numeroTiquete() {
-        try {
-            Con = new Conexion();
-            st = Con.conexion.createStatement(); //System.out.println("1"); 
-            rsnum = st.executeQuery("SELECT idTiquete FROM tiquete ORDER BY idTiquete ASC");
-            System.out.println(rsnum);
-
-            while (rsnum.next()) {
-                if (rsnum.getString(1) == null) {
-                } else {
-                    String resultado = rsnum.getString(1);
-                    int numero = Integer.parseInt(resultado);
-                    int num2 = numero + 1;
-                    String resul = Integer.toString(num2);
-                    Bas.lblNumeroTiquete.setText(resul);
-                }
-            }
-            Con.Desconectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
-    public void fecha() {
-        Calendar c;
-        c = Calendar.getInstance();
-        int d = c.get(Calendar.DATE), m = 1 + (c.get(Calendar.MONTH)), a = c.get(Calendar.YEAR);
-        Bas.txtFecha.setText(a + "/" + m + "/" + d);
+    public static String fecha() {
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        java.util.Date fecha = new Date();
+        String fec = formato.format(fecha);
+        String fec2 = formato2.format(fecha);
+        Bas.txtFecha.setText(fec);
+        return fec2;
     }
 
-    /*public void cargarLote() {
-        try {
-            Con.Conectar();
-            st = Con.conexion.createStatement();
-<<<<<<< HEAD
-            Bas.cmbLote.removeAllItems();
-            rslote = st.executeQuery("SELECT idLote,nombre FROM lote");
-            while (rslote.next()) {
-                Bas.cmbLote.addItem(rslote.getString(2));
-            }
-            String seleccion = (Bas.cmbLote.getSelectedItem().toString());
-            rslote2 = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + seleccion + "' ");
-            while (rslote2.next()) {
-                String lote = rslote2.getString(1);
-                //System.out.println("lote" + lote);
-=======
-            Bas.cmbZona.removeAllItems();
-            rszona = st.executeQuery("SELECT idLote,nombre FROM lote");
-            while (rszona.next()) {
-                Bas.cmbZona.addItem(rszona.getString(2));
-            }
-            String seleccion = (Bas.cmbZona.getSelectedItem().toString());
-            rszona2 = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + seleccion + "' ");
-            while (rszona2.next()) {
-                String zona = rszona2.getString(1);
-                //System.out.println("zona" + zona);
->>>>>>> c73b50a1cb0570d9eea4dce553e463bd662310a2
-            }
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String getIdLote(String nombre) {
-        try {
-            Con.Conectar();
-            st = Con.conexion.createStatement();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            rslotes = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + nombre + "'");
-            while (rslotes.next()) {
-                return rslotes.getString(1);
-=======
-=======
->>>>>>> c73b50a1cb0570d9eea4dce553e463bd662310a2
-            rszonas = st.executeQuery("SELECT idLote FROM lote WHERE nombre='" + nombre + "'");
-            while (rszonas.next()) {
-                return rszonas.getString(1);
->>>>>>> c73b50a1cb0570d9eea4dce553e463bd662310a2
-            }
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }*/
-
- /*
-    public void cargarTipoArroz() {
-        try {
-            Con.Conectar();
-            st= Con.conexion.createStatement();
-            Bas.cmbTipoArroz.removeAllItems();
-            rstipo= st.executeQuery("SELECT idTipoDeArroz,nombre FROM tipodearroz");
-            while (rstipo.next()) {
-                Bas.cmbTipoArroz.addItem(rstipo.getString(2));
-            }
-            String seleccion = (Bas.cmbTipoArroz.getSelectedItem().toString());
-            rstipo2
-                    = st.executeQuery("SELECT idTipoDeArroz FROM tipodearroz WHERE nombre='"
-                            + seleccion + "' ");
-            while (rstipo2.next()) {
-                String tipo= rstipo2.getString(1); //System.out.println(tipo); 
-            } 
-            Con.Desconectar(); 
-            }
-                catch (Exception e) { e.printStackTrace(); }
-            }
-        }
-    }
-      
-
-    public static String getIdTipo(String nombre) {
-        try {
-            Con.Conectar();
-            st= Con.conexion.createStatement();
-            rstipos = st.executeQuery("SELECT idTipoDeArroz FROM tipodearroz WHERE nombre ='" + nombre + "'  "); 
-            while (rstipos.next()) {
-                return rstipos.getString(1);
-            }
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }*/
-    /**
-     * public void buscarPlaca() { String bus =
-     * JOptionPane.showInputDialog("Ingrese la placa del vehiculo"); boolean
-     * bandera = false; if (bus != null) { try { Con.Conectar(); st =
-     * Con.conexion.createStatement(); rsplaca = st.executeQuery("SELECT placa
-     * FROM vehiculo WHERE placa='" + bus + "'");
-     *
-     * while (rsplaca.next()) { if (rsplaca.getString(1) == null) { } else {
-     * String resultado = rsplaca.getString(1); //
-     * System.out.println(resultado); bandera = true;
-     * Bas.txtPlaca.setText(resultado);
-     *
-     * }
-     * }
-     *
-     * if (bandera == false) { int valor = JOptionPane.showConfirmDialog(null,
-     * "La placa no pertenece a un vehiculo registrado" + "\n Desea registrarlo
-     * ahora?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-     * if (valor == JOptionPane.YES_OPTION) { abrirVehiculo();
-     * Vehiculo.txtPlaca.setText(bus); } else {
-     * JOptionPane.showMessageDialog(null, "Se ha cancelado la operación."); } }
-     * } catch (SQLException e) { e.printStackTrace(); } }
-    }
-     */
     public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
         BusTiquete = new BusquedasTiquete(TiqPrincipal);
         BusTiquete.setVisible(true);
@@ -452,12 +322,12 @@ public class bascula {
 
     public static void crearTiquete() {
         idTiquete = Bas.lblNumeroTiquete.getText();
-        fecha = Bas.txtFecha.getText();
-        agricultor = Bas.txtAgricultor.getText();
+        agricultor = idAgricultor;
+        fecha = fecha();
         lote = String.valueOf(Bascula.cmbLote.getSelectedIndex() + 1);
         tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
         user = login.enviarUsuario();
-        conductor = Bas.txtConductor.getText();
+        conductor = idConductor;
         //conductor = busTiquete.tabla_camposConductor();
         placa = Bas.txtPlaca.getText();
         observacion = Bas.txtObservacion.getText();
@@ -465,9 +335,6 @@ public class bascula {
         destare = Bas.txtPesoFinal.getText();
         kilosNetos = Bas.txtPesoNeto.getText();
 
-        if (kilosBrutos.equals("")) {
-            kilosBrutos = "0.00";
-        }
         if (destare.equals("")) {
             destare = "0.00";
         }
@@ -482,56 +349,35 @@ public class bascula {
         System.out.println("tipo " + tipoArroz);
         System.out.println("user " + user);
         System.out.println("conduc " + conductor);
-        System.out.println("placa " + placa);
         System.out.println("observacion " + observacion);
         System.out.println("kilosBrutoss " + kilosBrutos);
         System.out.println("destare " + destare);
         System.out.println("kilsNetos " + kilosNetos);
 
-        if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("")) {
-            agricultor = obtenerId(agricultor, 1);
-            conductor = obtenerId(conductor, 2);
-            placa = obtenerId(placa, 3);
+        switch (estadoTiquete) {
+            case "enEspera":
+                if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("")) {
+                    placa = ext.getIdPlaca(placa);
+                    System.out.println("placa " + placa);
+                    insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                    limpiarRegistros();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+                }
+            break;
 
-            insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
-            limpiarRegistros();
-        } else {
-            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+            case "segundoPesaje":
+                if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
+                    placa = ext.getIdPlaca(placa);
+                    System.out.println("placa " + placa);
+                    insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                    limpiarRegistros();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+                }
+            break;
         }
-    }
 
-    public static String obtenerId(String nombre, int num) {
-        try {
-            Con = new Conexion();
-            st = Con.conexion.createStatement();
-
-            switch (num) {
-                case 1:
-                    rsagricultor = st.executeQuery("SELECT idPersonalExterno FROM personalExterno WHERE CONCAT(personalexterno.nombres,' ',personalexterno.apellidos) ='" + nombre + "'  ");
-                    while (rsagricultor.next()) {
-                        return rsagricultor.getString(1);
-                    }
-                    break;
-
-                case 2:
-                    rsconductor = st.executeQuery("SELECT idPersonalExterno FROM personalExterno WHERE CONCAT(personalexterno.nombres,' ',personalexterno.apellidos) ='" + nombre + "'  ");
-                    while (rsconductor.next()) {
-                        return rsconductor.getString(1);
-                    }
-                    break;
-
-                case 3:
-                    rsplaca = st.executeQuery("SELECT idVehiculo FROM vehiculo WHERE placa ='" + nombre + "'  ");
-                    while (rsplaca.next()) {
-                        return rsplaca.getString(1);
-                    }
-                    break;
-            }
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos) {

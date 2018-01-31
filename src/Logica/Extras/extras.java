@@ -179,5 +179,38 @@ public class extras {
         }
         return 0;
     }
-   
+    public String getIdPersonalExterno(String cedula,String tipo){
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT idPersonalExterno FROM personalexterno WHERE cedula = '" + cedula + "' AND tipo = '"+tipo+"'");
+            String idPersonalExterno="";
+            while (rs.next()) {
+                idPersonalExterno = rs.getString(1);
+            }
+            Con.Desconectar();
+            return idPersonalExterno;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
+    public String getIdPlaca(String placa){
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT idVehiculo FROM vehiculo WHERE placa ='" + placa + "'  ");
+            String idPlaca="";
+                    while (rs.next()) {
+                        idPlaca=rs.getString(1);
+                    }
+
+            Con.Desconectar();
+            return idPlaca;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

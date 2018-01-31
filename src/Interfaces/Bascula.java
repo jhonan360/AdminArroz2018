@@ -117,6 +117,8 @@ public class Bascula extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel8.setForeground(new java.awt.Color(153, 153, 255));
+
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -254,11 +256,6 @@ public class Bascula extends javax.swing.JFrame {
 
         cmbLote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----SELECCIONE UNO----" }));
         cmbLote.setToolTipText("");
-        cmbLote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbLoteActionPerformed(evt);
-            }
-        });
 
         btnEditarAgricultor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/edit.png"))); // NOI18N
@@ -657,7 +654,7 @@ public class Bascula extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(6, 6, 6)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -666,12 +663,12 @@ public class Bascula extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
@@ -680,12 +677,24 @@ public class Bascula extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
-        jMenu1.setText("Menú");
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
 
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Crear");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(150, 32));
+
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         jMenuItem1.setText("Agricultor");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(150, 22));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -693,6 +702,8 @@ public class Bascula extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnConductor.setText("Conductor");
         mnConductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -702,6 +713,8 @@ public class Bascula extends javax.swing.JFrame {
         jMenu1.add(mnConductor);
         mnConductor.getAccessibleContext().setAccessibleName("mnConductor");
 
+        mnTipo_Arroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTipo_Arroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnTipo_Arroz.setText("Tipo de arroz");
         mnTipo_Arroz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -710,6 +723,8 @@ public class Bascula extends javax.swing.JFrame {
         });
         jMenu1.add(mnTipo_Arroz);
 
+        mnVehiculo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnVehiculo.setText("Vehiculo");
         mnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -719,6 +734,8 @@ public class Bascula extends javax.swing.JFrame {
         jMenu1.add(mnVehiculo);
         mnVehiculo.getAccessibleContext().setAccessibleName("mnVehiculo");
 
+        mnLote.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnLote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnLote.setText("Lote");
         mnLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -729,9 +746,16 @@ public class Bascula extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/file.png"))); // NOI18N
         jMenu3.setText("Tiquetes");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(150, 32));
 
-        mnTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteMateriaPrima.setText("Materia Prima");
+        mnTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(150, 22));
         mnTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTiqueteMateriaPrimaActionPerformed(evt);
@@ -739,7 +763,11 @@ public class Bascula extends javax.swing.JFrame {
         });
         jMenu3.add(mnTiqueteMateriaPrima);
 
-        mnTiqueteVarios.setText("Tiquete Varios");
+        mnTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteVarios.setText("Varios");
+        mnTiqueteVarios.setPreferredSize(new java.awt.Dimension(150, 22));
+        mnTiqueteVarios.setRequestFocusEnabled(false);
         mnTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTiqueteVariosActionPerformed(evt);
@@ -749,9 +777,16 @@ public class Bascula extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(150, 32));
 
-        menuSalir.setText("Salir");
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(150, 22));
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSalirActionPerformed(evt);
@@ -791,11 +826,6 @@ public class Bascula extends javax.swing.JFrame {
         bascula.abrirConductor();
     }//GEN-LAST:event_mnConductorActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        bascula.abrirAgricultor();
-        setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         // TODO add your handling code here:
         bascula.salir();
@@ -832,8 +862,7 @@ public class Bascula extends javax.swing.JFrame {
 
     private void btnEditarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAgricultorActionPerformed
         //bascula.abrirBusquedasTiquete(1, "TiqPrincipal");
-
-        String texto = txtAgricultor.getText();
+        String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
             int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Agricultor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
@@ -848,33 +877,41 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarAgricultorActionPerformed
 
     private void btnBuscarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConductorActionPerformed
-        String texto = txtConductor.getText();
+        String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
-            int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Conductor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (valor == JOptionPane.YES_OPTION) {
-                bascula.abrirBusquedasTiquete(2, "TiqPrincipal");
+            String estado = txtConductor.getText();
+            if (!estado.equals("")) {
+                int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Conductor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (valor == JOptionPane.YES_OPTION) {
+                    bascula.abrirBusquedasTiquete(2, "TiqPrincipal");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                bascula.abrirBusquedasTiquete(2, "TiqPrincipal");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
-
         }
     }//GEN-LAST:event_btnBuscarConductorActionPerformed
 
     private void btnBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPlacaActionPerformed
         //bascula.buscarPlaca();
-        String texto = txtPlaca.getText();
+        String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
-            int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar la placa del Vehiculo?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (valor == JOptionPane.YES_OPTION) {
-                bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
+            String estado = txtPlaca.getText();
+            if (!estado.equals("")) {
+                int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar la placa del Vehiculo?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (valor == JOptionPane.YES_OPTION) {
+                    bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
-
         }
     }//GEN-LAST:event_btnBuscarPlacaActionPerformed
 
@@ -908,22 +945,20 @@ public class Bascula extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoArrozActionPerformed
 
-
-
-    private void cmbLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbLoteActionPerformed
-
-
     private void tblSegundoPesajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSegundoPesajeMouseClicked
         bascula.limpiarRegistros();
-        bascula.tablaCampos_SegundoPesaje();
+        bascula.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeMouseClicked
 
     private void tblSegundoPesajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSegundoPesajeKeyReleased
         bascula.limpiarRegistros();
-        bascula.tablaCampos_SegundoPesaje();
+        bascula.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeKeyReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        bascula.abrirAgricultor();
+        setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1005,7 +1040,7 @@ public class Bascula extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
