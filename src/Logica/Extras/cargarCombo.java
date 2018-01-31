@@ -15,8 +15,8 @@ import javax.swing.JComboBox;
 public class cargarCombo {
     
     public static Conexion Con;
-    public static Statement st, st1,st2,st3,st4,st5,st6;
-    public static ResultSet rs, rs1,rs2,rs3,rs4,rs5,rs6;
+    public static Statement st, st1,st2,st3,st4,st5,st6,st7;
+    public static ResultSet rs, rs1,rs2,rs3,rs4,rs5,rs6,rs7;
     public static String idDepartamento;// tener encuenta  
     
     public boolean CargarDepa(JComboBox combo){
@@ -133,7 +133,7 @@ public class cargarCombo {
             e.printStackTrace();
         }
     }
-    
+
     public void lote(JComboBox combo){
         try {
             Con = new Conexion();
@@ -164,7 +164,19 @@ public class cargarCombo {
         }
     }
     
-    
-    
-    
+        
+    public void variedad(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st7 = Con.conexion.createStatement();
+            rs7=st7.executeQuery("SELECT nombre FROM variedad");
+            combo.removeAllItems();
+            while(rs7.next()){
+                combo.addItem(rs7.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

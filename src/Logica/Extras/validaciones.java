@@ -94,8 +94,7 @@ public class validaciones {
     }
     
     public boolean ValidarContrasena(String contrasena){
-        //String match="[A-Za-z][0-9]{7}";
-        String match="^[a-zA-Z0-9]{7,20}";
+        String match="^(?=\\w*\\d)(?=\\w*[a-z])\\S{7,16}$";
         boolean a=contrasena.matches(match);
         if (!contrasena.matches(match)) {
             return false;
