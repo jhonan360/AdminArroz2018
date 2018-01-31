@@ -87,7 +87,7 @@ public class laboratorio {
         };
         tbl = new tablas();
         tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete,idAgricultor,fecha from tiquete where idTiquete not in (select idTiquete from laboratorio group by idTiquete)");
-
+                                                                                                                                                                                   
     }
      public void estado_tiquete() {
         try {
