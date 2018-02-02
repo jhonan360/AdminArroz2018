@@ -17,6 +17,7 @@ import Interfaces.Vehiculo;
 import Interfaces.BusquedasTiquete;
 import Interfaces.TiqueteVarios;
 import Interfaces.VerTiquetePrincipal;
+import Interfaces.VerTiqueteVarios;
 import Logica.Extras.extras;
 import Logica.Extras.login;
 import Logica.Extras.tablas;
@@ -38,6 +39,7 @@ public class bascula {
     public static Bascula Bas;
     public static TiqueteVarios TiqVarios;
     public static VerTiquetePrincipal VerTiqPrincipal;
+    public static VerTiqueteVarios VerTiqVarios;
     public static Tipo_Arroz Arroz;
     public static Conductor Conductor;
     public static Agricultor Agricultor;
@@ -150,7 +152,12 @@ public class bascula {
     }
     
     public static void abrirVerTiqueteVarios() {
-        
+        if (!(VerTiqVarios instanceof VerTiqueteVarios)) {
+            VerTiqVarios = new VerTiqueteVarios();
+            VerTiqVarios.setVisible(true);
+        } else {
+            VerTiqVarios.setVisible(true);
+        }
     }
 
     public static void salir() {

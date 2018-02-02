@@ -1004,7 +1004,7 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
-        // TODO add your handling code here:
+        bascula.abrirVerTiqueteVarios();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
