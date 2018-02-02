@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Interfaces.Gerente;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -22,7 +24,7 @@ public class gerente {
     public static Conexion Con;
     public static ResultSet rs;
     public static Statement st;
-    public DefaultTableModel modelo;
+    public DefaultTableModel modelo,modelobuscar;
     public static Gerente Ger;
     public String columnas[] = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
     public tablas tbl;
@@ -70,10 +72,11 @@ public class gerente {
         Ger.TxtDestare.setText("");
         Ger.TxtKilosNetos.setText("");
         Ger.TxtObservacion.setText("");
-        Ger.TxtEmpaque.setText("");
+        Ger.TxtEmpaque.setText(""); 
         Ger.TxtHumedad.setText("");
         Ger.TxtImpureza.setText("");
         Ger.TxtValor.setText("");
+        
         crearModeloTabla();
     }
 
@@ -99,6 +102,42 @@ public class gerente {
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void BuscarTiquetes(){
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        Date Fechainicial = Ger.jDateinicial.getDate();
+        String FechaIni = formato.format(Fechainicial);
+        Date FechaFinal = Ger.jDatefinal.getDate();
+        String FechaFin = formato.format(FechaFinal);
+        String cedula = Ger.cedula.getText();
+        
+        
+        modelobuscar = new DefaultTableModel(null, columnas) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+
+        if (Ger.chfecha.isSelected() == true && Ger.chcedula.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("")) {
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' AND tiquete.fecha > '"+FechaIni+"' AND tiquete.fecha <'"+FechaFin+"'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (Ger.chfecha.isSelected() == true) {
+            if (!FechaIni.equals("") &&!FechaFin.equals("")) {
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz AND tiquete.fecha > '"+FechaIni+"' AND tiquete.fecha <'"+FechaFin+"'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        }else if (Ger.chcedula.isSelected() == true) {
+            if (!cedula.equals("")) {
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz personalexterno.cedula = '" + cedula + "'");
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
         }
     }
 }
