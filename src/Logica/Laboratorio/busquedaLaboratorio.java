@@ -101,6 +101,7 @@ public class busquedaLaboratorio {
         SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
         Date Fechainicial = BusT.jDateinicial.getDate();
         String FechaIni = formato.format(Fechainicial);
+        
         Date FechaFinal = BusT.jDatefinal.getDate();
         String FechaFin = formato.format(FechaFinal);
         //Date date = BusT.jDatefinal.getDate();

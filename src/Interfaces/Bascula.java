@@ -112,6 +112,9 @@ public class Bascula extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnTiqueteVarios = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -687,14 +690,14 @@ public class Bascula extends javax.swing.JFrame {
 
         jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
-        jMenu1.setText("Crear");
+        jMenu1.setText("Opciones");
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(150, 32));
+        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
 
         jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        jMenuItem1.setText("Agricultor");
-        jMenuItem1.setPreferredSize(new java.awt.Dimension(150, 22));
+        jMenuItem1.setText("Crear Agricultor");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(175, 22));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -704,7 +707,8 @@ public class Bascula extends javax.swing.JFrame {
 
         mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnConductor.setText("Conductor");
+        mnConductor.setText("Crear Conductor");
+        mnConductor.setPreferredSize(new java.awt.Dimension(175, 22));
         mnConductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnConductorActionPerformed(evt);
@@ -715,7 +719,8 @@ public class Bascula extends javax.swing.JFrame {
 
         mnTipo_Arroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnTipo_Arroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnTipo_Arroz.setText("Tipo de arroz");
+        mnTipo_Arroz.setText("Crear Tipo de arroz");
+        mnTipo_Arroz.setPreferredSize(new java.awt.Dimension(175, 22));
         mnTipo_Arroz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTipo_ArrozActionPerformed(evt);
@@ -725,7 +730,8 @@ public class Bascula extends javax.swing.JFrame {
 
         mnVehiculo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnVehiculo.setText("Vehiculo");
+        mnVehiculo.setText("Crear Vehiculo");
+        mnVehiculo.setPreferredSize(new java.awt.Dimension(175, 22));
         mnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnVehiculoActionPerformed(evt);
@@ -736,7 +742,8 @@ public class Bascula extends javax.swing.JFrame {
 
         mnLote.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnLote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnLote.setText("Lote");
+        mnLote.setText("Crear Lote");
+        mnLote.setPreferredSize(new java.awt.Dimension(175, 22));
         mnLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnLoteActionPerformed(evt);
@@ -748,14 +755,14 @@ public class Bascula extends javax.swing.JFrame {
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/file.png"))); // NOI18N
-        jMenu3.setText("Tiquetes");
+        jMenu3.setText("Crear Tiquete");
         jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu3.setPreferredSize(new java.awt.Dimension(150, 32));
+        jMenu3.setPreferredSize(new java.awt.Dimension(195, 32));
 
         mnTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnTiqueteMateriaPrima.setText("Materia Prima");
-        mnTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(150, 22));
+        mnTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
         mnTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTiqueteMateriaPrimaActionPerformed(evt);
@@ -765,8 +772,9 @@ public class Bascula extends javax.swing.JFrame {
 
         mnTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnTiqueteVarios.setText("Varios");
-        mnTiqueteVarios.setPreferredSize(new java.awt.Dimension(150, 22));
+        mnTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnTiqueteVarios.setToolTipText("");
+        mnTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
         mnTiqueteVarios.setRequestFocusEnabled(false);
         mnTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -777,16 +785,48 @@ public class Bascula extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Ver Tiquete");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteMateriaPrima);
+
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
+        jMenuBar1.add(jMenu4);
+
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         jMenu2.setText("Cuenta");
         jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu2.setPreferredSize(new java.awt.Dimension(150, 32));
+        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
 
         menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         menuSalir.setText("Cerrar Sesión");
-        menuSalir.setPreferredSize(new java.awt.Dimension(150, 22));
+        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSalirActionPerformed(evt);
@@ -872,7 +912,6 @@ public class Bascula extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
-
         }
     }//GEN-LAST:event_btnEditarAgricultorActionPerformed
 
@@ -957,8 +996,16 @@ public class Bascula extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         bascula.abrirAgricultor();
-        setVisible(false);
+        //setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1048,6 +1095,7 @@ public class Bascula extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
@@ -1072,6 +1120,8 @@ public class Bascula extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
     public static javax.swing.JMenuItem mnVehiculo;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblEspera;
     public static javax.swing.JTable tblSegundoPesaje;
     public static javax.swing.JTextField txtAgricultor;

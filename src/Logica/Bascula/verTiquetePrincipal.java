@@ -61,21 +61,27 @@ public class verTiquetePrincipal {
     }
 
     public void buscar() {
-        String select = "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo";
+        //String select = "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo";
+        String fechaI, fechaF;
+        Date FechaInicial, FechaFinal;
+
+        SimpleDateFormat formatoI = new SimpleDateFormat("yyy-MM-dd 00:00:00");
+        SimpleDateFormat formatoF = new SimpleDateFormat("yyy-MM-dd 23:59:59");
+        FechaInicial = VerTiqPrincipal.dcFechaInicial.getDate();
+        FechaFinal = VerTiqPrincipal.dcFechaFinal.getDate();
+
+        if (FechaInicial == null && FechaFinal == null) {
+            fechaI = "";
+            fechaF = "";
+        } else {
+            fechaI = formatoI.format(FechaInicial);
+            fechaF = formatoF.format(FechaFinal);
+        }
+
         String tiquete = VerTiqPrincipal.txtTiquete.getText();
         String agricultor = VerTiqPrincipal.txtAgricultor.getText();
-        
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
-        Date FechaInicial = VerTiqPrincipal.dcFechaInicial.getDate();
-        String fechaI=formato.format(FechaInicial);
-        
-        Date FechaFinal = VerTiqPrincipal.dcFechaFinal.getDate();
-        String fechaF=formato.format(FechaFinal);
-        String idAgricultor = ext.getIdPersonalExterno(agricultor,"agricultor");
+        String idAgricultor = ext.getIdPersonalExterno(agricultor, "agricultor");
 
-         System.out.println(fechaI);
-         System.out.println(fechaF);
-        
         modelVerTiqPrincipal = new DefaultTableModel(null, columnas) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
@@ -83,46 +89,46 @@ public class verTiquetePrincipal {
         };
         tbl = new tablas();
 
-       if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chAgricultor.isSelected() == true && VerTiqPrincipal.chFechaInicial.isSelected() == true && VerTiqPrincipal.chFechaFinal.isSelected() == true) {
-            if (!tiquete.equals("") && !agricultor.equals("") && !fechaI.equals("")&& !fechaF.equals("")) {
+        if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chAgricultor.isSelected() == true && VerTiqPrincipal.chFecha.isSelected()) {
+            if (!tiquete.equals("") && !idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 //tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
-                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='"+tiquete+"' AND tiquete.idAgricultor='"+idAgricultor+"' AND fecha >= '"+fechaI+"' AND fecha<='"+fechaF+"' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-       /** } else if (VerTiqPrincipal.chCedula.isSelected() == true && VerTiqPrincipal.chApellidos.isSelected() == true) {
-            if (!cedula.equals("") && !apellidos.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and personalexterno.cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chAgricultor.isSelected() == true) {
+            if (!tiquete.equals("") && !idAgricultor.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (VerTiqPrincipal.chCedula.isSelected() == true && VerTiqPrincipal.chCiudad.isSelected() == true) {
-            if (!cedula.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and  and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chFecha.isSelected()) {
+            if (!tiquete.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (VerTiqPrincipal.chApellidos.isSelected() == true && VerTiqPrincipal.chCiudad.isSelected() == true) {
-            if (!apellidos.equals("") && !ciudad.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chAgricultor.isSelected() == true && VerTiqPrincipal.chFecha.isSelected() == true) {
+            if (!idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE tiquete.idAgricultor='" + idAgricultor + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (VerTiqPrincipal.chCedula.isSelected() == true) {
-            if (!cedula.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chTiquete.isSelected() == true) {
+            if (!tiquete.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (VerTiqPrincipal.chApellidos.isSelected() == true) {
-            if (!apellidos.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.apellidos like '%" + apellidos + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chAgricultor.isSelected() == true) {
+            if (!idAgricultor.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE tiquete.idAgricultor='" + idAgricultor + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        } else if (VerTiqPrincipal.chCiudad.isSelected() == true) {
-            if (!ciudad.equals("")) {
-                tbl.llenarTabla(VerTiqPrincipal.jTable1, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
+        } else if (VerTiqPrincipal.chFecha.isSelected() == true) {
+            if (!fechaI.equals("") && !fechaF.equals("")) {
+                tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
@@ -130,9 +136,5 @@ public class verTiquetePrincipal {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkbox();*/
-       }
-        
     }
-    
-
 }
