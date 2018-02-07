@@ -18,6 +18,7 @@ import Logica.Extras.extras;
 import static Logica.Laboratorio.laboratorio_tiquete_inicial.BusTiquete;
 import java.text.DecimalFormat;
 import java.sql.PreparedStatement;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,13 +40,16 @@ public class liquidacion {
     public String idAgricultor;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
     long kiloNetos, totalKilosCompra, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar;
-    DecimalFormat ft = new DecimalFormat("###,###.##");
+    DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+    DecimalFormat ft;
 
     public liquidacion() {
         ext = new extras();
         tbl = new tablas();
+        simbolo.setDecimalSeparator('.');
+        simbolo.setGroupingSeparator(',');
+        ft = new DecimalFormat("###,###.##", simbolo);
         limpiar();
-        cargarValorInicio();
     }
 
     public static void abrirBusquedasTiquete(String TiqLiqui) {
@@ -56,7 +60,6 @@ public class liquidacion {
         BusTiquete.panel.setEnabledAt(1, false);
         BusTiquete.panel.setEnabledAt(2, false);;
         BusTiquete.panel.setSelectedIndex(0);
-
     }
 
     public void crearModelo() {
@@ -67,6 +70,7 @@ public class liquidacion {
                 }
             };
             tbl.llenarTabla(Liqui.tblSeleccionTiquete, modeloSeleccionTiquete, columnasSeleccionTiquete.length, "SELECT tiquete.idTiquete,tiquete.fecha,CONCAT(personalexterno.apellidos,' ',personalexterno.nombres),detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion,personalexterno WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.idAgricultor='" + idAgricultor + "'");
+            completarTablaTiquete();
             modeloSeleccionLiquidacion = new DefaultTableModel(null, columnasLiquidacion) {
                 public boolean isCellEditable(int fila, int columna) {
                     return false;
@@ -139,6 +143,15 @@ public class liquidacion {
 
     public void completarTablaLiquidacion() {
         int row = Liqui.tblSeleccionLiquidacion.getRowCount();
+        if (Liqui.txtDesAnticipo.getText().equals("")) {
+            this.desAnticipo = 0;
+        } else if (!Liqui.txtDesAnticipo.getText().contains(",")) {
+            this.desAnticipo = (long) Double.parseDouble(Liqui.txtDesAnticipo.getText());
+            Liqui.txtDesAnticipo.setText(ft.format(desAnticipo));
+        } else {
+            desAnticipo = (long) Double.parseDouble(Liqui.txtDesAnticipo.getText().replace(",", ""));
+            Liquidacion.txtDesAnticipo.setText(ft.format(desAnticipo));
+        }
         if (row > 0) {
             humedadIdeal = Liqui.txtHumedadIdeal.getText();
             impurezaIdeal = Liqui.txtImpurezaIdeal.getText();
@@ -149,7 +162,6 @@ public class liquidacion {
             subTotal = 0;
             valorImpuesto = 0;
             valorFomArrocero = 0;
-            desAnticipo = 0;
             netoPagar = 0;
             try {
                 Con = new Conexion();
@@ -165,7 +177,7 @@ public class liquidacion {
                         String valorCarga = rs.getString(4);
                         String kilosNetos = rs.getString(5);
                         Vector[0] = idTiquete;
-                        Vector[1] = kilosNetos;
+                        Vector[1] = ft.format(Double.parseDouble(kilosNetos));
                         Vector[2] = humedad;
                         Vector[3] = impureza;
                         double castigoHumedad;
@@ -206,11 +218,6 @@ public class liquidacion {
                 double fomArroz = (Double.parseDouble(FomArroz) / 100);
                 this.valorImpuesto = (long) ((long) this.subTotal * impuesto);
                 this.valorFomArrocero = (long) (this.subTotal * fomArroz);
-                if (Liqui.txtDesAnticipo.getText().equals("")) {
-                    this.desAnticipo = 0;
-                } else {
-                    this.desAnticipo = (long) Double.parseDouble(Liqui.txtDesAnticipo.getText());
-                }
                 this.netoPagar = (long) (subTotal - this.valorFomArrocero - this.valorImpuesto - this.desAnticipo);
                 Liqui.txtTotalKilosNeto.setText(String.valueOf(ft.format(this.kiloNetos)));
                 Liqui.txtTotalKilosCompra.setText(String.valueOf(ft.format(this.totalKilosCompra)));
@@ -238,8 +245,9 @@ public class liquidacion {
                         String Vector[] = new String[columnasSeleccionTiquete.length];
                         Vector[0] = rs.getString(1);
                         Vector[1] = rs.getString(2);
-                        Vector[2] = ft.format(rs.getString(3));
-                        Vector[3] = ft.format(rs.getString(4));
+                        Vector[2] = rs.getString(3);
+                        Vector[3] = ft.format(Double.parseDouble(rs.getString(4)));
+                        Vector[4] = ft.format(Double.parseDouble(rs.getString(5)));
                         for (int j = 0; j < columnasSeleccionTiquete.length; j++) {
                             Liqui.tblSeleccionTiquete.setValueAt(Vector[j], i, j);
                         }
@@ -307,17 +315,19 @@ public class liquidacion {
             if (Liqui.tblSeleccionLiquidacion.getRowCount() > 0) {
                 insertarLiquidacion();
                 insertarDetalleLiquidacion();
+                limpiar();
             } else {
                 JOptionPane.showMessageDialog(null, "No hay tiquetes para liquidar");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+            JOptionPane.showMessageDialog(null, "Ninguno de los campos obligatorios puede estar vacio");
         }
     }
 
     public void insertarLiquidacion() {
         try {
-            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','" + netoPagar + "'))", PreparedStatement.RETURN_GENERATED_KEYS);
+            Con = new Conexion();
+            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.execute();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -336,15 +346,15 @@ public class liquidacion {
             st = Con.conexion.createStatement();
             for (int i = 0; i < row; i++) {
                 String idTiquete = Liqui.tblSeleccionLiquidacion.getValueAt(i, 0).toString();
-                String kilosNetos = Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString();
+                String kilosNetos = Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString().replace(",", "");
                 String humedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 2).toString();
                 String impureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 3).toString();
                 String castigoHumedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 4).toString();
                 String castigoImpureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 5).toString();
-                String pesoCompra = Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString();
-                String valorKilo = Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString();
-                String valorTotal = Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString();
-                st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "'humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+                String pesoCompra = Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString().replace(",", "");
+                String valorKilo = Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString().replace(",", "");
+                String valorTotal = Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString().replace(",", "");
+                st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
                 if (i == row - 1) {
                     JOptionPane.showMessageDialog(null, "Creación exitosa");
                 }
@@ -378,15 +388,21 @@ public class liquidacion {
         Liqui.txtSubTotal.setText("");
         Liqui.txtTotalKilosCompra.setText("");
         Liqui.txtTotalKilosNeto.setText("");
+        getImpuesto();
+        cargarValorInicio();
         modeloSeleccionTiquete = new DefaultTableModel(null, columnasSeleccionTiquete) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
+        Liqui.tblSeleccionTiquete.setModel(modeloSeleccionTiquete);
         modeloSeleccionLiquidacion = new DefaultTableModel(null, columnasLiquidacion) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
+        Liqui.tblSeleccionLiquidacion.setModel(modeloSeleccionLiquidacion);
     }
 }
+// select busqueda agricultor
+//SELECT cedula,nombres,apellidos,direccion,municipios.nombre FROM personalexterno,municipios,tiquete,detalleliquidacion WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor' GROUP BY personalexterno.cedula

@@ -1227,15 +1227,16 @@ INSERT INTO `lote` (`idLote`, `nombre`, `descripcion`, `idMunicipio`) VALUES
 (10,'La cajita', 'Alto indice de fosoforo', 1024),
 (11,'Baja', 'parte baja del Espinal', 1021);
 
-INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES 
-(1, 'x', '1033', '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'), 
-(2, 'b', '5', '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
-(3, 'l', '639', '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211');
 
 INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
 ('b', 1, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
 ('l', 2, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
 ('x', 6, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo');
+
+INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES 
+(1, 'x', '1033', '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'), 
+(2, 'b', '5', '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
+(3, 'l', '639', '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211');
 
 INSERT INTO `personalexterno`(`idPersonalExterno`, `idMunicipio`, `tipo`, `cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `telefono2`, `telefono3`) VALUES
 (1,	1021,	'agricultor',	'1105689625', 'Jose Hernanda', 'Orjuela Vasquez', 'La caimanera', '3145433423', '', ''),
@@ -1312,7 +1313,10 @@ INSERT INTO `entradas` (`idEntradas`, `idTiqueteVarios`, `cantidad`, `descripcio
 
 INSERT INTO `parametros` (`idParametros`, `nombre`, `valor`) VALUES 
 (1, 'Retefuente', '1.50'),
-(2, 'Comisión Bolsa', '0.208948’),
-(3, 'Fomento Arrocero', '0.50’),
+(2, 'Comisión Bolsa', '0.208948'),
+(3, 'Fomento Arrocero', '0.50'),
 (4, 'Humedad', '24'),
 (5, 'Impureza', '3');
+INSERT INTO `bateria` (`idBateria`, `nombre`) VALUES 
+(1, 'A'), 
+(2, 'B');

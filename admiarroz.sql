@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-01-2018 a las 16:27:42
+-- Tiempo de generación: 07-02-2018 a las 16:49:20
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.30
 
@@ -90,8 +90,8 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombre`) VALUES
 
 CREATE TABLE `detalleliquidacion` (
   `idDetalleLiquidacion` int(11) NOT NULL,
-  `idliquidaciones` int(11) DEFAULT NULL,
   `idTiquete` int(11) NOT NULL,
+  `idliquidaciones` int(11) DEFAULT NULL,
   `humedad` decimal(5,2) DEFAULT NULL,
   `impureza` decimal(5,2) DEFAULT NULL,
   `castigoHumedad` decimal(4,3) DEFAULT NULL,
@@ -227,17 +227,17 @@ CREATE TABLE `liquidaciones` (
   `fecha` datetime NOT NULL,
   `humedadIdeal` decimal(5,2) NOT NULL,
   `impurezaIdeal` decimal(5,2) NOT NULL,
-  `kilosNeto` decimal(7,2) DEFAULT NULL,
-  `kilosCompra` decimal(7,2) DEFAULT NULL,
-  `subTotal` decimal(14,2) DEFAULT NULL,
+  `kilosNeto` decimal(7,2) NOT NULL,
+  `kilosCompra` decimal(7,2) NOT NULL,
+  `subTotal` decimal(14,2) NOT NULL,
   `fomArrocero` decimal(3,2) NOT NULL,
-  `valorFomArrocero` decimal(14,2) DEFAULT NULL,
+  `valorFomArrocero` decimal(14,2) NOT NULL,
   `impuesto` enum('retefuente','comision bolsa') NOT NULL,
   `porcenImpuesto` decimal(9,6) NOT NULL,
-  `valorImpuesto` decimal(14,2) DEFAULT NULL,
-  `descuentoAnticipo` decimal(14,2) DEFAULT NULL,
+  `valorImpuesto` decimal(14,2) NOT NULL,
+  `descuentoAnticipo` decimal(14,2) NOT NULL,
   `estado` enum('en proceso','aprobado') NOT NULL,
-  `netoPagar` decimal(14,2) DEFAULT NULL
+  `netoPagar` decimal(14,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1503,6 +1503,17 @@ CREATE TABLE `parametros` (
   `valor` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `parametros`
+--
+
+INSERT INTO `parametros` (`idParametros`, `nombre`, `valor`) VALUES
+(1, 'Retefuente', '1.50'),
+(2, 'Comisión Bolsa', '0.208948'),
+(3, 'Fomento Arrocero', '0.50'),
+(4, 'Humedad', '24'),
+(5, 'Impureza', '3');
+
 -- --------------------------------------------------------
 
 --
@@ -1677,9 +1688,9 @@ CREATE TABLE `tiqueteVarios` (
   `fecha` datetime NOT NULL,
   `destino` text,
   `observacion` text,
-  `kilosBrutos` decimal(5,2) NOT NULL,
-  `destare` decimal(5,2) DEFAULT NULL,
-  `kilosNetos` decimal(5,2) DEFAULT NULL
+  `kilosBrutos` decimal(7,2) NOT NULL,
+  `destare` decimal(7,2) DEFAULT NULL,
+  `kilosNetos` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1738,6 +1749,15 @@ CREATE TABLE `vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `vehiculo`
+--
+
+INSERT INTO `vehiculo` (`idVehiculo`, `idMarca`, `modelo`, `placa`, `color`) VALUES
+(1, 5, '2012', 'ZHX01C', 'AZUL'),
+(2, 6, '2015', 'KSA13B', 'NEGRO'),
+(3, 2, '2000', 'KMW12G', 'ROJO');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -1758,6 +1778,7 @@ ALTER TABLE `departamentos`
 --
 ALTER TABLE `detalleliquidacion`
   ADD PRIMARY KEY (`idDetalleLiquidacion`),
+  ADD UNIQUE KEY `idTiquete_UNIQUE` (`idTiquete`),
   ADD KEY `fk_liquidaciones_has_tiquete_tiquete1_idx` (`idTiquete`),
   ADD KEY `fk_liquidaciones_has_tiquete_liquidaciones1_idx` (`idliquidaciones`);
 
@@ -2024,7 +2045,7 @@ ALTER TABLE `muetraestufa`
 -- AUTO_INCREMENT de la tabla `parametros`
 --
 ALTER TABLE `parametros`
-  MODIFY `idParametros` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idParametros` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `personalexterno`
 --
@@ -2059,7 +2080,7 @@ ALTER TABLE `tipodearroz`
 -- AUTO_INCREMENT de la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tiqueteensilos`
 --
@@ -2079,7 +2100,7 @@ ALTER TABLE `variedad`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `idVehiculo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -2183,12 +2204,12 @@ ALTER TABLE `tipodearroz`
 -- Filtros para la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_personalExterno2` FOREIGN KEY (`idAgricultor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_tipodearroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiquete_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiquete_personalExterno2` FOREIGN KEY (`idAgricultor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiquete_tipodearroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tiqueteensilos`
@@ -2201,9 +2222,9 @@ ALTER TABLE `tiqueteensilos`
 -- Filtros para la tabla `tiqueteVarios`
 --
 ALTER TABLE `tiqueteVarios`
-  ADD CONSTRAINT `fk_tiqueteVarios_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiqueteVarios_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tiqueteVarios_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tiqueteVarios_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiqueteVarios_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tiqueteVarios_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`

@@ -19,6 +19,7 @@ import Logica.Extras.validaciones;
 import Logica.Extras.extras;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import Interfaces.Liquidacion;
 
 /**
  *
@@ -39,6 +40,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     public static Conexion Con;
     public static ResultSet rsconsecutivo;
     public static extras ext;
+    public static Liquidacion Liqui;
 
     /**
      * Creates new form BusquedasTiquete
@@ -915,7 +917,13 @@ public class BusquedasTiquete extends javax.swing.JFrame {
                     String idAgri=ext.getIdPersonalExterno((jTable3.getValueAt(rec,0).toString()), "agricultor");
                     tiqLab.ccAgricultor=idAgri;
                     dispose();
-                    break;                    
+                    break;      
+                    case "TiqLiqui":
+                    Liqui.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                    Liqui.liqui.idAgricultor=ext.getIdPersonalExterno((jTable3.getValueAt(rec,0).toString()), "agricultor");
+                    Liqui.liqui.crearModelo();
+                    dispose();
+                    break; 
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
