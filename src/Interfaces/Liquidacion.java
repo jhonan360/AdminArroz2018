@@ -5,7 +5,9 @@
  */
 package Interfaces;
 
+import Logica.Extras.validaciones;
 import javax.swing.JOptionPane;
+import Logica.Liquidacion.liquidacion;
 
 /**
  *
@@ -13,11 +15,20 @@ import javax.swing.JOptionPane;
  */
 public class Liquidacion extends javax.swing.JFrame {
 
+    public static liquidacion liqui;
+    public static validaciones vali;
+
     /**
      * Creates new form Liquidacion
      */
     public Liquidacion() {
         initComponents();
+        liqui = new liquidacion();
+        vali = new validaciones();
+        vali.DECIMAL(txtHumedadIdeal);
+        vali.DECIMAL(txtImpurezaIdeal);
+        vali.DECIMAL(txtFomArroz);
+        vali.DECIMAL(txtImpuesto);
     }
 
     /**
@@ -40,8 +51,11 @@ public class Liquidacion extends javax.swing.JFrame {
         txtFomArroz = new javax.swing.JTextField();
         txtImpuesto = new javax.swing.JTextField();
         cmbImpuesto = new javax.swing.JComboBox<>();
+        lblDesAnticipo = new javax.swing.JLabel();
+        txtDesAnticipo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSeleccionTiquete = new javax.swing.JTable();
@@ -56,6 +70,20 @@ public class Liquidacion extends javax.swing.JFrame {
         lblAnuncio = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        lblTotalKilosNetos = new javax.swing.JLabel();
+        lblTotalKilosCompra = new javax.swing.JLabel();
+        lblSubTotal = new javax.swing.JLabel();
+        lblImpuestoLiqui = new javax.swing.JLabel();
+        lblFomArrozLiqui = new javax.swing.JLabel();
+        lblNetoPagar = new javax.swing.JLabel();
+        txtTotalKilosNeto = new javax.swing.JTextField();
+        txtTotalKilosCompra = new javax.swing.JTextField();
+        txtSubTotal = new javax.swing.JTextField();
+        txtFomArroceroLiqui = new javax.swing.JTextField();
+        txtImpuestoLiqui = new javax.swing.JTextField();
+        txtNetoPagar = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -82,23 +110,57 @@ public class Liquidacion extends javax.swing.JFrame {
         lblImpuesto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblImpuesto.setText("% Impuesto:");
 
-        txtHumedadIdeal.setEditable(false);
+        txtHumedadIdeal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtHumedadIdealFocusLost(evt);
+            }
+        });
 
-        txtImpurezaIdeal.setEditable(false);
+        txtImpurezaIdeal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtImpurezaIdealFocusLost(evt);
+            }
+        });
 
-        txtFomArroz.setEditable(false);
+        txtFomArroz.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFomArrozFocusLost(evt);
+            }
+        });
 
-        txtImpuesto.setEditable(false);
+        txtImpuesto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtImpuestoFocusLost(evt);
+            }
+        });
 
-        cmbImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbImpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Retefuente", "Comisión Bolsa" }));
+        cmbImpuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbImpuestoItemStateChanged(evt);
+            }
+        });
+
+        lblDesAnticipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDesAnticipo.setText("Descuento Anticipo:");
+
+        txtDesAnticipo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDesAnticipoFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDesAnticipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDesAnticipo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblImpuesto)
                         .addGap(54, 54, 54)
@@ -119,23 +181,23 @@ public class Liquidacion extends javax.swing.JFrame {
                         .addComponent(lblTipoImpuesto)
                         .addGap(18, 18, 18)
                         .addComponent(cmbImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHumedadIdeal)
-                    .addComponent(txtHumedadIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtHumedadIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImpuerzaIdeal)
-                    .addComponent(txtImpurezaIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImpurezaIdeal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFomArroz)
-                    .addComponent(txtFomArroz, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFomArroz, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipoImpuesto)
@@ -143,8 +205,12 @@ public class Liquidacion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImpuesto)
-                    .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDesAnticipo)
+                    .addComponent(txtDesAnticipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -152,38 +218,43 @@ public class Liquidacion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel2.setText("Crear Liquidación");
 
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/liquidacion.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(422, 422, 422)
+                .addGap(425, 425, 425)
                 .addComponent(jLabel2)
+                .addGap(33, 33, 33)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel2)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblSeleccionTiquete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "N", "Agricultor", "Valor Carga", "Kilos Netos"
+                "N", "Fecha", "Agricultor", "Valor Carga", "Kilos Netos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -191,23 +262,21 @@ public class Liquidacion extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblSeleccionTiquete);
+        if (tblSeleccionTiquete.getColumnModel().getColumnCount() > 0) {
+            tblSeleccionTiquete.getColumnModel().getColumn(0).setMinWidth(30);
+            tblSeleccionTiquete.getColumnModel().getColumn(0).setMaxWidth(30);
+        }
 
         tblSeleccionLiquidacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "N", "Humedad", "Impureza", "Castigo Humedad", "Castigo Impureza", "Peso Compra", "Valor Kilo", "Valor Total"
+                "N", "Kilos Brutos", "Humedad", "Impureza", "Castigo Humedad", "Castigo Impureza", "Peso Compra", "Valor Kilo", "Valor Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -216,13 +285,35 @@ public class Liquidacion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblSeleccionLiquidacion);
 
-        btnPasarTodo.setText(">>");
+        btnPasarTodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/double-right.png"))); // NOI18N
+        btnPasarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasarTodoActionPerformed(evt);
+            }
+        });
 
-        btnPasarUno.setText(">");
+        btnPasarUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/only-right.png"))); // NOI18N
+        btnPasarUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasarUnoActionPerformed(evt);
+            }
+        });
 
-        btnDevolverTodo.setText("<<");
+        btnDevolverTodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/double-left.png"))); // NOI18N
+        btnDevolverTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverTodoActionPerformed(evt);
+            }
+        });
 
-        btnDevolverUno.setText("<");
+        btnDevolverUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/only-left.png"))); // NOI18N
+        btnDevolverUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverUnoActionPerformed(evt);
+            }
+        });
+
+        txtAgricultor.setEditable(false);
 
         btnBuscarAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search.png"))); // NOI18N
         btnBuscarAgricultor.setText("Buscar");
@@ -241,7 +332,7 @@ public class Liquidacion extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPasarTodo)
@@ -249,12 +340,12 @@ public class Liquidacion extends javax.swing.JFrame {
                     .addComponent(btnDevolverTodo)
                     .addComponent(btnDevolverUno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
-                .addComponent(txtAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addComponent(btnBuscarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(236, 236, 236))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -280,35 +371,140 @@ public class Liquidacion extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnDevolverTodo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDevolverUno))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnDevolverUno)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/limpiar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btnLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(btnGuardar)
-                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnLimpiar))
+                .addGap(16, 16, 16))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblTotalKilosNetos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalKilosNetos.setText("Total Kilos Netos:");
+
+        lblTotalKilosCompra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotalKilosCompra.setText("Total Kilos Compra:");
+
+        lblSubTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSubTotal.setText("SubTotal:");
+
+        lblImpuestoLiqui.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblImpuestoLiqui.setText("Retefuente:");
+
+        lblFomArrozLiqui.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFomArrozLiqui.setText("Fomento Arrocero:");
+
+        lblNetoPagar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNetoPagar.setText("Neto A Pagar:");
+
+        txtTotalKilosNeto.setEditable(false);
+
+        txtTotalKilosCompra.setEditable(false);
+
+        txtSubTotal.setEditable(false);
+
+        txtFomArroceroLiqui.setEditable(false);
+
+        txtImpuestoLiqui.setEditable(false);
+
+        txtNetoPagar.setEditable(false);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTotalKilosNetos)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblTotalKilosCompra, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblSubTotal))
+                    .addComponent(lblImpuestoLiqui)
+                    .addComponent(lblNetoPagar)
+                    .addComponent(lblFomArrozLiqui))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTotalKilosNeto)
+                    .addComponent(txtTotalKilosCompra)
+                    .addComponent(txtSubTotal)
+                    .addComponent(txtFomArroceroLiqui)
+                    .addComponent(txtImpuestoLiqui)
+                    .addComponent(txtNetoPagar))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalKilosNetos)
+                    .addComponent(txtTotalKilosNeto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalKilosCompra)
+                    .addComponent(txtTotalKilosCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSubTotal)
+                    .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFomArrozLiqui)
+                    .addComponent(txtFomArroceroLiqui, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblImpuestoLiqui)
+                    .addComponent(txtImpuestoLiqui, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNetoPagar)
+                    .addComponent(txtNetoPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13))
         );
 
         jMenu1.setText("Liquidaciones");
@@ -341,8 +537,9 @@ public class Liquidacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -351,20 +548,22 @@ public class Liquidacion extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPasarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarUnoActionPerformed
-        // TODO add your handling code here:
+        liqui.moverTabla("unoDerecha");
     }//GEN-LAST:event_btnPasarUnoActionPerformed
 
     private void btnBuscarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgricultorActionPerformed
@@ -373,16 +572,58 @@ public class Liquidacion extends javax.swing.JFrame {
         if (!texto.equals("")) {
             int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Agricultor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
-               // bascula.abrirBusquedasTiquete(1, "TiqPrincipal");
+                liqui.abrirBusquedasTiquete("TiqLiqui");
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
-
+            liqui.abrirBusquedasTiquete("TiqLiqui");
         }
     }//GEN-LAST:event_btnBuscarAgricultorActionPerformed
 
+    private void btnPasarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTodoActionPerformed
+        liqui.moverTabla("todoDerecha");
+    }//GEN-LAST:event_btnPasarTodoActionPerformed
+
+    private void btnDevolverTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverTodoActionPerformed
+        liqui.moverTabla("todoIzquierda");
+    }//GEN-LAST:event_btnDevolverTodoActionPerformed
+
+    private void btnDevolverUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverUnoActionPerformed
+        liqui.moverTabla("unoIzquierda");
+    }//GEN-LAST:event_btnDevolverUnoActionPerformed
+
+    private void txtHumedadIdealFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHumedadIdealFocusLost
+        liqui.completarTablaLiquidacion();
+    }//GEN-LAST:event_txtHumedadIdealFocusLost
+
+    private void txtImpurezaIdealFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtImpurezaIdealFocusLost
+        liqui.completarTablaLiquidacion();
+    }//GEN-LAST:event_txtImpurezaIdealFocusLost
+
+    private void txtFomArrozFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFomArrozFocusLost
+        liqui.completarTablaLiquidacion();
+    }//GEN-LAST:event_txtFomArrozFocusLost
+
+    private void txtImpuestoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtImpuestoFocusLost
+        liqui.completarTablaLiquidacion();
+    }//GEN-LAST:event_txtImpuestoFocusLost
+
+    private void txtDesAnticipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDesAnticipoFocusLost
+        liqui.completarTablaLiquidacion();
+    }//GEN-LAST:event_txtDesAnticipoFocusLost
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        liqui.limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void cmbImpuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbImpuestoItemStateChanged
+        liqui.getImpuesto();
+    }//GEN-LAST:event_cmbImpuestoItemStateChanged
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        liqui.crearLiquidacion();
+    }//GEN-LAST:event_btnGuardarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -423,6 +664,7 @@ public class Liquidacion extends javax.swing.JFrame {
     public static javax.swing.JButton btnDevolverTodo;
     public static javax.swing.JButton btnDevolverUno;
     public static javax.swing.JButton btnGuardar;
+    public static javax.swing.JButton btnLimpiar;
     public static javax.swing.JButton btnPasarTodo;
     public static javax.swing.JButton btnPasarUno;
     public static javax.swing.JComboBox<String> cmbImpuesto;
@@ -437,20 +679,36 @@ public class Liquidacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnuncio;
+    private javax.swing.JLabel lblDesAnticipo;
     private javax.swing.JLabel lblFomArroz;
+    private javax.swing.JLabel lblFomArrozLiqui;
     private javax.swing.JLabel lblHumedadIdeal;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblImpuerzaIdeal;
     private javax.swing.JLabel lblImpuesto;
+    public static javax.swing.JLabel lblImpuestoLiqui;
+    private javax.swing.JLabel lblNetoPagar;
+    private javax.swing.JLabel lblSubTotal;
     private javax.swing.JLabel lblTipoImpuesto;
+    private javax.swing.JLabel lblTotalKilosCompra;
+    private javax.swing.JLabel lblTotalKilosNetos;
     public static javax.swing.JTable tblSeleccionLiquidacion;
     public static javax.swing.JTable tblSeleccionTiquete;
     public static javax.swing.JTextField txtAgricultor;
+    public static javax.swing.JTextField txtDesAnticipo;
+    public static javax.swing.JTextField txtFomArroceroLiqui;
     public static javax.swing.JTextField txtFomArroz;
     public static javax.swing.JTextField txtHumedadIdeal;
     public static javax.swing.JTextField txtImpuesto;
+    public static javax.swing.JTextField txtImpuestoLiqui;
     public static javax.swing.JTextField txtImpurezaIdeal;
+    public static javax.swing.JTextField txtNetoPagar;
+    public static javax.swing.JTextField txtSubTotal;
+    public static javax.swing.JTextField txtTotalKilosCompra;
+    public static javax.swing.JTextField txtTotalKilosNeto;
     // End of variables declaration//GEN-END:variables
 }

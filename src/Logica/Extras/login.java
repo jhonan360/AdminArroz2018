@@ -17,7 +17,7 @@ import Logica.Laboratorio.laboratorio;
 
 import Logica.Bascula.conductor;
 import Logica.Gerencia.gerencia;
-
+import Interfaces.Liquidacion;
 import Logica.Auditor.auditor;
 import Interfaces.Auditor;
 import Logica.Extras.StringEncrypt;
@@ -46,8 +46,7 @@ public class login {
     public static conductor cond;
     public static Administracion admi;
 
-    
-
+    public static Liquidacion Liqui;
     public static Gerencia Ger;
     public boolean bandera = false;
     public static int contIntentos = 0;
@@ -173,6 +172,15 @@ public class login {
                             audi.setVisible(true);
                         }
                         bandera = true;*/
+                    } else if (priv.equals("contador") && estado.equals("activo")) {
+                        if (Liqui == null) {
+                            Liqui = new Liquidacion();
+                            Liqui.setVisible(true);
+                        enviarUsuario();
+                        } else {
+                            Liqui.setVisible(true);
+                        }
+                        bandera = true;
                     } else {
                         if (!estado.equals("activo")) {
                             JOptionPane.showMessageDialog(null, "El usuario se encuentra inactivo por favor hable con el administrador del sistema");
