@@ -23,6 +23,8 @@ public class Gerencia extends javax.swing.JFrame {
      */
     public Gerencia() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         setLocationRelativeTo(null);
     }
     /**
@@ -40,6 +42,8 @@ public class Gerencia extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnAgricultor = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
+        Liquidaciones = new javax.swing.JMenu();
+        mnPorAprobar = new javax.swing.JMenuItem();
         mnCalcular = new javax.swing.JMenu();
         mnSalir = new javax.swing.JMenuItem();
 
@@ -68,6 +72,18 @@ public class Gerencia extends javax.swing.JFrame {
         jMenu2.add(mnConductor);
 
         jMenuBar1.add(jMenu2);
+
+        Liquidaciones.setText("Liquidaciones");
+
+        mnPorAprobar.setText("Por aprobar");
+        mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPorAprobarActionPerformed(evt);
+            }
+        });
+        Liquidaciones.add(mnPorAprobar);
+
+        jMenuBar1.add(Liquidaciones);
 
         mnCalcular.setText("Cuenta");
 
@@ -112,6 +128,10 @@ public class Gerencia extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_mnSalirActionPerformed
 
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        ger.liqPorAprobar();
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -148,6 +168,7 @@ public class Gerencia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JMenu Liquidaciones;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
@@ -155,6 +176,7 @@ public class Gerencia extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnAgricultor;
     private javax.swing.JMenu mnCalcular;
     private javax.swing.JMenuItem mnConductor;
+    public static javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnSalir;
     // End of variables declaration//GEN-END:variables
 }

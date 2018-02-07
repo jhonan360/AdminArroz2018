@@ -66,7 +66,7 @@ public class bascula {
     public static Conexion Con;
     public static tablas tbl;
     public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
-    public static String idTiqueteEspera,estadoTiquete;
+    public static String idTiqueteEspera, estadoTiquete;
     public static boolean estado;
     //public static Double kilosBrutoss,destare,kilosNetos;
 
@@ -141,7 +141,7 @@ public class bascula {
             TiqVarios.setVisible(true);
         }
     }
-    
+
     public static void abrirVerTiqueteMateriaPrima() {
         if (!(VerTiqPrincipal instanceof VerTiquetePrincipal)) {
             VerTiqPrincipal = new VerTiquetePrincipal();
@@ -150,7 +150,7 @@ public class bascula {
             VerTiqPrincipal.setVisible(true);
         }
     }
-    
+
     public static void abrirVerTiqueteVarios() {
         if (!(VerTiqVarios instanceof VerTiqueteVarios)) {
             VerTiqVarios = new VerTiqueteVarios();
@@ -217,7 +217,7 @@ public class bascula {
                 Bas.lblHumedad.setText(rsTiquete.getString(1));
                 Bas.lblImpureza.setText(rsTiquete.getString(2));
                 idAgricultor = rsTiquete.getString(3);
-                estadoTiquete="enEspera";
+                estadoTiquete = "enEspera";
             }
 
             Con.Desconectar();
@@ -266,7 +266,7 @@ public class bascula {
 
                 idAgricultor = rsTiquete.getString(8);
                 idConductor = rsTiquete.getString(9);
-                estadoTiquete="segundoPesaje";
+                estadoTiquete = "segundoPesaje";
             }
 
             Con.Desconectar();
@@ -350,7 +350,9 @@ public class bascula {
         tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
         user = login.enviarUsuario();
         conductor = idConductor;
-        //conductor = busTiquete.tabla_camposConductor();
+        /**
+         * if (conductor==null){ conductor=""; }*
+         */
         placa = Bas.txtPlaca.getText();
         observacion = Bas.txtObservacion.getText();
         kilosBrutos = Bas.txtPesoInicial.getText();
@@ -376,30 +378,33 @@ public class bascula {
         System.out.println("destare " + destare);
         System.out.println("kilsNetos " + kilosNetos);
 
-        switch (estadoTiquete) {
-            case "enEspera":
-                if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("")) {
-                    placa = ext.getIdPlaca(placa);
-                    System.out.println("placa " + placa);
-                    insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
-                    limpiarRegistros();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
-                }
-            break;
+        if (idTiquete.equals("")) {
+            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+        } else {
+            switch (estadoTiquete) {
+                case "enEspera":
+                    if (!fecha.equals("") && agricultor != null && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && conductor != null && !placa.equals("") && !kilosBrutos.equals("")) {
+                        placa = ext.getIdPlaca(placa);
+                        System.out.println("placa " + placa);
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                        limpiarRegistros();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+                    }
+                    break;
 
-            case "segundoPesaje":
-                if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !observacion.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
-                    placa = ext.getIdPlaca(placa);
-                    System.out.println("placa " + placa);
-                    insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
-                    limpiarRegistros();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
-                }
-            break;
+                case "segundoPesaje":
+                    if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("")  && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
+                        placa = ext.getIdPlaca(placa);
+                        System.out.println("placa " + placa);
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                        limpiarRegistros();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+                    }
+                    break;
+            }
         }
-
     }
 
     public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos) {

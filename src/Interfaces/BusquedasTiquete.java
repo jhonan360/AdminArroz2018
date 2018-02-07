@@ -9,15 +9,14 @@ import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
 import static Logica.Bascula.bascula.Bas;
 import Logica.Bascula.busquedasTiquete;
+import Logica.Bascula.tiqueteVarios;
 import Logica.Laboratorio.laboratorio_tiquete_inicial;
-import Interfaces.Laboratorio_tiquete_inicial;
-import Logica.Extras.validaciones;
 import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import Interfaces.Laboratorio_tiquete_inicial;
 import Logica.Extras.validaciones;
-
+import Logica.Extras.extras;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -29,20 +28,17 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     public static Laboratorio_tiquete_inicial Lab;
     public static busquedasTiquete busTiquete;
     public static bascula bascula;
-    public static String claseTiquete;
+    public static String claseTiquete,conductor;
     public static TiqueteVarios TiqVarios;
+    public static tiqueteVarios tiqVarios;
     public static validaciones val,vali;
-
     public static String consecutivo;
-    
     public static Laboratorio_tiquete_inicial TiqLab;
     public static laboratorio_tiquete_inicial tiqLab;
-    
     public static Statement st;
-     public static Conexion Con;
-      public static ResultSet rsconsecutivo;
-
-    
+    public static Conexion Con;
+    public static ResultSet rsconsecutivo;
+    public static extras ext;
 
     /**
      * Creates new form BusquedasTiquete
@@ -52,11 +48,8 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         busTiquete = new busquedasTiquete();
         claseTiquete = tiquete;
-
-
+        ext = new extras();
         vali = new validaciones();
-
-
         vali.IDENTIFICACION(txtBCedulaVehiculo);
         vali.NOMBRES(txtBApellidosAgricultor);
         vali.NOMBRES(txtBCiudadAgricultor);
@@ -821,36 +814,48 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnGuardarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarConductorActionPerformed
-
         int rec2 = jTable2.getSelectedRow();
         if (rec2 == -1) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila");
         } else {
-            int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (valor == JOptionPane.YES_OPTION) {
-
-                switch (claseTiquete) {
-
-                    case "TiqPrincipal":
-
-                    Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+            switch (claseTiquete) {
+                case "TiqPrincipal":
+                    String placaTiqPrincipal = Bas.txtPlaca.getText();
+                    if (!placaTiqPrincipal.equals("")) {
+                        int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (valor == JOptionPane.YES_OPTION) {
+                            Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                        }
+                    } else {
+                        Bas.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                    }
+                    conductor = ext.getIdPersonalExterno((jTable2.getValueAt(rec2,0).toString()),"conductor");
+                    bascula.idConductor = conductor;
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
 
-                    case "TiqVarios":
-                    TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                case "TiqVarios":
+                    String placaTiqVarios = TiqVarios.txtPlaca.getText();
+                    if (!placaTiqVarios.equals("")) {
+                        int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (valor == JOptionPane.YES_OPTION) {
+                            TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                        }
+                    } else {
+                        TiqVarios.txtConductor.setText((jTable2.getValueAt(rec2, 1).toString()) + (" " + jTable2.getValueAt(rec2, 2).toString()));
+                    }
+                    conductor = ext.getIdPersonalExterno((jTable2.getValueAt(rec2,0).toString()),"conductor");
+                    tiqVarios.idConductor = conductor;
                     busTiquete.cerrar(claseTiquete);
-                    
                     dispose();
                     break;
-
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
-        }
+            }
     }//GEN-LAST:event_btnGuardarConductorActionPerformed
 
     private void btnRefrescarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarConductorActionPerformed
@@ -897,16 +902,18 @@ public class BusquedasTiquete extends javax.swing.JFrame {
             if (valor == JOptionPane.YES_OPTION) {
 
                 switch (claseTiquete) {
-                    case "TiqPrincipal":
+                    case "TiqPrincipal":                  
                     Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                    String idAgricultor=ext.getIdPersonalExterno((jTable3.getValueAt(rec,0).toString()), "agricultor");
+                    bascula.idAgricultor=idAgricultor;
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
                     
                     case "TiqLab":
                     Lab.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                    String id =   (jTable3.getValueAt(rec, 0).toString());
-                    id_agricultor(id);
+                    String idAgri=ext.getIdPersonalExterno((jTable3.getValueAt(rec,0).toString()), "agricultor");
+                    tiqLab.ccAgricultor=idAgri;
                     dispose();
                     break;                    
                 }
@@ -916,7 +923,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarAgricultorActionPerformed
 
-public void id_agricultor(String cedula){
+/**public void id_agricultor(String cedula){
     try {
             Con = new Conexion();
 
@@ -933,7 +940,7 @@ public void id_agricultor(String cedula){
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+}*/
     private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
         busTiquete.crearModeloAgricultor();
     }//GEN-LAST:event_btnRefrescarAgricultorActionPerformed
@@ -1009,27 +1016,38 @@ public void id_agricultor(String cedula){
         if (rec3 == -1) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila");
         } else {
-            int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (valor == JOptionPane.YES_OPTION) {
-
-                switch (claseTiquete) {
-
-                    case "TiqPrincipal":
-
-                    Bas.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+            switch (claseTiquete) {
+                case "TiqPrincipal":
+                    String placaTiqPrincipal = Bas.txtPlaca.getText();
+                    if (!placaTiqPrincipal.equals("")) {
+                        int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (valor == JOptionPane.YES_OPTION) {
+                            Bas.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                        }
+                    } else {
+                        Bas.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                    }
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
 
-                    case "TiqVarios":
-                    TiqVarios.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                case "TiqVarios":
+                    String placaTiqVarios = TiqVarios.txtPlaca.getText();
+                    if (!placaTiqVarios.equals("")) {
+                        int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (valor == JOptionPane.YES_OPTION) {
+                            TiqVarios.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                        }
+                    } else {
+                        TiqVarios.txtPlaca.setText((jTable4.getValueAt(rec3, 0).toString()));
+                    }
                     busTiquete.cerrar(claseTiquete);
                     dispose();
                     break;
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         }
     }//GEN-LAST:event_btnGuardarVehiculoActionPerformed
