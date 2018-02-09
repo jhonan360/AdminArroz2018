@@ -8,8 +8,10 @@ package Interfaces;
 import Logica.Gerencia.gerenteApruebaLiquidaciones;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
 /**
@@ -28,6 +30,8 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         gApruebaL = new gerenteApruebaLiquidaciones();
+
+
     }
 
     @SuppressWarnings("unchecked")
@@ -42,7 +46,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAprobarLiq = new javax.swing.JTable();
+        tblLiquidaciones = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -67,7 +71,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         jSeparator14 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblTiquetesLiq = new javax.swing.JTable();
+        tblDetalleL = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -149,7 +153,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel10.setText("Pendientes por aprobar");
 
-        tblAprobarLiq.setModel(new javax.swing.table.DefaultTableModel(
+        tblLiquidaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -160,17 +164,17 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblAprobarLiq.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblLiquidaciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblAprobarLiqMouseClicked(evt);
+                tblLiquidacionesMouseClicked(evt);
             }
         });
-        tblAprobarLiq.addKeyListener(new java.awt.event.KeyAdapter() {
+        tblLiquidaciones.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblAprobarLiqKeyReleased(evt);
+                tblLiquidacionesKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(tblAprobarLiq);
+        jScrollPane1.setViewportView(tblLiquidaciones);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -352,8 +356,8 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tblTiquetesLiq.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblTiquetesLiq.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetalleL.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tblDetalleL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -372,26 +376,26 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblTiquetesLiq.setColumnSelectionAllowed(true);
-        tblTiquetesLiq.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tblTiquetesLiq.getTableHeader().setReorderingAllowed(false);
-        tblTiquetesLiq.addFocusListener(new java.awt.event.FocusAdapter() {
+        tblDetalleL.setColumnSelectionAllowed(true);
+        tblDetalleL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tblDetalleL.getTableHeader().setReorderingAllowed(false);
+        tblDetalleL.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tblTiquetesLiqFocusLost(evt);
+                tblDetalleLFocusLost(evt);
             }
         });
-        tblTiquetesLiq.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDetalleL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTiquetesLiqMouseClicked(evt);
+                tblDetalleLMouseClicked(evt);
             }
         });
-        tblTiquetesLiq.addKeyListener(new java.awt.event.KeyAdapter() {
+        tblDetalleL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblTiquetesLiqKeyReleased(evt);
+                tblDetalleLKeyReleased(evt);
             }
         });
-        jScrollPane3.setViewportView(tblTiquetesLiq);
-        tblTiquetesLiq.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(tblDetalleL);
+        tblDetalleL.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -724,27 +728,26 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAprobarActionPerformed
 
-    private void tblTiquetesLiqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTiquetesLiqMouseClicked
+    private void tblDetalleLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetalleLMouseClicked
         gApruebaL.operacionesDetalle();
-    }//GEN-LAST:event_tblTiquetesLiqMouseClicked
+    }//GEN-LAST:event_tblDetalleLMouseClicked
 
-    private void tblTiquetesLiqKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTiquetesLiqKeyReleased
+    private void tblDetalleLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDetalleLKeyReleased
         gApruebaL.operacionesDetalle();
-    }//GEN-LAST:event_tblTiquetesLiqKeyReleased
-    private void tblAprobarLiqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAprobarLiqMouseClicked
-
+    }//GEN-LAST:event_tblDetalleLKeyReleased
+    private void tblLiquidacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLiquidacionesMouseClicked
         gApruebaL.crearModeloDetalle();
         gApruebaL.tablaCamposLiquidacion();
-    }//GEN-LAST:event_tblAprobarLiqMouseClicked
+    }//GEN-LAST:event_tblLiquidacionesMouseClicked
 
-    private void tblAprobarLiqKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblAprobarLiqKeyReleased
+    private void tblLiquidacionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblLiquidacionesKeyReleased
         gApruebaL.crearModeloDetalle();
         gApruebaL.tablaCamposLiquidacion();
-    }//GEN-LAST:event_tblAprobarLiqKeyReleased
+    }//GEN-LAST:event_tblLiquidacionesKeyReleased
 
-    private void tblTiquetesLiqFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblTiquetesLiqFocusLost
+    private void tblDetalleLFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblDetalleLFocusLost
 
-    }//GEN-LAST:event_tblTiquetesLiqFocusLost
+    }//GEN-LAST:event_tblDetalleLFocusLost
 
     /**
      * @param args the command line arguments
@@ -862,7 +865,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
     public static javax.swing.JLabel lblTipoImpuesto;
     public static javax.swing.JLabel lblValorFomento;
     public static javax.swing.JLabel lblValorImpuesto;
-    public static javax.swing.JTable tblAprobarLiq;
-    public static javax.swing.JTable tblTiquetesLiq;
+    public static javax.swing.JTable tblDetalleL;
+    public static javax.swing.JTable tblLiquidaciones;
     // End of variables declaration//GEN-END:variables
 }

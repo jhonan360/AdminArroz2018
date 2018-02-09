@@ -20,6 +20,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -35,7 +40,7 @@ public class gerenteApruebaLiquidaciones {
     public tablas tbl;
     public static String placa, color, modelo, marca, idVehiculo, idLiquidacion;
     public static DefaultTableModel modelPendientes, modelTiquetes;
-    public static String columPendientes[] = new String[]{"N° Liquidación", "Agricultor", "Subtotal", "Neto Pagar"};
+    public static String columPendientes[] = new String[]{"N°", "Agricultor", "Subtotal", "Neto Pagar"};
     public static String columTiquetes[] = new String[]{"N° Tiquete", "Fecha Tiquete", "Kg Brutos", "Humedad O", "Impureza O", "% Castigo H", "% Castigo I", "Peso Compra", "Valor Kg", "Valor Total"};
     public static login login;
     long kiloNetos, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar, humedadObtenida, impurezaObtenida, castigoHumedad, castigoImpureza, pesoCompra, valorTotal, netoAPagar, totalKilosCompra, vlrFomentoArrocero;
@@ -50,6 +55,9 @@ public class gerenteApruebaLiquidaciones {
         simbolo.setGroupingSeparator(',');
         ft = new DecimalFormat("###,###.##", simbolo);
         crearModeloLiquidacion();
+        alinearCamposTablaLiquidaciones();
+        alinearHeaderTablas();
+
     }
 
     public void crearModeloLiquidacion() {
@@ -60,12 +68,12 @@ public class gerenteApruebaLiquidaciones {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(GApruebaL.tblAprobarLiq, modelPendientes, columPendientes.length, "SELECT liquidaciones.idLiquidaciones, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),subTotal,netoPagar FROM liquidaciones,detalleliquidacion,tiquete,personalexterno WHERE liquidaciones.estado='en proceso' and liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+        tbl.llenarTabla(GApruebaL.tblLiquidaciones, modelPendientes, columPendientes.length, "SELECT liquidaciones.idLiquidaciones, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),subTotal,netoPagar FROM liquidaciones,detalleliquidacion,tiquete,personalexterno WHERE liquidaciones.estado='en proceso' and liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
         cambiarFormatoLiquidacion();
     }
-    
+
     public void cambiarFormatoLiquidacion() {
-        int row = GApruebaL.tblAprobarLiq.getRowCount();
+        int row = GApruebaL.tblLiquidaciones.getRowCount();
         int j = 0;
         try {
             Con = new Conexion();
@@ -80,7 +88,7 @@ public class gerenteApruebaLiquidaciones {
                     Vector[2] = ft.format(Double.parseDouble(rs.getString(3)));
                     Vector[3] = ft.format(Double.parseDouble(rs.getString(4)));
                     for (j = 0; j < columPendientes.length; j++) {
-                        GApruebaL.tblAprobarLiq.setValueAt(Vector[j], i, j);
+                        GApruebaL.tblLiquidaciones.setValueAt(Vector[j], i, j);
                     }
                     i++;
                 }
@@ -101,15 +109,18 @@ public class gerenteApruebaLiquidaciones {
                 return false;
             }
         };
-        GApruebaL.tblTiquetesLiq.setModel(modelTiquetes);
+        GApruebaL.tblDetalleL.setModel(modelTiquetes);
     }
 
     public void tablaCamposLiquidacion() {
-        int rec = GApruebaL.tblAprobarLiq.getSelectedRow();
-        idLiquidacion = GApruebaL.tblAprobarLiq.getValueAt(rec, 0).toString();
+
+        alinearCamposTablaDetalle();
+
+        int rec = GApruebaL.tblLiquidaciones.getSelectedRow();
+        idLiquidacion = GApruebaL.tblLiquidaciones.getValueAt(rec, 0).toString();
         GApruebaL.lblNumLiquidacion.setText(idLiquidacion);
         System.out.print(idLiquidacion);
-        GApruebaL.lblNomAgricultor.setText(GApruebaL.tblAprobarLiq.getValueAt(rec, 1).toString());
+        GApruebaL.lblNomAgricultor.setText(GApruebaL.tblLiquidaciones.getValueAt(rec, 1).toString());
 
         SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
 
@@ -140,7 +151,7 @@ public class gerenteApruebaLiquidaciones {
             }
 
             tbl = new tablas();
-            tbl.llenarTabla(GApruebaL.tblTiquetesLiq, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
+            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             cambiarFormatoDetalle(idLiquidacion);
             Con.Desconectar();
         } catch (Exception e) {
@@ -149,8 +160,9 @@ public class gerenteApruebaLiquidaciones {
     }
 
     public void cambiarFormatoDetalle(String idLiquidacion) {
-        int row = GApruebaL.tblTiquetesLiq.getRowCount();
+        int row = GApruebaL.tblDetalleL.getRowCount();
         int j = 0;
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -160,7 +172,9 @@ public class gerenteApruebaLiquidaciones {
                 while (rs.next()) {
                     String Vector[] = new String[columTiquetes.length];
                     Vector[0] = rs.getString(1);
-                    Vector[1] = rs.getString(2);
+                    Date Fecha = formato.parse(rs.getString(2));
+                    String fecha = formato.format(Fecha);
+                    Vector[1] = fecha;
                     Vector[2] = ft.format(Double.parseDouble(rs.getString(3)));
                     Vector[3] = rs.getString(4);
                     Vector[4] = rs.getString(5);
@@ -170,7 +184,7 @@ public class gerenteApruebaLiquidaciones {
                     Vector[8] = ft.format(Double.parseDouble(rs.getString(9)));
                     Vector[9] = ft.format(Double.parseDouble(rs.getString(10)));
                     for (j = 0; j < columTiquetes.length; j++) {
-                        GApruebaL.tblTiquetesLiq.setValueAt(Vector[j], i, j);
+                        GApruebaL.tblDetalleL.setValueAt(Vector[j], i, j);
                     }
                     i++;
                 }
@@ -182,7 +196,7 @@ public class gerenteApruebaLiquidaciones {
     }
 
     public void operacionesDetalle() {
-        int row = GApruebaL.tblTiquetesLiq.getRowCount();
+        int row = GApruebaL.tblDetalleL.getRowCount();
 
         if (GApruebaL.lblDesAnticipo.getText().equals("")) {
             this.desAnticipo = 0;
@@ -212,7 +226,7 @@ public class gerenteApruebaLiquidaciones {
                 Con = new Conexion();
                 st = Con.conexion.createStatement();
                 for (int i = 0; i < row; i++) {
-                    String idTiquete = GApruebaL.tblTiquetesLiq.getValueAt(i, 0).toString();
+                    String idTiquete = GApruebaL.tblDetalleL.getValueAt(i, 0).toString();
                     rs = st.executeQuery("SELECT detalleliquidacion.idDetalleLiquidacion,detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND tiquete.idTiquete='" + idTiquete + "'");
                     if (rs.next()) {
                         String Vector[] = new String[columTiquetes.length];
@@ -220,12 +234,11 @@ public class gerenteApruebaLiquidaciones {
                         String valorCarga = rs.getString(2);
                         String kilosNetos = rs.getString(3);
 
-                        String fecha = GApruebaL.tblTiquetesLiq.getValueAt(i, 1).toString();
-                        String kgBrutos = GApruebaL.tblTiquetesLiq.getValueAt(i, 2).toString();
-                        String humedadO = GApruebaL.tblTiquetesLiq.getValueAt(i, 3).toString();
-                        String impurezaO = GApruebaL.tblTiquetesLiq.getValueAt(i, 4).toString();
+                        String fecha = GApruebaL.tblDetalleL.getValueAt(i, 1).toString();
+                        String kgBrutos = GApruebaL.tblDetalleL.getValueAt(i, 2).toString();
+                        String humedadO = GApruebaL.tblDetalleL.getValueAt(i, 3).toString();
+                        String impurezaO = GApruebaL.tblDetalleL.getValueAt(i, 4).toString();
 
-    
                         Vector[0] = idTiquete;
                         Vector[1] = fecha;
                         Vector[2] = kgBrutos;
@@ -268,7 +281,7 @@ public class gerenteApruebaLiquidaciones {
                         this.subTotal += valorTotal;
 
                         for (int j = 0; j < columTiquetes.length; j++) {
-                            GApruebaL.tblTiquetesLiq.setValueAt(Vector[j], i, j);
+                            GApruebaL.tblDetalleL.setValueAt(Vector[j], i, j);
                         }
                     }
                 }
@@ -328,21 +341,21 @@ public class gerenteApruebaLiquidaciones {
     }
 
     public void actualizarDetalleLiquidacion() {
-        int row = GApruebaL.tblTiquetesLiq.getRowCount();
+        int row = GApruebaL.tblDetalleL.getRowCount();
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             for (int i = 0; i < row; i++) {
-                String idTiquete = GApruebaL.tblTiquetesLiq.getValueAt(i, 0).toString();
-                String fecha = GApruebaL.tblTiquetesLiq.getValueAt(i, 1).toString();
-                String kilosNetos = GApruebaL.tblTiquetesLiq.getValueAt(i, 2).toString().replace(",", "");
-                String humedadO = GApruebaL.tblTiquetesLiq.getValueAt(i, 3).toString();
-                String impurezaO = GApruebaL.tblTiquetesLiq.getValueAt(i, 4).toString();
-                String castigoH = GApruebaL.tblTiquetesLiq.getValueAt(i, 5).toString();
-                String castigoI = GApruebaL.tblTiquetesLiq.getValueAt(i, 6).toString();
-                String pesoCompra = GApruebaL.tblTiquetesLiq.getValueAt(i, 7).toString().replace(",", "");
-                String valorKilo = GApruebaL.tblTiquetesLiq.getValueAt(i, 8).toString().replace(",", "");
-                String valorTotal = GApruebaL.tblTiquetesLiq.getValueAt(i, 9).toString().replace(",", "");
+                String idTiquete = GApruebaL.tblDetalleL.getValueAt(i, 0).toString();
+                String fecha = GApruebaL.tblDetalleL.getValueAt(i, 1).toString();
+                String kilosNetos = GApruebaL.tblDetalleL.getValueAt(i, 2).toString().replace(",", "");
+                String humedadO = GApruebaL.tblDetalleL.getValueAt(i, 3).toString();
+                String impurezaO = GApruebaL.tblDetalleL.getValueAt(i, 4).toString();
+                String castigoH = GApruebaL.tblDetalleL.getValueAt(i, 5).toString();
+                String castigoI = GApruebaL.tblDetalleL.getValueAt(i, 6).toString();
+                String pesoCompra = GApruebaL.tblDetalleL.getValueAt(i, 7).toString().replace(",", "");
+                String valorKilo = GApruebaL.tblDetalleL.getValueAt(i, 8).toString().replace(",", "");
+                String valorTotal = GApruebaL.tblDetalleL.getValueAt(i, 9).toString().replace(",", "");
 
                 st.executeUpdate("UPDATE detalleliquidacion SET humedad='" + humedadO + "',impureza='" + impurezaO + "',castigoHumedad='" + castigoH + "',castigoImpureza='" + castigoI + "',pesoCompra='" + pesoCompra + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
                 if (i == row - 1) {
@@ -353,6 +366,52 @@ public class gerenteApruebaLiquidaciones {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void alinearHeaderTablas() {
+
+        TableColumnModel columnModel = GApruebaL.tblLiquidaciones.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+
+        TableCellRenderer rendererFromHeaderLiqui = GApruebaL.tblLiquidaciones.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeaderLiqui;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        TableCellRenderer rendererFromHeaderDetalle = GApruebaL.tblDetalleL.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel2 = (JLabel) rendererFromHeaderDetalle;
+        headerLabel2.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    public void alinearCamposTablaLiquidaciones() {
+        DefaultTableCellRenderer Right = new DefaultTableCellRenderer();
+        Right.setHorizontalAlignment(SwingConstants.RIGHT);
+        DefaultTableCellRenderer Center = new DefaultTableCellRenderer();
+        Center.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultTableCellRenderer Left = new DefaultTableCellRenderer();
+        Left.setHorizontalAlignment(SwingConstants.LEFT);
+        GApruebaL.tblLiquidaciones.getColumnModel().getColumn(0).setCellRenderer(Center);
+        GApruebaL.tblLiquidaciones.getColumnModel().getColumn(1).setCellRenderer(Left);
+        GApruebaL.tblLiquidaciones.getColumnModel().getColumn(2).setCellRenderer(Right);
+        GApruebaL.tblLiquidaciones.getColumnModel().getColumn(3).setCellRenderer(Right);
+    }
+
+    public void alinearCamposTablaDetalle() {
+        DefaultTableCellRenderer Right = new DefaultTableCellRenderer();
+        Right.setHorizontalAlignment(SwingConstants.RIGHT);
+        DefaultTableCellRenderer Center = new DefaultTableCellRenderer();
+        Center.setHorizontalAlignment(SwingConstants.CENTER);
+
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(0).setCellRenderer(Center);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(1).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(2).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(3).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(4).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(5).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(6).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(7).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(8).setCellRenderer(Right);
+        GApruebaL.tblDetalleL.getColumnModel().getColumn(9).setCellRenderer(Right);
+
     }
 
     public void limpiarCampos() {
