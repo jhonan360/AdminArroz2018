@@ -26,7 +26,7 @@ public class gerente {
     public static Statement st;
     public DefaultTableModel modelo,modelobuscar;
     public static Gerente Ger;
-    public String columnas[] = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
+    public String columnas[] = new String[]{"N", "Cedula", "Nombres", "Apellidos", "Tipo", "Fecha", "K brutos", "Destare", "K netos", "Observacion", "Empaque", "Humedad", "Impureza"};
     public tablas tbl;
     public String tiquete, valor;
 
