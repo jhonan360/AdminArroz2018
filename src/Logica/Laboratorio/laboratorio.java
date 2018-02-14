@@ -35,9 +35,9 @@ public class laboratorio {
     public static tablas tbl;
     public DefaultTableModel modeloemp,modeloestufa,modelo3;
     public login login;
-    public String columnas[] = new String[]{"idLaboratorio","idTiquete","fecha","humedad", "impureza","integralRes", "cascarillaRes", "blancoRes","partidoRes","enteroRes","yeso","dañado","ip"};
-    public String columnas2[] = new String[]{"idLaboratorio","idTiquete","muestreo","hora","humedad"};
-    public String columnas3[] = new String[]{"tiquete","agricultor","fecha"};
+    public String columnas[] = new String[]{"N° Laboratorio","N° Tiquete","Fecha","Humedad", "Impureza","IntegralRes", "CascarillaRes", "BlancoRes","PartidoRes","EnteroRes","Yeso","Dañado","Ip"};
+    public String columnas2[] = new String[]{"N° Laboratorio","N° Tiquete","Muestreo","Hora","Humedad"};
+    public String columnas3[] = new String[]{"N° Tiquete","Agricultor","Fecha"};
     
     public String user;
      public static Statement st,st3,st4,st5;
@@ -86,7 +86,7 @@ public class laboratorio {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete,idAgricultor,fecha from tiquete where idTiquete not in (select idTiquete from laboratorio group by idTiquete)");
+        tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete, CONCAT(personalexterno.nombres, personalexterno.apellidos),fecha from tiquete,personalexterno where idTiquete not in (select idTiquete from laboratorio group by idTiquete) and tiquete.idAgricultor = personalexterno.idPersonalExterno");
                                                                                                                                                                                    
     }
      public void estado_tiquete() {
@@ -180,7 +180,7 @@ public class laboratorio {
          
      }
      public void campos_habilitados(){
-         Laboratorio.TxtFecha.setEnabled(true);
+         
          Laboratorio.TxtHumedad.setEnabled(true);
          Laboratorio.TxtImpureza.setEnabled(true);
          Laboratorio.TxtIntegral.setEnabled(true);
