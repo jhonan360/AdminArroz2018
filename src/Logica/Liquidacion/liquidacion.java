@@ -7,6 +7,7 @@ package Logica.Liquidacion;
 
 import Interfaces.BusquedasTiquete;
 import Interfaces.Liquidacion;
+import Interfaces.Login;
 import Logica.Extras.tablas;
 import Negocio.Conexion;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ import java.util.Date;
 public class liquidacion {
 
     public static Liquidacion Liqui;
+    public static Login Login;
     public static Conexion Con;
     public static ResultSet rs;
     public static Statement st;
@@ -402,6 +404,11 @@ public class liquidacion {
             }
         };
         Liqui.tblSeleccionLiquidacion.setModel(modeloSeleccionLiquidacion);
+    }
+    public static void salir() {
+        Login = new Login();
+        Login.setVisible(true);
+
     }
 }
 // select busqueda agricultor

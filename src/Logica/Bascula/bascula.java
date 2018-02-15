@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Negocio.ConexionBascula;
 
 /**
  *
@@ -68,9 +69,11 @@ public class bascula {
     public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
     public static String idTiqueteEspera, estadoTiquete;
     public static boolean estado;
+    public static ConexionBascula ConBascula;
     //public static Double kilosBrutoss,destare,kilosNetos;
 
     public bascula() {
+        ConBascula = new ConexionBascula();
         //numeroTiquete();
         fecha();
         ext = new extras();
@@ -327,14 +330,23 @@ public class bascula {
         switch (opc) {
             case 1:
                 Bas.txtPesoInicial.setText("");
+                //Bas.txtPesoInicial.setText(ConBascula.getPeso("0"));
                 Bas.txtPesoInicial.setText(String.valueOf(inicial));
+                if (!Bas.txtPesoInicial.getText().equals("")) {
+                    Bas.btnCapturarInicial.setEnabled(false);
+                }
                 break;
             case 2:
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.txtPesoFinal.setText("");
                     Bas.txtPesoFinal.setText(String.valueOf(fina));
+                    //Bas.txtPesoFinal.setText(ConBascula.getPeso(Bas.txtPesoInicial.getText()));
                     double ini = Double.parseDouble(Bas.txtPesoInicial.getText());
-                    Bas.txtPesoNeto.setText(String.valueOf(ini - fina));
+                    if (!Bas.txtPesoFinal.getText().equals("")) {
+                        fina = Double.parseDouble(Bas.txtPesoFinal.getText());
+                        Bas.txtPesoNeto.setText(String.valueOf(ini - fina));
+                        Bas.btnCapturarFinal.setEnabled(false);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Sin peso bruto");
                 }
@@ -394,7 +406,7 @@ public class bascula {
                     break;
 
                 case "segundoPesaje":
-                    if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("")  && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
+                    if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
                         placa = ext.getIdPlaca(placa);
                         System.out.println("placa " + placa);
                         insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
