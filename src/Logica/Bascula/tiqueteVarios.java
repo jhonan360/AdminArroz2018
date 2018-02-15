@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import Negocio.ConexionBascula;
 
 /**
  *
@@ -42,8 +43,10 @@ public class tiqueteVarios {
     public static String idTiqVarios, cantidad, descripcion, idTiqueteEspera, estadoTiquete = "", idEntradas;
     public static int entradas;
     public static String columSegundoPesaje[] = new String[]{"N", "Conductor", "KL Brutos"};
+    public static ConexionBascula ConBascula;
 
     public tiqueteVarios() {
+        ConBascula = new ConexionBascula();
         ext = new extras();
         tbl = new tablas();
         numeroTiquete();
@@ -89,7 +92,7 @@ public class tiqueteVarios {
                 estadoTiquete = "segundoPesaje";
                 tbl = new tablas();
                 tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
-                
+
             }
 
             rsEntradas = st.executeQuery("SELECT idEntradas,cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
@@ -205,14 +208,23 @@ public class tiqueteVarios {
         switch (opc) {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
+                //TiqVarios.txtPesoInicial.setText(ConBascula.getPeso("0"));
                 TiqVarios.txtPesoInicial.setText(String.valueOf(inicial));
+                if (!TiqVarios.txtPesoInicial.getText().equals("")) {
+                    TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
+                }
                 break;
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.txtPesoFinal.setText("");
                     TiqVarios.txtPesoFinal.setText(String.valueOf(fina));
+                    //TiqVarios.txtPesoFinal.setText(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()));
                     double ini = Double.parseDouble(TiqVarios.txtPesoInicial.getText());
-                    TiqVarios.txtPesoNeto.setText(String.valueOf(ini - fina));
+                    if (!TiqVarios.txtPesoFinal.getText().equals("")) {
+                        fina = Double.parseDouble(TiqVarios.txtPesoFinal.getText());
+                        TiqVarios.txtPesoNeto.setText(String.valueOf(ini - fina));
+                        TiqVarios.btnCapturarDestare.setEnabled(false);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Sin peso bruto");
                 }
@@ -265,15 +277,13 @@ public class tiqueteVarios {
                 JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
             }
 
+        } else if (!user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("")) {
+            placa = ext.getIdPlaca(placa);
+            System.out.println("placa " + placa);
+            insertar(estadoTiquete, conductor, user, placa, fecha, destino, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+            insertarEntrada(estadoTiquete);
         } else {
-            if (!user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("")) {
-                placa = ext.getIdPlaca(placa);
-                System.out.println("placa " + placa);
-                insertar(estadoTiquete, conductor, user, placa, fecha, destino, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
-                insertarEntrada(estadoTiquete);
-            } else {
-                JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
-            }
+            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
     }
 
@@ -328,7 +338,7 @@ public class tiqueteVarios {
             e.printStackTrace();
         }
     }
-  
+
     public void limpiarRegistros() {
         TiqVarios.lblNumeroTiquete.setText("");
         TiqVarios.txtConductor.setText("");

@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+
 import Logica.Gerencia.gerenteApruebaLiquidaciones;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

@@ -1,5 +1,5 @@
 INSERT INTO `marca` (`idMarca`,`marca`) VALUES 
- (1,' NO APLICA'),
+ (1,'NO APLICA'),
  (2,'AGRALE'),
  (3,'ALFA ROMEO'),
  (4,'AUDI'),
@@ -1317,6 +1317,41 @@ INSERT INTO `parametros` (`idParametros`, `nombre`, `valor`) VALUES
 (3, 'Fomento Arrocero', '0.50'),
 (4, 'Humedad', '24'),
 (5, 'Impureza', '3');
+
 INSERT INTO `bateria` (`idBateria`, `nombre`) VALUES 
 (1, 'A'), 
 (2, 'B');
+
+INSERT INTO `seccion` (`idSeccion`, `idBateria`, `nombre`) VALUES 
+(1, '1', 'A1'),
+(2, '1', 'A2'),
+(3, '1', 'A3'),
+(4, '1', 'A4’),
+(5, '2', 'B1'),
+(6, '2', 'B2'),
+(7, '2', 'B3'),
+(8, '2', 'B4');
+
+
+INSERT INTO `silos` (`idSilos`, `idSeccion`, `numero`, `estado`) VALUES 
+(1, '1', '1', 'vacio'), 
+(2, '1', '2', 'vacio'), 
+(3, '1', '3', 'vacio'), 
+(4, '1', '4', 'vacio'), 
+(5, '1', '5', 'vacio'), 
+(6, '2', '6', 'vacio'), 
+(7, '2', '7', 'vacio'), 
+(8, '2', '8', 'vacio'), 
+(9, '2', '9', 'vacio'), 
+(10, '2', '10', 'vacio'), 
+(11, '3', '11', 'vacio'), 
+(12, '3', '12', 'vacio'), 
+(13, '3', '13', 'vacio'), 
+(14, '3', '14', 'vacio'), 
+(15, '3', '15', 'vacio'), 
+(16, '4', '16', 'vacio'), 
+(17, '4', '17', 'vacio'), 
+(18, '4', '18', 'vacio'), 
+(19, '4', '19', 'vacio'), 
+(20, '4', '20', 'vacio’);
+

@@ -137,21 +137,12 @@ public class login {
                             labor.tiquete1();
                         }
                         bandera = true;
-                    } else if (priv.equals("gerencia") && estado.equals("activo")) {
+                    } else if (priv.equals("gerente") && estado.equals("activo")) {
                         if (ger == null) {
                             ger = new Gerente();
                             ger.setVisible(true);
                         } else {
                             ger.setVisible(true);
-                        }
-                        bandera = true;
-                    }else if (priv.equals("gerente") && estado.equals("activo")) {
-                        if (Ger == null) {
-                            Ger = new Gerencia();
-                            Ger.setVisible(true);
-                            enviarUsuario();
-                        } else {
-                            Ger.setVisible(true);
                         }
                         bandera = true;
                     } else if (priv.equals("auditor") && estado.equals("activo") ) {
