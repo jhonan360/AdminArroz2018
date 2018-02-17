@@ -86,6 +86,7 @@ public class Gerente extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
+        mnGenerar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -498,6 +499,17 @@ public class Gerente extends javax.swing.JFrame {
         });
         jMenu1.add(mnPorAprobar);
 
+        mnGenerar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnGenerar.setText("Generar");
+        mnGenerar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGenerarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnGenerar);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -618,6 +630,10 @@ public class Gerente extends javax.swing.JFrame {
         //setVisible(false);
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
+    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
+        gerente.mnGenerarLiquidacion();
+    }//GEN-LAST:event_mnGenerarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -706,6 +722,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     // End of variables declaration//GEN-END:variables
 }

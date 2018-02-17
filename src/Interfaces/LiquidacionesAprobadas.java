@@ -38,6 +38,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtLiquidacion = new javax.swing.JTextField();
@@ -126,7 +127,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         tblLiquidaciones = new javax.swing.JTable();
         jLabel26 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel6.setPreferredSize(new java.awt.Dimension(1116, 114));
@@ -135,21 +136,30 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("       LIQUIDACIONES APROBADAS");
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cheque.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(356, 356, 356)
+                .addGap(334, 334, 334)
                 .addComponent(jLabel3)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3)))
+                .addGap(34, 34, 34))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -243,7 +253,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(4, 4, 4)
                                 .addComponent(dcFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(49, 49, 49)
+                        .addGap(37, 37, 37)
                         .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,7 +261,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -715,7 +725,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                             .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
-        btnDescargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/aprobado.png"))); // NOI18N
+        btnDescargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/download.png"))); // NOI18N
         btnDescargar.setText("Descargar");
         btnDescargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -723,7 +733,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
             }
         });
 
-        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/aprobado.png"))); // NOI18N
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/printer.png"))); // NOI18N
         btnImprimir.setText("Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -912,8 +922,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 }
             }
         }
-        liqAprobadas.crearModeloDetalle();
         liqAprobadas.limpiarCampos();
+        liqAprobadas.crearModeloDetalle();
         liqAprobadas.buscar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
@@ -1010,6 +1020,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

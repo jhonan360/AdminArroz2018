@@ -58,9 +58,6 @@ public class liquidacionesAprobadas {
         simbolo.setGroupingSeparator(',');
         ft = new DecimalFormat("###,###.##", simbolo);
         crearModeloLiquidacion();
-        alinearCamposTablaLiquidaciones();
-        alinearHeaderTablas();
-
     }
 
     public void crearModeloLiquidacion() {
@@ -72,12 +69,13 @@ public class liquidacionesAprobadas {
         };
         tbl = new tablas();
         tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
-        cambiarFormatoLiquidacion();
+        cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+        
+    }
+    
+    public void cambiarFormatoLiquidacion(String sentencia) {
         alinearCamposTablaLiquidaciones();
         alinearHeaderTablas();
-    }
-
-    public void cambiarFormatoLiquidacion() {
         int row = LiqAprobadas.tblLiquidaciones.getRowCount();
         int j = 0;
         SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
@@ -86,9 +84,8 @@ public class liquidacionesAprobadas {
             st = Con.conexion.createStatement();
             for (int i = 0; i < row; i++) {
                 //String idLiquidacion = GApruebaL.tblAprobarLiq.getValueAt(i, 0).toString();
-                rs = st.executeQuery("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                rs = st.executeQuery(sentencia);
                 while (rs.next()) {
-
                     String Vector[] = new String[columLiquidaciones.length];
                     Vector[0] = rs.getString(1);
                     Date Fecha = formato.parse(rs.getString(2));
@@ -110,18 +107,17 @@ public class liquidacionesAprobadas {
     }
 
     public void crearModeloDetalle() {
-
         modelDetalle = new DefaultTableModel(null, columDetalle) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
+        LiqAprobadas.tblDetalleL.setModel(modelDetalle);
     }
+    
+    
 
     public void tablaCamposLiquidacion() {
-
-        alinearCamposTablaDetalle();
-
         int rec = LiqAprobadas.tblLiquidaciones.getSelectedRow();
         idLiquidacion = LiqAprobadas.tblLiquidaciones.getValueAt(rec, 0).toString();
         LiqAprobadas.lblNumLiquidacion.setText(idLiquidacion);
@@ -159,6 +155,7 @@ public class liquidacionesAprobadas {
             tbl = new tablas();
             tbl.llenarTabla(LiqAprobadas.tblDetalleL, modelDetalle, columDetalle.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             cambiarFormatoDetalle(idLiquidacion);
+            alinearCamposTablaDetalle();
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -300,56 +297,60 @@ public class liquidacionesAprobadas {
         tbl = new tablas();
 
         if (LiqAprobadas.chLiquidacion.isSelected() == true && LiqAprobadas.chAgricultor.isSelected() == true && LiqAprobadas.chFecha.isSelected()) {
-            if (!liquidacion.equals("") && !idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+            if (!liquidacion.equals("") && !agricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 //tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chLiquidacion.isSelected() == true && LiqAprobadas.chAgricultor.isSelected() == true) {
-            if (!liquidacion.equals("") && !idAgricultor.equals("")) {
+            if (!liquidacion.equals("") && !agricultor.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chLiquidacion.isSelected() == true && LiqAprobadas.chFecha.isSelected()) {
             if (!liquidacion.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chAgricultor.isSelected() == true && LiqAprobadas.chFecha.isSelected() == true) {
-            if (!idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+            if (!agricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' AND tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.fecha >= '" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chLiquidacion.isSelected() == true) {
             if (!liquidacion.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and liquidaciones.idLiquidaciones='" + liquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chAgricultor.isSelected() == true) {
-            if (!idAgricultor.equals("")) {
+            if (!agricultor.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado' and tiquete.idAgricultor='" + idAgricultor + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (LiqAprobadas.chFecha.isSelected() == true) {
             if (!fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(LiqAprobadas.tblLiquidaciones, modelLiquidaciones, columLiquidaciones.length, "SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado'AND liquidaciones.fecha >='" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
+                cambiarFormatoLiquidacion("SELECT liquidaciones.idLiquidaciones,liquidaciones.fecha,personalexterno.cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),netoPagar FROM liquidaciones,personalexterno,detalleliquidacion,tiquete WHERE liquidaciones.estado='aprobado'AND liquidaciones.fecha >='" + fechaI + "' AND liquidaciones.fecha<='" + fechaF + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
+            
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkbox();*/
-        
-        cambiarFormatoLiquidacion();
-        alinearCamposTablaLiquidaciones();
-        alinearHeaderTablas();
     }
 
 }

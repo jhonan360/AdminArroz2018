@@ -36,12 +36,16 @@ public class busquedasTiquete {
     public static String columnasVhc[] = new String[]{"Placa","Marca","Modelo","Color"};
     public static String claseTiquete;
 
-    public busquedasTiquete() {
-        crearModeloAgricultor();
+    public busquedasTiquete(String claseTiquete) {
+        crearModeloAgricultor(claseTiquete);
         crearModeloConductor();
         crearModeloVehiculo();
 
         //tabla_camposAgricultor();
+    }
+
+    public busquedasTiquete() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -63,7 +67,7 @@ public class busquedasTiquete {
     }
     }
 
-    public void crearModeloAgricultor() {
+    public void crearModeloAgricultor(String claseTiquete) {
         //System.out.println("2");
         modeloagr = new DefaultTableModel(null, columnasAgri) {
             public boolean isCellEditable(int fila, int columna) {
@@ -71,8 +75,12 @@ public class busquedasTiquete {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT cedula,nombres,apellidos,direccion,municipios.nombre FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor'");
-    }
+        if(claseTiquete.equals("TiqLiqui")){
+            tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT cedula,nombres,apellidos,direccion,municipios.nombre FROM personalexterno,municipios,tiquete,detalleliquidacion WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor' GROUP BY personalexterno.cedula");
+        }else{
+            tbl.llenarTabla(BusTiquete.jTable3, modeloagr, columnasAgri.length, "SELECT cedula,nombres,apellidos,direccion,municipios.nombre FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='agricultor'");
+        }
+        }
 
     public void tabla_camposAgricultor(String tiquete) {
         /**int rec = BusTiquete.jTable3.getSelectedRow();

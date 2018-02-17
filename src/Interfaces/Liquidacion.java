@@ -23,6 +23,8 @@ public class Liquidacion extends javax.swing.JFrame {
      */
     public Liquidacion() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         liqui = new liquidacion();
         vali = new validaciones();
         vali.DECIMAL(txtHumedadIdeal);
@@ -87,7 +89,7 @@ public class Liquidacion extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mnGenerar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -512,8 +514,13 @@ public class Liquidacion extends javax.swing.JFrame {
         jMenuItem2.setText("Crear");
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Generar");
-        jMenu1.add(jMenuItem3);
+        mnGenerar.setText("Generar");
+        mnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGenerarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnGenerar);
 
         jMenuBar1.add(jMenu1);
 
@@ -634,6 +641,10 @@ public class Liquidacion extends javax.swing.JFrame {
         liqui.salir();
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
+        liqui.mnGenerarLiquiacion();
+    }//GEN-LAST:event_mnGenerarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -684,7 +695,6 @@ public class Liquidacion extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -706,6 +716,7 @@ public class Liquidacion extends javax.swing.JFrame {
     private javax.swing.JLabel lblTipoImpuesto;
     private javax.swing.JLabel lblTotalKilosCompra;
     private javax.swing.JLabel lblTotalKilosNetos;
+    public javax.swing.JMenuItem mnGenerar;
     public static javax.swing.JTable tblSeleccionLiquidacion;
     public static javax.swing.JTable tblSeleccionTiquete;
     public static javax.swing.JTextField txtAgricultor;

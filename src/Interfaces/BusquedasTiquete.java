@@ -48,8 +48,8 @@ public class BusquedasTiquete extends javax.swing.JFrame {
     public BusquedasTiquete(String tiquete) {
         initComponents();
         setLocationRelativeTo(null);
-        busTiquete = new busquedasTiquete();
         claseTiquete = tiquete;
+        busTiquete = new busquedasTiquete(claseTiquete);
         ext = new extras();
         vali = new validaciones();
         vali.IDENTIFICACION(txtBCedulaVehiculo);
@@ -950,7 +950,7 @@ public class BusquedasTiquete extends javax.swing.JFrame {
         }
 }*/
     private void btnRefrescarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarAgricultorActionPerformed
-        busTiquete.crearModeloAgricultor();
+        busTiquete.crearModeloAgricultor(claseTiquete);
     }//GEN-LAST:event_btnRefrescarAgricultorActionPerformed
 
     private void btnBuscarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAgricultorActionPerformed

@@ -90,14 +90,14 @@ public class verTiquetePrincipal {
         tbl = new tablas();
 
         if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chAgricultor.isSelected() == true && VerTiqPrincipal.chFecha.isSelected()) {
-            if (!tiquete.equals("") && !idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+            if (!tiquete.equals("") && !agricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 //tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
                 tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (VerTiqPrincipal.chTiquete.isSelected() == true && VerTiqPrincipal.chAgricultor.isSelected() == true) {
-            if (!tiquete.equals("") && !idAgricultor.equals("")) {
+            if (!tiquete.equals("") && !agricultor.equals("")) {
                 tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete='" + tiquete + "' AND tiquete.idAgricultor='" + idAgricultor + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -109,7 +109,7 @@ public class verTiquetePrincipal {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (VerTiqPrincipal.chAgricultor.isSelected() == true && VerTiqPrincipal.chFecha.isSelected() == true) {
-            if (!idAgricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+            if (!agricultor.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE tiquete.idAgricultor='" + idAgricultor + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -121,7 +121,7 @@ public class verTiquetePrincipal {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (VerTiqPrincipal.chAgricultor.isSelected() == true) {
-            if (!idAgricultor.equals("")) {
+            if (!agricultor.equals("")) {
                 tbl.llenarTabla(VerTiqPrincipal.tblVerTiqPrincipal, modelVerTiqPrincipal, columnas.length, "SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE tiquete.idAgricultor='" + idAgricultor + "' AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");

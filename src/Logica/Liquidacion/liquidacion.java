@@ -7,6 +7,7 @@ package Logica.Liquidacion;
 
 import Interfaces.BusquedasTiquete;
 import Interfaces.Liquidacion;
+import Interfaces.LiquidacionesAprobadas;
 import Interfaces.Login;
 import Logica.Extras.tablas;
 import Negocio.Conexion;
@@ -28,7 +29,7 @@ import java.util.Date;
  * @author jhonansmith
  */
 public class liquidacion {
-
+    public static LiquidacionesAprobadas LiqAprobadas;
     public static Liquidacion Liqui;
     public static Login Login;
     public static Conexion Con;
@@ -405,6 +406,16 @@ public class liquidacion {
         };
         Liqui.tblSeleccionLiquidacion.setModel(modeloSeleccionLiquidacion);
     }
+    
+    public static void mnGenerarLiquiacion(){
+        if (!(LiqAprobadas instanceof LiquidacionesAprobadas)) {
+            LiqAprobadas = new LiquidacionesAprobadas();
+            LiqAprobadas.setVisible(true);
+        } else {
+            LiqAprobadas.setVisible(true);
+        }
+    }
+    
     public static void salir() {
         Login = new Login();
         Login.setVisible(true);

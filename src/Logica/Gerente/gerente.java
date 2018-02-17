@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Interfaces.Gerente;
 import Interfaces.GerenteApruebaLiquidaciones;
+import Interfaces.LiquidacionesAprobadas;
 import Interfaces.Login;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.Date;
  * @author uriel
  */
 public class gerente {
+    public static LiquidacionesAprobadas LiqAprobada;
     public static Login Login;
     public static GerenteApruebaLiquidaciones GApruebaL;
     public static Conexion Con;
@@ -45,6 +47,16 @@ public class gerente {
             GApruebaL.setVisible(true);
         }
     }
+    
+     public static void mnGenerarLiquidacion() {
+        if (!(LiqAprobada instanceof LiquidacionesAprobadas)) {
+            LiqAprobada = new LiquidacionesAprobadas();
+            LiqAprobada.setVisible(true);
+        } else {
+            LiqAprobada.setVisible(true);
+        }
+    }
+    
 
     public static void salir() {
         Login = new Login();
