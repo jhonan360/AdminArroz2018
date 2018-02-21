@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaces;
-import Logica.Administracion.procedimientoInventario;
+import Logica.Administracion.etapaInventario;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.validaciones;
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Lizeth
  */
 public class ProcedimientoInventario extends javax.swing.JFrame {
- public static procedimientoInventario procedimiento;
+ public static etapaInventario procedimiento;
  public static validaciones vali;
     public static cargarCombo cargar;
     /**
@@ -29,7 +29,7 @@ public class ProcedimientoInventario extends javax.swing.JFrame {
         jfecha.setDate(datep);
         jhora.setTime(datep);
          cargar.silos(cmbsilos);
-         procedimiento = new procedimientoInventario();
+         procedimiento = new etapaInventario();
 
     }
 
