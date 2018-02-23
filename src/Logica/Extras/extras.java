@@ -32,6 +32,7 @@ public class extras {
         }
         return "";
     }
+
     // ATENCION no estoy seguro de este 
     public String getIdDepartamento(String nombre) {// metodo que retorna el id del departamento recibe el nombre del departamento
         try {
@@ -48,6 +49,7 @@ public class extras {
         }
         return "";
     }
+
     // metodo que retorna el nombre del departamento donde reside el usuario se utiliza switch case para determinar la sentencia
     //ATENCION no se si colocar numeros o seguir trabajando con letras
     public String getDepartamento(String opc, String cedula) {
@@ -63,7 +65,7 @@ public class extras {
                 sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,personalexterno WHERE personalexterno.cedula='" + cedula + "' and personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='cnductor')";
                 break;
             case "z":
-                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,lote WHERE lote.idLote='"+cedula+"' and lote.idMunicipio=municipios.idMunicipio)";
+                sentencia = "SELECT departamentos.nombre FROM departamentos WHERE idDepartamento=(SELECT municipios.idDepartamento FROM municipios,lote WHERE lote.idLote='" + cedula + "' and lote.idMunicipio=municipios.idMunicipio)";
                 break;
         }
         try {
@@ -71,7 +73,7 @@ public class extras {
             st = Con.conexion.createStatement();
             rs = st.executeQuery(sentencia);
             while (rs.next()) {
-                res=rs.getString(1);
+                res = rs.getString(1);
                 Con.Desconectar();
                 return res;
             }
@@ -106,7 +108,7 @@ public class extras {
             if (!(telefono2.equals("") || !telefono3.equals(""))) {
                 if (!telefono2.equals(telefono3)) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -115,6 +117,7 @@ public class extras {
             return false;
         }
     }
+
     // metodo para validar la exitencia del usuario en la BD se utiliza switch case para determinar la sentencia
     //ATENCION no se si colocar numeros o seguir trabajando con letras
     public static boolean validar(String opc, String cedula) {
@@ -134,7 +137,7 @@ public class extras {
             case "z":
                 sentencia = "SELECT nombre FROM lote WHERE nombre='" + cedula + "'";
                 break;
-                
+
             case "v":
                 sentencia = "SELECT placa FROM vehiculo WHERE placa='" + cedula + "'";
                 break;
@@ -163,15 +166,16 @@ public class extras {
         }
         return false;
     }
-    public int getNextIndex(String tabla){
-        String id="";
+
+    public int getNextIndex(String tabla) {
+        String id = "";
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='molino' and TABLE_NAME='"+tabla+"'");
+            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='molino' and TABLE_NAME='" + tabla + "'");
             while (rs.next()) {
-               id= rs.getObject(1) + "";
-         }
+                id = rs.getObject(1) + "";
+            }
             Con.Desconectar();
             return Integer.parseInt(id);
         } catch (Exception e) {
@@ -179,12 +183,13 @@ public class extras {
         }
         return 0;
     }
-    public String getIdPersonalExterno(String cedula,String tipo){
+
+    public String getIdPersonalExterno(String cedula, String tipo) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT idPersonalExterno FROM personalexterno WHERE cedula = '" + cedula + "' AND tipo = '"+tipo+"'");
-            String idPersonalExterno="";
+            rs = st.executeQuery("SELECT idPersonalExterno FROM personalexterno WHERE cedula = '" + cedula + "' AND tipo = '" + tipo + "'");
+            String idPersonalExterno = "";
             while (rs.next()) {
                 idPersonalExterno = rs.getString(1);
             }
@@ -195,19 +200,38 @@ public class extras {
         }
         return "";
     }
-    
-    public String getIdPlaca(String placa){
+
+    public String getIdPlaca(String placa) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             rs = st.executeQuery("SELECT idVehiculo FROM vehiculo WHERE placa ='" + placa + "'  ");
-            String idPlaca="";
-                    while (rs.next()) {
-                        idPlaca=rs.getString(1);
-                    }
+            String idPlaca = "";
+            while (rs.next()) {
+                idPlaca = rs.getString(1);
+            }
 
             Con.Desconectar();
             return idPlaca;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String getIdSilo(String nomSeccion,String nSilo) {
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT idSilos FROM silos,seccion WHERE numero ='" + nSilo + "' and seccion.nombre='"+nomSeccion+"' and silos.idSeccion=seccion.idSeccion");
+            String idSilo = "";
+            while (rs.next()) {
+                idSilo = rs.getString(1);
+                System.out.println("ext"+idSilo);
+            }
+
+            Con.Desconectar();
+            return idSilo;
         } catch (Exception e) {
             e.printStackTrace();
         }

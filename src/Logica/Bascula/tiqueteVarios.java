@@ -46,7 +46,7 @@ public class tiqueteVarios {
     public static ConexionBascula ConBascula;
 
     public tiqueteVarios() {
-        ConBascula = new ConexionBascula();
+        //ConBascula = new ConexionBascula();
         ext = new extras();
         tbl = new tablas();
         numeroTiquete();

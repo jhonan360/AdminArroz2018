@@ -179,4 +179,18 @@ public class cargarCombo {
             e.printStackTrace();
         }
     }
+    public void silos(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st7 = Con.conexion.createStatement();
+            rs7=st7.executeQuery("SELECT silos.numero FROM silos");
+            combo.removeAllItems();
+            while(rs7.next()){
+                combo.addItem(rs7.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

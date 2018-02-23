@@ -21,8 +21,8 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
      */
     public VerTiquetePrincipal() {
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
+        
+        
         verTiqPrincipal = new verTiquetePrincipal();
 
     }

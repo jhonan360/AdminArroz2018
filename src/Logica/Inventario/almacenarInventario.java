@@ -8,7 +8,7 @@ package Logica.Inventario;
 import Interfaces.AlmacenarInventario;
 import Interfaces.EtapaInventario;
 import Interfaces.Login;
-import Interfaces.ProcedimientoInventario;
+import Interfaces.ProcedimientosInventario;
 import Interfaces.VerProcedimientoInventario;
 
 /**
@@ -19,7 +19,7 @@ public class almacenarInventario {
 
     public static Login Login;
     public static AlmacenarInventario AlmacenarI;
-    public static ProcedimientoInventario ProcedI;
+    public static ProcedimientosInventario ProcedI;
     public static EtapaInventario EtapaI;
     public static VerProcedimientoInventario VerProcedI;
 
@@ -28,8 +28,8 @@ public class almacenarInventario {
     }
 
     public static void abrirProcedimiento() {
-        if (!(ProcedI instanceof ProcedimientoInventario)) {
-            ProcedI = new ProcedimientoInventario();
+        if (!(ProcedI instanceof ProcedimientosInventario)) {
+            ProcedI = new ProcedimientosInventario();
             ProcedI.setVisible(true);
         } else {
             ProcedI.setVisible(true);

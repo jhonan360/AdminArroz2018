@@ -73,7 +73,7 @@ public class bascula {
     //public static Double kilosBrutoss,destare,kilosNetos;
 
     public bascula() {
-        ConBascula = new ConexionBascula();
+        //ConBascula = new ConexionBascula();
         //numeroTiquete();
         fecha();
         ext = new extras();
