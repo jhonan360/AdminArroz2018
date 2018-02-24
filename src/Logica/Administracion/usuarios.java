@@ -36,7 +36,7 @@ public class usuarios {
     public static Usuarios Usu;
     public static Statement st;
     public static ResultSet rs, rs1, rs2;
-    public static String usuario, contrasena, contraencript, privilegio, estado;
+    public static String usuario, contrasena, confiContrasena, contraencript, privilegio, estado;
 
     public usuarios() {
         tbl = new tablas();
@@ -78,6 +78,7 @@ public class usuarios {
             int rec = Usu.tblUsuario.getSelectedRow();
             Usu.txtUsuario.setText(Usu.tblUsuario.getValueAt(rec, 0).toString());
             Usu.txtContrasena.setText(encrip.decrypt(Usu.tblUsuario.getValueAt(rec, 1).toString()));
+            Usu.txtConfiContraseña.setText(encrip.decrypt(Usu.tblUsuario.getValueAt(rec, 1).toString()));
             Usu.cmbPrivilegio.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 2).toString());
             Usu.cmbEstado.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 3).toString());
         } catch (Exception e) {
@@ -88,6 +89,7 @@ public class usuarios {
     public void limpiar_campos() {
         Usu.txtUsuario.setText("");
         Usu.txtContrasena.setText("");
+        Usu.txtConfiContraseña.setText("");
         Usu.cmbPrivilegio.setSelectedIndex(0);
         Usu.cmbEstado.setSelectedIndex(0);
     }
@@ -96,23 +98,29 @@ public class usuarios {
         usuario = Usu.txtUsuario.getText();
         char[] Pass = Usu.txtContrasena.getPassword();
         contrasena = new String(Pass);
+        char[] Pass1 = Usu.txtConfiContraseña.getPassword();
+        confiContrasena = new String(Pass1);
         privilegio = String.valueOf(Usu.cmbPrivilegio.getSelectedIndex() + 1);
         estado = Usu.cmbEstado.getSelectedItem().toString();
-        if (!usuario.equals("") && !contrasena.equals("")) {
+        if (!usuario.equals("") && !contrasena.equals("") && !confiContrasena.equals("")) {
             // System.out.println("contraseña = "+contrasena);
-            if (!vali.ValidarContrasena(contrasena)) {
-                JOptionPane.showMessageDialog(null, "La contraseña debe tener números y letras con minimo 7 caracteres");
-            } else {
-                try {
-                    contraencript = encrip.encrypt(contrasena);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            if (confiContrasena.equals(contrasena)) {
+                if (!vali.ValidarContrasena(contrasena)) {
+                    JOptionPane.showMessageDialog(null, "La contraseña debe tener números y letras con minimo 7 caracteres");
+                } else {
+                    try {
+                        contraencript = encrip.encrypt(contrasena);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //(System.out.println("sss"+hope );
+                    insertar_usuario(usuario, contraencript, privilegio, estado);
                 }
-                //(System.out.println("sss"+hope );
-                insertar_usuario(usuario, contraencript, privilegio, estado);
+            } else {
+                JOptionPane.showMessageDialog(null, "La contraseña no coincide");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "alguno de los campos se encuentra vacio");
+            JOptionPane.showMessageDialog(null, "Alguno de los campos se encuentra vacio");
 
         }
     }
@@ -150,30 +158,36 @@ public class usuarios {
         usuario = Usu.txtUsuario.getText();
         char[] Pass = Usu.txtContrasena.getPassword();
         contrasena = new String(Pass);
+        char[] Pass1 = Usu.txtConfiContraseña.getPassword();
+        confiContrasena = new String(Pass1);
         privilegio = String.valueOf(Usu.cmbPrivilegio.getSelectedIndex() + 1);
         estado = Usu.cmbEstado.getSelectedItem().toString();
-        if (!usuario.equals("") && !contrasena.equals("")) {
+        if (!usuario.equals("") && !contrasena.equals("") && !confiContrasena.equals("")) {
             int aceptar = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere modificar la informacion del usuario", "Confirmación", JOptionPane.CANCEL_OPTION);
             if (aceptar == JOptionPane.YES_OPTION) {
-                if (!vali.ValidarContrasena(contrasena)) {
-                    JOptionPane.showMessageDialog(null, "La contraseña debe tener números y letras con minimo 7 caracteres");
-                } else {
-                    try {
-                        contraencript = encrip.encrypt(contrasena);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                if (confiContrasena.equals(contrasena)) {
+                    if (!vali.ValidarContrasena(contrasena)) {
+                        JOptionPane.showMessageDialog(null, "La contraseña debe tener números y letras con minimo 7 caracteres");
+                    } else {
+                        try {
+                            contraencript = encrip.encrypt(contrasena);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        actualizar_usuario(usuario, contraencript, privilegio, estado);
+                        contraencript = "";
+                        crearModelo();
+                        limpiar_campos();
                     }
-                    actualizar_usuario(usuario, contraencript, privilegio, estado);
-                    contraencript = "";
-                    crearModelo();
-                    limpiar_campos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña no coincide");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "los cambios seran descartados");
+                JOptionPane.showMessageDialog(null, "Los cambios seran descartados");
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "alguno de los campos se encuentra vacio");
+            JOptionPane.showMessageDialog(null, "Alguno de los campos se encuentra vacio");
         }
     }
 

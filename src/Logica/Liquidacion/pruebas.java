@@ -18,9 +18,9 @@ public class pruebas {
 
     public static void main(String[] args) {
        currencyFormat cu = new currencyFormat();
-       String a=cu.thousandsFormat(2000000);
+       String a=cu.moneyFormat(1979);
         System.out.println(a);
-        System.out.println(cu.notThousandsFormat(a));
+        System.out.println(cu.notMoneyFormat(a));
         /* ConexionBascula b = new ConexionBascula();
         
        

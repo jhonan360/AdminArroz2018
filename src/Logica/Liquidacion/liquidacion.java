@@ -23,12 +23,14 @@ import java.sql.PreparedStatement;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import Logica.Extras.currencyFormat;
 
 /**
  *
  * @author jhonansmith
  */
 public class liquidacion {
+
     public static LiquidacionesAprobadas LiqAprobadas;
     public static Liquidacion Liqui;
     public static Login Login;
@@ -39,19 +41,16 @@ public class liquidacion {
     public DefaultTableModel modeloSeleccionTiquete, modeloSeleccionLiquidacion;
     public String columnasSeleccionTiquete[] = new String[]{"N", "Fecha", "Agricultor", "Valor Carga", "Kilos Netos"};
     public String columnasLiquidacion[] = new String[]{"N", "Kilos Brutos", "Humedad", "Impureza", "Castigo Humedad", "Castigo Impureza", "Peso Compra", "Valor Kilo", "Valor Total"};
-    public tablas tbl;
+    public static tablas tbl;
     public String idAgricultor;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
     long kiloNetos, totalKilosCompra, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar;
-    DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
-    DecimalFormat ft;
+    currencyFormat cu;
 
     public liquidacion() {
+        cu = new currencyFormat();
         ext = new extras();
         tbl = new tablas();
-        simbolo.setDecimalSeparator('.');
-        simbolo.setGroupingSeparator(',');
-        ft = new DecimalFormat("###,###.##", simbolo);
         limpiar();
     }
 
@@ -150,10 +149,10 @@ public class liquidacion {
             this.desAnticipo = 0;
         } else if (!Liqui.txtDesAnticipo.getText().contains(",")) {
             this.desAnticipo = (long) Double.parseDouble(Liqui.txtDesAnticipo.getText());
-            Liqui.txtDesAnticipo.setText(ft.format(desAnticipo));
+            Liqui.txtDesAnticipo.setText(cu.moneyFormat(desAnticipo));
         } else {
-            desAnticipo = (long) Double.parseDouble(Liqui.txtDesAnticipo.getText().replace(",", ""));
-            Liquidacion.txtDesAnticipo.setText(ft.format(desAnticipo));
+            desAnticipo = (long) Double.parseDouble(cu.notMoneyFormat(Liqui.txtDesAnticipo.getText()));
+            Liquidacion.txtDesAnticipo.setText(cu.moneyFormat(desAnticipo));
         }
         if (row > 0) {
             humedadIdeal = Liqui.txtHumedadIdeal.getText();
@@ -180,7 +179,7 @@ public class liquidacion {
                         String valorCarga = rs.getString(4);
                         String kilosNetos = rs.getString(5);
                         Vector[0] = idTiquete;
-                        Vector[1] = ft.format(Double.parseDouble(kilosNetos));
+                        Vector[1] = cu.thousandsFormat(Double.parseDouble(kilosNetos));
                         Vector[2] = humedad;
                         Vector[3] = impureza;
                         double castigoHumedad;
@@ -203,11 +202,11 @@ public class liquidacion {
                         }
                         double kiloNetos = Double.parseDouble(kilosNetos);
                         double pesoCompra = Math.round(castigoHumedad * castigoImpureza * kiloNetos);
-                        Vector[6] = String.valueOf(ft.format(pesoCompra));
+                        Vector[6] = String.valueOf(cu.thousandsFormat(pesoCompra));
                         double valorKilo = Double.parseDouble(valorCarga) / 125;
-                        Vector[7] = String.valueOf(ft.format(valorKilo));
+                        Vector[7] = String.valueOf(cu.moneyFormat(valorKilo));
                         long valorTotal = (long) (pesoCompra * valorKilo);
-                        Vector[8] = String.valueOf(ft.format(valorTotal));
+                        Vector[8] = String.valueOf(cu.moneyFormat(valorTotal));
                         this.kiloNetos += kiloNetos;
                         this.totalKilosCompra += pesoCompra;
                         this.subTotal += valorTotal;
@@ -222,12 +221,12 @@ public class liquidacion {
                 this.valorImpuesto = (long) ((long) this.subTotal * impuesto);
                 this.valorFomArrocero = (long) (this.subTotal * fomArroz);
                 this.netoPagar = (long) (subTotal - this.valorFomArrocero - this.valorImpuesto - this.desAnticipo);
-                Liqui.txtTotalKilosNeto.setText(String.valueOf(ft.format(this.kiloNetos)));
-                Liqui.txtTotalKilosCompra.setText(String.valueOf(ft.format(this.totalKilosCompra)));
-                Liqui.txtSubTotal.setText(String.valueOf(ft.format(this.subTotal)));
-                Liqui.txtFomArroceroLiqui.setText(String.valueOf(ft.format(this.valorFomArrocero)));
-                Liqui.txtImpuestoLiqui.setText(String.valueOf(ft.format(this.valorImpuesto)));
-                Liqui.txtNetoPagar.setText(String.valueOf(ft.format(this.netoPagar)));
+                Liqui.txtTotalKilosNeto.setText(String.valueOf(cu.thousandsFormat(this.kiloNetos)));
+                Liqui.txtTotalKilosCompra.setText(String.valueOf(cu.thousandsFormat(this.totalKilosCompra)));
+                Liqui.txtSubTotal.setText(String.valueOf(cu.moneyFormat(this.subTotal)));
+                Liqui.txtFomArroceroLiqui.setText(String.valueOf(cu.moneyFormat(this.valorFomArrocero)));
+                Liqui.txtImpuestoLiqui.setText(String.valueOf(cu.moneyFormat(this.valorImpuesto)));
+                Liqui.txtNetoPagar.setText(String.valueOf(cu.moneyFormat(this.netoPagar)));
                 Con.Desconectar();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -249,8 +248,8 @@ public class liquidacion {
                         Vector[0] = rs.getString(1);
                         Vector[1] = rs.getString(2);
                         Vector[2] = rs.getString(3);
-                        Vector[3] = ft.format(Double.parseDouble(rs.getString(4)));
-                        Vector[4] = ft.format(Double.parseDouble(rs.getString(5)));
+                        Vector[3] = cu.moneyFormat(Double.parseDouble(rs.getString(4)));
+                        Vector[4] = cu.thousandsFormat(Double.parseDouble(rs.getString(5)));
                         for (int j = 0; j < columnasSeleccionTiquete.length; j++) {
                             Liqui.tblSeleccionTiquete.setValueAt(Vector[j], i, j);
                         }
@@ -349,14 +348,14 @@ public class liquidacion {
             st = Con.conexion.createStatement();
             for (int i = 0; i < row; i++) {
                 String idTiquete = Liqui.tblSeleccionLiquidacion.getValueAt(i, 0).toString();
-                String kilosNetos = Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString().replace(",", "");
+                String kilosNetos = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString());
                 String humedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 2).toString();
                 String impureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 3).toString();
                 String castigoHumedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 4).toString();
                 String castigoImpureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 5).toString();
-                String pesoCompra = Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString().replace(",", "");
-                String valorKilo = Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString().replace(",", "");
-                String valorTotal = Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString().replace(",", "");
+                String pesoCompra = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString());
+                String valorKilo = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString());
+                String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString());
                 st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
                 if (i == row - 1) {
                     JOptionPane.showMessageDialog(null, "Creación exitosa");
@@ -406,8 +405,8 @@ public class liquidacion {
         };
         Liqui.tblSeleccionLiquidacion.setModel(modeloSeleccionLiquidacion);
     }
-    
-    public static void mnGenerarLiquiacion(){
+
+    public static void mnGenerarLiquiacion() {
         if (!(LiqAprobadas instanceof LiquidacionesAprobadas)) {
             LiqAprobadas = new LiquidacionesAprobadas();
             LiqAprobadas.setVisible(true);
@@ -415,7 +414,7 @@ public class liquidacion {
             LiqAprobadas.setVisible(true);
         }
     }
-    
+
     public static void salir() {
         Login = new Login();
         Login.setVisible(true);
