@@ -82,7 +82,7 @@ public class verTiqueteVarios {
     public void crearModeloEntradas() {
         modelEntradas = new DefaultTableModel(null, columnasEntradas) {
             public boolean isCellEditable(int fila, int columna) {
-                return true;
+                return false;
             }
         };
         VerTiqVarios.tblEntradas.setModel(modelEntradas);

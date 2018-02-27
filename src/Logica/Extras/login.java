@@ -22,6 +22,7 @@ import Logica.Auditor.auditor;
 import Interfaces.Auditor;
 import Logica.Extras.StringEncrypt;
 import Interfaces.Administracion;
+import Interfaces.AlmacenarInventario;
 import Interfaces.Gerencia;
 import Negocio.Conexion;
 import java.sql.ResultSet;
@@ -30,8 +31,8 @@ import javax.swing.JOptionPane;
 import Logica.Extras.log;
 import Logica.Laboratorio.laboratorio_menu;
 
-
 public class login {
+
     public static Gerente ger;
     public static Interfaces.Login log;
     public static laboratorio_menu labor;
@@ -45,6 +46,7 @@ public class login {
     public static bascula Bas;
     public static conductor cond;
     public static Administracion admi;
+    public static AlmacenarInventario Inventario;
 
     public static Liquidacion Liqui;
     public static Gerencia Ger;
@@ -79,7 +81,7 @@ public class login {
     public void limpiar_campos() {
         log.txtcontra.setText("");
         log.txtusuario.setText("");
-        
+
     }
 
     boolean Validar(String usuario, String Contraseña) {
@@ -94,10 +96,10 @@ public class login {
                 } else {
                     System.out.println("Usuario encontrado");
                     rs = st.executeQuery("SELECT * FROM usuario,empleado WHERE usuario.user=empleado.user AND usuario.user = '" + usuario + "'");
-                      if (!rs.next()) {
-                          JOptionPane.showMessageDialog(null, "El usuario no existe o esta inhabilitado");
-                          return false;
-                      }
+                    if (!rs.next()) {
+                        JOptionPane.showMessageDialog(null, "El usuario no existe o esta inhabilitado");
+                        return false;
+                    }
                     rs1 = st.executeQuery("SELECT privilegios.nombre from usuario, privilegios where usuario.user = '" + usu + "' and usuario.idPrivilegios = privilegios.idPrivilegios");
                     if (rs1.next()) {
                         priv = rs1.getObject(1) + "";
@@ -108,7 +110,7 @@ public class login {
                         estado = rs2.getObject(1) + "";
                         System.out.print("estado" + estado);
                     }
-                    if (priv.equals("basculista") && estado.equals("activo") ) {
+                    if (priv.equals("basculista") && estado.equals("activo")) {
                         if (bas == null) {
                             bas = new Bascula();
                             bas.setVisible(true);
@@ -121,7 +123,7 @@ public class login {
                             bas.setVisible(true);
                         }
                         bandera = true;
-                    } else if (priv.equals("administrador") && estado.equals("activo") ) {
+                    } else if (priv.equals("administrador") && estado.equals("activo")) {
                         if (admi == null) {
                             admi = new Administracion();
                             admi.setVisible(true);
@@ -145,7 +147,7 @@ public class login {
                             ger.setVisible(true);
                         }
                         bandera = true;
-                    } else if (priv.equals("auditor") && estado.equals("activo") ) {
+                    } else if (priv.equals("auditor") && estado.equals("activo")) {
                         if (audi == null) {
                             audi = new Auditor();
                             audi.setVisible(true);
@@ -154,7 +156,7 @@ public class login {
                             audi.setVisible(true);
                         }
                         bandera = true;
-                    /*} else if (priv.equals("supervisor") && estado.equals("activo")) {
+                        /*} else if (priv.equals("supervisor") && estado.equals("activo")) {
                         if (supe == null) {
                             supe = new Auditor();
                             supe.setVisible(true);
@@ -167,9 +169,18 @@ public class login {
                         if (Liqui == null) {
                             Liqui = new Liquidacion();
                             Liqui.setVisible(true);
-                        enviarUsuario();
+                            enviarUsuario();
                         } else {
                             Liqui.setVisible(true);
+                        }
+                        bandera = true;
+                    } else if (priv.equals("molinero") && estado.equals("activo")) {
+                        if (Inventario == null) {
+                            Inventario = new AlmacenarInventario();
+                            Inventario.setVisible(true);
+                            enviarUsuario();
+                        } else {
+                            Inventario.setVisible(true);
                         }
                         bandera = true;
                     } else {
@@ -190,7 +201,7 @@ public class login {
             e.printStackTrace();
             return false;
         }
-       /* if (usuario2.equals("")) {
+        /* if (usuario2.equals("")) {
             usuario2 = usuario;
         }
         if (contIntentos < 3 && usuario2.equals(usuario)) {
@@ -218,7 +229,7 @@ public class login {
 
         JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");*/
         return false;
-    
+
     }
 
     public static String enviarUsuario() {

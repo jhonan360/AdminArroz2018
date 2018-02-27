@@ -6,6 +6,7 @@
 package Logica.Inventario;
 
 import Interfaces.ProcedimientosInventario;
+import Logica.Extras.currencyFormat;
 import Negocio.Conexion;
 import Logica.Extras.tablas;
 import Logica.Extras.extras;
@@ -33,14 +34,19 @@ public class procedimientosInventario {
     public static Conexion Con;
     public static tablas tbl;
     public static DefaultTableModel modelSilos, modelProcedimientos;
-    public static String columSilos[] = new String[]{"Bateria", "Sección", "Silo", "Kilos Actuales"};
-    public static String columProcedimientos[] = new String[]{"N°", "Bateria", "Sección", "Silo", "Kg", "Fecha", "Hora"};
+    public static String columSilos[] = new String[]{"Bateria", "Sección", "Silo", "Kg Actuales"};
+    public static String alinearHeaderSilos[] = new String[]{"default", "default", "default", "default"};
+    public static String alinearCampoSilos[] = new String[]{"center", "center", "center", "right"};
+    public static String columProcedimientos[] = new String[]{"N°", "Bateria", "Sección", "Silo", "Kg Actuales", "Fecha", "Hora"};
+    public static String alinearHeaderProced[] = new String[]{"30", "50", "50", "40", "80", "default", "default"};
+    public static String alinearCampoPoced[] = new String[]{"center", "center", "center", "center", "right", "center", "center"};
     public static String idProcedimiento, idSilo, nSilo, kilos, fecha, hora, nomSeccion;
+    public static currencyFormat cu;
 
     public procedimientosInventario() {
         ext = new extras();
         tbl = new tablas();
-
+        cu = new currencyFormat();
         crearModeloSilos();
         crearModeloProcedimientos();
     }
@@ -77,8 +83,19 @@ public class procedimientosInventario {
                 return false;
             }
         };
-        tbl = new tablas();
         tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,seccion.nombre,silos.numero,silos.kilos FROM bateria,seccion,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos) AND silos.kilos<>0.00 AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria");
+        tbl.alinearHeaderTable(ProcedI.tblSilos, alinearHeaderSilos);
+        tbl.alinearCamposTable(ProcedI.tblSilos, alinearCampoSilos);
+        formatoTablaSilos();
+    }
+    
+    public static void formatoTablaSilos() {
+        int row = ProcedI.tblSilos.getRowCount();
+        for (int i = 0; i < row; i++) {
+            kilos = ProcedI.tblSilos.getValueAt(i, 3).toString();
+            kilos = cu.thousandsFormat(Double.parseDouble(kilos));
+            ProcedI.tblSilos.setValueAt(kilos, i, 3);
+        }
     }
 
     public void completarCamposConTblSilos() {
@@ -99,8 +116,19 @@ public class procedimientosInventario {
                 return false;
             }
         };
-        tbl = new tablas();
         tbl.llenarTabla(ProcedI.tblProcedimiento, modelProcedimientos, columProcedimientos.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE procedimiento.estado='proceso' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+        tbl.alinearHeaderTable(ProcedI.tblProcedimiento, alinearHeaderProced);
+        tbl.alinearCamposTable(ProcedI.tblProcedimiento, alinearCampoPoced);
+        formatoTablaProced();
+    }
+    
+    public static void formatoTablaProced() {
+        int row = ProcedI.tblProcedimiento.getRowCount();
+        for (int i = 0; i < row; i++) {
+            kilos = ProcedI.tblProcedimiento.getValueAt(i, 4).toString();
+            kilos = cu.thousandsFormat(Double.parseDouble(kilos));
+            ProcedI.tblProcedimiento.setValueAt(kilos, i, 4);
+        }
     }
 
     public void completarCamposConTblProcedimientos() {
@@ -147,6 +175,7 @@ public class procedimientosInventario {
         System.out.println("proced " + idProcedimiento);
         System.out.println("nsilo " + nSilo);
         System.out.println("idSilo " + idSilo);
+        System.out.println("kilos " + kilos);
         System.out.println("fecha " + fecha);
         System.out.println("hora " + hora);
         if (!idProcedimiento.equals("") && !idSilo.equals("") && !fecha.equals("") && !kilos.equals("")) {
@@ -167,8 +196,8 @@ public class procedimientosInventario {
             } else {
                 JOptionPane.showMessageDialog(null, "Establezca una hora diferente a 00:00");
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Seleccione un registro para "+accion);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un registro para " + accion);
         }
 
     }

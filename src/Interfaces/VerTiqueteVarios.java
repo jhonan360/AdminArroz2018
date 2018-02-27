@@ -96,11 +96,6 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(710, 123));
 
         txtTiquete.setEditable(false);
-        txtTiquete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTiqueteActionPerformed(evt);
-            }
-        });
 
         chTiquete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         chTiquete.setText("N° Tiquete");
@@ -320,10 +315,6 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTiqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTiqueteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTiqueteActionPerformed
 
     private void chTiqueteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chTiqueteItemStateChanged
         if (chTiquete.isSelected() == true) {
