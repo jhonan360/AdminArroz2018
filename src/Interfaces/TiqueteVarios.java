@@ -10,6 +10,7 @@ import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
 import Logica.Bascula.tiqueteVarios;
 import Logica.Extras.validaciones;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -32,7 +33,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         tiqVarios = new tiqueteVarios();
         tiqVarios.numeroTiquete();
-        vali= new validaciones();
+        vali = new validaciones();
         vali.TELEFONOS(txtCantidad);
         (task = new aTask()).execute();
     }
@@ -85,6 +86,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -435,10 +437,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 11, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(10, 10, 10))))
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
@@ -449,6 +450,14 @@ public class TiqueteVarios extends javax.swing.JFrame {
             }
         });
 
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
+        btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -456,7 +465,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createSequentialGroup()
@@ -475,7 +487,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(6, 6, 6))
         );
 
@@ -752,9 +766,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradasMouseClicked
-        //tiqVarios.tabla_campos();
+        tiqVarios.tabla_campos();
         tblEntradas.setRowSelectionAllowed(true);
-        tblEntradas.setCellSelectionEnabled(true);
+        //tblEntradas.setCellSelectionEnabled(true);
     }//GEN-LAST:event_tblEntradasMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -780,18 +794,17 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEntradasKeyReleased
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        
         tiqVarios.limpiarRegistrosEntradas();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+        tiqVarios.modificarEntradas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tblSegundoPesajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSegundoPesajeMouseClicked
         tiqVarios.limpiarRegistros();
         tiqVarios.crearModelo();
-        tiqVarios.tablaCampos_SegundoPesaje("SegundoPesaje");      
+        tiqVarios.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeMouseClicked
 
     private void tblSegundoPesajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSegundoPesajeKeyReleased
@@ -799,6 +812,14 @@ public class TiqueteVarios extends javax.swing.JFrame {
         tiqVarios.crearModelo();
         tiqVarios.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeKeyReleased
+
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        btnCapturarKilosBrutos.setEnabled(true);
+        btnCapturarDestare.setEnabled(true);
+        tiqVarios.limpiarRegistros();
+        tiqVarios.limpiarRegistrosEntradas();
+        tiqVarios.numeroTiquete();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -834,7 +855,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private class aTask extends SwingWorker<Double, Void> {
 
         @Override
@@ -862,8 +883,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
     public static javax.swing.JButton btnCapturarKilosBrutos;
     public static javax.swing.JButton btnEliminar;
     public static javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificar;
+    public static javax.swing.JButton btnLimpiar;
+    public static javax.swing.JButton btnModificar;
+    public static javax.swing.JButton btnRefrescar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -875,13 +897,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -896,7 +915,6 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

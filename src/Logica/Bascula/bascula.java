@@ -54,7 +54,7 @@ public class bascula {
     public static String columEspera[] = new String[]{"N", "Agricultor", "Tipo Arroz"};
     public static String columSegundoPesaje[] = new String[]{"N", "Agricultor", "KL Brutos"};
     public static DefaultTableModel modeloentrada, modeloSegundoPesaje;
-    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos,empaque;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -204,6 +204,8 @@ public class bascula {
 
         estado = true;
         int rec = Bas.tblEspera.getSelectedRow();
+        Bas.btnCapturarInicial.setEnabled(true);
+        Bas.btnCapturarFinal.setEnabled(true);
         idTiqueteEspera = Bas.tblEspera.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.txtAgricultor.setText(Bas.tblEspera.getValueAt(rec, 1).toString());
@@ -247,6 +249,8 @@ public class bascula {
     public void tablaCampos_SegundoPesaje(String SegundoPeso) {
         estado = false;
         int rec = Bas.tblSegundoPesaje.getSelectedRow();
+        Bas.btnCapturarInicial.setEnabled(false);
+        Bas.btnCapturarFinal.setEnabled(true);
         idTiqueteEspera = Bas.tblSegundoPesaje.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.txtAgricultor.setText(Bas.tblSegundoPesaje.getValueAt(rec, 1).toString());
@@ -360,6 +364,7 @@ public class bascula {
         fecha = fecha();
         lote = String.valueOf(Bascula.cmbLote.getSelectedIndex() + 1);
         tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
+        empaque =String.valueOf(Bascula.cmbEmpaque.getSelectedIndex()+1);
         user = login.enviarUsuario();
         conductor = idConductor;
         /**
@@ -388,6 +393,7 @@ public class bascula {
         System.out.println("observacion " + observacion);
         System.out.println("kilosBrutoss " + kilosBrutos);
         System.out.println("destare " + destare);
+        System.out.println("empaque " + empaque);
         System.out.println("kilsNetos " + kilosNetos);
 
         if (idTiquete.equals("")) {
@@ -395,10 +401,10 @@ public class bascula {
         } else {
             switch (estadoTiquete) {
                 case "enEspera":
-                    if (!fecha.equals("") && agricultor != null && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && conductor != null && !placa.equals("") && !kilosBrutos.equals("")) {
+                    if (!fecha.equals("") && agricultor != null && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && conductor != null && !placa.equals("") && !kilosBrutos.equals("") && !empaque.equals("")) {
                         placa = ext.getIdPlaca(placa);
                         System.out.println("placa " + placa);
-                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos,empaque);//Llamado al metodo insertar
                         limpiarRegistros();
                     } else {
                         JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -406,10 +412,10 @@ public class bascula {
                     break;
 
                 case "segundoPesaje":
-                    if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")) {
+                    if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00")&& !empaque.equals("")) {
                         placa = ext.getIdPlaca(placa);
                         System.out.println("placa " + placa);
-                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos,empaque);//Llamado al metodo insertar
                         limpiarRegistros();
                     } else {
                         JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -419,11 +425,11 @@ public class bascula {
         }
     }
 
-    public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos) {
+    public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos,String empaque) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tiquete SET idAgricultor='" + agricultor + "',idLote='" + lote + "',idVehiculo='" + placa + "',idConductor='" + conductor + "',user='" + user + "',fecha='" + fecha + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "',observacion='" + observacion + "' WHERE idTiquete='" + idTiquete + "'");
+            st.executeUpdate("UPDATE tiquete SET idAgricultor='" + agricultor + "',idLote='" + lote + "',idVehiculo='" + placa + "',idConductor='" + conductor + "',user='" + user + "',fecha='" + fecha + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "',observacion='" + observacion + "',empaque='"+empaque+"' WHERE idTiquete='" + idTiquete + "'");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
         } catch (Exception e) {
             e.printStackTrace();
@@ -438,6 +444,7 @@ public class bascula {
         Bas.txtConductor.setText("");
         Bas.txtPlaca.setText("");
         Bas.txtObservacion.setText("");
+        Bas.cmbEmpaque.setSelectedIndex(0);
         Bas.txtPesoInicial.setText("");
         Bas.txtPesoFinal.setText("");
         Bas.txtPesoNeto.setText("");

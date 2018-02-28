@@ -69,22 +69,9 @@ public class verProcedimientoInventario {
     public void formatoTablaProced() {
         int row = VerProcedI.tblVerProcedI.getRowCount();
         for (int i = 0; i < row; i++) {
-            kilos = VerProcedI.tblVerProcedI.getValueAt(i, 3).toString();
+            kilos = VerProcedI.tblVerProcedI.getValueAt(i, 4).toString();
             kilos = cu.thousandsFormat(Double.parseDouble(kilos));
-            VerProcedI.tblVerProcedI.setValueAt(kilos, i, 3);
-        }
-    }
-
-    public void tablaCamposEtapa() {
-        int rec = VerProcedI.tblVerProcedI.getSelectedRow();
-        idProcedimiento = VerProcedI.tblVerProcedI.getValueAt(rec, 0).toString();
-        try {
-            Con = new Conexion();
-            tbl = new tablas();
-            tbl.llenarTabla(VerProcedI.tblEtapas, modelEtapas, columnEtapas.length, "SELECT idHistorialEtapa,etapa,fecha,hora,humedad from etapa where etapa.idProcedimiento='" + idProcedimiento + "'");
-            Con.Desconectar();
-        } catch (Exception e) {
-            e.printStackTrace();
+            VerProcedI.tblVerProcedI.setValueAt(kilos, i, 4);
         }
     }
 
@@ -96,6 +83,19 @@ public class verProcedimientoInventario {
         };
         VerProcedI.tblEtapas.setModel(modelEtapas);
         tbl.alinearCamposTable(VerProcedI.tblEtapas, alineaCampoEtapas);
+    }
+    
+    public void tablaCamposEtapa() {
+        int rec = VerProcedI.tblVerProcedI.getSelectedRow();
+        idProcedimiento = VerProcedI.tblVerProcedI.getValueAt(rec, 0).toString();
+        try {
+            Con = new Conexion();
+            tbl = new tablas();
+            tbl.llenarTabla(VerProcedI.tblEtapas, modelEtapas, columnEtapas.length, "SELECT idHistorialEtapa,etapa,fecha,hora,humedad from etapa where etapa.idProcedimiento='" + idProcedimiento + "'");
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void buscar() {

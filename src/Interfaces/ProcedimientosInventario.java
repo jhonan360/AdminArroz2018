@@ -18,7 +18,7 @@ import java.util.Date;
 public class ProcedimientosInventario extends javax.swing.JFrame {
 
     public static procedimientosInventario procedI;
-
+    public static boolean cerrar=false;
     /**
      * Creates new form ProcedimientoInventario
      */
@@ -489,6 +489,9 @@ public class ProcedimientosInventario extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         procedI.accionProcedimiento("crear");
         procedI.numeroProcedimiento();
+        if(cerrar){
+            dispose();
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void tblSilosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSilosKeyReleased

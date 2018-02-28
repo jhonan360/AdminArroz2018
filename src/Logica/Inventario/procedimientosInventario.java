@@ -5,6 +5,7 @@
  */
 package Logica.Inventario;
 
+import Interfaces.EtapaInventario;
 import Interfaces.ProcedimientosInventario;
 import Logica.Extras.currencyFormat;
 import Negocio.Conexion;
@@ -27,6 +28,7 @@ import javax.swing.JOptionPane;
 public class procedimientosInventario {
 
     public static ProcedimientosInventario ProcedI;
+    public static EtapaInventario Etapa;
     public static extras ext;
     public static login login;
     public static ResultSet rs;
@@ -88,7 +90,7 @@ public class procedimientosInventario {
         tbl.alinearCamposTable(ProcedI.tblSilos, alinearCampoSilos);
         formatoTablaSilos();
     }
-    
+
     public static void formatoTablaSilos() {
         int row = ProcedI.tblSilos.getRowCount();
         for (int i = 0; i < row; i++) {
@@ -121,7 +123,7 @@ public class procedimientosInventario {
         tbl.alinearCamposTable(ProcedI.tblProcedimiento, alinearCampoPoced);
         formatoTablaProced();
     }
-    
+
     public static void formatoTablaProced() {
         int row = ProcedI.tblProcedimiento.getRowCount();
         for (int i = 0; i < row; i++) {
@@ -171,13 +173,6 @@ public class procedimientosInventario {
         fecha = ProcedI.txtFecha.getText();
         hora = ProcedI.jTimeHora.getFormatedTime();
 
-        //Valida que ningun campo este vacio
-        System.out.println("proced " + idProcedimiento);
-        System.out.println("nsilo " + nSilo);
-        System.out.println("idSilo " + idSilo);
-        System.out.println("kilos " + kilos);
-        System.out.println("fecha " + fecha);
-        System.out.println("hora " + hora);
         if (!idProcedimiento.equals("") && !idSilo.equals("") && !fecha.equals("") && !kilos.equals("")) {
             if (!hora.equals("00:00")) {
                 switch (accion) {
@@ -207,7 +202,13 @@ public class procedimientosInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
-            JOptionPane.showMessageDialog(null, "Procedimiento creado");
+            int respuesta = JOptionPane.showConfirmDialog(null, "                  Procedimiento creado \n ¿Desea crear las etapas correspondientes?", "Confirmación", JOptionPane.CANCEL_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                ProcedI.cerrar = true;
+                Etapa = new EtapaInventario();
+                Etapa.setVisible(true);
+                //Emp.txtUsuario.setText(usuario);
+            }
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();

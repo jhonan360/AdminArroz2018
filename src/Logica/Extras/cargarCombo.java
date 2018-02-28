@@ -205,7 +205,6 @@ public class cargarCombo {
             while (rs8.next()) {
                 Object objeto = new Object();
                 objeto = rs8.getObject(1);
-                // System.out.println(rs.getString(1));
                 combo.addItem(objeto);
             }
             combo.setSelectedItem("A");
@@ -239,5 +238,4 @@ public class cargarCombo {
             return false;
         }
     }
-
 }
