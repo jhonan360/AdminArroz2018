@@ -243,7 +243,7 @@ public class laboratorio {
         if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!danado.equals("")&&!ip.equals("")){
             insertar_inicial(idTiquete,user,estado,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
             limpiar_campos();
-            
+            crearModelo3();
         }else{
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
