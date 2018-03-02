@@ -225,9 +225,9 @@ public class login {
 
         }
         log.lblIntentos.setText(Integer.toString(contIntentos));
-        System.out.println(contIntentos + " " + usuario2 + " " + usuario);
+        System.out.println(contIntentos + " " + usuario2 + " " + usuario);*/
 
-        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");*/
+        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
         return false;
 
     }
