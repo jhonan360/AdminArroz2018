@@ -240,10 +240,11 @@ public class laboratorio {
         ip = Laboratorio.TxtIp.getText();
         
         
-        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!danado.equals("")&&!ip.equals("")){
+        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!ip.equals("")){
             insertar_inicial(idTiquete,user,estado,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
             limpiar_campos();
             crearModelo3();
+            actualizar();
         }else{
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
@@ -315,6 +316,7 @@ public class laboratorio {
         if (!IDLaboratorio.equals("")&&!muestreo.equals("")&&!hora.equals("")&&!humedadEstufa.equals("")){
             estado_tiquete();
             actualizar();
+            
             
         }
         
