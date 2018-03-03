@@ -10,66 +10,52 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author uriel
- */
-
-
 public class Conexion {
-    
+
     public static Connection conexion;
     public static Connection conexionInformation;
-    public Conexion(){
+    public static String BD = "admiarroz";
+
+    public Conexion() {
         Conectar();
     }
-    
-    public void Conectar(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-//<<<<<<< Updated upstream
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/admiarroz","root","molino");
-//=======
- //           conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/admiarroz","root","root");
-//>>>>>>> Stashed changes
-            //JOptionPane.showMessageDialog(null, "Conexion Exitosa");
-        }catch(Exception e){
+    public void Conectar() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/" + BD, "root", "root");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-  
-    public void Desconectar(){
-        try{
-            if(conexion != null){
+
+    public void Desconectar() {
+        try {
+            if (conexion != null) {
                 conexion.close();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-      
-    /*public void ConectarInformation(){
-        try{
+
+    public void ConectarInformation() {
+        try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexionInformation = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/information_schema","root","");
-            //JOptionPane.showMessageDialog(null, "Conexion Exitosa");
-        }catch(Exception e){
+            conexionInformation = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/information_schema", "root", "root");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void DesconectarInformation(){
-        try{
-            if(conexionInformation != null){
+
+    public void DesconectarInformation() {
+        try {
+            if (conexionInformation != null) {
                 conexionInformation.close();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
-    
-    
-    
+    }
+
 }

@@ -10,6 +10,7 @@ import java.text.DecimalFormatSymbols;
 import Negocio.ConexionBascula;
 import java.util.Scanner;
 import Logica.Extras.currencyFormat;
+import Logica.Extras.extras;
 /**
  *
  * @author jhonansmith
@@ -17,7 +18,9 @@ import Logica.Extras.currencyFormat;
 public class pruebas {
 
     public static void main(String[] args) {
-       currencyFormat cu = new currencyFormat();
+        extras ext = new extras();
+        System.out.println("id= "+ext.getNextIndex("tipodearroz"));
+        /* currencyFormat cu = new currencyFormat();
        String a=cu.moneyFormat(1979);
         System.out.println(a);
         System.out.println(cu.notMoneyFormat(a));
