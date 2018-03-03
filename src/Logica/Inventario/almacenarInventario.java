@@ -41,13 +41,14 @@ public class almacenarInventario {
     String alineaHeader[] = new String[]{"10", "default", "default", "default"};
     String alineaCampo[] = new String[]{"center", "center", "left", "right"};
     DefaultTableModel modeloTabla;
-    String idTiquete, movimientos = "";
+    String idTiquete = "", movimientos = "";
+    int lastIndex;
     double pesoActual = 0;
     double A1[][] = new double[5][3];
     double A2[][] = new double[5][3];
     double A3[][] = new double[5][3];
     double A4[][] = new double[5][3];
-    
+
     currencyFormat cu;
 
     public almacenarInventario() {
@@ -188,13 +189,30 @@ public class almacenarInventario {
     }
 
     public void tablaCampos() {
-        limpiar();
         int rec = AlmacenarI.tblMateriaPrima.getSelectedRow();
-        idTiquete = AlmacenarI.tblMateriaPrima.getValueAt(rec, 0).toString();
+        String idtiquete = AlmacenarI.tblMateriaPrima.getValueAt(rec, 0).toString();
+        if (!idTiquete.equals("") && !movimientos.equals("")) {
+            if (!idTiquete.equals(idtiquete)) {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿desea cambiar de tiquete?", "Confirmación", JOptionPane.CANCEL_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    seleccionarFila(rec, idtiquete);
+                } else {
+                    AlmacenarI.tblMateriaPrima.setRowSelectionInterval(lastIndex,lastIndex);
+                }
+            }
+        } else {
+            seleccionarFila(rec, idtiquete);
+        }
+    }
+
+    public void seleccionarFila(int rec, String idtiquete) {
+        limpiar();
+        idTiquete = idtiquete;
         AlmacenarI.lblPesoActual.setText(AlmacenarI.tblMateriaPrima.getValueAt(rec, 3).toString());
-        pesoActual = Double.parseDouble(AlmacenarI.lblPesoActual.getText());
+        pesoActual = Double.parseDouble(cu.notThousandsFormat(AlmacenarI.lblPesoActual.getText()));
         cargarSilos();
         print();
+        lastIndex = rec;
     }
 
     public void seleccionarSilo(JProgressBar progressBar) {
@@ -230,7 +248,7 @@ public class almacenarInventario {
                     silo[fila][2] = 0;
                     movimientos = movimientos.replace("," + nameSilo + ",", "");
                     progressBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
-                    AlmacenarI.lblPesoActual.setText(String.valueOf(pesoActual));
+                    AlmacenarI.lblPesoActual.setText(cu.thousandsFormat(pesoActual));
                     print();
                 }
             }
@@ -356,11 +374,13 @@ public class almacenarInventario {
     public void limpiar() {
         pesoActual = 0;
         movimientos = "";
+        idTiquete="";
         // Bateria A
         AlmacenarI.A11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
+        AlmacenarI.A15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A26.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A27.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
         AlmacenarI.A28.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
