@@ -668,7 +668,6 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnEditarAgricultor" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtFecha" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="txtPlaca" max="32767" attributes="0"/>
@@ -680,6 +679,7 @@
                                       <Component id="btnBuscarPlaca" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="txtFecha" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>

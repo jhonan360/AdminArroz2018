@@ -29,8 +29,8 @@ public class etapaInventario {
     public static Conexion Con;
     public DefaultTableModel modeloemp,modeloemp2;
     public static cargarCombo cargar;
-    public String columnas[] = new String[]{"N° procedimiento","N° silo","Fecha,hora,estado"};
-    public String columnas2[] = new String[]{"N°","Etapa","Fecha,hora,Humedad"};
+    public String columnas[] = new String[]{"N° procedimiento","N° silo","Fecha","hora","estado"};
+    public String columnas2[] = new String[]{"N°","Etapa","Fecha","hora","Humedad"};
     public static tablas tbl;
     public static String idSilos,idProcedimiento;
     public etapaInventario(){
@@ -114,7 +114,7 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jtablependiente, modeloemp, columnas.length, "SELECT idProcedimiento, idSilos, fecha,hora,estado FROM procedimiento WHERE estado = 'proceso'");
+        tbl.llenarTabla(Procedimiento.jtablecreadas, modeloemp, columnas.length, "SELECT idProcedimiento, idSilos, fecha,hora,estado FROM procedimiento WHERE estado = 'proceso'");
 
     }
     public void crearModelo2() {
@@ -124,7 +124,7 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jtablecreadas, modeloemp2, columnas2.length, "select idHistorialEtapa,etapa,fecha,hora,humedad FROM etapa WHERE etapa = 'secamiento' )");
+        tbl.llenarTabla(Procedimiento.jtablependiente, modeloemp2, columnas2.length, "SELECT idHistorialEtapa,etapa,fecha,hora,humedad FROM etapa WHERE etapa = 'secamiento' ");
 
     }
     

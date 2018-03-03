@@ -171,12 +171,14 @@ public class extras {
         String id = "";
         try {
             Con = new Conexion();
-            st = Con.conexion.createStatement();
-            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='molino' and TABLE_NAME='" + tabla + "'");
+            Con.ConectarInformation();
+            st = Con.conexionInformation.createStatement();
+            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='"+Con.BD+"' and TABLE_NAME='" + tabla + "'");
             while (rs.next()) {
                 id = rs.getObject(1) + "";
             }
             Con.Desconectar();
+            Con.DesconectarInformation();
             return Integer.parseInt(id);
         } catch (Exception e) {
             e.printStackTrace();

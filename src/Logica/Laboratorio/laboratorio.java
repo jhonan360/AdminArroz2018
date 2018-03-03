@@ -163,7 +163,7 @@ public class laboratorio {
          Laboratorio.TxtIp.setText(String.valueOf(ip));
      }
      public void campos_desabilitados(){
-         Laboratorio.TxtFecha.setEnabled(false);
+         //Laboratorio.lblFecha.setEnabled(false);
          Laboratorio.TxtHumedad.setEnabled(false);
          Laboratorio.TxtImpureza.setEnabled(false);
          Laboratorio.TxtIntegral.setEnabled(false);
@@ -205,7 +205,7 @@ public class laboratorio {
         Calendar c;
         c = Calendar.getInstance();
         int d = c.get(Calendar.DATE), m = 1 + (c.get(Calendar.MONTH)), a = c.get(Calendar.YEAR);
-        Laboratorio.TxtFecha.setText(a + "/" + m + "/" + d);
+        Laboratorio.lblFecha.setText(a + "/" + m + "/" + d);
 
     }
      
@@ -222,7 +222,7 @@ public class laboratorio {
    
     public void guardar_inicial(){
         idTiquete = Laboratorio.TxtIdTiquete.getText();
-        fecha = Laboratorio.TxtFecha.getText();
+        fecha = Laboratorio.lblFecha.getText();
         //variedad = Laboratorio.TxtVariedad.getText();
         humedad = Laboratorio.TxtHumedad.getText();
         impureza = Laboratorio.TxtImpureza.getText();
@@ -240,10 +240,11 @@ public class laboratorio {
         ip = Laboratorio.TxtIp.getText();
         
         
-        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!danado.equals("")&&!ip.equals("")){
+        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!ip.equals("")){
             insertar_inicial(idTiquete,user,estado,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
             limpiar_campos();
             crearModelo3();
+            actualizar();
         }else{
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
@@ -271,7 +272,7 @@ public class laboratorio {
                 consecutivo = (Integer.parseInt(res)+1)+"";
             }
             
-            Laboratorio.LabelTiquete.setText(consecutivo);
+            Laboratorio.lblTiquete.setText(consecutivo);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -282,7 +283,7 @@ public class laboratorio {
    
     public void limpiar_campos(){
         
-        Laboratorio.TxtFecha.setText("");
+        Laboratorio.lblFecha.setText("");
         Laboratorio.TxtYeso.setText("");
         Laboratorio.TxtDanado.setText("");
         Laboratorio.TxtIp.setText("");
@@ -315,6 +316,7 @@ public class laboratorio {
         if (!IDLaboratorio.equals("")&&!muestreo.equals("")&&!hora.equals("")&&!humedadEstufa.equals("")){
             estado_tiquete();
             actualizar();
+            
             
         }
         
