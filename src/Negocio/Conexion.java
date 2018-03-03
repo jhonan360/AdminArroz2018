@@ -23,7 +23,7 @@ public class Conexion {
     public void Conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/" + BD, "root", "root");
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/" + BD, "root", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class Conexion {
     public void ConectarInformation() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexionInformation = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/information_schema", "root", "root");
+            conexionInformation = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/information_schema", "root", "");
         } catch (Exception e) {
             e.printStackTrace();
         }

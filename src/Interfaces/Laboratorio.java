@@ -89,6 +89,8 @@ public static laboratorio_menu labor;
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -103,8 +105,8 @@ public static laboratorio_menu labor;
         jButton3 = new javax.swing.JButton();
         jTimeChooser1 = new lu.tudor.santec.jtimechooser.JTimeChooser();
         jButton4 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -577,7 +579,6 @@ public static laboratorio_menu labor;
         });
         jScrollPane1.setViewportView(jTable1);
 
-
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -590,7 +591,6 @@ public static laboratorio_menu labor;
             }
         ));
         jScrollPane2.setViewportView(jTable2);
-
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("TIQUETE DE LABORATORIO");
@@ -641,7 +641,7 @@ public static laboratorio_menu labor;
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -649,10 +649,10 @@ public static laboratorio_menu labor;
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "N°", "Tiquete", "Agricultor", "Fecha"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -679,7 +679,7 @@ public static laboratorio_menu labor;
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(105, 105, 105)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -707,7 +707,7 @@ public static laboratorio_menu labor;
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
@@ -1071,6 +1071,7 @@ public static laboratorio_menu labor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1083,6 +1084,7 @@ public static laboratorio_menu labor;
     public static javax.swing.JTable jTable1;
     public static javax.swing.JTable jTable2;
     public static javax.swing.JTable jTable3;
+    public static javax.swing.JTable jTable4;
     public static lu.tudor.santec.jtimechooser.JTimeChooser jTimeChooser1;
     public static javax.swing.JLabel lblFecha;
     public static javax.swing.JLabel lblTiquete;
