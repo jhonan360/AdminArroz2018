@@ -9,7 +9,6 @@ package Interfaces;
  *
  * @author uriel
  */
-
 import Logica.Extras.validaciones;
 import Negocio.Conexion;
 import Logica.Extras.login;
@@ -17,13 +16,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+
 public class Login extends javax.swing.JFrame {
 
-    public static Conexion Con; 
+    public static Conexion Con;
     public static login log;
     public static validaciones vali;
     public static String perfil;
     public static Welcome welcome;
+
     /**
      * Creates new form login
      */
@@ -110,6 +111,7 @@ public class Login extends javax.swing.JFrame {
         txtusuario.setBackground(new java.awt.Color(46, 162, 104));
         txtusuario.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         txtusuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtusuario.setText("Ingrese su usuario");
         txtusuario.setBorder(null);
         txtusuario.setName("txtusuario"); // NOI18N
         txtusuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,10 +119,16 @@ public class Login extends javax.swing.JFrame {
                 txtusuarioMouseClicked(evt);
             }
         });
+        txtusuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtusuarioKeyPressed(evt);
+            }
+        });
 
         txtcontra.setBackground(new java.awt.Color(46, 162, 104));
         txtcontra.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         txtcontra.setForeground(new java.awt.Color(255, 255, 255));
+        txtcontra.setText("contrasenaaaaaaaa");
         txtcontra.setBorder(null);
         txtcontra.setName("txtcontra"); // NOI18N
         txtcontra.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -229,7 +237,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         log = new login();
-        if(log.bandera == true){
+        if (log.bandera == true) {
             dispose();
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
@@ -242,12 +250,18 @@ public class Login extends javax.swing.JFrame {
         txtusuario.setText("");
     }//GEN-LAST:event_txtusuarioMouseClicked
 
-   
-    
+    private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
+        if (txtusuario.getText().equals("Ingrese su usuario")) {
+            txtusuario.setText("");
+        } else {
+
+        }
+    }//GEN-LAST:event_txtusuarioKeyPressed
+
     public static void main(String args[]) {
-        
+
         try {
-             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -266,13 +280,13 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-      
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run()  {
+            public void run() {
                 new Login().setVisible(true);
-                 
+
             }
         });
     }
