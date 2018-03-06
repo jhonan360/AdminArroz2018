@@ -6,6 +6,7 @@
 package Logica.Laboratorio;
 
 
+import Interfaces.BusquedasTiqueteInicial;
 import Interfaces.Laboratorio;
 import Interfaces.Laboratorio_tiquete_inicial;
 
@@ -16,6 +17,8 @@ import Interfaces.Laboratorio_tiquete_inicial;
 public class laboratorio_menu {
    public static Laboratorio Labo;
    public static Laboratorio_tiquete_inicial LaboTiquete;
+   public static BusquedasTiqueteInicial busTiquete;
+           
     public static void tiquete2(){
         Labo = new  Laboratorio();
         Labo.setVisible(true);
@@ -24,5 +27,10 @@ public class laboratorio_menu {
     public static void tiquete1(){
     LaboTiquete = new Laboratorio_tiquete_inicial();
     LaboTiquete.setVisible(true);
+    }
+    
+    public static void busquedaTiq(){
+    busTiquete = new BusquedasTiqueteInicial();
+    busTiquete.setVisible(true);
     }
 }

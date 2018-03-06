@@ -110,7 +110,6 @@ public class Login extends javax.swing.JFrame {
         txtusuario.setBackground(new java.awt.Color(46, 162, 104));
         txtusuario.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         txtusuario.setForeground(new java.awt.Color(255, 255, 255));
-        txtusuario.setText("Ingrese su usuario");
         txtusuario.setBorder(null);
         txtusuario.setName("txtusuario"); // NOI18N
         txtusuario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -118,16 +117,10 @@ public class Login extends javax.swing.JFrame {
                 txtusuarioMouseClicked(evt);
             }
         });
-        txtusuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtusuarioKeyPressed(evt);
-            }
-        });
 
         txtcontra.setBackground(new java.awt.Color(46, 162, 104));
         txtcontra.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         txtcontra.setForeground(new java.awt.Color(255, 255, 255));
-        txtcontra.setText("contrasenaaaaaaaa");
         txtcontra.setBorder(null);
         txtcontra.setName("txtcontra"); // NOI18N
         txtcontra.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -248,10 +241,6 @@ public class Login extends javax.swing.JFrame {
     private void txtusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtusuarioMouseClicked
         txtusuario.setText("");
     }//GEN-LAST:event_txtusuarioMouseClicked
-
-    private void txtusuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtusuarioKeyPressed
-        txtusuario.setText("");
-    }//GEN-LAST:event_txtusuarioKeyPressed
 
    
     

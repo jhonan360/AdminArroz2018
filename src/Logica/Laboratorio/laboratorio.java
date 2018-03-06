@@ -35,7 +35,7 @@ public class laboratorio {
     public static tablas tbl;
     public DefaultTableModel modeloemp,modeloestufa,modelo3;
     public login login;
-    public String columnas[] = new String[]{"N° Laboratorio","N° Tiquete","Fecha","Humedad", "Impureza","IntegralRes", "CascarillaRes", "BlancoRes","PartidoRes","EnteroRes","Yeso","Dañado","Ip"};
+    public String columnas[] = new String[]{"N° Laboratorio","N° Tiquete","Fecha","Humedad", "Impureza","Integral", "Cascarilla", "Blanco","Partido","Entero","Yeso","Dañado","IP"};
     public String columnas2[] = new String[]{"N° Laboratorio","N° Tiquete","Muestreo","Hora","Humedad"};
     public String columnas3[] = new String[]{"N° Tiquete","Agricultor","Fecha"};
     
@@ -76,7 +76,7 @@ public class laboratorio {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Laboratorio.jTable2, modeloestufa, columnas2.length, "SELECT idmuetraestufa,idLaboratorio,muestreo,hora,humedad FROM muetraestufa where idLaboratorio ='" + id + "' ");
+        tbl.llenarTabla(Laboratorio.jTable4, modeloestufa, columnas2.length, "SELECT idmuetraestufa,idLaboratorio,muestreo,hora,humedad FROM muetraestufa where idLaboratorio ='" + id + "' ");
 
     }
      public void crearModelo3() {

@@ -40,7 +40,7 @@ public class busquedaLaboratorio {
     public static tablas tbl;
     public static DefaultTableModel mdelolab;
     public static String columnasAgr[] = new String[]{"id","Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
-    public static String columnasAgri[] = new String[]{"idLaboratorio","idTiquete","fecha","humedad", "impureza","integralRes", "cascarillaRes", "blancoRes","partidoRes","enteroRes","yeso","dañado","ip"};
+    public static String columnasAgri[] = new String[]{"N° Tiq Lab","N° Tiq Bas","Fecha","Humedad", "Impureza","Integral", "Cascarilla", "Blanco","Partido","Entero","Yeso","Dañado","IP"};
     
     
 
