@@ -21,7 +21,9 @@ public class variedad {
     public static Tipo_Arroz Tipo_Arroz;
     public static Conexion Con;
     public static DefaultTableModel modeloTabla;
-    public String columnas[] = new String[]{"N", "Nombre"};
+    public String columnas[] = new String[]{"N°", "Variedad"};
+    public String headerColumnas[] = new String[]{"30", "500"};
+    public String camposColumnas[] = new String[]{"center", "left"};
     public static ResultSet rs;
     public static Statement st;
     public static tablas tbl;
@@ -38,7 +40,9 @@ public class variedad {
             }
         };
         tbl.llenarTabla(Variedad.tblVariedad, modeloTabla, columnas.length, "SELECT idVariedad,nombre FROM variedad");
-    }
+        tbl.alinearHeaderTable(Variedad.tblVariedad, headerColumnas);
+        tbl.alinearCamposTable(Variedad.tblVariedad, camposColumnas);
+     }
      
      public void crear_variedad() {
         nombre = Variedad.txtNombre.getText();

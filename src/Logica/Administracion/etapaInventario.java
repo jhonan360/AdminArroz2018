@@ -69,14 +69,16 @@ public class etapaInventario {
     }
     public void tabla_campos(){
         int rec = Procedimiento.jtablecreadas.getSelectedRow();
-             
+             idProcedimiento="";
         idProcedimiento= Procedimiento.jtablecreadas.getValueAt(rec, 0).toString();
         Procedimiento.txtFecha.setText(Procedimiento.jtablecreadas.getValueAt(rec, 2).toString());
         Procedimiento.txtHora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
-        numsilo(Procedimiento.jtablecreadas.getValueAt(rec, 1).toString());
+        String silo=Procedimiento.jtablecreadas.getValueAt(rec, 1).toString();
+        numsilo(silo);
     }
     public void numsilo(String idsilo){
             try {
+                
             Con = new Conexion();
             st2 = Con.conexion.createStatement();
             rs2 = st2.executeQuery("SELECT silos.numero FROM silos WHERE silos.idSilos = '" + idsilo + "'");
@@ -85,7 +87,7 @@ public class etapaInventario {
             Procedimiento.txtsilo.setText(idSilos);
             }
            
-            crearModelo();
+           
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();

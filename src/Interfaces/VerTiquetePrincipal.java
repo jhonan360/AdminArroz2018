@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Logica.Bascula.bascula;
 import Logica.Bascula.verTiquetePrincipal;
 import java.util.Date;
 
@@ -15,16 +16,16 @@ import java.util.Date;
 public class VerTiquetePrincipal extends javax.swing.JFrame {
 
     public static verTiquetePrincipal verTiqPrincipal;
+    public static bascula bascula;
 
     /**
      * Creates new form VisualizarTiquetePrincipal
      */
     public VerTiquetePrincipal() {
         initComponents();
-        
-        
+        this.setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);             
         verTiqPrincipal = new verTiquetePrincipal();
-
     }
 
     /**
@@ -57,6 +58,22 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVerTiqPrincipal = new javax.swing.JTable();
         btnCrear = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnConductor = new javax.swing.JMenuItem();
+        mnTipo_Arroz = new javax.swing.JMenuItem();
+        mnVehiculo = new javax.swing.JMenuItem();
+        mnLote = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnTiqueteVarios = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,30 +81,28 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(1116, 114));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("REGISTROS DE TIQUETES DE ENTRADA DE MATERIA PRIMA");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel3.setText("BUSQUEDA TIQUETE DE ENTRADA DE MATERIA PRIMA");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Logo.png"))); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/busTiqPpal.png"))); // NOI18N
         jLabel2.setPreferredSize(new java.awt.Dimension(80, 90));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(181, 181, 181)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -213,7 +228,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(chTiquete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtTiquete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -221,7 +236,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(chFecha)
                             .addComponent(chAgricultor))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(0, 0, 0)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dcFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dcFechaFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -253,6 +268,10 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel29.setText("*Seleccione el tiquete que desea guardar o imprimir.");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -260,35 +279,191 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1329, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1324, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Opciones");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        jMenuItem1.setText("Crear Agricultor");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(175, 22));
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnConductor.setText("Crear Conductor");
+        mnConductor.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnConductorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnConductor);
+
+        mnTipo_Arroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTipo_Arroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTipo_Arroz.setText("Crear Tipo de arroz");
+        mnTipo_Arroz.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnTipo_Arroz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTipo_ArrozActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnTipo_Arroz);
+
+        mnVehiculo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVehiculo.setText("Crear Vehiculo");
+        mnVehiculo.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVehiculoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnVehiculo);
+
+        mnLote.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnLote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnLote.setText("Crear Lote");
+        mnLote.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnLote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnLoteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnLote);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/file.png"))); // NOI18N
+        jMenu3.setText("Crear Tiquete");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        mnTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTiqueteMateriaPrimaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTiqueteMateriaPrima);
+
+        mnTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnTiqueteVarios.setToolTipText("");
+        mnTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTiqueteVarios.setRequestFocusEnabled(false);
+        mnTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnTiqueteVarios);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Ver Tiquete");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteMateriaPrima);
+
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
+        jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSalir);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1353, Short.MAX_VALUE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1348, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,6 +543,48 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chFechaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        bascula.abrirAgricultor();
+        //setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
+        bascula.abrirConductor();
+    }//GEN-LAST:event_mnConductorActionPerformed
+
+    private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
+        bascula.tipo_de_arroz();
+    }//GEN-LAST:event_mnTipo_ArrozActionPerformed
+
+    private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
+        bascula.abrirVehiculo();
+    }//GEN-LAST:event_mnVehiculoActionPerformed
+
+    private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
+        bascula.abrirLote();
+    }//GEN-LAST:event_mnLoteActionPerformed
+
+    private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
+        bascula.abrirTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
+
+    private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
+        bascula.abrirTiqueteVarios();
+    }//GEN-LAST:event_mnTiqueteVariosActionPerformed
+
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        dispose();
+        bascula.salir();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -416,13 +633,29 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnConductor;
+    public static javax.swing.JMenuItem mnLote;
+    public static javax.swing.JMenuItem mnTipo_Arroz;
+    public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnTiqueteVarios;
+    public static javax.swing.JMenuItem mnVehiculo;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblVerTiqPrincipal;
     public static javax.swing.JTextField txtAgricultor;
     public static javax.swing.JTextField txtTiquete;

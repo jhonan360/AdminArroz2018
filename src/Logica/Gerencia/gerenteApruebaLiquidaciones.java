@@ -112,7 +112,7 @@ public class gerenteApruebaLiquidaciones {
                 GApruebaL.lblDesAnticipo.setText(cu.moneyFormat(Double.parseDouble(rs.getString(15))));
                 GApruebaL.lblNetoPagar.setText(cu.moneyFormat(Double.parseDouble(rs.getString(16))));
             }
-            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
+            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT idEntradas,detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             formatoTblDetalle();
             Con.Desconectar();
         } catch (Exception e) {

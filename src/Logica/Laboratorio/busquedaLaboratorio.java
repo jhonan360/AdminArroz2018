@@ -30,7 +30,7 @@ public class busquedaLaboratorio {
     public static BusquedasTiquete BusTiquete;
     public static BusquedasTiqueteInicial BusT;
     public static ResultSet rs;
-    
+     public String columnas2[] = new String[]{"N° Laboratorio","N° Tiquete","Muestreo","Hora","Humedad"};
     public static Laboratorio_tiquete_inicial LabT;
    // public static bascula bas;
     public static laboratorio_tiquete_inicial labt;
@@ -38,7 +38,7 @@ public class busquedaLaboratorio {
   
     public static String cedula,id;
     public static tablas tbl;
-    public static DefaultTableModel mdelolab;
+    public static DefaultTableModel mdelolab,modeloestufa;
     public static String columnasAgr[] = new String[]{"id","Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
     public static String columnasAgri[] = new String[]{"N° Tiq Lab","N° Tiq Bas","Fecha","Humedad", "Impureza","Integral", "Cascarilla", "Blanco","Partido","Entero","Yeso","Dañado","IP"};
     
@@ -86,8 +86,25 @@ public class busquedaLaboratorio {
             }
         };
         tbl = new tablas(); 
-        tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT idLaboratorio,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio");
+        tbl.llenarTabla(BusT.jTable2, mdelolab, columnasAgri.length, "SELECT idLaboratorio,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio WHERE laboratorio.estado='cerrado'");
 }
+    public void crearModelo2(String id) {
+        modeloestufa = new DefaultTableModel(null, columnas2) {
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+        tbl = new tablas();
+        tbl.llenarTabla(BusT.jTable3, modeloestufa, columnas2.length, "SELECT idmuetraestufa,idLaboratorio,muestreo,hora,humedad FROM muetraestufa where idLaboratorio ='" + id + "' ");
+
+    }
+     public void tabla_consecutivo_campo(){
+        int rec = BusT.jTable2.getSelectedRow();
+        
+        String id=BusT.jTable2.getValueAt(rec, 0).toString();
+        crearModelo2(id);
+        
+    }
        
     public static void desactivar_checkboxAgricultor() { // desactiva las checkbox
         BusT.chfecha.setSelected(false);

@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Interfaces.BusquedasTiqueteInicial;
 import lu.tudor.santec.jtimechooser.JTimeChooser;
+import Logica.Extras.currencyFormat;
 
 /**
  *
@@ -38,13 +39,13 @@ public class laboratorio {
     public String columnas[] = new String[]{"N° Laboratorio","N° Tiquete","Fecha","Humedad", "Impureza","Integral", "Cascarilla", "Blanco","Partido","Entero","Yeso","Dañado","IP"};
     public String columnas2[] = new String[]{"N° Laboratorio","N° Tiquete","Muestreo","Hora","Humedad"};
     public String columnas3[] = new String[]{"N° Tiquete","Agricultor","Fecha"};
-    
+    public static currencyFormat cu;
     public String user;
      public static Statement st,st3,st4,st5;
      public static ResultSet rs,rs3,rsconsecutivo,rscantidaad;
     public static Conexion Con;
     public String IDLaboratorio,muestreo,hora,humedadEstufa,res;
-    public String idTiquete,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip,consecutivo;
+    public String maxMuestreo,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip,consecutivo;
     public int cantEstado;
     
     public laboratorio(){
@@ -67,8 +68,8 @@ public class laboratorio {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Laboratorio.jTable1, modeloemp, columnas.length, "SELECT idLaboratorio,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio");
-
+        tbl.llenarTabla(Laboratorio.jTable1, modeloemp, columnas.length, "SELECT idLaboratorio,idTiquete,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio WHERE laboratorio.estado='abierto'");
+       // formatoTbFecha();
     }public void crearModelo2(String id) {
         modeloestufa = new DefaultTableModel(null, columnas2) {
             public boolean isCellEditable(int fila, int columna) {
@@ -86,9 +87,31 @@ public class laboratorio {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete, CONCAT(personalexterno.nombres, personalexterno.apellidos),fecha from tiquete,personalexterno where idTiquete not in (select idTiquete from laboratorio group by idTiquete) and tiquete.idAgricultor = personalexterno.idPersonalExterno");
+        tbl.llenarTabla(Laboratorio.jTable3, modelo3, columnas3.length, "select idTiquete, CONCAT(personalexterno.nombres, personalexterno.apellidos),fecha from tiquete,personalexterno where idTiquete not in (select idTiquete from laboratorio group by idTiquete) and tiquete.idAgricultor = personalexterno.idPersonalExterno ORDER BY idTiquete asc");
                                                                                                                                                                                    
     }
+     public void maxMuestreo(){
+         
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT max(muetraestufa.muestreo) FROM muetraestufa ");
+            //ResultSetMetaData rsc3md = rsc3.getMetaData();
+            while (rs.next()) {
+               
+               maxMuestreo=rs.getString(1);
+               int numEntero = Integer.parseInt(maxMuestreo)+1;
+               
+                Laboratorio.TxtMuestreo.setText(Integer.toString(numEntero));
+              
+            }
+            
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+     }
      public void estado_tiquete() {
         try {
             String id= Laboratorio.TxtIDTiqueteEstufa.getText();
@@ -116,9 +139,21 @@ public class laboratorio {
         }
         
     }
+     public void formatoTbFecha() {
+        int row = Laboratorio.jTable1.getRowCount();
+        System.out.println("Row " + row);
+        for (int i = 0; i < row; i++) {
+            System.out.println(Laboratorio.jTable1.getValueAt(i, 2));
+            String fecha = cu.dateNotTime(Laboratorio.jTable1.getValueAt(i, 2)+"");
+            Laboratorio.jTable1.setValueAt(fecha, i, 2);
+            
+        }
+    }
      
      public void estado(){
-            try {
+          int aceptar = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere cerrar el tiquete", "Confirmacion", JOptionPane.CANCEL_OPTION);
+                if (aceptar == JOptionPane.YES_OPTION) {
+                    try {
             String id = Laboratorio.TxtIDTiqueteEstufa.getText();
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -126,11 +161,16 @@ public class laboratorio {
             JOptionPane.showMessageDialog(null, "El tiquete fue cerrado");
             actualizar();
             crearModelo2(IDLaboratorio);
+                       
             Con.Desconectar();
            
         } catch (Exception e) {
             e.printStackTrace();
         }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Los cambios han sido descartados");
+                }
+            
         }
      public void calculos(){
          double integral =0.0;
@@ -183,17 +223,10 @@ public class laboratorio {
          
          Laboratorio.TxtHumedad.setEnabled(true);
          Laboratorio.TxtImpureza.setEnabled(true);
-         Laboratorio.TxtIntegral.setEnabled(true);
-         Laboratorio.TxtBlanco.setEnabled(true);
-         Laboratorio.TxtPartido.setEnabled(true);
-         Laboratorio.TxtYeso.setEnabled(true);
-         Laboratorio.TxtIp.setEnabled(true);
-         Laboratorio.TxtIntegral.setEnabled(true);
-         Laboratorio.TxtBlanco.setEnabled(true);
-         Laboratorio.enteroRes.setEnabled(true);
-         Laboratorio.TxtIdTiquete.setEnabled(true);
-         Laboratorio.TxtCascarilla.setEnabled(true);
-         Laboratorio.TxtDanado.setEnabled(true);
+      
+        
+      
+     
          
      }
      public void idTiquete_campo(){
@@ -207,6 +240,39 @@ public class laboratorio {
         int d = c.get(Calendar.DATE), m = 1 + (c.get(Calendar.MONTH)), a = c.get(Calendar.YEAR);
         Laboratorio.lblFecha.setText(a + "/" + m + "/" + d);
 
+    }
+       public void tablaCamposLiquidacion() {
+           limpiar_campos();
+         int rec = Laboratorio.jTable3.getSelectedRow();
+          Laboratorio.TxtIdTiquete.setText(Laboratorio.jTable3.getValueAt(rec, 0).toString());
+           campos_habilitados();
+        String idlaboratorio=Laboratorio.jTable3.getValueAt(rec, 0).toString();
+       // idLiquidacion = LiqAprobadas.tblLiquidaciones.getValueAt(rec, 0).toString();
+        //LiqAprobadas.lblNumLiquidacion.setText(idLiquidacion);
+        //LiqAprobadas.lblNomAgricultor.setText(LiqAprobadas.tblLiquidaciones.getValueAt(rec, 3).toString());
+
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT  laboratorio.integralRes,laboratorio.cascarillaRes,laboratorio.blancoRes,laboratorio.partidoRes,laboratorio.enteroRes,laboratorio.yeso,laboratorio.danado,laboratorio.ip from laboratorio WHERE laboratorio.idLaboratorio='" + idlaboratorio + "'");
+
+            while (rs.next()) {
+                Laboratorio.TxtIntegral.setText(rs.getString(1));
+                Laboratorio.TxtCascarilla.setText(rs.getString(2));
+                Laboratorio.TxtBlanco.setText(rs.getString(3));
+                Laboratorio.TxtPartido.setText(rs.getString(4));
+                Laboratorio.enteroRes.setText(rs.getString(5));
+                Laboratorio.TxtYeso.setText(rs.getString(6));
+                Laboratorio.TxtDanado.setText(rs.getString(7));
+                Laboratorio.TxtIp.setText(rs.getString(8));
+               
+                
+            }
+            
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
      
      public void actualizar(){
@@ -227,8 +293,8 @@ public class laboratorio {
         humedad = Laboratorio.TxtHumedad.getText();
         impureza = Laboratorio.TxtImpureza.getText();
         //humedadEst = Laboratorio.TxtHumedadRes.getText();
-        estado = Laboratorio.CmbEstado.getSelectedItem().toString();
-        System.out.println("hola "+estado);
+       // estado = Laboratorio.CmbEstado.getSelectedItem().toString();
+      //  System.out.println("hola "+estado);
         user = login.enviarUsuario();
         integralRes = Laboratorio.TxtIntegral.getText();
         cascarillaRes = Laboratorio.TxtCascarilla.getText();
@@ -240,21 +306,22 @@ public class laboratorio {
         ip = Laboratorio.TxtIp.getText();
         
         
-        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!yeso.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!ip.equals("")){
-            insertar_inicial(idTiquete,user,estado,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
+        if (!fecha.equals("")&&!idTiquete.equals("")&&!humedad.equals("")&&!impureza.equals("")&&!integralRes.equals("")&&!cascarillaRes.equals("")&&!blancoRes.equals("")&&!partidoRes.equals("")&&!enteroRes.equals("")&&!ip.equals("")){
+            insertar_inicial(idTiquete,user,fecha,humedad, impureza,integralRes, cascarillaRes, blancoRes, partidoRes,enteroRes,yeso,danado,ip);
             limpiar_campos();
             crearModelo3();
+            campos_desabilitados();
             actualizar();
         }else{
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
     }
-    public void insertar_inicial(String idTiquete,String user,String estado,String fecha,String humedad,String impureza,String integralRes,String cascarillaRes,String blancoRes,String partidoRes,String enteroRes,String yeso,String danado, String ip){
+    public void insertar_inicial(String idTiquete,String user,String fecha,String humedad,String impureza,String integralRes,String cascarillaRes,String blancoRes,String partidoRes,String enteroRes,String yeso,String danado, String ip){
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            System.out.println("Insert Into laboratorio (idLaboratorio,idTiquete,user,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + estado + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
-            st.executeUpdate("Insert Into laboratorio (idLaboratorio,idTiquete,user,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + estado + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
+            System.out.println("Insert Into laboratorio (idLaboratorio,idTiquete,user,estado,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
+            st.executeUpdate("Insert Into laboratorio (idLaboratorio,idTiquete,user,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -305,6 +372,7 @@ public class laboratorio {
         Laboratorio.TxtIDTiqueteEstufa.setText(Laboratorio.jTable1.getValueAt(rec, 0).toString());
         String id=Laboratorio.jTable1.getValueAt(rec, 0).toString();
         crearModelo2(id);
+        maxMuestreo();
     }
    
     public void guardar_estufa(){
@@ -315,7 +383,13 @@ public class laboratorio {
         
         if (!IDLaboratorio.equals("")&&!muestreo.equals("")&&!hora.equals("")&&!humedadEstufa.equals("")){
             estado_tiquete();
-            actualizar();
+            crearModelo2(IDLaboratorio);
+             Laboratorio.TxtIDTiqueteEstufa.setText("");
+                       
+        
+        Laboratorio.TxtHumedadEstufa.setText("");
+        Laboratorio.TxtMuestreo.setText("");
+        
             
             
         }
