@@ -12,7 +12,6 @@ import Logica.Extras.tablas;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.cargarCombo;
-import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,9 +29,12 @@ public class Bascula extends javax.swing.JFrame {
      * Creates new form Bascula
      */
     public Bascula() {
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 500);
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
+        //this.setExtendedState(MAXIMIZED_BOTH);
+        //setLocationRelativeTo(null);
         cargar = new cargarCombo();
         cargar.lote(cmbLote);
         cargar.tipoArroz(cmbTipoArroz);
