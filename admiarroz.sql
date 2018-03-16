@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-02-2018 a las 16:49:20
+-- Tiempo de generación: 15-03-2018 a las 02:25:03
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.30
 
@@ -32,6 +32,14 @@ CREATE TABLE `bateria` (
   `idBateria` int(11) NOT NULL,
   `nombre` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `bateria`
+--
+
+INSERT INTO `bateria` (`idBateria`, `nombre`) VALUES
+(1, 'A'),
+(2, 'B');
 
 -- --------------------------------------------------------
 
@@ -91,7 +99,7 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombre`) VALUES
 CREATE TABLE `detalleliquidacion` (
   `idDetalleLiquidacion` int(11) NOT NULL,
   `idTiquete` int(11) NOT NULL,
-  `idliquidaciones` int(11) DEFAULT NULL,
+  `idLiquidaciones` int(11) DEFAULT NULL,
   `humedad` decimal(5,2) DEFAULT NULL,
   `impureza` decimal(5,2) DEFAULT NULL,
   `castigoHumedad` decimal(4,3) DEFAULT NULL,
@@ -101,6 +109,22 @@ CREATE TABLE `detalleliquidacion` (
   `valorKilo` decimal(14,2) DEFAULT NULL,
   `valorTotal` decimal(14,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detalleliquidacion`
+--
+
+INSERT INTO `detalleliquidacion` (`idDetalleLiquidacion`, `idTiquete`, `idLiquidaciones`, `humedad`, `impureza`, `castigoHumedad`, `castigoImpureza`, `pesoCompra`, `valorCarga`, `valorKilo`, `valorTotal`) VALUES
+(1, 1, 3, '26.00', '3.00', '0.970', '1.000', '13709.00', '120000.00', '960.00', '13160640.00'),
+(2, 8, 3, '20.00', '12.00', '1.000', '0.910', '3172.00', '120000.00', '960.00', '3045120.00'),
+(3, 10, 4, '22.00', '3.00', '1.000', '1.000', '3875.00', '120000.00', '960.00', '3720000.00'),
+(4, 12, 4, '27.00', '5.00', '0.960', '0.980', '1246.00', '120000.00', '960.00', '1196160.00'),
+(5, 3, 5, '29.00', '5.00', '0.930', '0.980', '4758.00', '120000.00', '960.00', '4567680.00'),
+(6, 4, 4, '2.40', '4.00', '1.000', '0.990', '450.00', '120000.00', '960.00', '432000.00'),
+(7, 6, 4, '9.99', '10.00', '1.000', '0.930', '2757.00', '120000.00', '960.00', '2646720.00'),
+(8, 17, 6, '30.00', '5.00', '0.920', '0.980', '1552.00', '170000.00', '1360.00', '2110720.00'),
+(9, 2, NULL, NULL, NULL, NULL, NULL, NULL, '135000.00', NULL, NULL),
+(10, 5, NULL, NULL, NULL, NULL, NULL, NULL, '120000.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,7 +150,10 @@ CREATE TABLE `empleado` (
 INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES
 (1, 'x', 1033, '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'),
 (2, 'b', 5, '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
-(3, 'l', 639, '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211');
+(3, 'l', 639, '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211'),
+(4, 'g', 1021, '28710378', 'Beatriz ', 'Gonzalez', 'Espinal', '3138084236'),
+(5, 'c', 1022, '65692470', 'Ana Delfina', 'Cortes Barrero', 'Espinal', '3142772941'),
+(6, 'lizeth', 1021, '9313529', 'Lizeth ', 'Ramirez', 'sssss', '3108976543');
 
 -- --------------------------------------------------------
 
@@ -141,15 +168,37 @@ CREATE TABLE `entradas` (
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `entradas`
+--
+
+INSERT INTO `entradas` (`idEntradas`, `idTiqueteVarios`, `cantidad`, `descripcion`) VALUES
+(1, 10, '12.00', 'asassa'),
+(2, 14, '112.00', 'dccd'),
+(3, 14, '22.00', 'fer'),
+(4, 15, '12.00', 'Bultos'),
+(5, 15, '23.00', 'Bultos de Arroz'),
+(6, 16, '24.00', 'liso'),
+(7, 17, '12.00', 'fdfds'),
+(8, 17, '21.00', 'sdsf'),
+(9, 21, '35.00', 'Bultos basura'),
+(10, 21, '44.00', 'dfd'),
+(11, 22, '23.00', 'sdsa'),
+(12, 22, '33.00', 'RSC');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `etapas`
+-- Estructura de tabla para la tabla `etapa`
 --
 
-CREATE TABLE `etapas` (
-  `idEtapas` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
+CREATE TABLE `etapa` (
+  `idHistorialEtapa` int(11) NOT NULL,
+  `idProcedimiento` int(11) NOT NULL,
+  `etapa` enum('secamiento','seco') NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `humedad` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -175,21 +224,6 @@ CREATE TABLE `funcionesprivilegios` (
   `idFunciones` int(11) NOT NULL,
   `idPrivilegios` int(11) NOT NULL,
   `estado` enum('activo','inactivo') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historialetapa`
---
-
-CREATE TABLE `historialetapa` (
-  `idHistorialEtapa` int(11) NOT NULL,
-  `idProcedimiento` int(11) NOT NULL,
-  `idEtapas` int(11) NOT NULL,
-  `fecha` varchar(45) NOT NULL,
-  `hora` varchar(45) NOT NULL,
-  `humedad` decimal(3,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -240,6 +274,16 @@ CREATE TABLE `liquidaciones` (
   `netoPagar` decimal(14,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `liquidaciones`
+--
+
+INSERT INTO `liquidaciones` (`idLiquidaciones`, `fecha`, `humedadIdeal`, `impurezaIdeal`, `kilosNeto`, `kilosCompra`, `subTotal`, `fomArrocero`, `valorFomArrocero`, `impuesto`, `porcenImpuesto`, `valorImpuesto`, `descuentoAnticipo`, `estado`, `netoPagar`) VALUES
+(3, '2018-02-08 11:40:19', '24.00', '3.00', '17575.00', '16881.00', '16205760.00', '0.50', '81028.00', 'retefuente', '1.500000', '243086.00', '0.00', 'aprobado', '15881646.00'),
+(4, '2018-02-08 11:37:56', '24.00', '3.00', '8625.00', '8328.00', '7994880.00', '0.50', '39974.00', 'comision bolsa', '0.208948', '16705.00', '0.00', 'en proceso', '7938201.00'),
+(5, '2018-02-09 01:39:32', '24.00', '3.00', '5200.00', '4758.00', '4567680.00', '0.50', '22838.00', 'comision bolsa', '0.208948', '9544.00', '100000.00', 'aprobado', '4435298.00'),
+(6, '2018-02-10 11:39:58', '24.00', '3.00', '1720.00', '1552.00', '2110720.00', '0.50', '10553.00', 'retefuente', '1.500000', '31660.00', '0.00', 'en proceso', '2068507.00');
+
 -- --------------------------------------------------------
 
 --
@@ -286,7 +330,7 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`idMarca`, `marca`) VALUES
-(1, ' NO APLICA'),
+(1, 'NO APLICA'),
 (2, 'AGRALE'),
 (3, 'ALFA ROMEO'),
 (4, 'AUDI'),
@@ -347,7 +391,7 @@ CREATE TABLE `muetraestufa` (
   `idLaboratorio` int(11) NOT NULL,
   `muestreo` int(11) NOT NULL,
   `hora` time NOT NULL,
-  `humedad` decimal(3,2) NOT NULL
+  `humedad` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1587,20 +1631,38 @@ INSERT INTO `privilegios` (`idPrivilegios`, `idnivel`, `nombre`) VALUES
 CREATE TABLE `procedimiento` (
   `idProcedimiento` int(11) NOT NULL,
   `idSilos` int(11) NOT NULL,
-  `fechahora` datetime NOT NULL
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `estado` enum('proceso','finalizado') NOT NULL,
+  `tipoAlmacenamiento` enum('silo','trincho') DEFAULT NULL,
+  `observacion` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `seccion`
+-- Estructura de tabla para la tabla `secadora`
 --
 
-CREATE TABLE `seccion` (
-  `idSeccion` int(11) NOT NULL,
+CREATE TABLE `secadora` (
+  `idSecadora` int(11) NOT NULL,
   `idBateria` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
+  `nombre` varchar(45) NOT NULL,
+  `estado` enum('encendido','apagado') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `secadora`
+--
+
+INSERT INTO `secadora` (`idSecadora`, `idBateria`, `nombre`, `estado`) VALUES
+(1, 1, 'A1', 'apagado'),
+(2, 1, 'A2', 'apagado'),
+(3, 1, 'A3', 'apagado'),
+(4, 2, 'B4', 'apagado'),
+(5, 2, 'B5', 'apagado'),
+(6, 2, 'B6', 'apagado'),
+(7, 2, 'B7', 'apagado');
 
 -- --------------------------------------------------------
 
@@ -1610,10 +1672,61 @@ CREATE TABLE `seccion` (
 
 CREATE TABLE `silos` (
   `idSilos` int(11) NOT NULL,
-  `idSeccion` int(11) NOT NULL,
+  `idSecadora` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `estado` enum('vacio','lleno','con contenido') NOT NULL
+  `kilos` decimal(7,2) NOT NULL,
+  `estado` enum('vacio','lleno','contenido') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `silos`
+--
+
+INSERT INTO `silos` (`idSilos`, `idSecadora`, `numero`, `kilos`, `estado`) VALUES
+(1, 1, 1, '0.00', 'vacio'),
+(2, 1, 2, '0.00', 'vacio'),
+(3, 1, 3, '0.00', 'vacio'),
+(4, 1, 4, '0.00', 'vacio'),
+(5, 1, 5, '0.00', 'vacio'),
+(6, 2, 6, '0.00', 'vacio'),
+(7, 2, 7, '0.00', 'vacio'),
+(8, 2, 8, '0.00', 'vacio'),
+(9, 2, 9, '0.00', 'vacio'),
+(10, 2, 10, '0.00', 'vacio'),
+(11, 2, 11, '0.00', 'vacio'),
+(12, 2, 12, '0.00', 'vacio'),
+(13, 2, 13, '0.00', 'vacio'),
+(14, 2, 14, '0.00', 'vacio'),
+(15, 2, 15, '0.00', 'vacio'),
+(16, 3, 16, '0.00', 'vacio'),
+(17, 3, 17, '0.00', 'vacio'),
+(18, 3, 18, '0.00', 'vacio'),
+(19, 3, 19, '0.00', 'vacio'),
+(20, 3, 20, '0.00', 'vacio'),
+(21, 7, 1, '0.00', 'vacio'),
+(22, 7, 2, '0.00', 'vacio'),
+(23, 7, 3, '0.00', 'vacio'),
+(24, 7, 4, '0.00', 'vacio'),
+(25, 7, 5, '0.00', 'vacio'),
+(26, 7, 6, '0.00', 'vacio'),
+(27, 6, 7, '0.00', 'vacio'),
+(28, 6, 8, '0.00', 'vacio'),
+(29, 6, 9, '0.00', 'vacio'),
+(30, 6, 10, '0.00', 'vacio'),
+(31, 6, 11, '0.00', 'vacio'),
+(32, 6, 12, '0.00', 'vacio'),
+(33, 5, 13, '0.00', 'vacio'),
+(34, 5, 14, '0.00', 'vacio'),
+(35, 5, 15, '0.00', 'vacio'),
+(36, 5, 16, '0.00', 'vacio'),
+(37, 5, 17, '0.00', 'vacio'),
+(38, 5, 18, '0.00', 'vacio'),
+(39, 4, 19, '0.00', 'vacio'),
+(40, 4, 20, '0.00', 'vacio'),
+(41, 4, 21, '0.00', 'vacio'),
+(42, 4, 22, '0.00', 'vacio'),
+(43, 4, 23, '0.00', 'vacio'),
+(44, 4, 24, '0.00', 'vacio');
 
 -- --------------------------------------------------------
 
@@ -1661,6 +1774,30 @@ CREATE TABLE `tiquete` (
   `impurezaUno` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tiquete`
+--
+
+INSERT INTO `tiquete` (`idTiquete`, `idAgricultor`, `idTipoDeArroz`, `idLote`, `idVehiculo`, `idConductor`, `user`, `fecha`, `kilosBrutos`, `destare`, `kilosNetos`, `observacion`, `empaque`, `humedadUno`, `impurezaUno`) VALUES
+(1, 10, 2, 1, 1, 11, 'b', '2018-01-28 01:27:27', '15250.00', '1171.00', '14079.00', 'hello', NULL, '2.20', '10.00'),
+(2, 7, 2, 2, 2, 13, 'b', '2018-01-24 00:00:00', '1655.00', '1076.00', '579.00', 'qwer', 'granel', '9.99', '10.00'),
+(3, 1, 1, 3, 1, 14, 'b', '2018-01-23 00:00:00', '4321.00', '5000.00', '5200.00', 'Trincho 2', NULL, '1.20', '2.00'),
+(4, 8, 2, 1, 2, 11, 'b', '2018-01-28 03:55:53', '1574.00', '1119.00', '455.00', 'oooo', NULL, '2.40', '4.00'),
+(5, 7, 3, 2, 3, 12, 'b', '2018-01-26 11:25:31', '4573.00', '861.00', '3712.00', 'Trincho 3', NULL, '9.99', '10.00'),
+(6, 8, 2, 1, 1, 11, 'b', '2018-01-28 09:33:23', '4275.00', '1304.00', '2971.00', 'asdfg', NULL, '9.99', '10.00'),
+(7, 10, 2, 1, 3, 14, 'b', '2018-01-29 01:03:13', '2177.00', '0.00', '0.00', 'wewew', NULL, '13.00', '12.00'),
+(8, 10, 2, 1, 2, 13, 'b', '2018-02-05 11:05:37', '4485.00', '989.00', '3496.00', 'aaa', NULL, '11.00', '10.00'),
+(9, 5, 2, NULL, NULL, 12, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '24.00', '3.00'),
+(10, 8, 1, 1, 3, 13, 'b', '2018-02-06 01:39:16', '4839.00', '964.00', '3875.00', 'qwert', NULL, '22.00', '3.00'),
+(11, 9, 1, NULL, NULL, 14, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '23.00', '4.00'),
+(12, 8, 2, 1, 2, 11, 'b', '2018-02-06 02:28:09', '2554.00', '1230.00', '1324.00', 'sw', NULL, '27.00', '5.00'),
+(13, 2, 1, 1, 1, 14, 'b', '2018-02-06 01:47:40', '2883.00', '0.00', '0.00', 'as', NULL, '22.00', '2.00'),
+(14, 2, 1, 1, 1, 12, 'b', '2018-02-06 02:47:17', '4039.00', '0.00', '0.00', '', NULL, '22.00', '3.00'),
+(15, 3, 2, NULL, NULL, 13, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '24.00', '4.00'),
+(16, 7, 2, NULL, NULL, 11, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '26.00', '3.00'),
+(17, 9, 2, 1, 2, 11, 'b', '2018-02-10 11:02:46', '2804.00', '1084.00', '1720.00', '', NULL, '30.00', '5.00'),
+(18, 4, 3, NULL, NULL, 11, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '25.00', '4.00');
+
 -- --------------------------------------------------------
 
 --
@@ -1671,7 +1808,8 @@ CREATE TABLE `tiqueteensilos` (
   `idTiqueteSilos` int(11) NOT NULL,
   `idTiquete` int(11) NOT NULL,
   `idSilos` int(11) NOT NULL,
-  `estado` enum('en espera','finalizado') NOT NULL
+  `kilos` decimal(7,2) NOT NULL,
+  `estado` enum('secamiento','trilla') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1693,6 +1831,38 @@ CREATE TABLE `tiqueteVarios` (
   `kilosNetos` decimal(7,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tiqueteVarios`
+--
+
+INSERT INTO `tiqueteVarios` (`idTiqueteVarios`, `idConductor`, `user`, `idVehiculo`, `fecha`, `destino`, `observacion`, `kilosBrutos`, `destare`, `kilosNetos`) VALUES
+(1, 11, 'b', 1, '2018-01-23 00:00:00', 'Trincho1', 'En movimiento', '1567.00', '1387.00', '180.00'),
+(2, 12, 'b', 3, '2018-01-24 00:00:00', 'Selva', 'Trincho 15', '3461.00', '0.00', '0.00'),
+(3, 13, 'b', 3, '2018-01-24 00:00:00', 'ere', 'ere', '4366.00', '0.00', '0.00'),
+(4, 13, 'b', 3, '2018-01-24 00:00:00', 'eerer', 'erer', '3709.00', '0.00', '0.00'),
+(5, 13, 'b', 3, '2018-01-24 00:00:00', 'qqqq', 'wwww', '3487.00', '0.00', '0.00'),
+(6, 13, 'b', 2, '2018-01-25 00:00:00', 'Trincho 6', 'klklkl', '3050.00', '0.00', '0.00'),
+(7, 13, 'b', 3, '2018-01-25 00:00:00', 'prueba J', 'prueba js', '2092.00', '0.00', '0.00'),
+(8, 14, 'b', 3, '2018-01-25 00:00:00', 'ok', 'ok', '1610.00', '0.00', '0.00'),
+(9, 13, 'b', 1, '2018-01-25 00:00:00', 'ok no ', 'ok si', '0.00', '0.00', '0.00'),
+(10, 13, 'b', 3, '2018-01-25 00:00:00', 'ok', 'qwer', '1922.00', '0.00', '0.00'),
+(11, 12, 'b', 3, '2018-01-25 00:00:00', 'waka', 'waka', '0.00', '0.00', '0.00'),
+(12, 12, 'b', 2, '2018-01-25 00:00:00', 'kkkkk', 'kkoko', '0.00', '0.00', '0.00'),
+(13, 14, 'b', 2, '2018-01-25 00:00:00', 'gfghfhg', 'regr', '3491.00', '0.00', '0.00'),
+(14, 12, 'b', 3, '2018-01-30 12:23:47', 'fgfg', 'ghfghfgh', '4617.00', '1229.00', '3388.00'),
+(15, 13, 'b', 2, '2018-01-29 09:47:12', 'Trincho 4', 'Cargamento basura.', '4962.00', '1291.00', '3671.00'),
+(16, 13, 'b', 3, '2018-01-26 11:32:30', 'Bodega 2', 'Para secamiento', '2113.00', '943.00', '1170.00'),
+(17, 13, 'b', 2, '2018-01-28 09:25:43', '', 'weer', '1801.00', '0.00', '0.00'),
+(18, 13, 'b', 1, '2018-01-29 03:20:27', 'Trincho 8', 'Listo para almacenamiento', '4212.00', '0.00', '0.00'),
+(19, 13, 'b', 1, '2018-01-29 03:20:59', 'Trincho 8', 'Listo para almacenamiento', '4212.00', '0.00', '0.00'),
+(20, 11, 'b', 2, '2018-01-29 09:25:30', 'fernanda', 'lerolero', '4997.00', '1001.00', '3996.00'),
+(21, 13, 'b', 1, '2018-01-29 09:32:02', 'Trincho lola', 'Listo para secamientosss', '2488.00', '1082.00', '1406.00'),
+(22, 11, 'b', 1, '2018-01-30 12:21:28', 'sdsa', 'Epaguetti', '4632.00', '1175.00', '3457.00'),
+(23, 14, 'b', 3, '2018-01-29 09:32:41', 'tyetryt', '43534', '2040.00', '0.00', '0.00'),
+(24, 12, 'b', 2, '2018-01-29 09:44:04', 'trg', 'tyhytf', '4299.00', '1208.00', '3091.00'),
+(25, 13, 'b', 1, '2018-01-29 09:47:41', '6', '0oo', '1593.00', '0.00', '0.00'),
+(26, 14, 'b', 1, '2018-01-29 09:47:50', '787', '', '1581.00', '870.00', '711.00');
+
 -- --------------------------------------------------------
 
 --
@@ -1712,7 +1882,10 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
 ('b', 1, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
+('c', 3, 'agkkACcpxr4wjFD6vObWAQ==', 'activo'),
+('g', 5, 'agkkACcpxr4wjFD6vObWAQ==', 'activo'),
 ('l', 2, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
+('lizeth', 1, 'qP8SMR9mMaJzMGfGo4s0dA==', 'activo'),
 ('x', 6, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo');
 
 -- --------------------------------------------------------
@@ -1780,7 +1953,7 @@ ALTER TABLE `detalleliquidacion`
   ADD PRIMARY KEY (`idDetalleLiquidacion`),
   ADD UNIQUE KEY `idTiquete_UNIQUE` (`idTiquete`),
   ADD KEY `fk_liquidaciones_has_tiquete_tiquete1_idx` (`idTiquete`),
-  ADD KEY `fk_liquidaciones_has_tiquete_liquidaciones1_idx` (`idliquidaciones`);
+  ADD KEY `fk_detalleliquidacion_liquidaciones1_idx` (`idLiquidaciones`);
 
 --
 -- Indices de la tabla `empleado`
@@ -1799,10 +1972,11 @@ ALTER TABLE `entradas`
   ADD KEY `fk_entradas_tiqueteVarios1_idx` (`idTiqueteVarios`);
 
 --
--- Indices de la tabla `etapas`
+-- Indices de la tabla `etapa`
 --
-ALTER TABLE `etapas`
-  ADD PRIMARY KEY (`idEtapas`);
+ALTER TABLE `etapa`
+  ADD PRIMARY KEY (`idHistorialEtapa`),
+  ADD KEY `fk_procedimiento_has_etapas_procedimiento1_idx` (`idProcedimiento`);
 
 --
 -- Indices de la tabla `funciones`
@@ -1817,14 +1991,6 @@ ALTER TABLE `funcionesprivilegios`
   ADD PRIMARY KEY (`idFuncionesPrivilegio`),
   ADD KEY `fk_funciones_has_privilegios_privilegios1_idx` (`idPrivilegios`),
   ADD KEY `fk_funciones_has_privilegios_funciones1_idx` (`idFunciones`);
-
---
--- Indices de la tabla `historialetapa`
---
-ALTER TABLE `historialetapa`
-  ADD PRIMARY KEY (`idHistorialEtapa`),
-  ADD KEY `fk_procedimiento_has_etapas_etapas1_idx` (`idEtapas`),
-  ADD KEY `fk_procedimiento_has_etapas_procedimiento1_idx` (`idProcedimiento`);
 
 --
 -- Indices de la tabla `laboratorio`
@@ -1902,10 +2068,10 @@ ALTER TABLE `procedimiento`
   ADD KEY `fk_procedimiento_silos1_idx` (`idSilos`);
 
 --
--- Indices de la tabla `seccion`
+-- Indices de la tabla `secadora`
 --
-ALTER TABLE `seccion`
-  ADD PRIMARY KEY (`idSeccion`),
+ALTER TABLE `secadora`
+  ADD PRIMARY KEY (`idSecadora`),
   ADD KEY `fk_seccion_bateria1_idx` (`idBateria`);
 
 --
@@ -1913,7 +2079,7 @@ ALTER TABLE `seccion`
 --
 ALTER TABLE `silos`
   ADD PRIMARY KEY (`idSilos`),
-  ADD KEY `fk_silos_seccion1_idx` (`idSeccion`);
+  ADD KEY `fk_silos_secadora1_idx` (`idSecadora`);
 
 --
 -- Indices de la tabla `tipodearroz`
@@ -1980,27 +2146,27 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `bateria`
 --
 ALTER TABLE `bateria`
-  MODIFY `idBateria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBateria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `detalleliquidacion`
 --
 ALTER TABLE `detalleliquidacion`
-  MODIFY `idDetalleLiquidacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalleLiquidacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEmpleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `idEntradas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEntradas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT de la tabla `etapas`
+-- AUTO_INCREMENT de la tabla `etapa`
 --
-ALTER TABLE `etapas`
-  MODIFY `idEtapas` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `etapa`
+  MODIFY `idHistorialEtapa` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `funciones`
 --
@@ -2012,11 +2178,6 @@ ALTER TABLE `funciones`
 ALTER TABLE `funcionesprivilegios`
   MODIFY `idFuncionesPrivilegio` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `historialetapa`
---
-ALTER TABLE `historialetapa`
-  MODIFY `idHistorialEtapa` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
@@ -2025,7 +2186,7 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `liquidaciones`
 --
 ALTER TABLE `liquidaciones`
-  MODIFY `idLiquidaciones` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idLiquidaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `lote`
 --
@@ -2062,15 +2223,15 @@ ALTER TABLE `privilegios`
 ALTER TABLE `procedimiento`
   MODIFY `idProcedimiento` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `seccion`
+-- AUTO_INCREMENT de la tabla `secadora`
 --
-ALTER TABLE `seccion`
-  MODIFY `idSeccion` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `secadora`
+  MODIFY `idSecadora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `silos`
 --
 ALTER TABLE `silos`
-  MODIFY `idSilos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSilos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT de la tabla `tipodearroz`
 --
@@ -2080,7 +2241,7 @@ ALTER TABLE `tipodearroz`
 -- AUTO_INCREMENT de la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTiquete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `tiqueteensilos`
 --
@@ -2090,7 +2251,7 @@ ALTER TABLE `tiqueteensilos`
 -- AUTO_INCREMENT de la tabla `tiqueteVarios`
 --
 ALTER TABLE `tiqueteVarios`
-  MODIFY `idTiqueteVarios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTiqueteVarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `variedad`
 --
@@ -2109,7 +2270,7 @@ ALTER TABLE `vehiculo`
 -- Filtros para la tabla `detalleliquidacion`
 --
 ALTER TABLE `detalleliquidacion`
-  ADD CONSTRAINT `fk_liquidaciones_has_tiquete_liquidaciones1` FOREIGN KEY (`idliquidaciones`) REFERENCES `liquidaciones` (`idLiquidaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_detalleliquidacion_liquidaciones1` FOREIGN KEY (`idLiquidaciones`) REFERENCES `liquidaciones` (`idLiquidaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_liquidaciones_has_tiquete_tiquete1` FOREIGN KEY (`idTiquete`) REFERENCES `tiquete` (`idTiquete`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -2126,18 +2287,17 @@ ALTER TABLE `entradas`
   ADD CONSTRAINT `fk_entradas_tiqueteVarios1` FOREIGN KEY (`idTiqueteVarios`) REFERENCES `tiqueteVarios` (`idTiqueteVarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `etapa`
+--
+ALTER TABLE `etapa`
+  ADD CONSTRAINT `fk_procedimiento_has_etapas_procedimiento1` FOREIGN KEY (`idProcedimiento`) REFERENCES `procedimiento` (`idProcedimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `funcionesprivilegios`
 --
 ALTER TABLE `funcionesprivilegios`
   ADD CONSTRAINT `fk_funciones_has_privilegios_funciones1` FOREIGN KEY (`idFunciones`) REFERENCES `funciones` (`idFunciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_funciones_has_privilegios_privilegios1` FOREIGN KEY (`idPrivilegios`) REFERENCES `privilegios` (`idPrivilegios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `historialetapa`
---
-ALTER TABLE `historialetapa`
-  ADD CONSTRAINT `fk_procedimiento_has_etapas_etapas1` FOREIGN KEY (`idEtapas`) REFERENCES `etapas` (`idEtapas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_procedimiento_has_etapas_procedimiento1` FOREIGN KEY (`idProcedimiento`) REFERENCES `procedimiento` (`idProcedimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `laboratorio`
@@ -2183,16 +2343,16 @@ ALTER TABLE `procedimiento`
   ADD CONSTRAINT `fk_procedimiento_silos1` FOREIGN KEY (`idSilos`) REFERENCES `silos` (`idSilos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `seccion`
+-- Filtros para la tabla `secadora`
 --
-ALTER TABLE `seccion`
+ALTER TABLE `secadora`
   ADD CONSTRAINT `fk_seccion_bateria1` FOREIGN KEY (`idBateria`) REFERENCES `bateria` (`idBateria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `silos`
 --
 ALTER TABLE `silos`
-  ADD CONSTRAINT `fk_silos_seccion1` FOREIGN KEY (`idSeccion`) REFERENCES `seccion` (`idSeccion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_silos_secadora1` FOREIGN KEY (`idSecadora`) REFERENCES `secadora` (`idSecadora`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tipodearroz`
@@ -2204,12 +2364,12 @@ ALTER TABLE `tipodearroz`
 -- Filtros para la tabla `tiquete`
 --
 ALTER TABLE `tiquete`
-  ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiquete_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiquete_personalExterno2` FOREIGN KEY (`idAgricultor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiquete_tipodearroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tiquete_lote1` FOREIGN KEY (`idLote`) REFERENCES `lote` (`idLote`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_personalExterno2` FOREIGN KEY (`idAgricultor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_tipodearroz1` FOREIGN KEY (`idTipoDeArroz`) REFERENCES `tipodearroz` (`idTipoDeArroz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiquete_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tiqueteensilos`
@@ -2222,9 +2382,9 @@ ALTER TABLE `tiqueteensilos`
 -- Filtros para la tabla `tiqueteVarios`
 --
 ALTER TABLE `tiqueteVarios`
-  ADD CONSTRAINT `fk_tiqueteVarios_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiqueteVarios_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tiqueteVarios_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tiqueteVarios_personalExterno1` FOREIGN KEY (`idConductor`) REFERENCES `personalexterno` (`idPersonalExterno`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiqueteVarios_usuario1` FOREIGN KEY (`user`) REFERENCES `usuario` (`user`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tiqueteVarios_vehiculo1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario`

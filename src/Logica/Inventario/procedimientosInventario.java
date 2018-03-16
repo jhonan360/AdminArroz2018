@@ -36,13 +36,13 @@ public class procedimientosInventario {
     public static Conexion Con;
     public static tablas tbl;
     public static DefaultTableModel modelSilos, modelProcedimientos;
-    public static String columSilos[] = new String[]{"Bateria", "Sección", "Silo", "Kg Actuales"};
+    public static String columSilos[] = new String[]{"Bateria", "Secadora", "Silo", "Kg Actuales"};
     public static String alinearHeaderSilos[] = new String[]{"default", "default", "default", "default"};
     public static String alinearCampoSilos[] = new String[]{"center", "center", "center", "right"};
-    public static String columProcedimientos[] = new String[]{"N°", "Bateria", "Sección", "Silo", "Kg Actuales", "Fecha", "Hora"};
+    public static String columProcedimientos[] = new String[]{"N°", "Bateria", "Secadora", "Silo", "Kg Actuales", "Fecha", "Hora"};
     public static String alinearHeaderProced[] = new String[]{"30", "50", "50", "40", "80", "default", "default"};
     public static String alinearCampoPoced[] = new String[]{"center", "center", "center", "center", "right", "center", "center"};
-    public static String idProcedimiento, idSilo, nSilo, kilos, fecha, hora, nomSeccion;
+    public static String idProcedimiento, idSilo, nSilo, kilos, fecha, hora, nomSecadora;
     public static currencyFormat cu;
 
     public procedimientosInventario() {
@@ -85,7 +85,7 @@ public class procedimientosInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,seccion.nombre,silos.numero,silos.kilos FROM bateria,seccion,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos) AND silos.kilos<>0.00 AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria");
+        tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,secadora.nombre,silos.numero,silos.kilos FROM bateria,secadora,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos) AND silos.kilos<>0.00 AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria");
         tbl.alinearHeaderTable(ProcedI.tblSilos, alinearHeaderSilos);
         tbl.alinearCamposTable(ProcedI.tblSilos, alinearCampoSilos);
         formatoTablaSilos();
@@ -103,7 +103,7 @@ public class procedimientosInventario {
     public void completarCamposConTblSilos() {
         int rec = ProcedI.tblSilos.getSelectedRow();
         ProcedI.tblSilos.getValueAt(rec, 0).toString();
-        nomSeccion = ProcedI.tblSilos.getValueAt(rec, 1).toString();
+        nomSecadora = ProcedI.tblSilos.getValueAt(rec, 1).toString();
         ProcedI.txtSilo.setText(ProcedI.tblSilos.getValueAt(rec, 2).toString());
         ProcedI.txtKilos.setText(ProcedI.tblSilos.getValueAt(rec, 3).toString());
         ProcedI.txtFecha.setText(fecha());
@@ -118,7 +118,7 @@ public class procedimientosInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(ProcedI.tblProcedimiento, modelProcedimientos, columProcedimientos.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE procedimiento.estado='proceso' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+        tbl.llenarTabla(ProcedI.tblProcedimiento, modelProcedimientos, columProcedimientos.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,secadora WHERE procedimiento.estado='proceso' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
         tbl.alinearHeaderTable(ProcedI.tblProcedimiento, alinearHeaderProced);
         tbl.alinearCamposTable(ProcedI.tblProcedimiento, alinearCampoPoced);
         formatoTablaProced();
@@ -137,7 +137,7 @@ public class procedimientosInventario {
         int rec = ProcedI.tblProcedimiento.getSelectedRow();
         ProcedI.txtProcedimiento.setText(ProcedI.tblProcedimiento.getValueAt(rec, 0).toString());
         ProcedI.tblProcedimiento.getValueAt(rec, 1).toString();
-        nomSeccion = ProcedI.tblProcedimiento.getValueAt(rec, 2).toString();
+        nomSecadora = ProcedI.tblProcedimiento.getValueAt(rec, 2).toString();
         ProcedI.txtSilo.setText(ProcedI.tblProcedimiento.getValueAt(rec, 3).toString());
         ProcedI.txtKilos.setText(ProcedI.tblProcedimiento.getValueAt(rec, 4).toString());
         ProcedI.txtFecha.setText(ProcedI.tblProcedimiento.getValueAt(rec, 5).toString());
@@ -168,7 +168,7 @@ public class procedimientosInventario {
     public void accionProcedimiento(String accion) {
         idProcedimiento = ProcedI.txtProcedimiento.getText();
         nSilo = ProcedI.txtSilo.getText();
-        idSilo = ext.getIdSilo(nomSeccion, nSilo);
+        idSilo = ext.getIdSilo(nomSecadora, nSilo);
         kilos = ProcedI.txtKilos.getText();
         fecha = ProcedI.txtFecha.getText();
         hora = ProcedI.jTimeHora.getFormatedTime();
