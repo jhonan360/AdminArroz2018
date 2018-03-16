@@ -71,8 +71,8 @@ public class etapaInventario {
         int rec = Procedimiento.jtablecreadas.getSelectedRow();
              idProcedimiento="";
         idProcedimiento= Procedimiento.jtablecreadas.getValueAt(rec, 0).toString();
-        Procedimiento.txtFecha.setText(Procedimiento.jtablecreadas.getValueAt(rec, 2).toString());
-        Procedimiento.txtHora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
+//        Procedimiento.txtFecha.setText(Procedimiento.jtablecreadas.getValueAt(rec, 2).toString());
+//        Procedimiento.txtHora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
         String silo=Procedimiento.jtablecreadas.getValueAt(rec, 1).toString();
         numsilo(silo);
     }
@@ -84,7 +84,7 @@ public class etapaInventario {
             rs2 = st2.executeQuery("SELECT silos.numero FROM silos WHERE silos.idSilos = '" + idsilo + "'");
             while (rs2.next()) {
             idSilos = rs2.getObject(1) + "";
-            Procedimiento.txtsilo.setText(idSilos);
+        //    Procedimiento.txtsilo.setText(idSilos);
             }
            
            
@@ -98,10 +98,10 @@ public class etapaInventario {
         Date datep = new   Date();
         Procedimiento.jfecha.setDate(datep);
         Procedimiento.jhora.setTime(datep);
-         Procedimiento.txtFecha.setText("");
-        Procedimiento.txtHora.setText("");
+//         Procedimiento.txtFecha.setText("");
+//        Procedimiento.txtHora.setText("");
         Procedimiento.txtHumedad.setText("");
-        Procedimiento.txtsilo.setText("");
+//        Procedimiento.txtsilo.setText("");
        
     }
     public void limpiar(){
