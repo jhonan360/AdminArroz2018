@@ -49,30 +49,14 @@ public class procedimientosInventario {
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
+        numeroProcedimiento();
+        fecha();
         crearModeloSilos();
         crearModeloProcedimientos();
     }
 
     public void numeroProcedimiento() {
-        try {
-            Con = new Conexion();
-            st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT count(*),idProcedimiento FROM procedimiento ORDER BY idProcedimiento ASC");
-
-            while (rs.next()) {
-                if (rs.getString(1).equals(0)) {
-                } else {
-                    String resultado = rs.getString(1);
-                    int numero = Integer.parseInt(resultado);
-                    int num2 = numero + 1;
-                    String resul = Integer.toString(num2);
-                    ProcedI.txtProcedimiento.setText(resul);
-                }
-            }
-            Con.Desconectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ProcedI.txtProcedimiento.setText(String.valueOf(ext.getNextIndex("procedimiento")));
     }
 
     /**

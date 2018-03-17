@@ -29,8 +29,10 @@ public class empleado {
     public static extras ext;
     public static login login;
     public DefaultTableModel modeloemp, modeloUsu;
-    public String columnas[] = new String[]{"N", "Usuario", "Cédula", "Nombres", "Apellidos", "Ciudad", "Dirección", "Teléfono"};
-    public String columnasUsu[] = new String[]{"Ususario", "Privilegio", "Estado"};
+    public String columnas[] = new String[]{"N°", "Usuario", "Cédula", "Nombres", "Apellidos", "Ciudad", "Dirección", "Teléfono"};
+    public String headerColumnas[] = new String[]{"20", "50", "40", "90", "90", "50", "80", "50"};
+    public String columnasUsu[] = new String[]{"Usuario", "Privilegio", "Estado"};
+    public String headerColumnasUsu[] = new String[]{"default", "default", "default"};
     public tablas tbl;
     public int idCargo;
     public String idEmpleado, user, cedula, nombres, apellidos, ciudad, direccion, telefono, departamento;
@@ -41,6 +43,7 @@ public class empleado {
         tbl = new tablas();
         crearModelo();
     }
+    
 
     public void crearModelo() {
         modeloemp = new DefaultTableModel(null, columnas) {
@@ -59,7 +62,9 @@ public class empleado {
         };
         tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE  empleado.idMunicipio=municipios.idMunicipio");
         tbl.llenarTabla(Emp.jTable2, modeloUsu, columnasUsu.length, "SELECT usuario.user,privilegios.nombre,usuario.estado FROM privilegios,usuario LEFT JOIN empleado ON empleado.user=usuario.user WHERE empleado.idEmpleado IS null AND privilegios.idPrivilegios=usuario.idPrivilegios");
-        //SELECT usuario.user,privilegios.nombre,usuario.estado FROM privilegios,usuario LEFT JOIN empleado ON empleado.user=usuario.user WHERE empleado.idEmpleado IS null AND privilegios.idPrivilegios=usuario.idPrivilegios
+        tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+        tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
+//SELECT usuario.user,privilegios.nombre,usuario.estado FROM privilegios,usuario LEFT JOIN empleado ON empleado.user=usuario.user WHERE empleado.idEmpleado IS null AND privilegios.idPrivilegios=usuario.idPrivilegios
     }
 
     public void crearEmpleado() {
@@ -238,90 +243,120 @@ public class empleado {
         if (Emp.chCedula.isSelected() == true && Emp.chApellidos.isSelected() == true && Emp.chCiudad.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.ccEmpleado like '%" + cedula + "%' and empleado.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%'  and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chApellidos.isSelected() == true && Emp.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and empleado.ccEmpleado like '%" + cedula + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chApellidos.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.apellidos like '%" + apellidos + "%' and empleado.ccEmpleado like '%" + cedula + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chCiudad.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.ccEmpleado like '%" + cedula + "%' and municipios.Nombre like '%" + ciudad + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chApellidos.isSelected() == true && Emp.chCiudad.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chApellidos.isSelected() == true) {
             if (!cedula.equals("") && !apellidos.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.ccEmpleado like '%" + cedula + "%' and empleado.Apellidos like '%" + apellidos + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chCiudad.isSelected() == true) {
             if (!cedula.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and empleado.ccEmpleado like '%" + cedula + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!cedula.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.ccEmpleado like '%" + cedula + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chApellidos.isSelected() == true && Emp.chCiudad.isSelected() == true) {
             if (!apellidos.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and empleado.apellidos like '%" + apellidos + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chApellidos.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!apellidos.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.apellidos like '%" + apellidos + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCiudad.isSelected() == true && Emp.chUsuario.isSelected() == true) {
             if (!ciudad.equals("") && !user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCedula.isSelected() == true) {
             if (!cedula.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.ccEmpleado like '%" + cedula + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chApellidos.isSelected() == true) {
             if (!apellidos.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE empleado.apellidos like '%" + apellidos + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE municipios.Nombre like '%" + ciudad + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Emp.chUsuario.isSelected() == true) {
             if (!user.equals("")) {
                 tbl.llenarTabla(Emp.jTable1, modeloemp, columnas.length, "SELECT idEmpleado,user,ccEmpleado,nombres,apellidos,municipios.Nombre,direccion,telefono FROM empleado,municipios WHERE user like '%" + user + "%' and  empleado.idMunicipio=municipios.idMunicipio ");
+                tbl.alinearHeaderTable(Emp.jTable1, headerColumnas);
+                tbl.alinearHeaderTable(Emp.jTable2, headerColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

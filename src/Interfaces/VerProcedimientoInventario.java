@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Logica.Extras.cargarCombo;
+import Logica.Inventario.almacenarInventario;
 import Logica.Inventario.verProcedimientoInventario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
 
     public static verProcedimientoInventario verProcedI;
     public static cargarCombo cargar;
+    public static almacenarInventario almacenarI;
 
     /**
      * Creates new form VerProcedimientosInventario
@@ -88,6 +90,14 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnProcedimineto = new javax.swing.JMenuItem();
+        mnEtapa = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnVerProcedimiento = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -251,14 +261,14 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(chProcedimiento)
                                     .addComponent(chBateria))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(0, 0, 0)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtProcedimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                                     .addComponent(cmbBateria)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(chSilo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbSilo))))
+                                .addComponent(cmbSilo, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -271,7 +281,7 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         tblVerProcedI.setModel(new javax.swing.table.DefaultTableModel(
@@ -299,10 +309,7 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
 
         tblEtapas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "N Etapa", "Etapa", "Fecha Muestra", "Hora Muestra", "Humedad"
@@ -408,10 +415,86 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Opciones");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(230, 32));
+
+        mnProcedimineto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnProcedimineto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnProcedimineto.setText("Crear Procedimiento");
+        mnProcedimineto.setPreferredSize(new java.awt.Dimension(230, 22));
+        mnProcedimineto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnProcediminetoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnProcedimineto);
+
+        mnEtapa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnEtapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnEtapa.setText("Crear Etapa");
+        mnEtapa.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnEtapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEtapaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnEtapa);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Visualizar");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(230, 32));
+
+        mnVerProcedimiento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerProcedimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerProcedimiento.setText("Ver Procedimiento");
+        mnVerProcedimiento.setToolTipText("");
+        mnVerProcedimiento.setPreferredSize(new java.awt.Dimension(230, 22));
+        mnVerProcedimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerProcedimientoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerProcedimiento);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
+        jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(230, 32));
+
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(230, 22));
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSalir);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -430,7 +513,7 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -516,6 +599,25 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chProcedimientoItemStateChanged
 
+    private void mnProcediminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProcediminetoActionPerformed
+        almacenarI.abrirProcedimiento();
+        //setVisible(false);
+    }//GEN-LAST:event_mnProcediminetoActionPerformed
+
+    private void mnEtapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEtapaActionPerformed
+        almacenarI.abrirEtapa();
+    }//GEN-LAST:event_mnEtapaActionPerformed
+
+    private void mnVerProcedimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerProcedimientoActionPerformed
+        almacenarI.abrirVerProcedimiento();
+    }//GEN-LAST:event_mnVerProcedimientoActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        // TODO add your handling code here:
+        almacenarI.salir();
+        dispose();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -574,6 +676,10 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    public static javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -583,6 +689,10 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnEtapa;
+    public static javax.swing.JMenuItem mnProcedimineto;
+    public static javax.swing.JMenuItem mnVerProcedimiento;
     public static javax.swing.JTable tblEtapas;
     public static javax.swing.JTable tblVerProcedI;
     public static javax.swing.JTextField txtProcedimiento;

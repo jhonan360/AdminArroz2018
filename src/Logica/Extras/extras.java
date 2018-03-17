@@ -221,11 +221,11 @@ public class extras {
         return "";
     }
 
-    public static String getIdSilo(String nomSeccion, String nSilo) {
+    public static String getIdSilo(String nomSecadora, String nSilo) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT idSilos FROM silos,seccion WHERE numero ='" + nSilo + "' and seccion.nombre='" + nomSeccion + "' and silos.idSeccion=seccion.idSeccion");
+            rs = st.executeQuery("SELECT idSilos FROM silos,secadora WHERE numero ='" + nSilo + "' and secadora.nombre='" + nomSecadora + "' and silos.idSecadora=secadora.idSecadora");
             String idSilo = "";
             while (rs.next()) {
                 idSilo = rs.getString(1);
