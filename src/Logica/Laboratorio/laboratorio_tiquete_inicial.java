@@ -13,6 +13,9 @@ import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,10 +32,11 @@ public class laboratorio_tiquete_inicial {
     public static Statement st, st1, st2, st3;
     public static Conexion Con;
     public static ResultSet rstipo, rstipo2, rsconsecutivo, rstipos;
-    public static String consecutivo, idTiquete, ccAgricultor, idTipoDeArroz, idAgricultor, humedadUno, impurezaUno;
+    public static String consecutivo, idTiquete, ccAgricultor, idTipoDeArroz, idAgricultor, humedadUno, impurezaUno,fechaSis;
 
     public laboratorio_tiquete_inicial() {
         cargarTipoArroz();
+        fecha();
         consecutivo();
 
         System.out.println("usuario es = " + user);
@@ -95,6 +99,23 @@ public class laboratorio_tiquete_inicial {
         }
 
     }
+    public void fecha() {
+        Calendar c;
+        c = Calendar.getInstance();
+        int d = c.get(Calendar.DATE), m = 1 + (c.get(Calendar.MONTH)), a = c.get(Calendar.YEAR);
+        labo.LBFECHA.setText(a + "/" + m + "/" + d);
+        String fecha = labo.LBFECHA.getText();
+        fecha1(fecha);
+
+    }
+     public void fecha1(String fecha1) {
+        //SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        java.util.Date fecha = new Date();
+       // String fec = formato.format(fecha);
+        fechaSis = formato2.format(fecha);
+      
+    }
 
     public void guardar() {
         idTiquete = labo.Tiquete.getText();
@@ -114,7 +135,7 @@ public class laboratorio_tiquete_inicial {
         if (!idTiquete.equals("") && idAgricultor!=null && !idTipoDeArroz.equals("") && !user.equals("") && !humedadUno.equals("") && !impurezaUno.equals("")) {
 
             idTipoDeArroz = getIdTipo(idTipoDeArroz);
-            insertar(idTiquete, idAgricultor, idTipoDeArroz, user, humedadUno, impurezaUno);//Llamado al metodo insertar
+            insertar(idTiquete, idAgricultor, idTipoDeArroz, user,fechaSis, humedadUno, impurezaUno);//Llamado al metodo insertar
             limpiarCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -122,11 +143,11 @@ public class laboratorio_tiquete_inicial {
 
     }
 
-    public void insertar(String idTiquete, String idAgricultor, String idTipoDeArroz, String user, String humedadUno, String impurezaUno) {
+    public void insertar(String idTiquete, String idAgricultor, String idTipoDeArroz, String user,String fecha, String humedadUno, String impurezaUno) {
         try {
             Con = new Conexion();
             st2 = Con.conexion.createStatement();
-            st2.executeUpdate("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + humedadUno + "','" + impurezaUno + "')");
+            st2.executeUpdate("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
             consecutivo();
         } catch (Exception e) {
