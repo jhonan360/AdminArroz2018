@@ -25,7 +25,9 @@ public class lote {
     public static Lote Lote;
     public static extras ext;
     public DefaultTableModel modelolote;
-    public static String columnas[] = new String[]{"ID", "Nombre", "Descripción", "Departamento", "Ciudad"};
+    public static String columnas[] = new String[]{"N°", "Lote", "Descripción", "Departamento", "Ciudad"};
+    public static String headerColumnas[] = new String[]{"30", "150", "600", "150", "150"};
+    public static String camposColumnas[] = new String[]{"center", "left", "left", "left", "left"};
     public tablas tbl;
     public String nombre, descripcion, idLote, ciudad, idDepartamento;
     public static log logs;
@@ -47,6 +49,8 @@ public class lote {
         };
         tbl = new tablas();
         tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT idLote,lote.nombre,descripcion,departamentos.nombre,municipios.Nombre FROM lote,municipios,departamentos WHERE idLote=idLote AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento");
+        tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+        tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
     }
 
     //se encarga de limpiar los campos de texto de la clase Lote y restablecer los combo box
@@ -153,42 +157,56 @@ public class lote {
         if (Lote.chNombre.isSelected() == true && Lote.chDepartamento.isSelected() == true && Lote.chCiudad.isSelected() == true) {
             if (!nombre.equals("") && !departamento.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE lote.nombre LIKE '%" + nombre + "%' AND departamentos.nombre LIKE '%" + departamento + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY iLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chNombre.isSelected() == true && Lote.chDepartamento.isSelected()) {
             if (!nombre.equals("") && !departamento.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE lote.nombre LIKE '%" + nombre + "%' AND departamentos.nombre LIKE '%" + departamento + "%'AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chNombre.isSelected() == true && Lote.chCiudad.isSelected()) {
             if (!nombre.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE lote.nombre LIKE '%" + nombre + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chDepartamento.isSelected() == true && Lote.chCiudad.isSelected()) {
             if (!departamento.equals("") && !ciudad.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE departamentos.nombre LIKE '%" + departamento + "%' AND municipios.Nombre LIKE '%" + ciudad + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chNombre.isSelected() == true) {
             if (!nombre.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE lote.nombre LIKE '%" + nombre + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chDepartamento.isSelected() == true) {
             if (!departamento.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE departamentos.nombre LIKE '%" + departamento + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Lote.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
                 tbl.llenarTabla(Lote.jTable1, modelolote, columnas.length, "SELECT lote.idLote,lote.nombre,lote.descripcion,departamentos.nombre,municipios.Nombre FROM lote,departamentos,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND lote.idMunicipio=municipios.idMunicipio AND municipios.idDepartamento=departamentos.idDepartamento GROUP BY idLote");
+                tbl.alinearHeaderTable(Lote.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Lote.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

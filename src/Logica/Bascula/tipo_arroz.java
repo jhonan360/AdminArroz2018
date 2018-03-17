@@ -27,11 +27,13 @@ public class tipo_arroz {
     public static Tipo_Arroz Tipo_Arroz;
     public static Conexion Con;
     public static DefaultTableModel modeloTabla;
-    public String columnas[] = new String[]{"N", "Tipo de arroz", "Variedad", "Descripcion"};
+    public String columnas[] = new String[]{"N°", "Tipo de Arroz", "Variedad", "Descripcion"};
+    public String headerColumnas[] = new String[]{"30", "120", "120", "750"};
+    public String camposColumnas[] = new String[]{"center", "left", "left", "left"};
     public static ResultSet rs, rsid;
     public static Statement st, stvalidar, stmodificar, stid;
     public static tablas tbl;
-    public static String idTipoDeArroz,nombre, idVariedad, descripcion;
+    public static String idTipoDeArroz, nombre, idVariedad, descripcion;
     public static validaciones val;
     public static bascula bas;
 
@@ -47,15 +49,16 @@ public class tipo_arroz {
             }
         };
         tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad");
-        desactivar_checkbox();
+        tbl.alinearHeaderTable(Tipo_Arroz.jTable1, headerColumnas);
+        tbl.alinearCamposTable(Tipo_Arroz.jTable1, camposColumnas);
     }
 
     public void crear_tipo_de_arroz() {
         nombre = Tipo_Arroz.txtNombre.getText();
-         idVariedad = String.valueOf(Tipo_Arroz.cmbVariedad.getSelectedIndex() + 1);
+        idVariedad = String.valueOf(Tipo_Arroz.cmbVariedad.getSelectedIndex() + 1);
         descripcion = Tipo_Arroz.txtDescripcion.getText();
         if (!nombre.equals("") && !descripcion.equals("")) {
-            if (!validar(nombre,idVariedad)) {
+            if (!validar(nombre, idVariedad)) {
                 insertar(nombre, idVariedad, descripcion);
                 crearModelo();
                 limpiar_campos();
@@ -67,12 +70,12 @@ public class tipo_arroz {
         }
     }
 
-    public boolean validar(String nombre, String idVariedad ) {
+    public boolean validar(String nombre, String idVariedad) {
         String resultado;
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT nombre FROM tipodearroz WHERE nombre='" + nombre + "'AND idVariedad='"+idVariedad+"'AND idTipoDeArroz<>'"+idTipoDeArroz+"'");
+            rs = st.executeQuery("SELECT nombre FROM tipodearroz WHERE nombre='" + nombre + "'AND idVariedad='" + idVariedad + "'AND idTipoDeArroz<>'" + idTipoDeArroz + "'");
             while (rs.next()) {
                 resultado = rs.getObject(1) + "";
                 if (rs.getString(1) == null) {
@@ -111,11 +114,11 @@ public class tipo_arroz {
         descripcion = Tipo_Arroz.txtDescripcion.getText();
         idVariedad = String.valueOf(Tipo_Arroz.cmbVariedad.getSelectedIndex() + 1);
         if (!nombre.equals("") && !descripcion.equals("")) {
-            if (!validar(nombre,idVariedad)) {
-            actualizar(nombre, idVariedad, descripcion);
-            crearModelo();
-            limpiar_campos();
-            }else{
+            if (!validar(nombre, idVariedad)) {
+                actualizar(nombre, idVariedad, descripcion);
+                crearModelo();
+                limpiar_campos();
+            } else {
                 JOptionPane.showMessageDialog(null, "El tipo de arroz que intenta modificar coincide con un tipo de arroz registrado");
             }
         } else {
@@ -143,7 +146,7 @@ public class tipo_arroz {
         Tipo_Arroz.txtBNombre.setText("");
         Tipo_Arroz.txtBVariedad.setText("");
         Tipo_Arroz.txtNombre.setEnabled(true);
-        idTipoDeArroz="";
+        idTipoDeArroz = "";
     }
 
     public void tablas_campos() {
@@ -165,19 +168,25 @@ public class tipo_arroz {
         };
         if (Tipo_Arroz.chNombre.isSelected() == true && Tipo_Arroz.chVariedad.isSelected() == true) {
             if (!nombre.equals("") && !variedad.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.nombre like '%" + nombre + "%' AND variedad.nombre LIKE '%" + variedad + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad AND tipodearroz.nombre like '%" + nombre + "%' AND variedad.nombre LIKE '%" + variedad + "%' GROUP BY idTipoDeArroz");
+                tbl.alinearHeaderTable(Tipo_Arroz.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Tipo_Arroz.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Tipo_Arroz.chNombre.isSelected() == true) {
             if (!nombre.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.nombre like '%" + nombre + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad AND tipodearroz.nombre like '%" + nombre + "%' GROUP BY idTipoDeArroz");
+                tbl.alinearHeaderTable(Tipo_Arroz.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Tipo_Arroz.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Tipo_Arroz.chVariedad.isSelected() == true) {
             if (!variedad.equals("")) {
-                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE variedad.nombre LIKE '%" + variedad + "%'");
+                tbl.llenarTabla(Tipo_Arroz.jTable1, modeloTabla, columnas.length, "SELECT idTipoDeArroz,tipodearroz.nombre,variedad.nombre,descripcion FROM tipodearroz,variedad WHERE tipodearroz.idVariedad=variedad.idVariedad AND variedad.nombre LIKE '%" + variedad + "%' GROUP BY idTipoDeArroz");
+                tbl.alinearHeaderTable(Tipo_Arroz.jTable1, headerColumnas);
+                tbl.alinearCamposTable(Tipo_Arroz.jTable1, camposColumnas);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

@@ -576,7 +576,8 @@ public class Gerente extends javax.swing.JFrame {
 
     private void TablaPendienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPendienteMouseClicked
         // TODO add your handling code here:
-        gerente.enviarInformacionALosCampos();
+//        gerente.enviarInformacionALosCampos();
+gerente.tablaCamposLiquidacion();
     }//GEN-LAST:event_TablaPendienteMouseClicked
 
     private void TxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtValorActionPerformed

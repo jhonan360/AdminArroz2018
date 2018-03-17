@@ -37,10 +37,10 @@ public class verProcedimientoInventario {
     public tablas tbl;
     public static String idProcedimiento, kilos, humedad;
     public static DefaultTableModel modelVerProcedI, modelEtapas;
-    String columnProced[] = new String[]{"N Procedimiento", "Bateria", "Sección", "N Silo", "Kg", "Fecha Creación", "Hora Creación"};
-    String alineaHeaderProced[] = new String[]{"default", "default", "default", "default", "default", "default", "default"};
-    String alineaCampoProced[] = new String[]{"center", "center", "center", "center", "right", "center", "center"};
-    String columnEtapas[] = new String[]{"N Etapa", "Etapa", "Fecha Muestra", "Hora Muestra", "Humedad"};
+    String columnProced[] = new String[]{"N° Procedimiento", "Bateria", "Secadora", "N Silo", "Kg", "Fecha Creación", "Hora Creación","Almacenamiento","Observacion"};
+    String alineaHeaderProced[] = new String[]{"40", "30", "30", "30", "80", "50", "40","30","100"};
+    String alineaCampoProced[] = new String[]{"center", "center", "center", "center", "right", "center", "center","left","left"};
+    String columnEtapas[] = new String[]{"N° Etapa", "Etapa", "Fecha Muestra", "Hora Muestra", "Humedad"};
     String alineaHeaderEtapas[] = new String[]{"default", "default", "default", "default", "default"};
     String alineaCampoEtapas[] = new String[]{"center", "left", "center", "center", "right"};
     public static login login;
@@ -59,7 +59,7 @@ public class verProcedimientoInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+        tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
         tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
         tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
         tbl.alinearHeaderTable(VerProcedI.tblEtapas, alineaHeaderEtapas);
@@ -127,7 +127,7 @@ public class verProcedimientoInventario {
 
         if (VerProcedI.chProcedimiento.isSelected() == true && VerProcedI.chBateria.isSelected() == true && VerProcedI.chSilo.isSelected() == true && VerProcedI.chFecha.isSelected() == true) {
             if (!procedimiento.equals("") && !bateria.equals("") && !silo.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -136,7 +136,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chProcedimiento.isSelected() == true && VerProcedI.chBateria.isSelected() == true && VerProcedI.chSilo.isSelected() == true) {
             if (!procedimiento.equals("") && !bateria.equals("") && !silo.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -145,7 +145,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chProcedimiento.isSelected() == true && VerProcedI.chBateria.isSelected() == true && VerProcedI.chFecha.isSelected() == true) {
             if (!procedimiento.equals("") && !bateria.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -154,7 +154,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chBateria.isSelected() == true && VerProcedI.chSilo.isSelected() == true && VerProcedI.chFecha.isSelected() == true) {
             if (!bateria.equals("") && !silo.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -163,7 +163,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chProcedimiento.isSelected() == true && VerProcedI.chBateria.isSelected() == true) {
             if (!procedimiento.equals("") && !bateria.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND bateria.nombre= '" + bateria + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -172,7 +172,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chProcedimiento.isSelected() == true && VerProcedI.chFecha.isSelected() == true) {
             if (!procedimiento.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -181,7 +181,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chBateria.isSelected() == true && VerProcedI.chSilo.isSelected() == true) {
             if (!bateria.equals("") && !silo.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE bateria.nombre= '" + bateria + "' AND silos.numero = '" + silo + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -190,7 +190,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chBateria.isSelected() == true && VerProcedI.chFecha.isSelected() == true) {
             if (!bateria.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE bateria.nombre= '" + bateria + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE bateria.nombre= '" + bateria + "' AND fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -199,7 +199,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chProcedimiento.isSelected() == true) {
             if (!procedimiento.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE idProcedimiento= '" + procedimiento + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE idProcedimiento= '" + procedimiento + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -208,7 +208,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chBateria.isSelected() == true) {
             if (!bateria.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE bateria.nombre= '" + bateria + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE bateria.nombre= '" + bateria + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();
@@ -217,7 +217,7 @@ public class verProcedimientoInventario {
             }
         } else if (VerProcedI.chFecha.isSelected() == true) {
             if (!fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,seccion.nombre,silos.numero,silos.kilos,fecha,hora FROM procedimiento,silos,bateria,seccion WHERE fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+                tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE fecha >= '" + fechaI + "' AND fecha<= '" + fechaF + "' AND procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
                 tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
                 tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
                 formatoTablaProced();

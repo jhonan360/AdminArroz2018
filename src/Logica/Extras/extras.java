@@ -173,7 +173,7 @@ public class extras {
             Con = new Conexion();
             Con.ConectarInformation();
             st = Con.conexionInformation.createStatement();
-            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='"+Con.BD+"' and TABLE_NAME='" + tabla + "'");
+            rs = st.executeQuery("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='" + Con.BD + "' and TABLE_NAME='" + tabla + "'");
             while (rs.next()) {
                 id = rs.getObject(1) + "";
             }
@@ -221,15 +221,15 @@ public class extras {
         return "";
     }
 
-    public static String getIdSilo(String nomSeccion,String nSilo) {
+    public static String getIdSilo(String nomSecadora, String nSilo) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT idSilos FROM silos,seccion WHERE numero ='" + nSilo + "' and seccion.nombre='"+nomSeccion+"' and silos.idSeccion=seccion.idSeccion");
+            rs = st.executeQuery("SELECT idSilos FROM silos,secadora WHERE numero ='" + nSilo + "' and secadora.nombre='" + nomSecadora + "' and silos.idSecadora=secadora.idSecadora");
             String idSilo = "";
             while (rs.next()) {
                 idSilo = rs.getString(1);
-                System.out.println("ext"+idSilo);
+                System.out.println("ext" + idSilo);
             }
 
             Con.Desconectar();
@@ -238,5 +238,14 @@ public class extras {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static boolean isNumeric(String numero) {
+        try {
+            double d = Double.parseDouble(numero);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

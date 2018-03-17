@@ -45,13 +45,13 @@ public class gerenteApruebaLiquidaciones {
     public static String columPendientes[] = new String[]{"N°", "Agricultor", "Subtotal", "Neto Pagar"};
     public static String alinearHeaderPendientes[] = new String[]{"10", "default", "default", "default"};
     public static String alinearCamposPendientes[] = new String[]{"center", "left", "right", "right"};
-    public static String columTiquetes[] = new String[]{"N° Tiquete", "Fecha Tiquete", "Kg Brutos", "Humedad O", "Impureza O", "% Castigo H", "% Castigo I", "Peso Compra", "Valor Kg", "Valor Total"};
-    public static String alinearHeaderTiquetes[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default", "default"};
-    public static String alinearCamposTiquetes[] = new String[]{"center", "center", "right", "right", "right", "right", "right", "right", "right", "right"};
+    public static String columTiquetes[] = new String[]{"N° Tiquete", "Fecha Tiquete", "Kg Brutos", "Humedad O", "Impureza O", "% Castigo H", "% Castigo I", "Peso Compra", "Vlr Carga", "Vlr Kg", "Vlr Total"};
+    public static String alinearHeaderTiquetes[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default"};
+    public static String alinearCamposTiquetes[] = new String[]{"center", "center", "right", "right", "right", "right", "right", "right", "right", "right", "right"};
     public static login login;
     long kiloNetos, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar, humedadObtenida, impurezaObtenida, castigoHumedad, castigoImpureza, pesoCompra, valorTotal, netoAPagar, totalKilosCompra, vlrFomentoArrocero;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
-    
+
     public gerenteApruebaLiquidaciones() {
         cu = new currencyFormat();
         ext = new extras();
@@ -105,14 +105,18 @@ public class gerenteApruebaLiquidaciones {
                 GApruebaL.lblTipoImpuesto.setText(rs.getString(8));
                 GApruebaL.lblPorcentajeImpuesto.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(9))));
                 GApruebaL.lblKilosNetos.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(10))));
+                Double klNetos = Double.parseDouble(rs.getString(10));
                 GApruebaL.lblKilosCompra.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(11))));
+                Double klCompra = Double.parseDouble(rs.getString(11));
                 GApruebaL.lblSubtotal.setText(cu.moneyFormat(Double.parseDouble(rs.getString(12))));
                 GApruebaL.lblValorFomento.setText(cu.moneyFormat(Double.parseDouble(rs.getString(13))));
                 GApruebaL.lblValorImpuesto.setText(cu.moneyFormat(Double.parseDouble(rs.getString(14))));
                 GApruebaL.lblDesAnticipo.setText(cu.moneyFormat(Double.parseDouble(rs.getString(15))));
                 GApruebaL.lblNetoPagar.setText(cu.moneyFormat(Double.parseDouble(rs.getString(16))));
+                Double descuento = klNetos - klCompra;
+                GApruebaL.lblKilosDescuento.setText(String.valueOf(cu.thousandsFormat(descuento)));
             }
-            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
+            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorCarga,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             formatoTblDetalle();
             Con.Desconectar();
         } catch (Exception e) {
@@ -123,7 +127,7 @@ public class gerenteApruebaLiquidaciones {
     public void crearModeloDetalle() {
         modelTiquetes = new DefaultTableModel(null, columTiquetes) {
             public boolean isCellEditable(int fila, int columna) {
-                if (columna == 3 || columna == 4) {
+                if (columna == 3 || columna == 4 || columna == 8) {
                     return true;
                 }
                 return false;
@@ -149,13 +153,15 @@ public class gerenteApruebaLiquidaciones {
             GApruebaL.tblDetalleL.setValueAt(castigoI, i, 6);
             String pesoCompra = cu.thousandsFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 7).toString()));
             GApruebaL.tblDetalleL.setValueAt(pesoCompra, i, 7);
-            String valorKg = cu.moneyFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 8).toString()));
-            GApruebaL.tblDetalleL.setValueAt(valorKg, i, 8);
-            String valorTotal = cu.moneyFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 9).toString()));
-            GApruebaL.tblDetalleL.setValueAt(valorTotal, i, 9);
+            String valorCarga = cu.moneyFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 8).toString()));
+            GApruebaL.tblDetalleL.setValueAt(valorCarga, i, 8);
+            String valorKg = cu.moneyFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 9).toString()));
+            GApruebaL.tblDetalleL.setValueAt(valorKg, i, 9);
+            String valorTotal = cu.moneyFormat(Double.parseDouble(GApruebaL.tblDetalleL.getValueAt(i, 10).toString()));
+            GApruebaL.tblDetalleL.setValueAt(valorTotal, i, 10);
         }
     }
-    
+
     public void operacionesDetalle() {
         int row = GApruebaL.tblDetalleL.getRowCount();
 
@@ -181,19 +187,21 @@ public class gerenteApruebaLiquidaciones {
                     if (rs.next()) {
                         String Vector[] = new String[columTiquetes.length];
                         String idDetalleLiquidacion = rs.getString(1);
-                        String valorCarga = rs.getString(2);
+                        //String valorCarga = rs.getString(2);
                         String kilosNetos = rs.getString(3);
 
                         String fecha = GApruebaL.tblDetalleL.getValueAt(i, 1).toString();
                         String kgBrutos = GApruebaL.tblDetalleL.getValueAt(i, 2).toString();
                         String humedadO = GApruebaL.tblDetalleL.getValueAt(i, 3).toString();
                         String impurezaO = GApruebaL.tblDetalleL.getValueAt(i, 4).toString();
+                        String valorCarga = GApruebaL.tblDetalleL.getValueAt(i, 8).toString();
 
                         Vector[0] = idTiquete;
                         Vector[1] = fecha;
                         Vector[2] = kgBrutos;
                         Vector[3] = humedadO;
                         Vector[4] = impurezaO;
+                        Vector[8] = valorCarga;
 
                         double castigoHumedad;
                         if (Double.parseDouble(humedadO) > Double.parseDouble(humedadIdeal)) {
@@ -220,11 +228,14 @@ public class gerenteApruebaLiquidaciones {
                         double pesoCompra = Math.round(castigoHumedad * castigoImpureza * kiloNetos);
                         Vector[7] = String.valueOf(cu.thousandsFormat(pesoCompra));
 
-                        double valorKilo = Double.parseDouble(valorCarga) / 125;
-                        Vector[8] = String.valueOf(cu.moneyFormat(valorKilo));
+                        double tvalorCarga = Double.parseDouble(cu.notMoneyFormat(valorCarga));
+                        Vector[8] = String.valueOf(cu.moneyFormat(tvalorCarga));
+
+                        double valorKilo = (tvalorCarga) / 125;
+                        Vector[9] = String.valueOf(cu.moneyFormat(valorKilo));
 
                         long valorTotal = (long) (pesoCompra * valorKilo);
-                        Vector[9] = String.valueOf(cu.moneyFormat(valorTotal));
+                        Vector[10] = String.valueOf(cu.moneyFormat(valorTotal));
 
                         this.kiloNetos += kiloNetos;
                         this.totalKilosCompra += pesoCompra;
@@ -248,6 +259,10 @@ public class gerenteApruebaLiquidaciones {
                 GApruebaL.lblValorFomento.setText(String.valueOf(cu.moneyFormat(this.valorFomArrocero)));
                 GApruebaL.lblValorImpuesto.setText(String.valueOf(cu.moneyFormat(this.valorImpuesto)));
                 GApruebaL.lblNetoPagar.setText(String.valueOf(cu.moneyFormat(this.netoPagar)));
+
+                long descuento = kiloNetos - totalKilosCompra;
+                GApruebaL.lblKilosDescuento.setText(String.valueOf(cu.thousandsFormat(descuento)));
+
                 Con.Desconectar();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -257,10 +272,10 @@ public class gerenteApruebaLiquidaciones {
 
     public void aprobarLiquidacion(String idLiquidacion) {
         String kilosNetos = cu.notThousandsFormat(GApruebaL.lblKilosNetos.getText());
-        String kilosCompra =cu.notThousandsFormat(GApruebaL.lblKilosCompra.getText());
+        String kilosCompra = cu.notThousandsFormat(GApruebaL.lblKilosCompra.getText());
         String subtotal = cu.notMoneyFormat(GApruebaL.lblSubtotal.getText());
-        String vlrFomento =cu.notMoneyFormat(GApruebaL.lblValorFomento.getText());
-        String vlrImpuesto =cu.notMoneyFormat(GApruebaL.lblValorImpuesto.getText());
+        String vlrFomento = cu.notMoneyFormat(GApruebaL.lblValorFomento.getText());
+        String vlrImpuesto = cu.notMoneyFormat(GApruebaL.lblValorImpuesto.getText());
         String descuento = cu.notMoneyFormat(GApruebaL.lblDesAnticipo.getText());
         String netoPagar = cu.notMoneyFormat(GApruebaL.lblNetoPagar.getText());
 
@@ -301,10 +316,11 @@ public class gerenteApruebaLiquidaciones {
                 String castigoH = cu.notThousandsFormat(GApruebaL.tblDetalleL.getValueAt(i, 5).toString());
                 String castigoI = cu.notThousandsFormat(GApruebaL.tblDetalleL.getValueAt(i, 6).toString());
                 String pesoCompra = cu.notThousandsFormat(GApruebaL.tblDetalleL.getValueAt(i, 7).toString());
-                String valorKilo = cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 8).toString());
-                String valorTotal =cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 9).toString());
+                String valorCarga = cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 8).toString());
+                String valorKilo = cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 9).toString());
+                String valorTotal = cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 10).toString());
 
-                st.executeUpdate("UPDATE detalleliquidacion SET humedad='" + humedadO + "',impureza='" + impurezaO + "',castigoHumedad='" + castigoH + "',castigoImpureza='" + castigoI + "',pesoCompra='" + pesoCompra + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+                st.executeUpdate("UPDATE detalleliquidacion SET humedad='" + humedadO + "',impureza='" + impurezaO + "',castigoHumedad='" + castigoH + "',castigoImpureza='" + castigoI + "',pesoCompra='" + pesoCompra + "',valorCarga='" + valorCarga + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
                 if (i == row - 1) {
                     System.out.println("detalle liquidacion actualizado");
                 }
@@ -334,5 +350,6 @@ public class gerenteApruebaLiquidaciones {
         GApruebaL.lblValorImpuesto.setText("");
         GApruebaL.lblDesAnticipo.setText("");
         GApruebaL.lblNetoPagar.setText("");
+        GApruebaL.lblKilosDescuento.setText("");
     }
 }

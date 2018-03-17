@@ -8,6 +8,7 @@ package Logica.Bascula;
 import Interfaces.BusquedasTiquete;
 import Negocio.Conexion;
 import Interfaces.TiqueteVarios;
+import Logica.Extras.currencyFormat;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -39,18 +40,25 @@ public class tiqueteVarios {
     public static tablas tbl;
     public static DefaultTableModel modelTiqVarios, modeloSegundoPesaje;
     public static String idTiqueteVarios, user, fecha, destino, conductor, idConductor, placa, observacion, kilosBrutos, destare, kilosNetos;
-    public static String columnas[] = new String[]{"Cantidad", "Descripcion"};
-    public static String idTiqVarios, cantidad, descripcion, idTiqueteEspera, estadoTiquete = "", idEntradas;
+    public static String columnas[] = new String[]{"N°", "Cantidad", "Descripcion"};
+    public static String headerColumnas[] = new String[]{"10", "40", "225"};
+    public static String camposColumnas[] = new String[]{"center", "right", "left"};
+    public static String idTiqVarios, cantidad, descripcion, idTiqueteEspera, estadoTiquete = "", idEntradas, kl, cant;
     public static int entradas;
-    public static String columSegundoPesaje[] = new String[]{"N", "Conductor", "KL Brutos"};
+    public static String columSegundoPesaje[] = new String[]{"N°", "Conductor", "Kl Brutos"};
+    public static String headerColumSegundoPesaje[] = new String[]{"7", "165", "60"};
+    public static String camposColumSegundoPesaje[] = new String[]{"center", "left", "right"};
     public static ConexionBascula ConBascula;
+    public static currencyFormat cu;
 
     public tiqueteVarios() {
         //ConBascula = new ConexionBascula();
         ext = new extras();
         tbl = new tablas();
+        cu = new currencyFormat();
         numeroTiquete();
         fecha();
+        tiquetesVariosEsperandoSegundoPesaje(true);
         crearModelo();
     }
 
@@ -59,17 +67,27 @@ public class tiqueteVarios {
      * TIQUETES VARIOS PENDIENTES POR REGISTRAR SEGUNDO PESAJE
      */
     public static void tiquetesVariosEsperandoSegundoPesaje(boolean visible) {
-
         modeloSegundoPesaje = new DefaultTableModel(null, columSegundoPesaje) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
         };
-        tbl.llenarTabla(TiqVarios.tblSegundoPesaje, modeloSegundoPesaje, columSegundoPesaje.length, "SELECT tiquetevarios.idTiqueteVarios, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquetevarios.kilosBrutos FROM tiquetevarios,personalexterno WHERE tiquetevarios.destare=0.00 AND tiquetevarios.kilosNetos=0.00 AND tiquetevarios.idConductor=personalexterno.idPersonalExterno ORDER BY tiquetevarios.idTiqueteVarios DESC;");
+        tbl.llenarTabla(TiqVarios.tblSegundoPesaje, modeloSegundoPesaje, columSegundoPesaje.length, "SELECT tiquetevarios.idTiqueteVarios, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquetevarios.kilosBrutos FROM tiquetevarios,personalexterno WHERE tiquetevarios.destare=0.00 AND tiquetevarios.kilosNetos=0.00 AND tiquetevarios.idConductor=personalexterno.idPersonalExterno ORDER BY tiquetevarios.idTiqueteVarios ASC;");
+        tbl.alinearHeaderTable(TiqVarios.tblSegundoPesaje, headerColumSegundoPesaje);
+        tbl.alinearCamposTable(TiqVarios.tblSegundoPesaje, camposColumSegundoPesaje);
+        formatoTiqVariosEsperandoSegundoPesaje();
+    }
+
+    public static void formatoTiqVariosEsperandoSegundoPesaje() {
+        int row = TiqVarios.tblSegundoPesaje.getRowCount();
+        for (int i = 0; i < row; i++) {
+            kl = TiqVarios.tblSegundoPesaje.getValueAt(i, 2).toString();
+            kl = cu.thousandsFormat(Double.parseDouble(kl));
+            TiqVarios.tblSegundoPesaje.setValueAt(kl, i, 2);
+        }
     }
 
     public void tablaCampos_SegundoPesaje(String SegundoPeso) {
-        //estado = false;
         int rec = TiqVarios.tblSegundoPesaje.getSelectedRow();
         TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
         TiqVarios.btnCapturarDestare.setEnabled(true);
@@ -78,11 +96,20 @@ public class tiqueteVarios {
         TiqVarios.txtConductor.setText(TiqVarios.tblSegundoPesaje.getValueAt(rec, 1).toString());
         TiqVarios.txtPesoInicial.setText(TiqVarios.tblSegundoPesaje.getValueAt(rec, 2).toString());
 
+        /*Campos Entradas deshabilitados*/
+        TiqVarios.txtCantidad.setEnabled(false);
+        TiqVarios.txtDescripcion.setEnabled(false);
+        TiqVarios.btnAgregar.setEnabled(false);
+        TiqVarios.btnEliminar.setEnabled(false);
+        TiqVarios.btnModificar.setEnabled(false);
+        TiqVarios.btnLimpiar.setEnabled(false);
+        TiqVarios.tblEntradas.setEnabled(false);
+
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
 
-            rsTiquete = st.executeQuery("SELECT tiquetevarios.destino,vehiculo.placa,tiquetevarios.observacion,tiquetevarios.idConductor FROM tiquetevarios,vehiculo,personalexterno WHERE tiquetevarios.idTiqueteVarios='" + idTiqueteEspera + "' AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.idConductor=personalexterno.idPersonalExterno");
+            rsTiquete = st.executeQuery("SELECT tiquetevarios.destino,vehiculo.placa,tiquetevarios.observacion,tiquetevarios.idConductor,tiquetevarios.fecha FROM tiquetevarios,vehiculo,personalexterno WHERE tiquetevarios.idTiqueteVarios='" + idTiqueteEspera + "' AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.idConductor=personalexterno.idPersonalExterno");
 
             while (rsTiquete.next()) {
 
@@ -90,16 +117,15 @@ public class tiqueteVarios {
                 TiqVarios.txtPlaca.setText(rsTiquete.getString(2));
                 TiqVarios.txtObservaciones.setText(rsTiquete.getString(3));
                 idConductor = rsTiquete.getString(4);
+                TiqVarios.txtFecha.setText(cu.dateNotTime(rsTiquete.getString(5)));
                 estadoTiquete = "segundoPesaje";
-                tbl = new tablas();
-                tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
+                tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT idEntradas,cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
+                formatoTblEntradas();
             }
-
-            rsEntradas = st.executeQuery("SELECT idEntradas,cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
+            rsEntradas = st.executeQuery("SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteEspera + "'");
             while (rsEntradas.next()) {
                 idEntradas = rsEntradas.getString(1);
             }
-
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,37 +136,35 @@ public class tiqueteVarios {
         Tiquete Varios
      */
     public void crearModelo() {
+        if (TiqVarios.tblEntradas.getRowCount() != 0 && TiqVarios.tblEntradas.getSelectedRow() != -1) {
+        } else {
+            TiqVarios.btnModificar.setEnabled(false);
+            TiqVarios.btnEliminar.setEnabled(false);
+            TiqVarios.btnLimpiar.setEnabled(false);
+        }
         modelTiqVarios = new DefaultTableModel(null, columnas) {
             public boolean isCellEditable(int fila, int columna) {
-                return true;
+                return false;
             }
         };
         TiqVarios.tblEntradas.setModel(modelTiqVarios);
-        //tbl = new tablas();
-        //tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT idEntradas,cantidad,descripcion FROM entradas");
+        tbl.alinearHeaderTable(TiqVarios.tblEntradas, headerColumnas);
+        tbl.alinearCamposTable(TiqVarios.tblEntradas, camposColumnas);
+        formatoTblEntradas();
+    }
+
+    public void formatoTblEntradas() {
+        int row = TiqVarios.tblEntradas.getRowCount();
+        for (int i = 0; i < row; i++) {
+            cant = TiqVarios.tblEntradas.getValueAt(i, 1).toString();
+            cant = cu.thousandsFormat(Double.parseDouble(cant));
+            TiqVarios.tblEntradas.setValueAt(cant, i, 1);
+            TiqVarios.tblEntradas.setValueAt(i + 1, i, 0);
+        }
     }
 
     public void numeroTiquete() {
-        try {
-            Con = new Conexion();
-            st = Con.conexion.createStatement(); //System.out.println("1"); 
-            rs = st.executeQuery("SELECT idTiqueteVarios FROM tiqueteVarios ORDER BY idTiqueteVarios ASC");
-
-            while (rs.next()) {
-                if (rs.getString(1) == null) {
-                } else {
-                    String resultado = rs.getString(1);
-                    int numero = Integer.parseInt(resultado);
-                    int num2 = numero + 1;
-                    String resul = Integer.toString(num2);
-                    //System.out.println(resul);
-                    TiqVarios.lblNumeroTiquete.setText(resul);
-                }
-            }
-            Con.Desconectar();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        TiqVarios.lblNumeroTiquete.setText(String.valueOf(ext.getNextIndex("tiquetevarios")));
     }
 
     public static String fecha() {
@@ -161,7 +185,6 @@ public class tiqueteVarios {
         switch (num) {
             case 2:
                 BusTiquete.panel.setEnabledAt(0, false);
-                //BusTiquete.panel.remove(0);
                 BusTiquete.panel.setEnabledAt(1, true);
                 BusTiquete.panel.setEnabledAt(2, false);
                 TiqVarios.btnBuscarConductor.setEnabled(false);
@@ -170,7 +193,6 @@ public class tiqueteVarios {
                 break;
 
             case 3:
-                //panel vehiculo
                 BusTiquete.panel.setEnabledAt(0, false);
                 BusTiquete.panel.setEnabledAt(1, false);
                 BusTiquete.panel.setEnabledAt(2, true);
@@ -180,15 +202,13 @@ public class tiqueteVarios {
         }
     }
 
-    public void crearEntradas() {//Metodo para crear un nuevo conductor 
+    public void crearEntradas() {
         cantidad = TiqVarios.txtCantidad.getText();
         descripcion = TiqVarios.txtDescripcion.getText();
 
-        //Valida que ningun campo este vacio
         if (!cantidad.equals("") && !descripcion.equals("")) {
-            //insertar(cantidad, descripcion);//Llamado al metodo insertar
-            //int row = TiqVarios.tblEntradas.getRowCount();
-            modelTiqVarios.addRow(new Object[]{cantidad, descripcion});
+            int row = TiqVarios.tblEntradas.getRowCount();
+            modelTiqVarios.addRow(new Object[]{row + 1, cantidad, descripcion});
             limpiarRegistrosEntradas();
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -196,9 +216,21 @@ public class tiqueteVarios {
     }
 
     public void eliminarEntradas() {
-        int rec = TiqVarios.tblEntradas.getSelectedRow();
-        modelTiqVarios.removeRow(rec);
-        limpiarRegistrosEntradas();
+        if (TiqVarios.tblEntradas.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una entrada para poder eliminarla");
+        } else {
+            int rec = TiqVarios.tblEntradas.getSelectedRow();
+            modelTiqVarios.removeRow(rec);
+            formatoTblEntradas();
+            limpiarRegistrosEntradas();
+            int cont = TiqVarios.tblEntradas.getRowCount();
+            if (cont == 0) {
+                TiqVarios.btnModificar.setEnabled(false);
+                TiqVarios.btnLimpiar.setEnabled(false);
+                TiqVarios.btnEliminar.setEnabled(false);
+            }
+        }
+
     }
 
     public static void capturarPeso(int opc) {
@@ -208,8 +240,7 @@ public class tiqueteVarios {
         switch (opc) {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
-                //TiqVarios.txtPesoInicial.setText(ConBascula.getPeso("0"));
-                TiqVarios.txtPesoInicial.setText(String.valueOf(inicial));
+                TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
                 }
@@ -217,12 +248,11 @@ public class tiqueteVarios {
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.txtPesoFinal.setText("");
-                    TiqVarios.txtPesoFinal.setText(String.valueOf(fina));
-                    //TiqVarios.txtPesoFinal.setText(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()));
-                    double ini = Double.parseDouble(TiqVarios.txtPesoInicial.getText());
+                    TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
-                        fina = Double.parseDouble(TiqVarios.txtPesoFinal.getText());
-                        TiqVarios.txtPesoNeto.setText(String.valueOf(ini - fina));
+                        fina = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText()));
+                        TiqVarios.txtPesoNeto.setText(String.valueOf(cu.thousandsFormat(ini - fina)));
                         TiqVarios.btnCapturarDestare.setEnabled(false);
                     }
                 } else {
@@ -233,12 +263,36 @@ public class tiqueteVarios {
     }
 
     public void tabla_campos() {
-        int rec = TiqVarios.tblEntradas.getSelectedRow();
-        TiqVarios.txtCantidad.setText(TiqVarios.tblEntradas.getValueAt(rec, 0).toString());
-        TiqVarios.txtDescripcion.setText(TiqVarios.tblEntradas.getValueAt(rec, 1).toString());
+        int row = TiqVarios.tblEntradas.getRowCount();
+        if (row > 0) {
+            if (TiqVarios.tblEntradas.isEnabled()) {
+                int rec = TiqVarios.tblEntradas.getSelectedRow();
+                if (rec <0) {
+                    TiqVarios.btnModificar.setEnabled(false);
+                    TiqVarios.btnEliminar.setEnabled(false);
+                    TiqVarios.btnLimpiar.setEnabled(false);
+                    System.out.println("---1");
+                } else {
+                    TiqVarios.btnModificar.setEnabled(true);
+                    TiqVarios.btnEliminar.setEnabled(true);
+                    TiqVarios.btnLimpiar.setEnabled(true);
+                    TiqVarios.txtCantidad.setText(TiqVarios.tblEntradas.getValueAt(rec, 1).toString());
+                    TiqVarios.txtDescripcion.setText(TiqVarios.tblEntradas.getValueAt(rec, 2).toString());
+                }
+            } else {
+                TiqVarios.btnModificar.setEnabled(false);
+                TiqVarios.btnEliminar.setEnabled(false);
+                TiqVarios.btnLimpiar.setEnabled(false);
+            }
+        } else {
+            TiqVarios.btnModificar.setEnabled(false);
+            TiqVarios.btnEliminar.setEnabled(false);
+            TiqVarios.btnLimpiar.setEnabled(false);
+        }
     }
 
     public void crearTiqueteVarios() {
+        int row = TiqVarios.tblEntradas.getRowCount();
         idTiqueteVarios = TiqVarios.lblNumeroTiquete.getText();
         conductor = idConductor;
         user = login.enviarUsuario();
@@ -246,10 +300,11 @@ public class tiqueteVarios {
         fecha = fecha();
         destino = TiqVarios.txtDestino.getText();
         observacion = TiqVarios.txtObservaciones.getText();
-        kilosBrutos = TiqVarios.txtPesoInicial.getText();
-        destare = TiqVarios.txtPesoFinal.getText();
-        kilosNetos = TiqVarios.txtPesoNeto.getText();
-        //entradas = TiqVarios.tblEntradas.getRowCount();
+        kilosBrutos = cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText());
+        destare = cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText());
+        kilosNetos = cu.notThousandsFormat(TiqVarios.txtPesoNeto.getText());
+
+        System.out.println("user " + user);
         System.out.println("fecha " + fecha);
         System.out.println("dest " + destino);
         System.out.println("conduc: " + conductor);
@@ -270,13 +325,23 @@ public class tiqueteVarios {
                 placa = ext.getIdPlaca(placa);
                 insertar(estadoTiquete, conductor, user, placa, fecha, destino, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
                 insertarEntrada(estadoTiquete);
+                tiquetesVariosEsperandoSegundoPesaje(true);
+                TiqVarios.btnCapturarKilosBrutos.setEnabled(true);
+                TiqVarios.btnCapturarDestare.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
             }
         } else if (!user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("")) {
-            placa = ext.getIdPlaca(placa);
-            insertar(estadoTiquete, conductor, user, placa, fecha, destino, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
-            insertarEntrada(estadoTiquete);
+            if (row != 0) {
+                placa = ext.getIdPlaca(placa);
+                insertar(estadoTiquete, conductor, user, placa, fecha, destino, observacion, kilosBrutos, destare, kilosNetos);//Llamado al metodo insertar
+                insertarEntrada(estadoTiquete);
+                tiquetesVariosEsperandoSegundoPesaje(true);
+                TiqVarios.btnCapturarKilosBrutos.setEnabled(true);
+                TiqVarios.btnCapturarDestare.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Recuerde ingresar como minimo una entrada");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
         }
@@ -287,7 +352,7 @@ public class tiqueteVarios {
             Con = new Conexion();
 
             if (estadoTiquete.equals("segundoPesaje")) {
-                PreparedStatement ps = Con.conexion.prepareStatement("UPDATE tiqueteVarios SET idConductor='" + conductor + "', user = '" + user + "', idVehiculo = '" + placa + "', fecha = '" + fecha + "', destino='" + destino + "',observacion ='" + observacion + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "' WHERE idTiqueteVarios = '" + idTiqueteVarios + "'", PreparedStatement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = Con.conexion.prepareStatement("UPDATE tiqueteVarios SET idConductor='" + conductor + "', user = '" + user + "', idVehiculo = '" + placa + "', destino='" + destino + "',observacion ='" + observacion + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "' WHERE idTiqueteVarios = '" + idTiqueteVarios + "'", PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.execute();
                 rs = ps.getGeneratedKeys();
                 if (rs.next()) {
@@ -312,8 +377,8 @@ public class tiqueteVarios {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             for (int i = 0; i < TiqVarios.tblEntradas.getRowCount(); i++) {
-                String cantidad = TiqVarios.tblEntradas.getValueAt(i, 0).toString();
-                String descripcion = TiqVarios.tblEntradas.getValueAt(i, 1).toString();
+                String cantidad = TiqVarios.tblEntradas.getValueAt(i, 1).toString();
+                String descripcion = TiqVarios.tblEntradas.getValueAt(i, 2).toString();
 
                 if (estadoTiquete.equals("segundoPesaje")) {
                     st.executeUpdate("UPDATE entradas SET cantidad = '" + cantidad + "',descripcion = '" + descripcion + "' WHERE entradas.idEntradas='" + idEntradas + "' AND entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
@@ -323,18 +388,25 @@ public class tiqueteVarios {
                 }
             }
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
-            limpiarRegistros();
-            limpiarRegistrosEntradas();
-            numeroTiquete();
-            crearModelo();
+            refrescar();
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void modificarEntradas(){
-        
+
+    public void modificarEntradas() {
+        int rec = TiqVarios.tblEntradas.getSelectedRow();
+        cantidad = TiqVarios.txtCantidad.getText();
+        descripcion = TiqVarios.txtDescripcion.getText();
+
+        if (!cantidad.equals("") && !descripcion.equals("")) {
+            TiqVarios.tblEntradas.setValueAt(cantidad, rec, 1);
+            TiqVarios.tblEntradas.setValueAt(descripcion, rec, 2);
+            limpiarRegistrosEntradas();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
+        }
     }
 
     public void limpiarRegistros() {
@@ -351,5 +423,24 @@ public class tiqueteVarios {
     public void limpiarRegistrosEntradas() {
         TiqVarios.txtCantidad.setText("");
         TiqVarios.txtDescripcion.setText("");
+    }
+
+    public void refrescar() {
+        TiqVarios.btnModificar.setEnabled(false);
+        TiqVarios.btnEliminar.setEnabled(false);
+        TiqVarios.btnLimpiar.setEnabled(false);
+        fecha();
+        limpiarRegistros();
+        limpiarRegistrosEntradas();
+        tiquetesVariosEsperandoSegundoPesaje(true);
+        crearModelo();
+        numeroTiquete();
+        TiqVarios.btnCapturarKilosBrutos.setEnabled(true);
+        TiqVarios.btnCapturarDestare.setEnabled(true);
+        /*Campos Entradas habilitados*/
+        TiqVarios.txtCantidad.setEnabled(true);
+        TiqVarios.txtDescripcion.setEnabled(true);
+        TiqVarios.btnAgregar.setEnabled(true);
+        TiqVarios.tblEntradas.setEnabled(true);
     }
 }

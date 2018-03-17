@@ -216,7 +216,7 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
-                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -859,51 +859,70 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
 
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel25" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="jLabel28" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="jLabel29" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="jLabel30" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="jLabel31" alignment="1" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                              <Component id="jLabel25" max="32767" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel27" max="32767" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jSeparator6" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                                          <Component id="jSeparator17" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jSeparator18" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jSeparator19" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblImpurezaIdeal" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="lblPorcentajeFomento" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="lblTipoImpuesto" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="lblPorcentajeImpuesto" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                                  <Component id="jLabel28" alignment="1" max="32767" attributes="0"/>
+                                                                  <Component id="jLabel29" alignment="1" max="32767" attributes="0"/>
+                                                                  <Component id="jLabel30" alignment="1" max="32767" attributes="0"/>
+                                                                  <Component id="jLabel31" alignment="1" max="32767" attributes="0"/>
+                                                                  <Component id="jLabel27" max="32767" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <Component id="lblNomKilosDescuento1" min="-2" pref="159" max="-2" attributes="0"/>
+                                                              <EmptySpace max="32767" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="lblPorcentajeFomento" min="-2" pref="102" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="jSeparator6" alignment="1" pref="115" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator17" alignment="1" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator18" alignment="1" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator19" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator20" alignment="1" max="32767" attributes="0"/>
+                                                              <Component id="lblHumedadIdeal" min="-2" pref="105" max="-2" attributes="0"/>
+                                                              <Component id="lblTipoImpuesto" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                                                              <Component id="lblPorcentajeImpuesto" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                                                              <Component id="lblImpurezaIdeal" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="lblKilosDescuent" min="-2" pref="105" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator23" min="-2" pref="115" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="lblNomKilosDescuento2" min="-2" pref="134" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="lblHumedadIdeal" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
-                                          <Component id="jSeparator20" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel24" min="-2" pref="350" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -919,7 +938,7 @@
                                   <Component id="jLabel23" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel32" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -969,59 +988,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jSeparator4" alignment="1" pref="142" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel24" min="-2" pref="25" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="lblPorcentajeFomento" min="-2" pref="14" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator18" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                                          <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="lblHumedadIdeal" min="-2" pref="14" max="-2" attributes="0"/>
-                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                                          <Component id="jSeparator6" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                                          <Component id="lblImpurezaIdeal" min="-2" pref="14" max="-2" attributes="0"/>
-                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                                          <Component id="jSeparator17" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                                  <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="lblTipoImpuesto" min="-2" pref="14" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator19" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblPorcentajeImpuesto" min="-2" pref="14" max="-2" attributes="0"/>
-                                              <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                          <Component id="jSeparator20" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Component id="lblKilosNetos" min="-2" pref="16" max="-2" attributes="0"/>
@@ -1084,6 +1053,68 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="jSeparator16" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lblNomKilosDescuento2" min="-2" pref="16" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel24" min="-2" pref="12" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="lblPorcentajeFomento" min="-2" pref="14" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                          <Component id="jSeparator18" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Group type="103" groupAlignment="1" attributes="0">
+                                                              <Group type="102" alignment="1" attributes="0">
+                                                                  <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                                  <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <Group type="102" alignment="1" attributes="0">
+                                                                  <Component id="lblHumedadIdeal" min="-2" pref="14" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                                  <Component id="jSeparator6" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                                  <Component id="lblImpurezaIdeal" min="-2" pref="14" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                                  <Component id="jSeparator17" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                          <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="lblTipoImpuesto" min="-2" pref="14" max="-2" attributes="0"/>
+                                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                          <Component id="jSeparator19" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblPorcentajeImpuesto" min="-2" pref="14" max="-2" attributes="0"/>
+                                                      <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                  <Component id="jSeparator20" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblNomKilosDescuento1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblKilosDescuent" min="-2" pref="14" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                                  <Component id="jSeparator23" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1225,6 +1256,9 @@
                     <Component class="javax.swing.JSeparator" name="jSeparator6">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblHumedadIdeal">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
@@ -1232,6 +1266,9 @@
                     <Component class="javax.swing.JSeparator" name="jSeparator17">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblImpurezaIdeal">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
@@ -1239,6 +1276,9 @@
                     <Component class="javax.swing.JSeparator" name="jSeparator18">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblPorcentajeFomento">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
@@ -1246,6 +1286,9 @@
                     <Component class="javax.swing.JSeparator" name="jSeparator19">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblTipoImpuesto">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
@@ -1253,6 +1296,9 @@
                     <Component class="javax.swing.JSeparator" name="jSeparator20">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblPorcentajeImpuesto">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
@@ -1311,6 +1357,42 @@
                     <Component class="javax.swing.JLabel" name="lblVlrImpuesto">
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblNomKilosDescuento1">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Se realiza el descuento de:"/>
+                        <Property name="verticalAlignment" type="int" value="3"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblKilosDescuent">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="4"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JSeparator" name="jSeparator23">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblNomKilosDescuento2">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Kg."/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

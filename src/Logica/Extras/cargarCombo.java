@@ -221,7 +221,7 @@ public class cargarCombo {
         try {
             Con = new Conexion();
             st1 = Con.conexion.createStatement();
-            rs1 = st1.executeQuery("SELECT silos.numero from silos,seccion,bateria where bateria.idBateria='" + bateria + "' and silos.idSeccion=seccion.idSeccion AND seccion.idBateria=bateria.idBateria ");
+            rs1 = st1.executeQuery("SELECT silos.numero from silos,secadora,bateria where bateria.idBateria='" + bateria + "' and silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ");
             combo.removeAllItems();
             while (rs1.next()) {
                 combo.addItem(rs1.getString(1));

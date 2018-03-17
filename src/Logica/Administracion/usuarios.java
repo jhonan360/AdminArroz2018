@@ -11,6 +11,7 @@ import Logica.Extras.cargarCombo;
 import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
 import Logica.Extras.StringEncrypt;
+import Logica.Extras.currencyFormat;
 import javax.swing.table.DefaultTableModel;
 import Negocio.Conexion;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class usuarios {
     public static StringEncrypt encrip;
     public static String columnas[] = new String[]{"N", "Cedula", "Nombres", "Apellidos"};
     public static String columnasUsu[] = new String[]{"Usuario", "Contrasena", "Privilegio", "Estado"};
+    public static String headeColumnasUsu[] = new String[]{"default", "default", "default", "default"};
     public static Usuarios Usu;
     public static Statement st;
     public static ResultSet rs, rs1, rs2;
@@ -65,7 +67,7 @@ public class usuarios {
         };
 
         tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios");
-
+        tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
     }
 
     /* public void tablas_campos() {
@@ -205,7 +207,7 @@ public class usuarios {
         String usuario = Usu.txtBUsuario.getText();
         String privilegio = Usu.txtBPrivilegio.getText();
         String estado = Usu.txtBEstado.getText();
-        modelusu = new DefaultTableModel(null, columnas) {
+        modelusu = new DefaultTableModel(null, columnasUsu) {
             public boolean isCellEditable(int fila, int columna) {
                 return false;
             }
@@ -215,43 +217,50 @@ public class usuarios {
         if (Usu.chUsuario.isSelected() == true && Usu.chPrivilegio.isSelected() == true && Usu.chEstado.isSelected() == true) {
             if (!usuario.equals("") && !privilegio.equals("") && !estado.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND user LIKE '%" + usuario + "%' AND privilegios.nombre LIKE '%" + privilegio + "%' AND estado LIKE '%" + estado + "%'");
-
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Usu.chUsuario.isSelected() == true && Usu.chEstado.isSelected() == true) {
             if (!usuario.equals("") && !estado.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND user LIKE '%" + usuario + "%' AND estado LIKE '%" + estado + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Usu.chUsuario.isSelected() == true && Usu.chPrivilegio.isSelected() == true) {
             if (!usuario.equals("") && !privilegio.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND user LIKE '%" + usuario + "%' AND privilegios.nombre LIKE '%" + privilegio + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Usu.chEstado.isSelected() == true && Usu.chPrivilegio.isSelected() == true) {
             if (!estado.equals("") && !privilegio.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND privilegios.nombre LIKE '%" + privilegio + "%' AND estado LIKE '%" + estado + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             }
         } else if (Usu.chUsuario.isSelected() == true) {
             if (!usuario.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND user LIKE '%" + usuario + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Usu.chEstado.isSelected() == true) {
             if (!estado.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND estado LIKE '%" + estado + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Usu.chPrivilegio.isSelected() == true) {
             if (!privilegio.equals("")) {
                 tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios AND privilegios.nombre LIKE '%" + privilegio + "%'");
+                tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

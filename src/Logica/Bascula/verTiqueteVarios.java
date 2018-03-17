@@ -10,6 +10,7 @@ import Negocio.Conexion;
 import Interfaces.TiqueteVarios;
 import Interfaces.VerTiqueteVarios;
 import static Logica.Bascula.bascula.Vehiculo;
+import Logica.Extras.currencyFormat;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -40,13 +41,20 @@ public class verTiqueteVarios {
     public tablas tbl;
     public static String placa, color, modelo, marca, idVehiculo, idTiqueteVarios;
     public static DefaultTableModel modelVerTiqVarios, modelEntradas;
-    public static String columnas[] = new String[]{"N°", "Fecha", "Conductor", "Vehículo", "Destino", "Observación", "KL Brutos", "Destare", "KilosNetos"};
+    public static String columnas[] = new String[]{"N°", "Fecha", "Conductor", "Vehículo", "Destino", "Observación", "Kl Brutos", "Destare", "Kl Netos"};
+    public static String headerColumnas[] = new String[]{"20", "45", "180", "55", "default", "default", "55", "55", "55"};
+    public static String camposColumnas[] = new String[]{"center", "center", "left", "left", "left", "left", "right", "right", "right"};
     public static String columnasEntradas[] = new String[]{"Cantidad", "Descripción"};
+    public static String headerColumnasEntradas[] = new String[]{"20", "160"};
+    public static String camposColumnasEntradas[] = new String[]{"right", "left"};
     //public static log logs;
     public static login login;
+    public static currencyFormat cu;
 
     public verTiqueteVarios() {
         ext = new extras();
+        tbl = new tablas();
+        cu = new currencyFormat();
         //logs = new log();
         crearModelo();
     }
@@ -57,8 +65,21 @@ public class verTiqueteVarios {
                 return false;
             }
         };
-        tbl = new tablas();
-        tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 ");
+        tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC");
+        tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+        tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+        tbl.alinearHeaderTable(VerTiqVarios.tblEntradas, headerColumnasEntradas);
+        formatoTabla();
+    }
+
+    public void formatoTabla() {
+        int row = VerTiqVarios.tblVerTiqVarios.getRowCount();
+        for (int i = 0; i <row; i++) {
+            VerTiqVarios.tblVerTiqVarios.setValueAt((cu.dateNotTime(VerTiqVarios.tblVerTiqVarios.getValueAt(i, 1).toString())), i, 1);
+            VerTiqVarios.tblVerTiqVarios.setValueAt(cu.thousandsFormat(Double.parseDouble(VerTiqVarios.tblVerTiqVarios.getValueAt(i, 6).toString())), i, 6);
+            VerTiqVarios.tblVerTiqVarios.setValueAt(cu.thousandsFormat(Double.parseDouble(VerTiqVarios.tblVerTiqVarios.getValueAt(i, 7).toString())), i, 7);
+            VerTiqVarios.tblVerTiqVarios.setValueAt(cu.thousandsFormat(Double.parseDouble(VerTiqVarios.tblVerTiqVarios.getValueAt(i, 8).toString())), i, 8);
+        }
     }
 
     public void tablaCamposEntrada() {
@@ -69,11 +90,11 @@ public class verTiqueteVarios {
         try {
             Con = new Conexion();
             //st = Con.conexion.createStatement();
-           // rs = st.executeQuery("SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
-                tbl = new tablas();
-                tbl.llenarTabla(VerTiqVarios.tblEntradas, modelEntradas, columnasEntradas.length, "SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
-                Con.Desconectar();
-
+            // rs = st.executeQuery("SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
+            tbl.llenarTabla(VerTiqVarios.tblEntradas, modelEntradas, columnasEntradas.length, "SELECT cantidad,descripcion FROM entradas WHERE entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
+            tbl.alinearCamposTable(VerTiqVarios.tblEntradas, camposColumnasEntradas);
+            formatoTablaEntradas();
+            Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,8 +107,14 @@ public class verTiqueteVarios {
             }
         };
         VerTiqVarios.tblEntradas.setModel(modelEntradas);
-        //tbl = new tablas();
-        //tbl.llenarTabla(TiqVarios.tblEntradas, modelTiqVarios, columnas.length, "SELECT idEntradas,cantidad,descripcion FROM entradas");
+        tbl.alinearHeaderTable(VerTiqVarios.tblEntradas, headerColumnasEntradas);
+    }
+
+    public void formatoTablaEntradas() {
+        int row = VerTiqVarios.tblEntradas.getRowCount();
+        for (int i = 0; i < row; i++) {
+            VerTiqVarios.tblEntradas.setValueAt(cu.thousandsFormat(Double.parseDouble(VerTiqVarios.tblEntradas.getValueAt(i, 0).toString())), i, 0);
+        }
     }
 
     public void buscar() {
@@ -115,24 +142,32 @@ public class verTiqueteVarios {
                 return false;
             }
         };
-        tbl = new tablas();
-
+        
         if (VerTiqVarios.chTiquete.isSelected() == true && VerTiqVarios.chFecha.isSelected()) {
             if (!tiquete.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 //tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 ");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC ");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (VerTiqVarios.chTiquete.isSelected() == true) {
             if (!tiquete.equals("")) {
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 ");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (VerTiqVarios.chFecha.isSelected() == true) {
             if (!fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 ");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }

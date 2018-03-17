@@ -111,14 +111,20 @@ public class liquidacionesAprobadas {
                 LiqAprobadas.lblTipoImpuesto.setText(rs.getString(8));
                 LiqAprobadas.lblPorcentajeImpuesto.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(9))));
                 LiqAprobadas.lblKilosNetos.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(10))));
+                Double klNetos = Double.parseDouble(rs.getString(10));
                 LiqAprobadas.lblKilosCompra.setText(cu.thousandsFormat(Double.parseDouble(rs.getString(11))));
+                Double klCompra = Double.parseDouble(rs.getString(11));
                 LiqAprobadas.lblSubtotal.setText(cu.moneyFormat(Double.parseDouble(rs.getString(12))));
                 LiqAprobadas.lblVlrFomento.setText(cu.moneyFormat(Double.parseDouble(rs.getString(13))));
                 LiqAprobadas.lblVlrImpuesto.setText(cu.moneyFormat(Double.parseDouble(rs.getString(14))));
                 LiqAprobadas.lblDescAnticipo.setText(cu.moneyFormat(Double.parseDouble(rs.getString(15))));
                 LiqAprobadas.lblNetoPagar.setText(cu.moneyFormat(Double.parseDouble(rs.getString(16))));
+                
+                Double descuento = klNetos - klCompra;
+                LiqAprobadas.lblKilosDescuent.setText(String.valueOf(cu.thousandsFormat(descuento)));
+                
             }
-            tbl.llenarTabla(LiqAprobadas.tblDetalleL, modelDetalle, columDetalle.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
+            tbl.llenarTabla(LiqAprobadas.tblDetalleL, modelDetalle, columDetalle.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             tbl.alinearCamposTable(LiqAprobadas.tblDetalleL, alinearCamposDetalle);
             formatoTblDetalle();
             Con.Desconectar();

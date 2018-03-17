@@ -31,7 +31,7 @@ public class gerente {
     public static Statement st;
     public DefaultTableModel modelo,modelobuscar;
     public static Gerente Ger;
-    public String columnas[] = new String[]{"N", "Cedula", "Nombres", "Apellidos", "Tipo", "Fecha", "K brutos", "Destare", "K netos", "Observacion", "Empaque", "Humedad", "Impureza"};
+    public String columnas[] = new String[]{"N", "Nombre","Fecha"};
     public tablas tbl;
     public String tiquete, valor;
 
@@ -72,7 +72,47 @@ public class gerente {
         };
 
         tbl = new tablas();
-        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula,personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz");
+        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha  FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz");
+    }
+     public void tablaCamposLiquidacion() {
+     // limpiarCampos();
+         int rec = Ger.TablaPendiente.getSelectedRow();
+          //Ger.TxtNumTiquete.setText(Ger.TablaPendiente.getValueAt(rec, 0).toString());
+          // campos_habilitados();
+        String idTiquete=Ger.TablaPendiente.getValueAt(rec, 0).toString();
+         System.out.println("id tiquete pendiente ="+ idTiquete);
+       // idLiquidacion = LiqAprobadas.tblLiquidaciones.getValueAt(rec, 0).toString();
+        //LiqAprobadas.lblNumLiquidacion.setText(idLiquidacion);
+        //LiqAprobadas.lblNomAgricultor.setText(LiqAprobadas.tblLiquidaciones.getValueAt(rec, 3).toString());
+
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT tiquete.idTiquete, personalexterno.cedula,personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and tiquete.idTiquete='"+idTiquete+"'");
+
+            while (rs.next()) {
+                Ger.TxtNumTiquete.setText(rs.getString(1));
+       // Ger.TxtNumTiquete.setText(rs.getString(0));        
+        Ger.TxtCedula.setText(rs.getString(2));
+       Ger.TxtNombre.setText(rs.getString(3)+ rs.getString(4));
+        Ger.TxtTipo.setText(rs.getString(5));
+        Ger.TxtFecha.setText(rs.getString(6));
+        Ger.TxtKilosBrutos.setText(rs.getString(7));
+        Ger.TxtDestare.setText(rs.getString(8));
+        Ger.TxtKilosNetos.setText(rs.getString(9));
+        Ger.TxtObservacion.setText(rs.getString(10));
+        Ger.TxtEmpaque.setText(rs.getString(11));
+        Ger.TxtHumedad.setText(rs.getString(12));
+        Ger.TxtImpureza.setText(rs.getString(13));
+             
+               
+                
+            }
+            
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void enviarInformacionALosCampos() {

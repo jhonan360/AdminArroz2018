@@ -67,12 +67,12 @@ public class EtapaInventario extends javax.swing.JFrame {
         jfecha = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         txtHumedad = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        TxtBateria = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel15 = new javax.swing.JLabel();
+        TxtSecadora = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
+        TxtSilo = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         btnguardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -85,7 +85,7 @@ public class EtapaInventario extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TxtObservacion = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         btnguardar1 = new javax.swing.JButton();
@@ -139,6 +139,14 @@ public class EtapaInventario extends javax.swing.JFrame {
         jtablecreadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtablecreadasMouseClicked(evt);
+            }
+        });
+        jtablecreadas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtablecreadasKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtablecreadasKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(jtablecreadas);
@@ -234,7 +242,12 @@ public class EtapaInventario extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Humedad:");
 
-        cmbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Secamiento", "Trilla" }));
+        cmbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Secamiento", "Seco" }));
+        cmbestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbestadoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Fecha:");
@@ -248,11 +261,11 @@ public class EtapaInventario extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TxtBateria.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TxtSecadora.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TxtSilo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -296,19 +309,19 @@ public class EtapaInventario extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtBateria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
                         .addComponent(jLabel10)
                         .addGap(8, 8, 8)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtSecadora, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
                         .addComponent(jLabel11)
                         .addGap(8, 8, 8)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtSilo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(30, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -340,17 +353,17 @@ public class EtapaInventario extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtBateria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtSecadora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtSilo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,12 +378,12 @@ public class EtapaInventario extends javax.swing.JFrame {
                             .addComponent(jhora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHumedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbestado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHumedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -448,6 +461,11 @@ public class EtapaInventario extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -463,9 +481,9 @@ public class EtapaInventario extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(jTable2);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane5.setViewportView(jTextArea1);
+        TxtObservacion.setColumns(20);
+        TxtObservacion.setRows(5);
+        jScrollPane5.setViewportView(TxtObservacion);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Observación:");
@@ -547,9 +565,8 @@ public class EtapaInventario extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
 
@@ -587,12 +604,31 @@ public class EtapaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtHumedadActionPerformed
 
     private void jtablecreadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablecreadasMouseClicked
-etapa.tabla_campos();        // TODO add your handling code here:
+    etapa.Datos_Campos_Procedimientos();// TODO add your handling code here:
     }//GEN-LAST:event_jtablecreadasMouseClicked
 
     private void btnguardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardar1ActionPerformed
         // TODO add your handling code here:
+        etapa.trillar();
     }//GEN-LAST:event_btnguardar1ActionPerformed
+
+    private void jtablecreadasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablecreadasKeyPressed
+        // TODO add your handling code here:
+        etapa.Datos_Campos_Procedimientos();
+    }//GEN-LAST:event_jtablecreadasKeyPressed
+
+    private void cmbestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbestadoActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        etapa.Datos_Campos_Procedimientos2();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jtablecreadasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablecreadasKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtablecreadasKeyReleased
 
     /**
      * @param args the command line arguments
@@ -630,6 +666,10 @@ etapa.tabla_campos();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel TxtBateria;
+    public static javax.swing.JTextArea TxtObservacion;
+    public static javax.swing.JLabel TxtSecadora;
+    public static javax.swing.JLabel TxtSilo;
     public static javax.swing.JButton btnguardar;
     public static javax.swing.JButton btnguardar1;
     public static javax.swing.JComboBox<String> cmbestado;
@@ -639,8 +679,6 @@ etapa.tabla_campos();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -648,7 +686,6 @@ etapa.tabla_campos();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -669,9 +706,8 @@ etapa.tabla_campos();        // TODO add your handling code here:
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable2;
     public static com.toedter.calendar.JDateChooser jfecha;
     public static lu.tudor.santec.jtimechooser.JTimeChooser jhora;
     public static javax.swing.JTable jtablecreadas;

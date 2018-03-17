@@ -4,7 +4,7 @@ INSERT INTO `marca` (`idMarca`,`marca`) VALUES
  (3,'ALFA ROMEO'),
  (4,'AUDI'),
  (5,'BMW'),
- (6,'CHERY’),
+ (6,'CHERY'),
  (7,'CHEVROLET'),
  (8,'CHRYSLER'),
  (9,'CITROEN'),
@@ -1227,18 +1227,21 @@ INSERT INTO `lote` (`idLote`, `nombre`, `descripcion`, `idMunicipio`) VALUES
 (10,'La cajita', 'Alto indice de fosoforo', 1024),
 (11,'Baja', 'parte baja del Espinal', 1021);
 
-
 INSERT INTO `usuario` (`user`, `idPrivilegios`, `contrasena`, `estado`) VALUES
 ('b', 1, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
+('c', 3, 'agkkACcpxr4wjFD6vObWAQ==', 'activo'),
+('g', 5, 'agkkACcpxr4wjFD6vObWAQ==', 'activo'),
 ('l', 2, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo'),
-('x', 6, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo’),
-('g', '5', 'SUuFcdv+8nRxQzY85TcIeA==', 'activo');
+('lizeth', 1, 'qP8SMR9mMaJzMGfGo4s0dA==', 'activo'),
+('x', 6, 'SUuFcdv+8nRxQzY85TcIeA==', 'activo');
 
-INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES 
-(1, 'x', '1033', '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'), 
-(2, 'b', '5', '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
-(3, 'l', '639', '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211’),
-(4, 'g', '370', '1108765241', 'Jeison Aldemar', 'Blanco Trujillo', 'Cr 69 # 24', '3221234563');
+INSERT INTO `empleado` (`idEmpleado`, `user`, `idMunicipio`, `ccEmpleado`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES
+(1, 'x', 1033, '1106896645', 'Jhonan Smith', 'Vargas Herrán', 'Cra 29 # 11-95', '31338385186'),
+(2, 'b', 5, '1105689625', 'Lizeth Fernanda', 'Ramirez Cortes', 'Manzana E casa 7 Barrio La Esperanza', '3223006069'),
+(3, 'l', 639, '14232121', 'Javier Ivan', 'Arevalo', 'Cra 69 # 24', '3122453211'),
+(4, 'g', 1021, '28710378', 'Beatriz ', 'Gonzalez', 'Espinal', '3138084236'),
+(5, 'c', 1022, '65692470', 'Ana Delfina', 'Cortes Barrero', 'Espinal', '3142772941'),
+(6, 'lizeth', 1021, '9313529', 'Lizeth ', 'Ramirez', 'sssss', '3108976543');
 
 INSERT INTO `personalexterno`(`idPersonalExterno`, `idMunicipio`, `tipo`, `cedula`, `nombres`, `apellidos`, `direccion`, `telefono`, `telefono2`, `telefono3`) VALUES
 (1,	1021,	'agricultor',	'1105689625', 'Jose Hernanda', 'Orjuela Vasquez', 'La caimanera', '3145433423', '', ''),
@@ -1261,20 +1264,30 @@ INSERT INTO `vehiculo` (`idVehiculo`, `idMarca`, `modelo`, `placa`, `color`) VAL
 (2, 6, '2015', 'KSA13B', 'NEGRO'),
 (3, 2, '2000', 'KMW12G', 'ROJO');
 
-INSERT INTO `tiquete` (`idTiquete`, `idAgricultor`, `idTipoDeArroz`, `idLote`, `idVehiculo`, `idConductor`, `user`, `fecha`, `kilosBrutos`, `destare`, `kilosNetos`, `observacion`, `humedadUno`, `impurezaUno`) VALUES
-(1, 10, 2, 1, 1, 1, 'b', '2018-01-28 01:27:27', '15250.00', '1171.00', '14079.00', 'hello', '2.20', '10'),
-(2, 7, 2, 2, 2, 17, 'b', '2018-01-24 00:00:00', '1655.00', '1076.00', '579.00', 'qwer', '9.99', '10'),
-(3, 1, 1, 3, 1, 17, 'b', '2018-01-23 00:00:00', '4321.00', '5000.00', '5200.00', 'Trincho 2', '1.20', '2'),
-(4, 1, 2, 1, 2, 14, 'b', '2018-01-28 03:55:53', '1574.00', '1119.00', '455.00', 'oooo', '2.40', '4'),
-(5, 6, 3, 2, 3, 14, 'b', '2018-01-26 11:25:31', '4573.00', '861.00', '3712.00', 'Trincho 3', '9.99', '10'),
-(6, 2, 2, 1, 1, 11, 'b', '2018-01-28 09:33:23', '4275.00', '1304.00', '2971.00', 'asdfg', '9.99', '10'),
-(7, 16, 2, 1, 3, 14, 'b', '2018-01-29 01:03:13', '2177.00', '0.00', '0.00', 'wewew', '13.00', '12'),
-(8, 10, 2, NULL, NULL, NULL, 'b', NULL, NULL, NULL, NULL, NULL, '11.00', '10');
+INSERT INTO `tiquete` (`idTiquete`, `idAgricultor`, `idTipoDeArroz`, `idLote`, `idVehiculo`, `idConductor`, `user`, `fecha`, `kilosBrutos`, `destare`, `kilosNetos`, `observacion`, `empaque`, `humedadUno`, `impurezaUno`) VALUES
+(1, 10, 2, 1, 1, 11, 'b', '2018-01-28 01:27:27', '15250.00', '1171.00', '14079.00', 'hello', NULL, '2.20', '10.00'),
+(2, 7, 2, 2, 2, 13, 'b', '2018-01-24 00:00:00', '1655.00', '1076.00', '579.00', 'qwer', 'granel', '9.99', '10.00'),
+(3, 1, 1, 3, 1, 14, 'b', '2018-01-23 00:00:00', '4321.00', '5000.00', '5200.00', 'Trincho 2', NULL, '1.20', '2.00'),
+(4, 8, 2, 1, 2, 11, 'b', '2018-01-28 03:55:53', '1574.00', '1119.00', '455.00', 'oooo', NULL, '2.40', '4.00'),
+(5, 7, 3, 2, 3, 12, 'b', '2018-01-26 11:25:31', '4573.00', '861.00', '3712.00', 'Trincho 3', NULL, '9.99', '10.00'),
+(6, 8, 2, 1, 1, 11, 'b', '2018-01-28 09:33:23', '4275.00', '1304.00', '2971.00', 'asdfg', NULL, '9.99', '10.00'),
+(7, 10, 2, 1, 3, 14, 'b', '2018-01-29 01:03:13', '2177.00', '0.00', '0.00', 'wewew', NULL, '13.00', '12.00'),
+(8, 10, 2, 1, 2, 13, 'b', '2018-02-05 11:05:37', '4485.00', '989.00', '3496.00', 'aaa', NULL, '11.00', '10.00'),
+(9, 5, 2, NULL, NULL, 12, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '24.00', '3.00'),
+(10, 8, 1, 1, 3, 13, 'b', '2018-02-06 01:39:16', '4839.00', '964.00', '3875.00', 'qwert', NULL, '22.00', '3.00'),
+(11, 9, 1, NULL, NULL, 14, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '23.00', '4.00'),
+(12, 8, 2, 1, 2, 11, 'b', '2018-02-06 02:28:09', '2554.00', '1230.00', '1324.00', 'sw', NULL, '27.00', '5.00'),
+(13, 2, 1, 1, 1, 14, 'b', '2018-02-06 01:47:40', '2883.00', '0.00', '0.00', 'as', NULL, '22.00', '2.00'),
+(14, 2, 1, 1, 1, 12, 'b', '2018-02-06 02:47:17', '4039.00', '0.00', '0.00', '', NULL, '22.00', '3.00'),
+(15, 3, 2, NULL, NULL, 13, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '24.00', '4.00'),
+(16, 7, 2, NULL, NULL, 11, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '26.00', '3.00'),
+(17, 9, 2, 1, 2, 11, 'b', '2018-02-10 11:02:46', '2804.00', '1084.00', '1720.00', '', NULL, '30.00', '5.00'),
+(18, 4, 3, NULL, NULL, 11, 'l', NULL, NULL, NULL, NULL, NULL, NULL, '25.00', '4.00');
 
 INSERT INTO `tiquetevarios` (`idTiqueteVarios`, `idConductor`, `user`, `idVehiculo`, `fecha`, `destino`, `observacion`, `kilosBrutos`, `destare`, `kilosNetos`) VALUES
-(1, 14, 'b', 1, '2018-01-23 00:00:00', 'Trincho1', 'En movimiento', '1567.00', '1387.00', '180.00'),
-(2, 14, 'b', 3, '2018-01-24 00:00:00', 'Selva', 'Trincho 15', '3461.00', '0.00', '0.00'),
-(3, 14, 'b', 3, '2018-01-24 00:00:00', 'ere', 'ere', '4366.00', '0.00', '0.00'),
+(1, 11, 'b', 1, '2018-01-23 00:00:00', 'Trincho1', 'En movimiento', '1567.00', '1387.00', '180.00'),
+(2, 12, 'b', 3, '2018-01-24 00:00:00', 'Selva', 'Trincho 15', '3461.00', '0.00', '0.00'),
+(3, 13, 'b', 3, '2018-01-24 00:00:00', 'ere', 'ere', '4366.00', '0.00', '0.00'),
 (4, 13, 'b', 3, '2018-01-24 00:00:00', 'eerer', 'erer', '3709.00', '0.00', '0.00'),
 (5, 13, 'b', 3, '2018-01-24 00:00:00', 'qqqq', 'wwww', '3487.00', '0.00', '0.00'),
 (6, 13, 'b', 2, '2018-01-25 00:00:00', 'Trincho 6', 'klklkl', '3050.00', '0.00', '0.00'),
@@ -1291,9 +1304,9 @@ INSERT INTO `tiquetevarios` (`idTiqueteVarios`, `idConductor`, `user`, `idVehicu
 (17, 13, 'b', 2, '2018-01-28 09:25:43', '', 'weer', '1801.00', '0.00', '0.00'),
 (18, 13, 'b', 1, '2018-01-29 03:20:27', 'Trincho 8', 'Listo para almacenamiento', '4212.00', '0.00', '0.00'),
 (19, 13, 'b', 1, '2018-01-29 03:20:59', 'Trincho 8', 'Listo para almacenamiento', '4212.00', '0.00', '0.00'),
-(20, 17, 'b', 2, '2018-01-29 09:25:30', 'fernanda', 'lerolero', '4997.00', '1001.00', '3996.00'),
+(20, 11, 'b', 2, '2018-01-29 09:25:30', 'fernanda', 'lerolero', '4997.00', '1001.00', '3996.00'),
 (21, 13, 'b', 1, '2018-01-29 09:32:02', 'Trincho lola', 'Listo para secamientosss', '2488.00', '1082.00', '1406.00'),
-(22, 17, 'b', 1, '2018-01-30 12:21:28', 'sdsa', 'Epaguetti', '4632.00', '1175.00', '3457.00'),
+(22, 11, 'b', 1, '2018-01-30 12:21:28', 'sdsa', 'Epaguetti', '4632.00', '1175.00', '3457.00'),
 (23, 14, 'b', 3, '2018-01-29 09:32:41', 'tyetryt', '43534', '2040.00', '0.00', '0.00'),
 (24, 12, 'b', 2, '2018-01-29 09:44:04', 'trg', 'tyhytf', '4299.00', '1208.00', '3091.00'),
 (25, 13, 'b', 1, '2018-01-29 09:47:41', '6', '0oo', '1593.00', '0.00', '0.00'),
@@ -1313,6 +1326,24 @@ INSERT INTO `entradas` (`idEntradas`, `idTiqueteVarios`, `cantidad`, `descripcio
 (11, 22, '23.00', 'sdsa'),
 (12, 22, '33.00', 'RSC');
 
+INSERT INTO `liquidaciones` (`idLiquidaciones`, `fecha`, `humedadIdeal`, `impurezaIdeal`, `kilosNeto`, `kilosCompra`, `subTotal`, `fomArrocero`, `valorFomArrocero`, `impuesto`, `porcenImpuesto`, `valorImpuesto`, `descuentoAnticipo`, `estado`, `netoPagar`) VALUES
+(3, '2018-02-08 11:40:19', '24.00', '3.00', '17575.00', '16881.00', '16205760.00', '0.50', '81028.00', 'retefuente', '1.500000', '243086.00', '0.00', 'aprobado', '15881646.00'),
+(4, '2018-02-08 11:37:56', '24.00', '3.00', '8625.00', '8328.00', '7994880.00', '0.50', '39974.00', 'comision bolsa', '0.208948', '16705.00', '0.00', 'en proceso', '7938201.00'),
+(5, '2018-02-09 01:39:32', '24.00', '3.00', '5200.00', '4758.00', '4567680.00', '0.50', '22838.00', 'comision bolsa', '0.208948', '9544.00', '100000.00', 'aprobado', '4435298.00'),
+(6, '2018-02-10 11:39:58', '24.00', '3.00', '1720.00', '1552.00', '2110720.00', '0.50', '10553.00', 'retefuente', '1.500000', '31660.00', '0.00', 'en proceso', '2068507.00');
+
+INSERT INTO `detalleliquidacion` (`idDetalleLiquidacion`, `idLiquidaciones`, `idTiquete`, `humedad`, `impureza`, `castigoHumedad`, `castigoImpureza`, `pesoCompra`, `valorCarga`, `valorKilo`, `valorTotal`) VALUES
+(1, 3, 1, '26.00', '3.00', '0.970', '1.000', '13709.00', '120000.00', '960.00', '13160640.00'),
+(2, 3, 8, '20.00', '12.00', '1.000', '0.910', '3172.00', '120000.00', '960.00', '3045120.00'),
+(3, 4, 10, '22.00', '3.00', '1.000', '1.000', '3875.00', '120000.00', '960.00', '3720000.00'),
+(4, 4, 12, '27.00', '5.00', '0.960', '0.980', '1246.00', '120000.00', '960.00', '1196160.00'),
+(5, 5, 3, '29.00', '5.00', '0.930', '0.980', '4758.00', '120000.00', '960.00', '4567680.00'),
+(6, 4, 4, '2.40', '4.00', '1.000', '0.990', '450.00', '120000.00', '960.00', '432000.00'),
+(7, 4, 6, '9.99', '10.00', '1.000', '0.930', '2757.00', '120000.00', '960.00', '2646720.00'),
+(8, 6, 17, '30.00', '5.00', '0.920', '0.980', '1552.00', '170000.00', '1360.00', '2110720.00'),
+(9, NULL, 2, NULL, NULL, NULL, NULL, NULL, '135000.00', NULL, NULL),
+(10, NULL, 5, NULL, NULL, NULL, NULL, NULL, '120000.00', NULL, NULL);
+
 INSERT INTO `parametros` (`idParametros`, `nombre`, `valor`) VALUES 
 (1, 'Retefuente', '1.50'),
 (2, 'Comisión Bolsa', '0.208948'),
@@ -1325,19 +1356,16 @@ INSERT INTO `bateria` (`idBateria`, `nombre`) VALUES
 (2, 'B');
 
 
-INSERT INTO `seccion` (`idSeccion`, `idBateria`, `nombre`) VALUES 
-(1, '1', 'A1'),
-(2, '1', 'A2'),
-(3, '1', 'A3'),
-(4, '1', 'A4'),
-(5, '2', 'B1'),
-(6, '2', 'B2'),
-(7, '2', 'B3'),
-(8, '2', 'B4');
+INSERT INTO `secadora` (`idSecadora`, `idBateria`, `nombre`, `estado`) VALUES 
+(1, '1', 'A1', 'apagado'),
+(2, '1', 'A2', 'apagado'),
+(3, '1', 'A3', 'apagado'),
+(4, '2', 'B4', 'apagado'),
+(5, '2', 'B5', 'apagado'),
+(6, '2', 'B6', 'apagado'),
+(7, '2', 'B7', 'apagado');
 
-
-
-INSERT INTO `silos` (`idSilos`, `idSeccion`, `numero`, `kilos`, `estado`) VALUES 
+INSERT INTO `silos` (`idSilos`, `idSecadora`, `numero`, `kilos`, `estado`) VALUES 
 (1, '1', '1',0.00, 'vacio'), 
 (2, '1', '2',0.00, 'vacio'), 
 (3, '1', '3',0.00, 'vacio'), 
@@ -1348,13 +1376,37 @@ INSERT INTO `silos` (`idSilos`, `idSeccion`, `numero`, `kilos`, `estado`) VALUES
 (8, '2', '8',0.00, 'vacio'), 
 (9, '2', '9',0.00, 'vacio'), 
 (10, '2', '10',0.00, 'vacio'), 
-(11, '3', '11',0.00, 'vacio'), 
-(12, '3', '12',0.00, 'vacio'), 
-(13, '3', '13',0.00, 'vacio'), 
-(14, '3', '14',0.00, 'vacio'), 
-(15, '3', '15',0.00, 'vacio'), 
-(16, '4', '16',0.00, 'vacio'), 
-(17, '4', '17',0.00, 'vacio'), 
-(18, '4', '18',0.00, 'vacio'), 
-(19, '4', '19',0.00, 'vacio'), 
-(20, '4', '20',0.00, 'vacio');
+(11, '2', '11',0.00, 'vacio'), 
+(12, '2', '12',0.00, 'vacio'), 
+(13, '2', '13',0.00, 'vacio'), 
+(14, '2', '14',0.00, 'vacio'), 
+(15, '2', '15',0.00, 'vacio'), 
+(16, '3', '16',0.00, 'vacio'), 
+(17, '3', '17',0.00, 'vacio'), 
+(18, '3', '18',0.00, 'vacio'), 
+(19, '3', '19',0.00, 'vacio'), 
+(20, '3', '20',0.00, 'vacio'), 
+(21, '7', '1',0.00, 'vacio'), 
+(22, '7', '2',0.00, 'vacio'), 
+(23, '7', '3',0.00, 'vacio'), 
+(24, '7', '4',0.00, 'vacio'), 
+(25, '7', '5',0.00, 'vacio'), 
+(26, '7', '6',0.00, 'vacio'), 
+(27, '6', '7',0.00, 'vacio'), 
+(28, '6', '8',0.00, 'vacio'), 
+(29, '6', '9',0.00, 'vacio'), 
+(30, '6', '10',0.00, 'vacio'), 
+(31, '6', '11',0.00, 'vacio'), 
+(32, '6', '12',0.00, 'vacio'), 
+(33, '5', '13',0.00, 'vacio'), 
+(34, '5', '14',0.00, 'vacio'), 
+(35, '5', '15',0.00, 'vacio'), 
+(36, '5', '16',0.00, 'vacio'), 
+(37, '5', '17',0.00, 'vacio'), 
+(38, '5', '18',0.00, 'vacio'), 
+(39, '4', '19',0.00, 'vacio'), 
+(40, '4', '20',0.00, 'vacio'), 
+(41, '4', '21',0.00, 'vacio'), 
+(42, '4', '22',0.00, 'vacio'), 
+(43, '4', '23',0.00, 'vacio'), 
+(44, '4', '24',0.00, 'vacio');

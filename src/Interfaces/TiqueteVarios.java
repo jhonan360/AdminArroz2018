@@ -7,6 +7,7 @@ package Interfaces;
 
 import static Interfaces.Conductor.txtTelefono;
 import static Interfaces.Conductor.vali;
+import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 import Logica.Bascula.tiqueteVarios;
 import Logica.Extras.validaciones;
@@ -20,9 +21,10 @@ import javax.swing.SwingWorker;
 public class TiqueteVarios extends javax.swing.JFrame {
 
     public static bascula bas;
+    public static Bascula Bas;
     public static tiqueteVarios tiqVarios;
     public static int i = 0;
-    private aTask task;
+    //private aTask task;
 
     /**
      * Creates new form TiqueteVarios
@@ -35,7 +37,25 @@ public class TiqueteVarios extends javax.swing.JFrame {
         tiqVarios.numeroTiquete();
         vali = new validaciones();
         vali.TELEFONOS(txtCantidad);
-        (task = new aTask()).execute();
+        //(task = new aTask()).execute();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                cerrar(); 
+            }
+        });
+    }
+
+    void cerrar() {
+        tiqVarios.limpiarRegistros();
+        tiqVarios.limpiarRegistrosEntradas();
+        tiqVarios.tiquetesVariosEsperandoSegundoPesaje(true);
+        tiqVarios.crearModelo();
+        tiqVarios.fecha();
+        btnCapturarKilosBrutos.setEnabled(true);
+        btnCapturarDestare.setEnabled(true);
+        dispose();
     }
 
     /**
@@ -85,6 +105,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnRefrescar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -107,8 +128,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnTiqueteVarios = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        menuSalir = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -194,28 +216,28 @@ public class TiqueteVarios extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtFecha)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                    .addComponent(btnBuscarConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                    .addComponent(btnBuscarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -225,14 +247,18 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Kilos Brutos:");
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Destare:");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Kilos Netos:");
 
         txtPesoInicial.setEditable(false);
+        txtPesoInicial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPesoInicial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         btnCapturarKilosBrutos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/rotate.png"))); // NOI18N
         btnCapturarKilosBrutos.setText("Capturar");
@@ -243,6 +269,8 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
 
         txtPesoFinal.setEditable(false);
+        txtPesoFinal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPesoFinal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         btnCapturarDestare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/rotate.png"))); // NOI18N
         btnCapturarDestare.setText("Capturar");
@@ -253,6 +281,8 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
 
         txtPesoNeto.setEditable(false);
+        txtPesoNeto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPesoNeto.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         lblNumeroTiquete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNumeroTiquete.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -264,13 +294,13 @@ public class TiqueteVarios extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPesoNeto)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPesoNeto, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPesoFinal, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPesoInicial, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -284,29 +314,26 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNumeroTiquete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNumeroTiquete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCapturarKilosBrutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(btnCapturarKilosBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jLabel10)
                 .addGap(4, 4, 4)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCapturarDestare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCapturarDestare, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jLabel12)
                 .addGap(4, 4, 4)
-                .addComponent(txtPesoNeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPesoNeto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
 
@@ -314,14 +341,22 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         tblEntradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Cantidad", "Descripcion"
+                "N°", "Cantidad", "Descripcion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblEntradas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEntradasMouseClicked(evt);
@@ -402,6 +437,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel29.setText("*Seleccione un registro para modificarlo o eliminarlo.");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -419,14 +458,20 @@ public class TiqueteVarios extends javax.swing.JFrame {
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
@@ -435,11 +480,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
@@ -463,7 +506,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -475,52 +518,48 @@ public class TiqueteVarios extends javax.swing.JFrame {
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(11, 11, 11))
+                .addGap(6, 6, 6))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                     .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tiqVarios.png"))); // NOI18N
         jLabel2.setPreferredSize(new java.awt.Dimension(80, 90));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("TIQUETE DE MOVIMIENTOS VARIOS");
+        jLabel3.setText("CREACIÓN TIQUETE DE MOVIMIENTOS VARIOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel3)
-                .addContainerGap(41, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -551,14 +590,18 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/bascula2.png"))); // NOI18N
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/tiquetePeso2.png"))); // NOI18N
         jLabel22.setPreferredSize(new java.awt.Dimension(80, 90));
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel23.setText(" DE SEGUNDO PESAJE");
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("ESPERA DE SEGUNDO PESAJE");
+        jLabel23.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel24.setText("ENTRADAS EN ESPERA");
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("TIQUETES CREADOS EN");
+        jLabel24.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -566,25 +609,21 @@ public class TiqueteVarios extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel23)
-                .addGap(4, 4, 4))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -601,16 +640,28 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(6, 6, 6)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
 
-        jMenu1.setText("Menú");
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
 
-        jMenuItem1.setText("Agricultor");
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Opciones");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        jMenuItem1.setText("Crear Agricultor");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(175, 22));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -618,7 +669,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        mnConductor.setText("Conductor");
+        mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnConductor.setText("Crear Conductor");
+        mnConductor.setPreferredSize(new java.awt.Dimension(175, 22));
         mnConductor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnConductorActionPerformed(evt);
@@ -626,7 +680,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
         jMenu1.add(mnConductor);
 
-        mnTipo_Arroz.setText("Tipo de arroz");
+        mnTipo_Arroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTipo_Arroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTipo_Arroz.setText("Crear Tipo de arroz");
+        mnTipo_Arroz.setPreferredSize(new java.awt.Dimension(175, 22));
         mnTipo_Arroz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTipo_ArrozActionPerformed(evt);
@@ -634,7 +691,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
         jMenu1.add(mnTipo_Arroz);
 
-        mnVehiculo.setText("Vehiculo");
+        mnVehiculo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVehiculo.setText("Crear Vehiculo");
+        mnVehiculo.setPreferredSize(new java.awt.Dimension(175, 22));
         mnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnVehiculoActionPerformed(evt);
@@ -642,7 +702,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
         jMenu1.add(mnVehiculo);
 
-        mnLote.setText("Lote");
+        mnLote.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnLote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnLote.setText("Crear Lote");
+        mnLote.setPreferredSize(new java.awt.Dimension(175, 22));
         mnLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnLoteActionPerformed(evt);
@@ -652,9 +715,16 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Tiquetes");
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/file.png"))); // NOI18N
+        jMenu3.setText("Crear Tiquete");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(195, 32));
 
+        mnTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
         mnTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTiqueteMateriaPrimaActionPerformed(evt);
@@ -662,7 +732,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
         jMenu3.add(mnTiqueteMateriaPrima);
 
-        mnTiqueteVarios.setText("Tiquete Varios");
+        mnTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnTiqueteVarios.setToolTipText("");
+        mnTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTiqueteVarios.setRequestFocusEnabled(false);
         mnTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnTiqueteVariosActionPerformed(evt);
@@ -672,17 +747,37 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Cuenta");
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Ver Tiquete");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(195, 32));
 
-        menuSalir.setText("Salir");
-        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSalirActionPerformed(evt);
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
             }
         });
-        jMenu2.add(menuSalir);
+        jMenu4.add(mnVerTiqueteMateriaPrima);
 
-        jMenuBar1.add(jMenu2);
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -691,73 +786,35 @@ public class TiqueteVarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(10, 10, 10))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        bascula.abrirAgricultor();
-        setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
-        bascula.abrirConductor();
-    }//GEN-LAST:event_mnConductorActionPerformed
-
-    private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
-        // TODO add your handling code here:
-        bascula.tipo_de_arroz();
-    }//GEN-LAST:event_mnTipo_ArrozActionPerformed
-
-    private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
-        bascula.abrirVehiculo();
-    }//GEN-LAST:event_mnVehiculoActionPerformed
-
-    private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
-        // TODO add your handling code here:
-        bascula.abrirLote();
-    }//GEN-LAST:event_mnLoteActionPerformed
-
-    private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
-        bascula.abrirTiqueteMateriaPrima();
-    }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
-
-    private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
-        bascula.abrirTiqueteVarios();
-    }//GEN-LAST:event_mnTiqueteVariosActionPerformed
-
-    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
-        bascula.salir();
-        dispose();
-    }//GEN-LAST:event_menuSalirActionPerformed
 
     private void btnBuscarConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConductorActionPerformed
         tiqVarios.abrirBusquedasTiquete(2, "TiqVarios");
     }//GEN-LAST:event_btnBuscarConductorActionPerformed
 
     private void btnBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPlacaActionPerformed
-        //tiqVarios.buscarPlaca();
         tiqVarios.abrirBusquedasTiquete(3, "TiqVarios");
     }//GEN-LAST:event_btnBuscarPlacaActionPerformed
 
@@ -767,8 +824,6 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
     private void tblEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradasMouseClicked
         tiqVarios.tabla_campos();
-        tblEntradas.setRowSelectionAllowed(true);
-        //tblEntradas.setCellSelectionEnabled(true);
     }//GEN-LAST:event_tblEntradasMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -814,12 +869,45 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tblSegundoPesajeKeyReleased
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
-        btnCapturarKilosBrutos.setEnabled(true);
-        btnCapturarDestare.setEnabled(true);
-        tiqVarios.limpiarRegistros();
-        tiqVarios.limpiarRegistrosEntradas();
-        tiqVarios.numeroTiquete();
+        tiqVarios.refrescar();
     }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        bascula.abrirAgricultor();
+        //setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
+        bascula.abrirConductor();
+    }//GEN-LAST:event_mnConductorActionPerformed
+
+    private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
+        bascula.tipo_de_arroz();
+    }//GEN-LAST:event_mnTipo_ArrozActionPerformed
+
+    private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
+        bascula.abrirVehiculo();
+    }//GEN-LAST:event_mnVehiculoActionPerformed
+
+    private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
+        bascula.abrirLote();
+    }//GEN-LAST:event_mnLoteActionPerformed
+
+    private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
+        bascula.abrirTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
+
+    private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
+        bascula.abrirTiqueteVarios();
+    }//GEN-LAST:event_mnTiqueteVariosActionPerformed
+
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -856,24 +944,21 @@ public class TiqueteVarios extends javax.swing.JFrame {
         });
     }
 
-    private class aTask extends SwingWorker<Double, Void> {
-
-        @Override
-        protected Double doInBackground() throws InterruptedException {
-            while (!isCancelled()) {
-
-                try {
-                    tiqVarios.tiquetesVariosEsperandoSegundoPesaje(isVisible());
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            return null;
-        }
-
-    }
+    /**
+     * private class aTask extends SwingWorker<Double, Void> {
+     *
+     * @Override protected Double doInBackground() throws InterruptedException {
+     * while (!isCancelled()) {
+     *
+     * try { tiqVarios.tiquetesVariosEsperandoSegundoPesaje(isVisible());
+     * Thread.sleep(10000); } catch (InterruptedException e) {
+     * e.printStackTrace(); }
+     *
+     * }
+     * return null; }
+     *
+     * }
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnAgregar;
@@ -900,11 +985,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
@@ -919,13 +1005,14 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JLabel lblNumeroTiquete;
-    private javax.swing.JMenuItem menuSalir;
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnLote;
     public static javax.swing.JMenuItem mnTipo_Arroz;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
     public static javax.swing.JMenuItem mnVehiculo;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblEntradas;
     public static javax.swing.JTable tblSegundoPesaje;
     public static javax.swing.JTextField txtCantidad;
