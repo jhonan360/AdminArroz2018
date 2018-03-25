@@ -31,7 +31,7 @@ public class gerente {
     public static Statement st;
     public DefaultTableModel modelo,modelobuscar;
     public static Gerente Ger;
-    public String columnas[] = new String[]{"N", "Nombre","Fecha"};
+    public String columnas[] = new String[]{"N", "Nombre","Cedula","Fecha"};
     public tablas tbl;
     public String tiquete, valor;
 
@@ -72,7 +72,7 @@ public class gerente {
         };
 
         tbl = new tablas();
-        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha  FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz");
+        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,concat(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,tiquete.fecha  FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz");
     }
      public void tablaCamposLiquidacion() {
      // limpiarCampos();
@@ -179,11 +179,26 @@ public class gerente {
     }
     
     public void BuscarTiquetes(){
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
-        Date Fechainicial = Ger.jDateinicial.getDate();
-        String FechaIni = formato.format(Fechainicial);
-        Date FechaFinal = Ger.jDatefinal.getDate();
-        String FechaFin = formato.format(FechaFinal);
+        String fechaI, fechaF;
+        Date FechaInicial, FechaFinal;
+
+        SimpleDateFormat formatoI = new SimpleDateFormat("yyy-MM-dd 00:00:00");
+        SimpleDateFormat formatoF = new SimpleDateFormat("yyy-MM-dd 23:59:59");
+        FechaInicial = Ger.jDateinicial.getDate();
+        FechaFinal = Ger.jDatefinal.getDate();
+
+        if (FechaInicial == null && FechaFinal == null) {
+            fechaI = "";
+            fechaF = "";
+        } else {
+            fechaI = formatoI.format(FechaInicial);
+            fechaF = formatoF.format(FechaFinal);
+        }
+        //SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        //Date Fechainicial = Ger.jDateinicial.getDate();
+        //String FechaIni = formato.format(Fechainicial);
+        //Date FechaFinal = Ger.jDatefinal.getDate();
+        //String FechaFin = formato.format(FechaFinal);
         String cedula = Ger.cedula.getText();
         
         
@@ -194,14 +209,14 @@ public class gerente {
         };
 
         if (Ger.chfecha.isSelected() == true && Ger.chcedula.isSelected() == true) {
-            if (!FechaIni.equals("") &&!FechaFin.equals("") && !cedula.equals("")) {
-                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' AND tiquete.fecha > '"+FechaIni+"' AND tiquete.fecha <'"+FechaFin+"'");
+            if (!FechaInicial.equals("") &&!FechaFinal.equals("") && !cedula.equals("")) {
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' AND tiquete.fecha > '"+FechaInicial+"' AND tiquete.fecha <'"+FechaFinal+"'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         } else if (Ger.chfecha.isSelected() == true) {
-            if (!FechaIni.equals("") &&!FechaFin.equals("")) {
-                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz AND tiquete.fecha > '"+FechaIni+"' AND tiquete.fecha <'"+FechaFin+"'");
+            if (!FechaInicial.equals("") &&!FechaFinal.equals("")) {
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete, personalexterno.cedula, personalexterno.nombres,personalexterno.apellidos,tipodearroz.nombre,tiquete.fecha,tiquete.kilosBrutos,tiquete.destare,tiquete.kilosNetos,tiquete.observacion,tiquete.empaque,tiquete.humedadUno,tiquete.impurezaUno FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz AND tiquete.fecha > '"+FechaInicial+"' AND tiquete.fecha <'"+FechaFinal+"'");
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
