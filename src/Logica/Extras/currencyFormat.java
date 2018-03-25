@@ -7,6 +7,7 @@ package Logica.Extras;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class currencyFormat {
     DecimalFormatSymbols simboloMiles = new DecimalFormatSymbols();
     DecimalFormat ftMiles;
     SimpleDateFormat ftDate = new SimpleDateFormat("yyy-MM-dd");
+    SimpleDateFormat ftDateTime = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
 
     public currencyFormat() {
         simboloDinero.setDecimalSeparator('.');
@@ -52,6 +54,15 @@ public class currencyFormat {
             Date Date = ftDate.parse(date);
             return ftDate.format(Date);
         } catch (Exception e) {
+        }
+        return "";
+    }
+
+    public String DateTime(Date dateTime) {
+        try {
+            return ftDateTime.format(dateTime);
+        } catch (Exception e) {
+            System.err.println(e);
         }
         return "";
     }

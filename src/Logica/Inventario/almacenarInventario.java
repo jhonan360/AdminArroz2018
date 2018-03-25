@@ -47,13 +47,13 @@ public class almacenarInventario {
     String idTiquete = "", movimientos = "";
     int lastIndex;
     double pesoActual = 0;
-    double A1[][] = new double[5][3];
-    double A2[][] = new double[10][3];
-    double A3[][] = new double[5][3];
-    double B4[][] = new double[6][3];
-    double B5[][] = new double[6][3];
-    double B6[][] = new double[6][3];
-    double B7[][] = new double[6][3];
+    double A1[][] = new double[5][4];
+    double A2[][] = new double[10][4];
+    double A3[][] = new double[5][4];
+    double B4[][] = new double[6][4];
+    double B5[][] = new double[6][4];
+    double B6[][] = new double[6][4];
+    double B7[][] = new double[6][4];
     String estados[] = new String[7];
 
     currencyFormat cu;
@@ -117,7 +117,7 @@ public class almacenarInventario {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A1' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A1' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             int contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < A1[contador].length; i++) {
@@ -125,7 +125,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A2' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A2' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < A2[contador].length; i++) {
@@ -133,7 +133,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A3' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='A' AND secadora.nombre='A3' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < A3[contador].length; i++) {
@@ -141,7 +141,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B4' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B4' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < B4[contador].length; i++) {
@@ -149,7 +149,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B5' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B5' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < B5[contador].length; i++) {
@@ -157,7 +157,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B6' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B6' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < B6[contador].length; i++) {
@@ -165,7 +165,7 @@ public class almacenarInventario {
                 }
                 contador++;
             }
-            rs = st.executeQuery(" SELECT idSilos,kilos,0 FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B7' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
+            rs = st.executeQuery(" SELECT idSilos,kilos,0,capacidad FROM silos,secadora,bateria WHERE bateria.nombre='B' AND secadora.nombre='B7' AND secadora.idBateria=bateria.idBateria AND silos.idSecadora=secadora.idSecadora");
             contador = 0;
             while (rs.next()) {
                 for (int i = 0; i < B7[contador].length; i++) {
@@ -252,11 +252,11 @@ public class almacenarInventario {
     public void setValueSilo(JProgressBar progressBar, double silo[][], int fila) {
         if (silo[fila][2] == 0) {
             progressBar.setString(String.valueOf(silo[fila][1]));
-            double percent = ((silo[fila][1] * 100) / 12000);
+            double percent = ((silo[fila][1] * 100) / silo[fila][3]);
             progressBar.setValue((int) percent);
         } else {
             progressBar.setString(String.valueOf(silo[fila][2]));
-            double percent = ((silo[fila][2] * 100) / 12000);
+            double percent = ((silo[fila][2] * 100) / silo[fila][3]);
             progressBar.setValue((int) percent);
         }
     }
@@ -383,8 +383,6 @@ public class almacenarInventario {
         for (int i = 0; i < silos.length; i++) {
             if (silos[i][1] != 0 || silos[i][2] != 0) {
                 return false;
-            } else {
-                return true;
             }
         }
         return true;
@@ -413,8 +411,7 @@ public class almacenarInventario {
     public void llenarSilo(JProgressBar progressBar, double silo[][], int fila) {
         String nameSilo = progressBar.getName();
         int secadora = getNumberSecadora(nameSilo, 2);
-
-        if (silo[fila][1] < 12000) {
+        if (silo[fila][1] < silo[fila][3]) {
             if (silo[fila][2] == 0) {
                 if (pesoActual > 0) {
                     if (!estados[secadora].equals("encendido")) {
@@ -422,7 +419,7 @@ public class almacenarInventario {
                     } else if (AlmacenarI.rbtnGuiado.isSelected()) {
                         int respuesta = JOptionPane.showConfirmDialog(null, "¿desea llenar este silo?", "Confirmación", JOptionPane.CANCEL_OPTION);
                         if (respuesta == JOptionPane.YES_OPTION) {
-                            double espacio = 12000 - silo[fila][1];
+                            double espacio = silo[fila][3] - silo[fila][1];
                             if (espacio >= pesoActual) {
                                 silo[fila][2] = silo[fila][1] + pesoActual;
                                 pesoActual = 0;
@@ -437,9 +434,9 @@ public class almacenarInventario {
                         }
                     } else {
                         String respuesta = JOptionPane.showInputDialog("Digite los kilos a ingresar al silo");
-                        if (!respuesta.equals("")) {
+                        if (!respuesta.equals("") && respuesta != null) {
                             if (ext.isNumeric(respuesta)) {
-                                double espacio = 12000 - silo[fila][1];
+                                double espacio = silo[fila][3] - silo[fila][1];
                                 double kilos = Double.parseDouble(respuesta);
                                 if (kilos <= pesoActual) {
                                     if (kilos <= espacio) {
@@ -467,11 +464,69 @@ public class almacenarInventario {
                     movimientos = movimientos.replace("," + nameSilo + ",", "");
                     progressBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, null));
                     AlmacenarI.lblPesoActual.setText(cu.thousandsFormat(pesoActual));
+                    if (verificarContenidoSecadoras(secadora)) {
+                        estados[secadora] = "apagado";
+                        printLabelLed(secadora, 2);
+                    }
                     print();
                 }
             }
         }
 
+    }
+
+    private void printLabelLed(int secadora, int opc) {
+        switch (secadora) {
+            case 0:
+                if (opc == 2) {
+                    AlmacenarI.lblLedA1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedA1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 1:
+                if (opc == 2) {
+                    AlmacenarI.lblLedA2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedA2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 2:
+                if (opc == 2) {
+                    AlmacenarI.lblLedA3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedA3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 3:
+                if (opc == 2) {
+                    AlmacenarI.lblLedB4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedB4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 4:
+                if (opc == 2) {
+                    AlmacenarI.lblLedB5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedB5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 5:
+                if (opc == 2) {
+                    AlmacenarI.lblLedB6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedB6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+            case 6:
+                if (opc == 2) {
+                    AlmacenarI.lblLedB7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+                } else {
+                    AlmacenarI.lblLedB7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+                }
+                break;
+        }
     }
 
     public void almacenar() {
@@ -494,8 +549,12 @@ public class almacenarInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             for (int i = 0; i < estados.length; i++) {
-                int idSecadora=i+1;
-                st.executeUpdate("UPDATE secadora SET estado='"+estados[i]+"' WHERE idSecadora='"+idSecadora+"';");
+                int idSecadora = i + 1;
+                if (!verificarContenidoSecadoras(idSecadora)) {
+                    st.executeUpdate("UPDATE secadora SET estado='" + estados[i] + "' WHERE idSecadora='" + idSecadora + "';");
+                }else{
+                    
+                }
             }
             Con.Desconectar();
         } catch (Exception e) {
@@ -511,7 +570,7 @@ public class almacenarInventario {
             String idSilo = String.valueOf((int) (silo[fila][0]));
             double kilos = silo[fila][2] - silo[fila][1];
             String estadoSilo = "vacio";
-            if (silo[fila][2] == 12000) {
+            if (silo[fila][2] == silo[fila][3]) {
                 estadoSilo = "lleno";
             } else {
                 estadoSilo = "contenido";
@@ -547,6 +606,7 @@ public class almacenarInventario {
         return null;
     }
 // retorna el entero perteneciente a la secadora donde se aloja el silo
+
     public int getNumberSecadora(String silo, int opc) {
         if (opc == 1) {
             String secadora = silo.substring(6, 8);

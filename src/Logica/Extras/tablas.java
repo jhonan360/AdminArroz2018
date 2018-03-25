@@ -53,8 +53,8 @@ public class tablas {
                 columnModel.getColumn(i).setPreferredWidth(Integer.parseInt(columnas[i]));
             }
         }
-        TableCellRenderer rendererFromHeaderLiqui = tabla.getTableHeader().getDefaultRenderer();
-        JLabel headerLabel = (JLabel) rendererFromHeaderLiqui;
+        TableCellRenderer rendererFromHeader = tabla.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
         headerLabel.setHorizontalAlignment(JLabel.CENTER);
     }
 
