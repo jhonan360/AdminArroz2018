@@ -29,26 +29,20 @@ public class Bascula extends javax.swing.JFrame {
      * Creates new form Bascula
      */
     public Bascula() {
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        /**int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 500);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 500);*/
         initComponents();
-        //this.setExtendedState(MAXIMIZED_BOTH);
-        //setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         cargar = new cargarCombo();
         cargar.lote(cmbLote);
         cargar.tipoArroz(cmbTipoArroz);
         System.out.println("isshowing " + isVisible());
         bascula = new bascula();
         (task = new aTask()).execute();
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                cerrar();
-            }
-        });
     }
+    
     void close(){
         this.dispose();
     }
@@ -356,12 +350,13 @@ public class Bascula extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbEmpaque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbLote, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cmbTipoArroz, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtAgricultor)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEditarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtPlaca)
@@ -1019,12 +1014,11 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_txtConductorActionPerformed
 
     private void tblEsperaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEsperaKeyReleased
-        bascula.limpiarRegistros();
-        bascula.tablaCampos_TiquetesEspera();
+         bascula.tablaCampos_TiquetesEspera();
     }//GEN-LAST:event_tblEsperaKeyReleased
 
     private void tblEsperaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEsperaMouseClicked
-        bascula.limpiarRegistros();
+        
         bascula.tablaCampos_TiquetesEspera();
     }//GEN-LAST:event_tblEsperaMouseClicked
 
@@ -1041,12 +1035,10 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbTipoArrozActionPerformed
 
     private void tblSegundoPesajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSegundoPesajeMouseClicked
-        bascula.limpiarRegistros();
         bascula.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeMouseClicked
 
     private void tblSegundoPesajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSegundoPesajeKeyReleased
-        bascula.limpiarRegistros();
         bascula.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeKeyReleased
 

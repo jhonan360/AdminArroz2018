@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Administracion/etapaInventario.java</file>
             <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/Laboratorio.java</file>
             <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Interfaces/EtapaInventario.java</file>
             <file>file:/C:/Users/uriel/Documents/GitHub/AdminArroz2018/src/Logica/Laboratorio/laboratorio.java</file>
+=======
+            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Interfaces/AlmacenarInventario.java</file>
+            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Liquidacion/pruebas.java</file>
+            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Negocio/Conexion.java</file>
+            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Inventario/almacenarInventario.java</file>
+            <file>file:/Users/jhonansmith/GitHub/AdminArroz2018/src/Logica/Administracion/gestionBD.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

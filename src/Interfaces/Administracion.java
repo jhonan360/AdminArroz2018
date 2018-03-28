@@ -6,7 +6,7 @@
 package Interfaces;
 import Logica.Administracion.administracion;
 import Logica.Bascula.bascula;
-import Interfaces.Laboratorio;
+import Interfaces.LaboratorioTiquete;
 import Interfaces.Conductor;
 import Interfaces.Agricultor;
 import Interfaces.Reportes;
@@ -21,7 +21,7 @@ public class Administracion extends javax.swing.JFrame {
     public static Conductor Cdt;
     public static Agricultor Agr;
     public static Reportes repor;
-    public static Laboratorio Labo;
+    public static LaboratorioTiquete Labo;
     
             
     /**

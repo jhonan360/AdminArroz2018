@@ -443,16 +443,20 @@
                           <Component id="jLabel15" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtConductor" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btnBuscarConductor" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel16" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtConductor" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="btnBuscarConductor" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtPlaca" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="btnBuscarPlaca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel18" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtPlaca" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="btnBuscarPlaca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">

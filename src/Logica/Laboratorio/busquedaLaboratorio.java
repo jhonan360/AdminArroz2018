@@ -8,8 +8,8 @@ import Logica.Extras.tablas;
 import Interfaces.BusquedasTiquete;
 import Interfaces.BusquedasTiqueteInicial;
 import Interfaces.Bascula;
-import Interfaces.Laboratorio_tiquete_inicial;
-import Logica.Laboratorio.laboratorio_tiquete_inicial;
+import Interfaces.LaboratorioTiqueteInicial;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Interfaces.Vehiculo;
 import Negocio.Conexion;
 import javax.swing.JOptionPane;
@@ -31,9 +31,9 @@ public class busquedaLaboratorio {
     public static BusquedasTiqueteInicial BusT;
     public static ResultSet rs;
      public String columnas2[] = new String[]{"N° Laboratorio","N° Tiquete","Muestreo","Hora","Humedad"};
-    public static Laboratorio_tiquete_inicial LabT;
+    public static LaboratorioTiqueteInicial LabT;
    // public static bascula bas;
-    public static laboratorio_tiquete_inicial labt;
+    public static laboratorioTiqueteInicial labt;
     
   
     public static String cedula,id;

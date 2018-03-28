@@ -13,7 +13,7 @@ import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 
 import Interfaces.Gerente;
-import Logica.Laboratorio.laboratorio;
+import Logica.Laboratorio.laboratorioTiquete;
 
 import Logica.Bascula.conductor;
 import Logica.Gerencia.gerencia;

@@ -59,7 +59,7 @@ public class bascula {
     public static String headerSegundoPesaje[] = new String[]{"7", "175", "60"};
     public static String camposSegundoPesaje[] = new String[]{"center", "left", "right"};
     public static DefaultTableModel modeloentrada, modeloSegundoPesaje;
-    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos, empaque,kilos;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos, empaque, kilos;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -72,7 +72,7 @@ public class bascula {
     public static Conexion Con;
     public static tablas tbl;
     public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
-    public static String idTiqueteEspera, estadoTiquete;
+    public static String idTiqueteEspera = "", estadoTiquete;
     public static boolean estado;
     public static ConexionBascula ConBascula;
     public static currencyFormat cu;
@@ -80,11 +80,11 @@ public class bascula {
 
     public bascula() {
         //ConBascula = new ConexionBascula();
-        fecha();
         ext = new extras();
         tbl = new tablas();
-        cu = new currencyFormat(); 
+        cu = new currencyFormat();
         tiquetesEsperandoSegundoPesaje(true);
+        Bas.txtFecha.setText(cu.dateNotTime(ext.fecha()));
     }
 
     public static void tipo_de_arroz() {
@@ -206,17 +206,34 @@ public class bascula {
     }
 
     public void tablaCampos_TiquetesEspera() {
-
         estado = true;
         int rec = Bas.tblEspera.getSelectedRow();
+        String idTiquete = Bas.tblEspera.getValueAt(rec, 0).toString();
+
+        if (!idTiqueteEspera.equals("")) {
+            if (!idTiqueteEspera.equals(idTiquete)) {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿desea cambiar de tiquete?", "Confirmación", JOptionPane.CANCEL_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    cambiarFila(rec, idTiquete);
+                }
+            }
+        } else {
+            cambiarFila(rec, idTiquete);
+        }
+    }
+
+    public void cambiarFila(int rec, String idTiquete) {
+        limpiarRegistros();
+        idTiqueteEspera = idTiquete;
+        Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.btnCapturarInicial.setEnabled(true);
         Bas.btnCapturarFinal.setEnabled(true);
-        idTiqueteEspera = Bas.tblEspera.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.txtAgricultor.setText(Bas.tblEspera.getValueAt(rec, 1).toString());
         String tipoArroz = Bas.tblEspera.getValueAt(rec, 2).toString();
         Bas.cmbTipoArroz.setSelectedItem(tipoArroz);
-
+        Bas.txtFecha.setText(cu.dateNotTime(ext.fecha()));
+        
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -253,11 +270,11 @@ public class bascula {
         tbl.alinearCamposTable(Bas.tblSegundoPesaje, camposSegundoPesaje);
         tiquetesEsperandoSegundoPesaje();
     }
-    
+
     public static void tiquetesEsperandoSegundoPesaje() {
         int row = Bas.tblSegundoPesaje.getRowCount();
         for (int i = 0; i < row; i++) {
-            kilos = Bas.tblSegundoPesaje.getValueAt(i,2).toString();
+            kilos = Bas.tblSegundoPesaje.getValueAt(i, 2).toString();
             kilos = cu.thousandsFormat(Double.parseDouble(kilos));
             Bas.tblSegundoPesaje.setValueAt(kilos, i, 2);
         }
@@ -266,9 +283,25 @@ public class bascula {
     public void tablaCampos_SegundoPesaje(String SegundoPeso) {
         estado = false;
         int rec = Bas.tblSegundoPesaje.getSelectedRow();
+        String idTiquete = Bas.tblSegundoPesaje.getValueAt(rec, 0).toString();
+
+        if (!idTiqueteEspera.equals("")) {
+            if (!idTiqueteEspera.equals(idTiquete)) {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿desea cambiar de tiquete?", "Confirmación", JOptionPane.CANCEL_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    cambiarTiq(rec, idTiquete);
+                }
+            }
+        } else {
+            cambiarTiq(rec, idTiquete);
+        }
+    }
+
+    public void cambiarTiq(int rec,String idTiquete){
+        limpiarRegistros();
+        idTiqueteEspera=idTiquete;
         Bas.btnCapturarInicial.setEnabled(false);
         Bas.btnCapturarFinal.setEnabled(true);
-        idTiqueteEspera = Bas.tblSegundoPesaje.getValueAt(rec, 0).toString();
         Bas.lblNumeroTiquete.setText(idTiqueteEspera);
         Bas.txtAgricultor.setText(Bas.tblSegundoPesaje.getValueAt(rec, 1).toString());
         Bas.txtPesoInicial.setText(Bas.tblSegundoPesaje.getValueAt(rec, 2).toString());
@@ -277,7 +310,7 @@ public class bascula {
             Con = new Conexion();
             st = Con.conexion.createStatement();
 
-            rsTiquete = st.executeQuery("SELECT CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,vehiculo.placa,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.observacion,humedadUno,impurezaUno,idAgricultor,idConductor FROM tiquete,personalexterno,tipodearroz,variedad,lote,vehiculo WHERE idTiquete='" + idTiqueteEspera + "' AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.idConductor=personalexterno.idPersonalExterno");
+            rsTiquete = st.executeQuery("SELECT CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,vehiculo.placa,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.observacion,humedadUno,impurezaUno,idAgricultor,idConductor,fecha FROM tiquete,personalexterno,tipodearroz,variedad,lote,vehiculo WHERE idTiquete='" + idTiqueteEspera + "' AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.idConductor=personalexterno.idPersonalExterno");
 
             while (rsTiquete.next()) {
                 Bas.cmbTipoArroz.setSelectedItem(rsTiquete.getString(1));
@@ -290,6 +323,7 @@ public class bascula {
 
                 idAgricultor = rsTiquete.getString(8);
                 idConductor = rsTiquete.getString(9);
+                Bas.txtFecha.setText(cu.dateNotTime(rsTiquete.getString(10)));
                 estadoTiquete = "segundoPesaje";
             }
 
@@ -297,16 +331,6 @@ public class bascula {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static String fecha() {
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
-        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
-        java.util.Date fecha = new Date();
-        String fec = formato.format(fecha);
-        String fec2 = formato2.format(fecha);
-        Bas.txtFecha.setText(fec);
-        return fec2;
     }
 
     public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
@@ -351,7 +375,7 @@ public class bascula {
         switch (opc) {
             case 1:
                 Bas.txtPesoInicial.setText("");
-                //Bas.txtPesoInicial.setText(ConBascula.getPeso("0"));
+                //Bas.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
                 Bas.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.btnCapturarInicial.setEnabled(false);
@@ -361,7 +385,7 @@ public class bascula {
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.txtPesoFinal.setText("");
                     Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    //Bas.txtPesoFinal.setText(ConBascula.getPeso(Bas.txtPesoInicial.getText()));
+                    //Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))));
                     double ini = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoInicial.getText()));
                     if (!Bas.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoFinal.getText()));
@@ -378,7 +402,7 @@ public class bascula {
     public static void crearTiquete() {
         idTiquete = Bas.lblNumeroTiquete.getText();
         agricultor = idAgricultor;
-        fecha = fecha();
+        fecha = ext.fecha();
         lote = String.valueOf(Bascula.cmbLote.getSelectedIndex() + 1);
         tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
         empaque = String.valueOf(Bascula.cmbEmpaque.getSelectedIndex() + 1);

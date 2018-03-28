@@ -34,17 +34,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         tiqVarios = new tiqueteVarios();
-        tiqVarios.numeroTiquete();
         vali = new validaciones();
         vali.TELEFONOS(txtCantidad);
         //(task = new aTask()).execute();
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                cerrar(); 
-            }
-        });
     }
 
     void cerrar() {
@@ -52,7 +44,6 @@ public class TiqueteVarios extends javax.swing.JFrame {
         tiqVarios.limpiarRegistrosEntradas();
         tiqVarios.tiquetesVariosEsperandoSegundoPesaje(true);
         tiqVarios.crearModelo();
-        tiqVarios.fecha();
         btnCapturarKilosBrutos.setEnabled(true);
         btnCapturarDestare.setEnabled(true);
         dispose();
@@ -224,15 +215,17 @@ public class TiqueteVarios extends javax.swing.JFrame {
                     .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarConductor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -857,14 +850,10 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tblSegundoPesajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSegundoPesajeMouseClicked
-        tiqVarios.limpiarRegistros();
-        tiqVarios.crearModelo();
         tiqVarios.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeMouseClicked
 
     private void tblSegundoPesajeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblSegundoPesajeKeyReleased
-        tiqVarios.limpiarRegistros();
-        tiqVarios.crearModelo();
         tiqVarios.tablaCampos_SegundoPesaje("SegundoPesaje");
     }//GEN-LAST:event_tblSegundoPesajeKeyReleased
 

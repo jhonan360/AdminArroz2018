@@ -20,7 +20,7 @@ public class currencyFormat {
     DecimalFormat ftDinero;
     DecimalFormatSymbols simboloMiles = new DecimalFormatSymbols();
     DecimalFormat ftMiles;
-    SimpleDateFormat ftDate = new SimpleDateFormat("yyy-MM-dd");
+    SimpleDateFormat ftDate = new SimpleDateFormat("yyyy-MM-dd");
 
     public currencyFormat() {
         simboloDinero.setDecimalSeparator('.');

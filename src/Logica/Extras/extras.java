@@ -8,6 +8,8 @@ package Logica.Extras;
 import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class extras {
 
@@ -247,5 +249,12 @@ public class extras {
             return false;
         }
         return true;
+    }
+    
+    public static String fecha() {
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        java.util.Date fecha = new Date();
+        String fec = formato.format(fecha);
+        return fec;
     }
 }

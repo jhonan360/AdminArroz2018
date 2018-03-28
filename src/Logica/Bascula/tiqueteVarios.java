@@ -8,6 +8,7 @@ package Logica.Bascula;
 import Interfaces.BusquedasTiquete;
 import Negocio.Conexion;
 import Interfaces.TiqueteVarios;
+import static Interfaces.TiqueteVarios.tiqVarios;
 import Logica.Extras.currencyFormat;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class tiqueteVarios {
     public static String columnas[] = new String[]{"N°", "Cantidad", "Descripcion"};
     public static String headerColumnas[] = new String[]{"10", "40", "225"};
     public static String camposColumnas[] = new String[]{"center", "right", "left"};
-    public static String idTiqVarios, cantidad, descripcion, idTiqueteEspera, estadoTiquete = "", idEntradas, kl, cant;
+    public static String idTiqVarios, cantidad, descripcion, idTiqueteEspera="", estadoTiquete = "", idEntradas, kl, cant;
     public static int entradas;
     public static String columSegundoPesaje[] = new String[]{"N°", "Conductor", "Kl Brutos"};
     public static String headerColumSegundoPesaje[] = new String[]{"7", "165", "60"};
@@ -52,12 +53,12 @@ public class tiqueteVarios {
     public static currencyFormat cu;
 
     public tiqueteVarios() {
-        //ConBascula = new ConexionBascula();
+        ConBascula=bas.ConBascula;
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
-        numeroTiquete();
-        fecha();
+        TiqVarios.lblNumeroTiquete.setText(String.valueOf(ext.getNextIndex("tiquetevarios")));
+        TiqVarios.txtFecha.setText(cu.dateNotTime(ext.fecha()));
         tiquetesVariosEsperandoSegundoPesaje(true);
         crearModelo();
     }
@@ -89,9 +90,25 @@ public class tiqueteVarios {
 
     public void tablaCampos_SegundoPesaje(String SegundoPeso) {
         int rec = TiqVarios.tblSegundoPesaje.getSelectedRow();
+        String idTiquete =TiqVarios.tblSegundoPesaje.getValueAt(rec, 0).toString(); 
+        if(!idTiqueteEspera.equals("")){
+            if(!idTiqueteEspera.equals(idTiquete)){
+              int respuesta = JOptionPane.showConfirmDialog(null, "¿desea cambiar de tiquete?", "Confirmación", JOptionPane.CANCEL_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    cambiarTiq(rec, idTiquete);
+                }
+            }
+        }else{
+            cambiarTiq(rec,idTiquete);
+        }
+    }
+    
+    public void cambiarTiq(int rec,String idTiquete){
+        limpiarRegistros();
+        crearModelo();
         TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
         TiqVarios.btnCapturarDestare.setEnabled(true);
-        idTiqueteEspera = TiqVarios.tblSegundoPesaje.getValueAt(rec, 0).toString();
+        idTiqueteEspera = idTiquete;
         TiqVarios.lblNumeroTiquete.setText(idTiqueteEspera);
         TiqVarios.txtConductor.setText(TiqVarios.tblSegundoPesaje.getValueAt(rec, 1).toString());
         TiqVarios.txtPesoInicial.setText(TiqVarios.tblSegundoPesaje.getValueAt(rec, 2).toString());
@@ -163,20 +180,6 @@ public class tiqueteVarios {
         }
     }
 
-    public void numeroTiquete() {
-        TiqVarios.lblNumeroTiquete.setText(String.valueOf(ext.getNextIndex("tiquetevarios")));
-    }
-
-    public static String fecha() {
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
-        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
-        java.util.Date fecha = new Date();
-        String fec = formato.format(fecha);
-        String fec2 = formato2.format(fecha);
-        TiqVarios.txtFecha.setText(fec);
-        return fec2;
-    }
-
     public static void abrirBusquedasTiquete(int num, String tiquete) {
 
         BusTiquete = new BusquedasTiquete(tiquete);
@@ -240,7 +243,8 @@ public class tiqueteVarios {
         switch (opc) {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
-                TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
+                TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
+                //TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
                 }
@@ -248,7 +252,8 @@ public class tiqueteVarios {
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.txtPesoFinal.setText("");
-                    TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    //TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))));
                     double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText()));
@@ -267,7 +272,7 @@ public class tiqueteVarios {
         if (row > 0) {
             if (TiqVarios.tblEntradas.isEnabled()) {
                 int rec = TiqVarios.tblEntradas.getSelectedRow();
-                if (rec <0) {
+                if (rec < 0) {
                     TiqVarios.btnModificar.setEnabled(false);
                     TiqVarios.btnEliminar.setEnabled(false);
                     TiqVarios.btnLimpiar.setEnabled(false);
@@ -297,7 +302,7 @@ public class tiqueteVarios {
         conductor = idConductor;
         user = login.enviarUsuario();
         placa = TiqVarios.txtPlaca.getText();
-        fecha = fecha();
+        fecha = ext.fecha();
         destino = TiqVarios.txtDestino.getText();
         observacion = TiqVarios.txtObservaciones.getText();
         kilosBrutos = cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText());
@@ -429,12 +434,12 @@ public class tiqueteVarios {
         TiqVarios.btnModificar.setEnabled(false);
         TiqVarios.btnEliminar.setEnabled(false);
         TiqVarios.btnLimpiar.setEnabled(false);
-        fecha();
+        TiqVarios.txtFecha.setText(cu.dateNotTime(ext.fecha()));
         limpiarRegistros();
         limpiarRegistrosEntradas();
         tiquetesVariosEsperandoSegundoPesaje(true);
         crearModelo();
-        numeroTiquete();
+        TiqVarios.lblNumeroTiquete.setText(String.valueOf(ext.getNextIndex("tiquetevarios")));
         TiqVarios.btnCapturarKilosBrutos.setEnabled(true);
         TiqVarios.btnCapturarDestare.setEnabled(true);
         /*Campos Entradas habilitados*/

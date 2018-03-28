@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Logica.Extras.extras;
-import static Logica.Laboratorio.laboratorio_tiquete_inicial.BusTiquete;
+import static Logica.Laboratorio.laboratorioTiqueteInicial.BusTiquete;
 import java.text.DecimalFormat;
 import java.sql.PreparedStatement;
 import java.text.DecimalFormatSymbols;
@@ -39,8 +39,12 @@ public class liquidacion {
     public static Statement st;
     public static extras ext;
     public DefaultTableModel modeloSeleccionTiquete, modeloSeleccionLiquidacion;
-    public String columnasSeleccionTiquete[] = new String[]{"N", "Fecha", "Agricultor", "Valor Carga", "Kilos Netos"};
-    public String columnasLiquidacion[] = new String[]{"N", "Kilos Brutos", "Humedad", "Impureza", "Castigo Humedad", "Castigo Impureza", "Peso Compra", "Valor Kilo", "Valor Total"};
+    public String columnasSeleccionTiquete[] = new String[]{"N° Tiquete", "Fecha", "Agricultor", "Valor Carga", "Kilos Netos"};
+    public String headeColumnasSeleccionTiquete[] = new String[]{"30", "30", "170", "40", "40"};
+    public String camposCcolumnasSeleccionTiquete[] = new String[]{"center", "center", "left", "right", "right"};
+    public String columnasLiquidacion[] = new String[]{"N° Tiquete", "Kg Brutos", "Humedad", "Impureza", "% Castigo H", "% Castigo I", "Peso Compra", "Vlr Kg", "Vlr Total"};
+    public String headerColumnasLiquidacion[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default"};
+    public String camposColumnasLiquidacion[] = new String[]{"center", "right", "riht", "right", "right", "right", "right", "right", "right"};
     public static tablas tbl;
     public String idAgricultor;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
@@ -51,6 +55,10 @@ public class liquidacion {
         cu = new currencyFormat();
         ext = new extras();
         tbl = new tablas();
+        Liqui.lblNumLiquidacion.setText(String.valueOf(ext.getNextIndex("liquidaciones")));
+        Liqui.lblFechaLiquidacion.setText(cu.dateNotTime(ext.fecha()));
+        tbl.alinearHeaderTable(Liqui.tblSeleccionTiquete, headeColumnasSeleccionTiquete);
+        tbl.alinearHeaderTable(Liqui.tblSeleccionLiquidacion, headerColumnasLiquidacion);
         limpiar();
     }
 
@@ -62,9 +70,11 @@ public class liquidacion {
         BusTiquete.panel.setEnabledAt(1, false);
         BusTiquete.panel.setEnabledAt(2, false);;
         BusTiquete.panel.setSelectedIndex(0);
+
     }
 
     public void crearModelo() {
+        encabezadoLiquidacion();
         if (!idAgricultor.equals("")) {
             modeloSeleccionTiquete = new DefaultTableModel(null, columnasSeleccionTiquete) {
                 public boolean isCellEditable(int fila, int columna) {
@@ -72,6 +82,7 @@ public class liquidacion {
                 }
             };
             tbl.llenarTabla(Liqui.tblSeleccionTiquete, modeloSeleccionTiquete, columnasSeleccionTiquete.length, "SELECT tiquete.idTiquete,tiquete.fecha,CONCAT(personalexterno.apellidos,' ',personalexterno.nombres),detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion,personalexterno WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.idAgricultor='" + idAgricultor + "'");
+            tbl.alinearCamposTable(Liqui.tblSeleccionTiquete, camposCcolumnasSeleccionTiquete);
             completarTablaTiquete();
             modeloSeleccionLiquidacion = new DefaultTableModel(null, columnasLiquidacion) {
                 public boolean isCellEditable(int fila, int columna) {
@@ -83,6 +94,7 @@ public class liquidacion {
     }
 
     public void moverTabla(String movimiento) {
+        tbl.alinearCamposTable(Liqui.tblSeleccionLiquidacion, camposColumnasLiquidacion);
         humedadIdeal = Liqui.txtHumedadIdeal.getText();
         impurezaIdeal = Liqui.txtImpurezaIdeal.getText();
         FomArroz = Liqui.txtFomArroz.getText();
@@ -246,7 +258,7 @@ public class liquidacion {
                     if (rs.next()) {
                         String Vector[] = new String[columnasSeleccionTiquete.length];
                         Vector[0] = rs.getString(1);
-                        Vector[1] = rs.getString(2);
+                        Vector[1] = cu.dateNotTime(rs.getString(2));
                         Vector[2] = rs.getString(3);
                         Vector[3] = cu.moneyFormat(Double.parseDouble(rs.getString(4)));
                         Vector[4] = cu.thousandsFormat(Double.parseDouble(rs.getString(5)));
@@ -317,6 +329,7 @@ public class liquidacion {
             if (Liqui.tblSeleccionLiquidacion.getRowCount() > 0) {
                 insertarLiquidacion();
                 insertarDetalleLiquidacion();
+                Liqui.lblNumLiquidacion.setText(String.valueOf(ext.getNextIndex("liquidaciones")));
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(null, "No hay tiquetes para liquidar");
@@ -375,6 +388,11 @@ public class liquidacion {
     }
 
     public void limpiar() {
+        Liqui.lblNumLiquidacion.setText(String.valueOf(ext.getNextIndex("liquidaciones")));
+        Liqui.lblNomAgricultor.setText("");
+        Liqui.lblCedAgricultor.setText("");
+        Liqui.lblCelAgricultor.setText("");
+        Liqui.lblDirAgricultor.setText("");
         idAgricultor = "";
         idLiquidaciones = "";
         Liqui.cmbImpuesto.setSelectedIndex(0);
@@ -419,6 +437,24 @@ public class liquidacion {
         Login = new Login();
         Login.setVisible(true);
 
+    }
+
+    public void encabezadoLiquidacion() {
+        System.out.println("id" + idAgricultor);
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula, CONCAT( telefono, ' ', telefono2, ' ', telefono3 ),direccion FROM personalexterno WHERE idPersonalExterno='" + idAgricultor + "'");
+            while (rs.next()) {
+                Liqui.lblNomAgricultor.setText(rs.getString(1));
+                Liqui.lblCedAgricultor.setText(rs.getString(2));
+                Liqui.lblCelAgricultor.setText(rs.getString(3));
+                Liqui.lblDirAgricultor.setText(rs.getString(4));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 // select busqueda agricultor

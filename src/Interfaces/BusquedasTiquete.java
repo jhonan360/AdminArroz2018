@@ -10,11 +10,11 @@ import Logica.Bascula.bascula;
 import static Logica.Bascula.bascula.Bas;
 import Logica.Bascula.busquedasTiquete;
 import Logica.Bascula.tiqueteVarios;
-import Logica.Laboratorio.laboratorio_tiquete_inicial;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import Interfaces.Laboratorio_tiquete_inicial;
+import Interfaces.LaboratorioTiqueteInicial;
 import Logica.Extras.validaciones;
 import Logica.Extras.extras;
 import javax.swing.JFrame;
@@ -27,16 +27,16 @@ import Interfaces.Liquidacion;
  */
 public class BusquedasTiquete extends javax.swing.JDialog {
 
-    public static Laboratorio_tiquete_inicial Lab;
+    public static LaboratorioTiqueteInicial Lab;
     public static busquedasTiquete busTiquete;
     public static bascula bascula;
-    public static String claseTiquete, conductor;
+    public static String claseTiquete, conductor, agricultor;
     public static TiqueteVarios TiqVarios;
     public static tiqueteVarios tiqVarios;
     public static validaciones val, vali;
     public static String consecutivo;
-    public static Laboratorio_tiquete_inicial TiqLab;
-    public static laboratorio_tiquete_inicial tiqLab;
+    public static LaboratorioTiqueteInicial TiqLab;
+    public static laboratorioTiqueteInicial tiqLab;
     public static Statement st;
     public static Conexion Con;
     public static ResultSet rsconsecutivo;
@@ -50,6 +50,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         claseTiquete = tiquete;
+        System.out.println(claseTiquete);
         busTiquete = new busquedasTiquete(claseTiquete);
         ext = new extras();
         vali = new validaciones();
@@ -894,33 +895,44 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         if (rec == -1) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna fila");
         } else {
-            int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (valor == JOptionPane.YES_OPTION) {
-
-                switch (claseTiquete) {
-                    case "TiqPrincipal":
+            switch (claseTiquete) {
+                case "TiqPrincipal":
+                    int valor = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (valor == JOptionPane.YES_OPTION) {
                         Bas.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                        String idAgricultor = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
-                        bascula.idAgricultor = idAgricultor;
-                        busTiquete.cerrar(claseTiquete);
-                        dispose();
-                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                    }
+                    String idAgricultor = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
+                    bascula.idAgricultor = idAgricultor;
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
 
-                    case "TiqLab":
+                case "TiqLab":
+                    String agricultor = Lab.txtAgricultor.getText();
+                    if (!agricultor.equals("")) {
+                        int valorl = JOptionPane.showConfirmDialog(null, "Desea guardar los cambios realizados?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (valorl == JOptionPane.YES_OPTION) {
+                            Lab.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                        }
+                    } else {
                         Lab.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                        String idAgri = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
-                        tiqLab.ccAgricultor = idAgri;
-                        dispose();
-                        break;
-                    case "TiqLiqui":
-                        Liqui.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
-                        Liqui.liqui.idAgricultor = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
-                        Liqui.liqui.crearModelo();
-                        dispose();
-                        break;
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
+                    }
+                    agricultor = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
+                    tiqLab.ccAgricultor = agricultor;
+                    busTiquete.cerrar(claseTiquete);
+                    dispose();
+                    break;
+
+                case "TiqLiqui":
+                    Liqui.txtAgricultor.setText((jTable3.getValueAt(rec, 1).toString()) + (" " + jTable3.getValueAt(rec, 2).toString()));
+                    Liqui.liqui.idAgricultor = ext.getIdPersonalExterno((jTable3.getValueAt(rec, 0).toString()), "agricultor");
+                    Liqui.liqui.crearModelo();
+                    dispose();
+                    break;
             }
         }
     }//GEN-LAST:event_btnGuardarAgricultorActionPerformed
