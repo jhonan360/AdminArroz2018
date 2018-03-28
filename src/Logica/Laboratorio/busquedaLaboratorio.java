@@ -47,6 +47,7 @@ public class busquedaLaboratorio {
     public busquedaLaboratorio() {
         tbl = new tablas();
        crearModeloAgricultor();
+       
         
         
         //tabla_camposAgricultor();
@@ -115,7 +116,23 @@ public class busquedaLaboratorio {
     
 
     public void buscarAgricultor() {
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        java.util.Date fecha = new Date();
+        fecha =BusT.jDateinicial.getDate();
+        // String fec = formato.format(fecha);
+        String FechaIni = formato2.format(fecha);
+        java.util.Date fecha2 = new Date();
+        fecha2 =BusT.jDatefinal.getDate();
+        // String fec = formato.format(fecha);
+        String FechaFin = formato2.format(fecha2);
+       ///  SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        //Date Fechainicial = BusT.jDateinicial.getDate();
+        //String FechaIni = formato.format(Fechainicial);
+       // Date FechaFinal = BusT.jDatefinal.getDate();
+        //String FechaFin = formato.format(FechaFinal);
+        String cedula = BusT.txtcedula.getText();
+       
+        /*SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
         Date Fechainicial = BusT.jDateinicial.getDate();
         String FechaIni = formato.format(Fechainicial);
         
@@ -127,6 +144,7 @@ public class busquedaLaboratorio {
         //String fecha_inicial = BusT.jDateinicial.getDateFormatString();
         //String fecha_inicial = "2018/01/02";
         String cedula = BusT.txtcedula.getText();
+        */
         String numtiquete = BusT.txttiquete.getText();
         System.out.println("num"+numtiquete);
         System.out.println("id"+id);
