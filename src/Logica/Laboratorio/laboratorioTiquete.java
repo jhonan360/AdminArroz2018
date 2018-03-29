@@ -66,7 +66,7 @@ public class laboratorioTiquete {
         Laboratorio.txtIdTiquete.setText(String.valueOf(ext.getNextIndex("laboratorio")));
         crearModelo();
         crearModelo3();
-        consecutivo();
+        //consecutivo();
         campos_desabilitados();
     }
 
@@ -131,7 +131,7 @@ public class laboratorioTiquete {
         if (!Laboratorio.TxtIntegral.getText().equals("")) {
             integral = Double.parseDouble(Laboratorio.TxtIntegral.getText());
             double cascarilla = 1000 - integral;
-            Laboratorio.TxtCascarilla.setText(String.valueOf(cascarilla));
+            Laboratorio.TxtCascarilla.setText(String.valueOf(cu.thousandsFormat(cascarilla)));
         } else {
             JOptionPane.showMessageDialog(null, "El campo Integral no puede quedar vacio");
         }
@@ -143,7 +143,7 @@ public class laboratorioTiquete {
         if (!Laboratorio.TxtPartido.getText().equals("")) {
             partido = Double.parseDouble(Laboratorio.TxtPartido.getText());
             double entero = 100 - partido;
-            Laboratorio.enteroRes.setText(String.valueOf(entero));
+            Laboratorio.enteroRes.setText(String.valueOf(cu.thousandsFormat((entero))));
             calculo_ip(entero);
         } else {
             JOptionPane.showMessageDialog(null, "El campo partido no se puede encontrar vacio");
@@ -188,7 +188,8 @@ public class laboratorioTiquete {
         Laboratorio.TxtBlanco.setText("");
         Laboratorio.TxtPartido.setText("");
         Laboratorio.enteroRes.setText("");
-        consecutivo();
+        //consecutivo();
+        Laboratorio.lblFecha.setText(cu.dateNotTime(ext.fecha()));
         Laboratorio.txtIdTiquete.setText(String.valueOf(ext.getNextIndex("laboratorio")));
     }
 
@@ -326,7 +327,7 @@ public class laboratorioTiquete {
         }
     }
 
-    public void consecutivo() {
+    /*public void consecutivo() {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -339,7 +340,7 @@ public class laboratorioTiquete {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     //cierra un tiquete de laboratorio
     public void estado() {
