@@ -15,7 +15,7 @@ public class Conexion {
     public static Connection conexion;
     public static Connection conexionInformation;
     public static String BD = "admiarroz";
-    public static String pass = "root";
+    public static String pass = "";
 
     public Conexion() {
         Conectar();
@@ -38,6 +38,16 @@ public class Conexion {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public Connection ConectarReport() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/" + BD, "root", pass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conexion;
     }
 
     public void ConectarInformation() {

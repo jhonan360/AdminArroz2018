@@ -31,6 +31,16 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Negocio.ConexionBascula;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.WindowConstants;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -501,6 +511,23 @@ public class bascula {
 
     void cerrarVentana(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void reporteBasculaTiqPrincipal(){
+        try {
+            Con = new Conexion();
+            Connection c= Con.ConectarReport();
+
+            JasperReport reporte=null;
+            String path="src\\}reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
+            reporte=(JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
+            JasperPrint jprint = JasperFillManager.fillReport(path,null,c);//enviamos parametros
+            JasperViewer view= new JasperViewer(jprint,false);//vista del reporte
+            view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            
+        } catch (JRException ex) {
+            Logger.getLogger(bascula.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

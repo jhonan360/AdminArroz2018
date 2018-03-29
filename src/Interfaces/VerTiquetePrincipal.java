@@ -261,7 +261,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblVerTiqPrincipal);
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
-        btnCrear.setText("Guardar");
+        btnCrear.setText("Generar");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -536,7 +536,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        //cdt.crearConductor();
+        verTiqPrincipal.reporteBasculaTiqPrincipal();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void chFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chFechaActionPerformed
