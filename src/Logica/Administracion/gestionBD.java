@@ -72,7 +72,7 @@ public class gestionBD {
                 File a = new File(Dir + "/" + listSql[i]);
                 datos[0] = String.valueOf(i + 1);
                 datos[1] = a.getName();
-                datos[2] = a.length() / 1024 + "Kb";
+                datos[2] = setFotmatWeight(a.length());
                 Date d = new Date(a.lastModified());
                 datos[3] = cu.DateTime(d);
                 datos[4] = a.getAbsolutePath();
@@ -99,13 +99,20 @@ public class gestionBD {
             try {
                 Process p = null;
                 String os = getOS();
-                System.out.println("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
                 switch (os) {
                     case "win":
-                        p = Runtime.getRuntime().exec("mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                        if (Con.pass.equals("")) {
+                            p = Runtime.getRuntime().exec("mysqldump -u root " + Con.BD + "");
+                        } else {
+                            p = Runtime.getRuntime().exec("mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                        }
                         break;
                     case "mac":
-                        p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                        if (Con.pass.equals("")) {
+                            p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root " + Con.BD + "");
+                        } else {
+                            p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                        }
                         break;
                 }
                 InputStream is = p.getInputStream();
@@ -146,10 +153,18 @@ public class gestionBD {
                     String os = getOS();
                     switch (os) {
                         case "win":
-                            p = Runtime.getRuntime().exec("mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                            if (Con.pass.equals("")) {
+                                p = Runtime.getRuntime().exec("mysql -u root " + Con.BD + "");
+                            } else {
+                                p = Runtime.getRuntime().exec("mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                            }
                             break;
                         case "mac":
-                            p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                            if (Con.pass.equals("")) {
+                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u root " + Con.BD + "");
+                            } else {
+                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                            }
                             break;
                     }
                     OutputStream gos = p.getOutputStream();
@@ -176,10 +191,8 @@ public class gestionBD {
     public String getOS() {
         String OS = System.getProperty("os.name").toLowerCase();
         if (OS.indexOf("win") >= 0) {
-            System.out.println("win");
             return "win";
         } else if (OS.indexOf("mac") >= 0) {
-            System.out.println("mac");
             return "mac";
         } else if (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0) {
             return "unix";
@@ -191,6 +204,22 @@ public class gestionBD {
 
     public String getDate() {
         java.util.Date date = new Date();
-        return cu.DateTime(date);
+        String dates = cu.DateTime(date);
+        dates = dates.replace(" ", "_");
+        dates = dates.replace(":", "-");
+        return dates;
+    }
+
+    public String setFotmatWeight(long file) {
+        if (file > Math.pow(1024,3)) {
+            return file / (Math.pow(1024,3)) + " GB";
+        }else 
+        if (file > Math.pow(1024,2)) {
+            return file / (Math.pow(1024,2)) + " MB";
+        } else if (file > 1024) {
+            return file / (1024) + " KB";
+        } else {
+            return file + " B";
+        }
     }
 }
