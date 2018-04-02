@@ -247,7 +247,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblVerTiqVarios);
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
-        btnCrear.setText("Guardar");
+        btnCrear.setText("Generar");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -540,7 +540,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        //cdt.crearConductor();
+        verTiqVarios.reporteBasculaTiqVarios();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void tblEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradasMouseClicked

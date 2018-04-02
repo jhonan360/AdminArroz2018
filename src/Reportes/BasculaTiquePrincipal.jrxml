@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="382" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9067f82-5b99-4564-90c7-6d9ee3fd9da6">
-	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.zoom" value="1.1000000000000003"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id_tiquete" class="java.lang.Integer">
@@ -88,9 +88,9 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="13" width="555" height="22" backcolor="#CCCCFF" uuid="f60009ea-18de-4537-8fed-ad082a95d934"/>
+				<reportElement mode="Opaque" x="0" y="4" width="555" height="22" backcolor="#CCCCFF" uuid="f60009ea-18de-4537-8fed-ad082a95d934"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
 				</textElement>
@@ -99,10 +99,10 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="1" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="215" splitType="Stretch">
+		<band height="212" splitType="Stretch">
 			<staticText>
 				<reportElement x="15" y="92" width="90" height="20" uuid="42841df2-4942-4621-9c92-15d2672ca938"/>
 				<textElement verticalAlignment="Middle">
@@ -203,14 +203,14 @@
 				<text><![CDATA[IMPUREZA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="336" y="9" width="79" height="22" backcolor="#CCCCFF" uuid="82639e88-92fd-41d1-9a7d-8b0d0d717d50"/>
-				<textElement verticalAlignment="Top">
+				<reportElement mode="Opaque" x="326" y="9" width="89" height="22" backcolor="#CCCCFF" uuid="82639e88-92fd-41d1-9a7d-8b0d0d717d50"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[N° Tiquete:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="336" y="104" width="217" height="22" backcolor="#CCFFCC" uuid="f118cf83-6243-43cf-8e29-d82ad7f00092"/>
+				<reportElement mode="Opaque" x="326" y="104" width="227" height="22" backcolor="#CCFFCC" uuid="f118cf83-6243-43cf-8e29-d82ad7f00092"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
 				</textElement>
@@ -300,35 +300,35 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="###,###.##">
 				<reportElement x="415" y="36" width="100" height="19" uuid="a166d729-bff7-4677-bd76-ada6b1ec77a5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kilosBrutos}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="###,###.##">
 				<reportElement x="415" y="54" width="100" height="18" uuid="c4967d62-dbb4-4fd9-af43-f7f56a12dfbf"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{destare}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="###,###.##">
 				<reportElement x="415" y="72" width="100" height="19" uuid="b5603ff2-849c-4641-90cb-6d5a29197923"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kilosNetos}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="###,###.##">
 				<reportElement x="417" y="131" width="100" height="20" uuid="d88f67d4-10fd-428a-8543-bb99ce8d234a"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{humedadUno}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="###,###.##">
 				<reportElement x="417" y="154" width="100" height="20" uuid="4a313839-9b17-4108-9e11-0d6665662cd5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
@@ -341,9 +341,23 @@
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="1" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="61" height="20" uuid="b3b36f56-e65a-4642-a089-cfe5868ffe4e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="61" y="0" width="40" height="20" uuid="e3a540d8-bd67-4cc2-83c8-1f82a4c4e72b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="a18ea353-c87a-4e7a-9905-77ee7ed2aa3f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="2" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

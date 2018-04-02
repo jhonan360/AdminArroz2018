@@ -16,17 +16,29 @@ import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Logica.Extras.extras;
 import Logica.Extras.login;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -353,6 +365,32 @@ public class liquidacionesAprobadas {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
+        }
+    }
+    
+    public void reporteGerenteLiquidacion() {
+        int row = LiqAprobadas.tblLiquidaciones.getSelectedRow();
+        if (row != -1) {
+            String idLiquidacion = LiqAprobadas.tblLiquidaciones.getValueAt(row, 0).toString();
+            Map parametro = new HashMap();//mapeo de parametros
+            parametro.put("id_liquidacion", idLiquidacion);//colocar parametros
+
+            try {
+                Con = new Conexion();
+                Connection c = Con.ConectarReport();
+
+                JasperReport reporte = null;
+                String path = "src\\reportes\\GerenteLiquidacionesAprobadas.jasper";//aqui se encuentra el archivo del reporte
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
+                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, c);//enviamos parametros
+                JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
+                view.setVisible(true);//mostrar visible el reporte
+            } catch (JRException ex) {
+                Logger.getLogger(liquidacionesAprobadas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un tiquete para generarlo");
         }
     }
 }

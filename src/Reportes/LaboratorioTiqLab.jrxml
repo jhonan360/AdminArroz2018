@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="382" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="48ffd549-5077-4acf-ba89-f4a5bb68f771">
+	<property name="ireport.zoom" value="1.1269722013523664"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tblEstufa" uuid="58ee1e58-2e6e-4841-bbdf-990cdc0d965a">
+		<parameter name="id_tiq_tbl" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT muestreo,hora,humedad FROM muetraestufa WHERE idLaboratorio=$P!{id_tiq_tbl}]]>
+		</queryString>
+		<field name="muestreo" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="hora" class="java.sql.Time">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="humedad" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_tiquete" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT idLaboratorio,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),CONCAT(tipodearroz.nombre,'-',variedad.nombre),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno,tipodearroz,variedad WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND laboratorio.idTiquete=$P!{id_tiquete}]]>
+	</queryString>
+	<field name="idLaboratorio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONCAT(personalexterno.nombres,&apos; &apos;,personalexterno.apellidos)" class="java.lang.String"/>
+	<field name="CONCAT(tipodearroz.nombre,&apos;-&apos;,variedad.nombre)" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="humedad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="impureza" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="integralRes" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cascarillaRes" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="blancoRes" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partidoRes" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="enteroRes" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="yeso" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="danado" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ip" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="1" width="106" height="74" uuid="e35ab260-3969-4cd2-80de-3ef9f3eedbbc"/>
+				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="60" y="62" width="494" height="13" uuid="6114a8d0-af95-4087-8788-499e6a9f3cb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="494" height="36" uuid="af7754b1-c96f-46e3-936d-5721e2ff3fc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bernard MT Condensed" size="28"/>
+				</textElement>
+				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="48" width="494" height="13" uuid="1b6eca0d-d008-4a15-9817-6a1ca367584a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="36" width="494" height="13" uuid="803ffcea-fa16-4909-ab31-379fab406fe5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT. 809.010.728-0]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="5" width="555" height="22" backcolor="#FFCC99" uuid="286c77cd-f63b-44ec-ab6d-86bf99a85d22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTROL LABORATORIO ARROZ PADY]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="211" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="40" width="90" height="20" uuid="b5061e5a-c3d7-4c06-840a-1cc6c30dfc1b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="15"/>
+				</textElement>
+				<text><![CDATA[Agricultor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="60" width="90" height="20" uuid="7534207c-ae26-4d2d-9d5c-948355e49930"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="15"/>
+				</textElement>
+				<text><![CDATA[Tipo de Arroz:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="19" width="90" height="22" uuid="d441ac93-728b-4090-9f2d-3a3cbc7dd0ec"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="15"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="307" y="53" width="15" height="20" uuid="c4544ff9-a78a-4768-815d-fb18b82bdb98"/>
+				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\impurezas.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="327" y="33" width="108" height="20" uuid="f203735a-fe6c-4dbb-9739-8c42f43325e7"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi Cond" size="15"/>
+				</textElement>
+				<text><![CDATA[Humedad Inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="53" width="108" height="20" uuid="c4fe7e42-d218-4ce2-8c59-3abf19adf992"/>
+				<textElement>
+					<font fontName="Franklin Gothic Demi Cond" size="15"/>
+				</textElement>
+				<text><![CDATA[Impureza Inicial:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="307" y="33" width="16" height="20" uuid="b6cfb78d-37b6-4df0-b546-51f19be2c274"/>
+				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\humedad.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="104" width="77" height="16" uuid="98d111e7-63f2-4810-9c47-35a8032e2738"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Integral:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="105" width="60" height="16" uuid="0a4b8603-3e64-42b1-8b34-c1a10c726413"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Cascarilla:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="120" width="77" height="16" uuid="cc04e5f6-2df6-4c52-8078-2e96b1d35697"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Blanco(rp):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="135" width="77" height="16" uuid="bfbb3ab9-bb76-4003-bd93-e9695def78c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Partido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="136" width="60" height="16" uuid="1fce7703-97d5-49c8-b3bf-2499208a5253"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Entero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="307" y="3" width="128" height="19" backcolor="#FFCC99" uuid="f43040c7-1627-4f97-b164-ee752023261c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Tiquete:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="296" y="104" width="258" height="13" backcolor="#CCCCFF" uuid="be1b93cf-4431-473b-843b-878fdcb0666f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ESTUFA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="3" width="73" height="19" uuid="8959ce28-10cf-4de9-99f5-a176c70f43fa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idLaboratorio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="151" width="77" height="16" uuid="c1524522-4d03-47a4-93d3-f3eb858b225b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Yeso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="167" width="77" height="16" uuid="1e8b0254-5d0f-464a-9d4c-d44e36b765e3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[Grano dañado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="189" width="78" height="16" backcolor="#FFCC99" uuid="04231b43-9261-4760-8ee3-e3e281f793e5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+				</textElement>
+				<text><![CDATA[(Ip):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="20" width="185" height="20" uuid="9768caf7-4375-48ba-9a22-fdc712ac8c1e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="40" width="185" height="20" uuid="ea9841d4-a227-43a0-92a8-054d9c44f22d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCAT(personalexterno.nombres,' ',personalexterno.apellidos)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="60" width="185" height="20" uuid="99396a0b-85d0-4faa-a8d0-c7f84fb5d71a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONCAT(tipodearroz.nombre,'-',variedad.nombre)}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="450" y="33" width="58" height="20" uuid="35ef86a6-9197-45d3-8d02-c4cc205d5063"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{humedad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="450" y="53" width="58" height="20" uuid="1eb04f2c-1c98-44a6-946a-55d00090ed25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{impureza}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="87" y="104" width="55" height="16" uuid="8b912f55-7772-46b9-93bb-3545f500d861"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{integralRes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="88" y="120" width="54" height="16" uuid="5c1eed58-8f87-4387-a82e-be610d5aa9d3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{blancoRes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="87" y="135" width="55" height="16" uuid="29c1afe9-e308-467d-bb4f-f60093f411cf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{partidoRes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="87" y="151" width="55" height="16" uuid="0b6ce11e-a9f5-47ae-bf6b-c9dd9e94b4dc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{yeso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="87" y="167" width="55" height="16" uuid="3a3ea6ca-2ea8-4421-8e8f-59ce1029a638"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{danado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="88" y="189" width="54" height="16" uuid="f4283094-ee3f-4bab-9e8d-7c60895c3cae"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ip}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="233" y="105" width="37" height="16" uuid="e3908dd6-7747-4c23-ab9f-f5391a93760d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cascarillaRes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="233" y="136" width="37" height="16" uuid="314d863a-aab0-44e3-bbd2-ab0ba1a3f155"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{enteroRes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="83" width="554" height="18" backcolor="#CCCCFF" uuid="d2db650b-79a3-470c-a5a0-ee9dfc0632e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RESULTADOS DE LABORATORIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="3" width="285" height="19" backcolor="#CCCCFF" uuid="9aa2dc0f-8327-4385-8f9d-095d483be59c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MATERIA PRIMA RECIBIDA]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="296" y="119" width="258" height="92" uuid="00bb412e-cb7b-4f91-9109-aefd0b86ccbc"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tblEstufa" uuid="17b919bc-6c8d-4484-964f-5c3e1f3cb21a">
+						<datasetParameter name="id_tiq_tbl">
+							<datasetParameterExpression><![CDATA[$P{id_tiquete}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="82" uuid="68ea6a25-a7fd-44e3-855b-e83910bb488b">
+						<jr:columnHeader style="table 1_CH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="82" height="12" uuid="54410f39-d4ab-42bb-a9c7-b9cea153cdbe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Franklin Gothic Demi Cond" isBold="false"/>
+								</textElement>
+								<text><![CDATA[MUESTREO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="13" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="82" height="13" uuid="8a046a9a-4a57-494b-aaeb-265ab42801e6"/>
+								<textElement textAlignment="Center">
+									<font fontName="SansSerif" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{muestreo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="85" uuid="d0186cb8-1f4a-4135-9590-b29ae977f937">
+						<jr:columnHeader style="table 1_CH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="85" height="12" uuid="765b173d-b4f7-470a-b8ae-d4d541968611"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Franklin Gothic Demi Cond" isBold="false"/>
+								</textElement>
+								<text><![CDATA[HORA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="13" rowSpan="1">
+							<textField pattern="h:mm a">
+								<reportElement x="0" y="0" width="85" height="13" uuid="69053512-bfcf-47ca-8dd0-bf8c0112c02c"/>
+								<textElement textAlignment="Center">
+									<font fontName="SansSerif" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="46b02a2a-98b5-48b2-a073-b7cdba362a47">
+						<jr:columnHeader style="table 1_CH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="12" uuid="2b2d34e4-7c62-41bc-89cf-e6fd53d930fb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Franklin Gothic Demi Cond" isBold="false"/>
+								</textElement>
+								<text><![CDATA[HUMEDAD]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="13" rowSpan="1">
+							<textField pattern="###,###.##">
+								<reportElement x="0" y="0" width="90" height="13" uuid="6e5d4f67-eca8-42d7-b617-5b8694228b1f"/>
+								<textElement textAlignment="Center">
+									<font fontName="SansSerif" size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{humedad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="450" y="0" width="100" height="20" uuid="f06a50bc-5f09-4b66-aa07-ec80ae7b8de2"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="57" height="20" uuid="5d98ce67-53fc-4498-ba6d-a66ae6ff069e"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="57" y="0" width="40" height="20" uuid="43bc43fc-0893-492d-8a30-9293ec9eaa93"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

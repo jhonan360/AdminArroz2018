@@ -191,28 +191,31 @@ public class verTiquetePrincipal {
         }
         //desactivar_checkbox();*/
     }
-    
-    public void reporteBasculaTiqPrincipal(){
-        int row = VerTiqPrincipal.tblVerTiqPrincipal.getSelectedRow();
-        String idTiquete = VerTiqPrincipal.tblVerTiqPrincipal.getValueAt(row, 0).toString();
-        
-        Map parametro = new HashMap();//mapeo de parametros
-        parametro.put("id_tiquete",idTiquete);//colocar parametros
-        
-        try {
-            Con = new Conexion();
-            Connection c= Con.ConectarReport();
 
-            JasperReport reporte=null;
-            String path="src\\reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
-            reporte=(JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
-            JasperPrint jprint = JasperFillManager.fillReport(reporte,parametro,c);//enviamos parametros
-            JasperViewer view= new JasperViewer(jprint,false);//vista del reporte
-            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
-            view.setVisible(true);//mostrar visible el reporte
-        } catch (JRException ex) {
-            Logger.getLogger(bascula.class.getName()).log(Level.SEVERE, null, ex);
+    public void reporteBasculaTiqPrincipal() {
+        int row = VerTiqPrincipal.tblVerTiqPrincipal.getSelectedRow();
+        if (row != -1) {
+            String idTiquete = VerTiqPrincipal.tblVerTiqPrincipal.getValueAt(row, 0).toString();
+            Map parametro = new HashMap();//mapeo de parametros
+            parametro.put("id_tiquete", idTiquete);//colocar parametros
+
+            try {
+                Con = new Conexion();
+                Connection c = Con.ConectarReport();
+
+                JasperReport reporte = null;
+                String path = "src\\reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
+                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
+                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, c);//enviamos parametros
+                JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
+                view.setVisible(true);//mostrar visible el reporte
+            } catch (JRException ex) {
+                Logger.getLogger(bascula.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un tiquete para generarlo");
         }
     }
-    
+
 }

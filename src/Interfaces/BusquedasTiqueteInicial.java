@@ -273,7 +273,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
         jLabel29.setText("*Seleccione el tiquete que desea guardar o imprimir.");
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
-        btnCrear.setText("Guardar");
+        btnCrear.setText("Generar");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -522,7 +522,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_tblLaboratorioKeyReleased
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        //cdt.crearConductor();
+        busT.reporteBasculaTiqPrincipal();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
