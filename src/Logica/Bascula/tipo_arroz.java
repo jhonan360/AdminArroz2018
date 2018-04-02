@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Negocio.Conexion;
 import Logica.Extras.validaciones;
+import Logica.Extras.extras;
 
 /**
  *
@@ -26,6 +27,7 @@ public class tipo_arroz {
     public static extras extras;
     public static Tipo_Arroz Tipo_Arroz;
     public static Conexion Con;
+    public static extras ext;
     public static DefaultTableModel modeloTabla;
     public String columnas[] = new String[]{"N°", "Tipo de Arroz", "Variedad", "Descripcion"};
     public String headerColumnas[] = new String[]{"30", "120", "120", "750"};
@@ -102,6 +104,7 @@ public class tipo_arroz {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
+            ext.logs("INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
             JOptionPane.showMessageDialog(null, "El tipo de arroz ha sido ingresado");
             bas = new bascula();
         } catch (Exception e) {
@@ -132,6 +135,7 @@ public class tipo_arroz {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
+            ext.logs("UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             Con.Desconectar();
         } catch (Exception e) {

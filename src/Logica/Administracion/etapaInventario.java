@@ -16,13 +16,14 @@ import javax.swing.JOptionPane;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.tablas;
 import javax.swing.table.DefaultTableModel;
+import Logica.Extras.extras;
 
 /**
  *
  * @author uriel
  */
 public class etapaInventario {
-    
+    public static extras ext;
     public static EtapaInventario Procedimiento;
     public static Statement st,st2;
      public static ResultSet rs,rs2;
@@ -63,6 +64,8 @@ public class etapaInventario {
             st = Con.conexion.createStatement();
             
             st.executeUpdate("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
+            ext.logs("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
+         
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             refrescar();
             crearModeloProcedimiento();
@@ -215,6 +218,8 @@ public class etapaInventario {
             st = Con.conexion.createStatement();
             
             st.executeUpdate("UPDATE procedimiento SET tipoAlmacenamiento='"+almacenamiento+"',observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+            ext.logs("UPDATE procedimiento SET tipoAlmacenamiento='"+almacenamiento+"',observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+        
             JOptionPane.showMessageDialog(null, "El registro ha sido modificado");
          
             crearModeloProcedimiento();
@@ -243,6 +248,8 @@ public class etapaInventario {
             st = Con.conexion.createStatement();
             
             st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
+            ext.logs("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
+      
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
          
             crearModeloProcedimiento();

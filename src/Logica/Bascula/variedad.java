@@ -12,11 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Negocio.Conexion;
 import Interfaces.Tipo_Arroz;
+import Logica.Extras.extras;
 /**
  *
  * @author jhonansmith
  */
 public class variedad {
+    public static extras ext;
     public static Variedad Variedad;
     public static Tipo_Arroz Tipo_Arroz;
     public static Conexion Con;
@@ -92,6 +94,7 @@ public class variedad {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO variedad (idVariedad, nombre) VALUES (0,'" + nombre + "')");
+            ext.logs("INSERT INTO variedad (idVariedad, nombre) VALUES (0,'" + nombre + "')");
             JOptionPane.showMessageDialog(null, "La variedad ha sido ingresada");
             Con.Desconectar();
         } catch (Exception e) {
@@ -115,6 +118,8 @@ public class variedad {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE variedad SET nombre ='" + nombre + "'WHERE idTipoDeArroz = '" + idVariedad + "'");
+            ext.logs("UPDATE variedad SET nombre ='" + nombre + "'WHERE idTipoDeArroz = '" + idVariedad + "'");
+    
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             Con.Desconectar();
         } catch (Exception e) {

@@ -295,6 +295,8 @@ public class gerenteApruebaLiquidaciones {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
+           ext.logs("UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
+
             System.out.println("liquidacion actualizada");
             Con.Desconectar();
         } catch (Exception e) {
@@ -321,6 +323,8 @@ public class gerenteApruebaLiquidaciones {
                 String valorTotal = cu.notMoneyFormat(GApruebaL.tblDetalleL.getValueAt(i, 10).toString());
 
                 st.executeUpdate("UPDATE detalleliquidacion SET humedad='" + humedadO + "',impureza='" + impurezaO + "',castigoHumedad='" + castigoH + "',castigoImpureza='" + castigoI + "',pesoCompra='" + pesoCompra + "',valorCarga='" + valorCarga + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+               ext.logs("UPDATE detalleliquidacion SET humedad='" + humedadO + "',impureza='" + impurezaO + "',castigoHumedad='" + castigoH + "',castigoImpureza='" + castigoI + "',pesoCompra='" + pesoCompra + "',valorCarga='" + valorCarga + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+
                 if (i == row - 1) {
                     System.out.println("detalle liquidacion actualizado");
                 }

@@ -10,12 +10,17 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
+import Logica.Extras.login;
 
 public class extras {
-
+    final static Logger logger = Logger.getLogger(extras.class);
     public static Conexion Con;
     public static Statement st, st1;
     public static ResultSet rs, rs1;
+    public static Date fecha;
 
     public String getIdMunicipio(String nombre, String idDeparta) { // Metodo que retorna el id del municipio recibe el nombre del municipio y el ID del depatamento
         try {
@@ -257,4 +262,11 @@ public class extras {
         String fec = formato.format(fecha);
         return fec;
     }
+    public void logs(String log){
+        PropertyConfigurator.configure("log4j.properties");
+        String user = login.enviarUsuario();
+        fecha = new Date();
+        logger.info(log+ " usuario: "+ user+ " Fecha: "+fecha);
+    }
+    
 }
