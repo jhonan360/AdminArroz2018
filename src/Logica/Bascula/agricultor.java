@@ -17,7 +17,10 @@ import Interfaces.Agricultor;
 import static Logica.Administracion.empleado.Emp;
 import static Logica.Administracion.empleado.login;
 import Logica.Extras.log;
-
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
+import Logica.Extras.login;
 public class agricultor {
 
     //Variables a utilizar
@@ -37,8 +40,11 @@ public class agricultor {
     //public static log logs;
     public static login login;
     public String estado = "crear";
+    final static Logger logger = Logger.getLogger(agricultor.class); 
 
     public agricultor() {//constructor de la clase
+        PropertyConfigurator.configure("log4j.properties");
+ 
         ext = new extras();
         // logs = new log();
         crearModelo();
@@ -110,7 +116,9 @@ public class agricultor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
-            JOptionPane.showMessageDialog(null, "Agricultor registrado");
+            
+            logger.info("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
+                    JOptionPane.showMessageDialog(null, "Agricultor registrado");
             //logs.logAgricultor("i", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
         } catch (Exception e) {
