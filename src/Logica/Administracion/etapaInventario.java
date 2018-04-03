@@ -30,18 +30,30 @@ public class etapaInventario {
     public static Conexion Con;
     public DefaultTableModel modeloemp,modeloemp2,modeloemp3,modeloemp5;
     public static cargarCombo cargar;
-    public String columnas[] = new String[]{"N° procedimiento","N° silo","Fecha","hora","estado"};
-    public String columnas2[] = new String[]{"N°","Etapa","Fecha","hora","Humedad"};
-    public String columnas1[] = new String[]{"N°","Bateria","Secadora","Silo","Fecha","Hora"};
-    public String columnas3[] = new String[]{"N°","Bateria","Secadora","Silo","Almacenamiento"};
-    public String columnas5[] = new String[]{"N°","Etapa","Fecha","hora","Humedad"};
+    //public String columnas[] = new String[]{"N° procedimiento", "N° silo", "Fecha", "Hora", "estado"};
+    public String columnas2[] = new String[]{"N°", "Etapa", "Fecha", "Hora", "Humedad"};
+    public String headerEtapasProedimiento[] = new String[]{"10", "30", "30", "30", "30"};
+    public String columnas1[] = new String[]{"N°", "Bateria", "Secadora", "Silo", "Fecha", "Hora"};
+    public String headerProcedimiento[] = new String[]{"6", "20", "30", "10", "40", "30"};
+    public String columnas3[] = new String[]{"N°", "Bateria", "Secadora", "Silo", "Almacenamiento"};
+    public String headerSilo[] = new String[]{"10", "20", "35", "10", "30"};
+    public String columnas5[] = new String[]{"N°", "Etapa", "Fecha", "Hora", "H"};
+    public String headerEtapaSilo[] = new String[]{"5", "30", "40", "40", "10"};
     public static tablas tbl;
     public static String idSilos,idProcedimiento,idProcedimiento2;
-    public etapaInventario(){
-               crearModeloProcedimiento();
-               crearModelo2();
-               crearModeloProcedimentosSecamiento();
-        
+    
+    public etapaInventario() {
+        crearModeloProcedimiento();
+        crearModelo2();
+        crearModeloProcedimentosSecamiento();
+        alignHeadersTable();
+    }
+    
+    public void alignHeadersTable(){
+        tbl.alinearHeaderTable(Procedimiento.jtablecreadas, headerProcedimiento);
+        tbl.alinearHeaderTable(Procedimiento.jtablependiente, headerEtapasProedimiento);
+        tbl.alinearHeaderTable(Procedimiento.jTable1, headerSilo);
+        tbl.alinearHeaderTable(Procedimiento.jTable2, headerEtapaSilo);
     }
             
     public void guardar(){
