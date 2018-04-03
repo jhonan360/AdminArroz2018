@@ -41,7 +41,7 @@ public class almacenarInventario {
     public static ResultSet rs;
     public static Statement st;
     String columnasTabla[] = new String[]{"N", "Fecha", "Agricultor", "Kilos Netos"};
-    String alineaHeader[] = new String[]{"10", "default", "default", "default"};
+    String alineaHeader[] = new String[]{"10", "40", "150", "40"};
     String alineaCampo[] = new String[]{"center", "center", "left", "right"};
     DefaultTableModel modeloTabla;
     String idTiquete = "", movimientos = "";
@@ -577,6 +577,9 @@ public class almacenarInventario {
             }
             st.executeUpdate("INSERT INTO tiqueteensilos (idTiqueteSilos, idTiquete, idSilos, kilos, estado) VALUES(0,'" + idTiquete + "','" + idSilo + "','" + kilos + "','secamiento')");
             st.executeUpdate("UPDATE silos SET kilos='" + silo[fila][2] + "',estado='" + estadoSilo + "' WHERE idSilos='" + idSilo + "';");
+            ext.logs("INSERT INTO tiqueteensilos (idTiqueteSilos, idTiquete, idSilos, kilos, estado) VALUES(0,'" + idTiquete + "','" + idSilo + "','" + kilos + "','secamiento')");
+            ext.logs("UPDATE silos SET kilos='" + silo[fila][2] + "',estado='" + estadoSilo + "' WHERE idSilos='" + idSilo + "';");
+
             Con.Desconectar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guadar");

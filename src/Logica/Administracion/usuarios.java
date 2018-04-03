@@ -19,6 +19,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.OptionPaneUI;
 import javax.swing.table.TableColumnModel;
+import Logica.Extras.extras;
 
 /**
  *
@@ -27,6 +28,7 @@ import javax.swing.table.TableColumnModel;
 public class usuarios {
 
     public static DefaultTableModel modelemp, modelusu;
+    public static extras ext;
     public static Empleado Emp;
     public static tablas tbl;
     public static validaciones vali;
@@ -138,6 +140,8 @@ public class usuarios {
             }
             if (conusu < 1) {
                 st.executeUpdate("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
+                ext.logs("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
+               
                 limpiar_campos();
                 crearModelo();
                 int respuesta = JOptionPane.showConfirmDialog(null, "El usuario a sido ingresado \n ¿desea crear el empleado del usuario?", "Confirmación", JOptionPane.CANCEL_OPTION);
@@ -198,6 +202,8 @@ public class usuarios {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
+       ext.logs("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
+     
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -358,7 +358,9 @@ public class tiqueteVarios {
 
             if (estadoTiquete.equals("segundoPesaje")) {
                 PreparedStatement ps = Con.conexion.prepareStatement("UPDATE tiqueteVarios SET idConductor='" + conductor + "', user = '" + user + "', idVehiculo = '" + placa + "', destino='" + destino + "',observacion ='" + observacion + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "' WHERE idTiqueteVarios = '" + idTiqueteVarios + "'", PreparedStatement.RETURN_GENERATED_KEYS);
+               
                 ps.execute();
+                ext.logs("UPDATE tiqueteVarios SET idConductor='" + conductor + "', user = '" + user + "', idVehiculo = '" + placa + "', destino='" + destino + "',observacion ='" + observacion + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "' WHERE idTiqueteVarios = '" + idTiqueteVarios + "'");
                 rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     idTiqVarios = String.valueOf(rs.getInt(1));
@@ -366,6 +368,7 @@ public class tiqueteVarios {
             } else {
                 PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO tiqueteVarios (idTiqueteVarios,idConductor,user,idVehiculo,fecha,destino,observacion,kilosBrutos,destare,kilosNetos) VALUES (0,'" + conductor + "','" + user + "','" + placa + "','" + fecha + "','" + destino + "','" + observacion + "','" + kilosBrutos + "','" + destare + "','" + kilosNetos + "')", PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.execute();
+                ext.logs("INSERT INTO tiqueteVarios (idTiqueteVarios,idConductor,user,idVehiculo,fecha,destino,observacion,kilosBrutos,destare,kilosNetos) VALUES (0,'" + conductor + "','" + user + "','" + placa + "','" + fecha + "','" + destino + "','" + observacion + "','" + kilosBrutos + "','" + destare + "','" + kilosNetos + "')");
                 rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     idTiqVarios = String.valueOf(rs.getInt(1));
@@ -387,9 +390,10 @@ public class tiqueteVarios {
 
                 if (estadoTiquete.equals("segundoPesaje")) {
                     st.executeUpdate("UPDATE entradas SET cantidad = '" + cantidad + "',descripcion = '" + descripcion + "' WHERE entradas.idEntradas='" + idEntradas + "' AND entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
-
+                    ext.logs("UPDATE entradas SET cantidad = '" + cantidad + "',descripcion = '" + descripcion + "' WHERE entradas.idEntradas='" + idEntradas + "' AND entradas.idTiqueteVarios='" + idTiqueteVarios + "'");
                 } else {
                     st.executeUpdate("INSERT INTO entradas (idEntradas,idTiqueteVarios,cantidad,descripcion) VALUES  (0,'" + idTiqVarios + "','" + cantidad + "','" + descripcion + "')");
+                    ext.logs("INSERT INTO entradas (idEntradas,idTiqueteVarios,cantidad,descripcion) VALUES  (0,'" + idTiqVarios + "','" + cantidad + "','" + descripcion + "')");
                 }
             }
             JOptionPane.showMessageDialog(null, "Tiquete registrado");

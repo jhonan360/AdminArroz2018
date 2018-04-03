@@ -123,6 +123,8 @@ public class empleado {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO empleado (idEmpleado,ccEmpleado,nombres,apellidos,direccion,telefono,user,idMunicipio) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + user + "','" + ciudad + "')");
+            ext.logs("INSERT INTO empleado (idEmpleado,ccEmpleado,nombres,apellidos,direccion,telefono,user,idMunicipio) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + user + "','" + ciudad + "')");
+
             JOptionPane.showMessageDialog(null, "El empleado ha sido ingresado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -164,6 +166,8 @@ public class empleado {
             //Con.Conectar();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE empleado SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',telefono='" + telefono + "',idMunicipio='" + ciudad + "' WHERE empleado.ccEmpleado='" + cedula + "'");
+            ext.logs("UPDATE empleado SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',telefono='" + telefono + "',idMunicipio='" + ciudad + "' WHERE empleado.ccEmpleado='" + cedula + "'");
+           
             JOptionPane.showMessageDialog(null, "El emplado ha sido modificado");
             Con.Desconectar();
         } catch (Exception e) {

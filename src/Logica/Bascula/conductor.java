@@ -113,6 +113,7 @@ public class conductor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO personalexterno (cedula,nombres,apellidos,telefono,Direccion,idMunicipio,tipo) VALUES ('" + cedula + "','" + nombres + "','" + apellidos + "','" + telefono + "','" + direccion + "','" + ciudad + "','conductor')");
+            ext.logs("INSERT INTO personalexterno (cedula,nombres,apellidos,telefono,Direccion,idMunicipio,tipo) VALUES ('" + cedula + "','" + nombres + "','" + apellidos + "','" + telefono + "','" + direccion + "','" + ciudad + "','conductor')");
             JOptionPane.showMessageDialog(null, "Conductor registrado");
 //          logs.logConductor("i", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
@@ -161,6 +162,7 @@ public class conductor {
             st = Con.conexion.createStatement();
             //logs.logConductor("a", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
             st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idPersonalExterno='" + idConductor + "'");
+            ext.logs("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idPersonalExterno='" + idConductor + "'");
             JOptionPane.showMessageDialog(null, "El conductor fue modificado");
             Con.Desconectar();
         } catch (Exception e) {

@@ -18,13 +18,14 @@ import Interfaces.Login;
 import Logica.Extras.currencyFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import Logica.Extras.extras;
 
 /**
  *
  * @author uriel
  */
 public class gerente {
-
+    public static extras ext;
     public static LiquidacionesAprobadas LiqAprobada;
     public static Login Login;
     public static GerenteApruebaLiquidaciones GApruebaL;
@@ -186,6 +187,8 @@ public class gerente {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
+            ext.logs("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
+
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             limpiarCampos();
             crearModeloTabla();

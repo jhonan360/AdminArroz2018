@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ddaba3-0f15-458f-8f5d-7b698c9aa7e3">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="85"/>
-	<property name="ireport.y" value="68"/>
+	<property name="ireport.x" value="68"/>
+	<property name="ireport.y" value="51"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -243,14 +243,14 @@
 				<text><![CDATA[PROVEEDOR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="563" y="26" width="111" height="35" uuid="2b4dd345-8db2-4270-8645-9373e94c255c"/>
+				<reportElement x="540" y="26" width="134" height="35" uuid="2b4dd345-8db2-4270-8645-9373e94c255c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="17"/>
 				</textElement>
 				<text><![CDATA[N° Liquidación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="563" y="61" width="111" height="30" uuid="f2114597-cfb2-4f3e-8aad-545f05941555"/>
+				<reportElement x="540" y="61" width="134" height="30" uuid="f2114597-cfb2-4f3e-8aad-545f05941555"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="17"/>
 				</textElement>
@@ -314,9 +314,9 @@
 								<text><![CDATA[N° TIQUETE]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
-								<reportElement x="3" y="0" width="53" height="20" uuid="71cd13c0-b107-4c67-a48b-3316c453e1f7"/>
+								<reportElement x="3" y="0" width="53" height="15" uuid="71cd13c0-b107-4c67-a48b-3316c453e1f7"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{idTiquete}]]></textFieldExpression>
 							</textField>
@@ -332,9 +332,9 @@
 								<text><![CDATA[FECHA]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="dd/MM/yy">
-								<reportElement x="0" y="0" width="49" height="20" uuid="2de1f659-4676-4733-8e0c-a8db88b1587d"/>
+								<reportElement x="0" y="0" width="49" height="15" uuid="2de1f659-4676-4733-8e0c-a8db88b1587d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 							</textField>
@@ -350,9 +350,9 @@
 								<text><![CDATA[VARIEDAD]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
-								<reportElement x="2" y="0" width="86" height="20" uuid="d859b977-dcf2-4f16-8e38-01053fb56074"/>
+								<reportElement x="2" y="0" width="86" height="15" uuid="d859b977-dcf2-4f16-8e38-01053fb56074"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{CONCAT(tipodearroz.nombre,' - ',variedad.nombre)}]]></textFieldExpression>
 							</textField>
@@ -368,9 +368,9 @@
 								<text><![CDATA[EMPAQUE]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
-								<reportElement x="2" y="0" width="54" height="20" uuid="3623ad86-c5f5-46eb-8865-8ee223563001"/>
+								<reportElement x="2" y="0" width="54" height="15" uuid="3623ad86-c5f5-46eb-8865-8ee223563001"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{empaque}]]></textFieldExpression>
 							</textField>
@@ -386,9 +386,9 @@
 								<text><![CDATA[PESO BRUTO]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="68" height="20" uuid="43208776-7b1e-4cb8-9067-faa5661d0a91"/>
+								<reportElement x="0" y="0" width="68" height="15" uuid="43208776-7b1e-4cb8-9067-faa5661d0a91"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{kilosNetos}]]></textFieldExpression>
 							</textField>
@@ -404,9 +404,9 @@
 								<text><![CDATA[HUMEDAD]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="1" y="0" width="49" height="20" uuid="02c12213-184b-44d6-806d-1879aab155c3"/>
+								<reportElement x="1" y="0" width="49" height="15" uuid="02c12213-184b-44d6-806d-1879aab155c3"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{humedadUno}]]></textFieldExpression>
 							</textField>
@@ -422,9 +422,9 @@
 								<text><![CDATA[IMPUREZA]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="51" height="20" uuid="41b81d2a-89d8-45f0-b930-b785ce3b4b00"/>
+								<reportElement x="0" y="0" width="51" height="15" uuid="41b81d2a-89d8-45f0-b930-b785ce3b4b00"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{impurezaUno}]]></textFieldExpression>
 							</textField>
@@ -440,9 +440,9 @@
 								<text><![CDATA[% CASTIGO H]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="66" height="20" uuid="f26c3141-3ffe-434a-88b6-764b8c9868df"/>
+								<reportElement x="0" y="0" width="66" height="15" uuid="f26c3141-3ffe-434a-88b6-764b8c9868df"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{castigoHumedad}]]></textFieldExpression>
 							</textField>
@@ -458,9 +458,9 @@
 								<text><![CDATA[% CASTIGO I]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="64" height="20" uuid="07954af3-67e5-4c7e-bb90-cf0691a6033a"/>
+								<reportElement x="0" y="0" width="64" height="15" uuid="07954af3-67e5-4c7e-bb90-cf0691a6033a"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{castigoImpureza}]]></textFieldExpression>
 							</textField>
@@ -476,9 +476,9 @@
 								<text><![CDATA[PESO COMPRA]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="74" height="20" uuid="f331288d-5548-403b-80a9-bec24bb515ca"/>
+								<reportElement x="0" y="0" width="74" height="15" uuid="f331288d-5548-403b-80a9-bec24bb515ca"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{pesoCompra}]]></textFieldExpression>
 							</textField>
@@ -494,9 +494,9 @@
 								<text><![CDATA[VALOR Kg]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="62" height="20" uuid="4963b7e6-0785-4e9d-9a7f-b2167c6724f2"/>
+								<reportElement x="0" y="0" width="62" height="15" uuid="4963b7e6-0785-4e9d-9a7f-b2167c6724f2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{valorKilo}]]></textFieldExpression>
 							</textField>
@@ -512,9 +512,9 @@
 								<text><![CDATA[VALOR TOTAL]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
-								<reportElement x="0" y="0" width="71" height="20" uuid="c32348f7-13a0-4de6-ba92-45f3d66a769e"/>
+								<reportElement x="0" y="0" width="71" height="15" uuid="c32348f7-13a0-4de6-ba92-45f3d66a769e"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 							</textField>
@@ -576,7 +576,7 @@
 				<text><![CDATA[Neto a pagar:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="0" width="390" height="15" forecolor="#3300CC" uuid="61df6ad1-022a-43b1-940e-bd06e1f245a8"/>
+				<reportElement x="13" y="5" width="390" height="15" forecolor="#3300CC" uuid="61df6ad1-022a-43b1-940e-bd06e1f245a8"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="false"/>
 				</textElement>
@@ -700,6 +700,24 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="438" y="5" width="1" height="117" uuid="dc67aac9-2aba-4695-adf3-4cf0de24498e"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="13" y="4" width="781" height="1" uuid="e6f9e4db-62a5-415c-a44c-5d7d47aafca4"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="13" y="122" width="781" height="1" uuid="1ea8f040-7dde-478d-a5ee-49becdae20f7"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -714,7 +732,7 @@
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="699" y="0" width="100" height="20" uuid="ef04d5ef-6771-4332-a16d-134f908be352"/>
+				<reportElement x="699" y="0" width="95" height="20" uuid="ef04d5ef-6771-4332-a16d-134f908be352"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
