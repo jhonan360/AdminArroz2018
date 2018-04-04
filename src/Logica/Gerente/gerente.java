@@ -45,7 +45,7 @@ public class gerente {
         tbl = new tablas();
         cu = new currencyFormat();
         crearModeloTabla();
-
+        ext = new extras();
     }
 
     public static void mnAbrirLiqPorAprobar() {

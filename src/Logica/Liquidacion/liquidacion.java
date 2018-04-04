@@ -9,6 +9,7 @@ import Interfaces.BusquedasTiquete;
 import Interfaces.Liquidacion;
 import Interfaces.LiquidacionesAprobadas;
 import Interfaces.Login;
+import static Logica.Administracion.etapaInventario.ext;
 import Logica.Extras.tablas;
 import Negocio.Conexion;
 import java.sql.ResultSet;
@@ -70,6 +71,7 @@ public class liquidacion {
         BusTiquete.panel.setEnabledAt(1, false);
         BusTiquete.panel.setEnabledAt(2, false);;
         BusTiquete.panel.setSelectedIndex(0);
+        ext = new extras();
 
     }
 

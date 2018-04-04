@@ -9,6 +9,7 @@ import Logica.Extras.cargarCombo;
 import Logica.Extras.extras;
 import Logica.Extras.tablas;
 import Interfaces.Tipo_Arroz;
+import static Logica.Administracion.etapaInventario.ext;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class tipo_arroz {
     public tipo_arroz() {
         tbl = new tablas();
         crearModelo();
+        ext = new extras();
     }
 
     public void crearModelo() {

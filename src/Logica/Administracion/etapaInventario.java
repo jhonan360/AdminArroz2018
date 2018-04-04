@@ -47,6 +47,7 @@ public class etapaInventario {
         crearModelo2();
         crearModeloProcedimentosSecamiento();
         alignHeadersTable();
+        ext = new extras();
     }
     
     public void alignHeadersTable(){
@@ -65,6 +66,8 @@ public class etapaInventario {
         String estado = Procedimiento.cmbestado.getSelectedItem().toString();
         insertar_procedimiento(fecha, hora, humedad, estado);
         crearModeloProcedimentosSecamiento();
+         String almacenamiento = Procedimiento.CmbAlmacenamiento.getSelectedItem().toString();
+            String observacion= Procedimiento.TxtObs.getText();
         
         
         
@@ -74,9 +77,10 @@ public class etapaInventario {
             Con = new Conexion();
             
             st = Con.conexion.createStatement();
-            
-            st.executeUpdate("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
             ext.logs("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
+         
+            st.executeUpdate("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
+        //    ext.logs("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
          
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             refrescar();
@@ -214,6 +218,7 @@ public class etapaInventario {
             e.printStackTrace();
         }
     }
+    
     
     public void actualizar_procedimiento(){
         String estado= Procedimiento.cmbestado.getSelectedItem().toString();

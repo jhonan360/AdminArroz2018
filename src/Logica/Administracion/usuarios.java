@@ -7,6 +7,7 @@ package Logica.Administracion;
 
 import Interfaces.Usuarios;
 import Interfaces.Empleado;
+import static Logica.Administracion.etapaInventario.ext;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
@@ -46,6 +47,7 @@ public class usuarios {
         tbl = new tablas();
         vali = new validaciones();
         crearModelo();
+        ext = new extras();
     }
 
     /* public void crearModeloEmp() {

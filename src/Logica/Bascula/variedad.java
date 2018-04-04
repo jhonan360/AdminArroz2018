@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Negocio.Conexion;
 import Interfaces.Tipo_Arroz;
+import static Logica.Administracion.etapaInventario.ext;
 import Logica.Extras.extras;
 /**
  *
@@ -33,6 +34,7 @@ public class variedad {
      public variedad() {
         tbl = new tablas();
         crearModelo();
+        ext = new extras();
     }
      
      public void crearModelo() {

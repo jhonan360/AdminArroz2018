@@ -43,6 +43,7 @@ public class busquedasTiquete {
         crearModeloAgricultor(claseTiquete);
         crearModeloConductor();
         crearModeloVehiculo();
+        
 
         //tabla_camposAgricultor();
     }
