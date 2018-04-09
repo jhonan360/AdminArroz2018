@@ -237,7 +237,7 @@ public class laboratorioTiquete {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert Into laboratorio (idLaboratorio,idTiquete,user,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
-           ext.logs("Insert Into laboratorio (idLaboratorio,idTiquete,user,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
+           ext.logs("INSERT","Insert Into laboratorio (idLaboratorio,idTiquete,user,fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip) values (0,'" + idTiquete + "','" + user + "','" + fecha + "','" + humedad + "','" + impureza + "','" + integralRes + "','" + cascarillaRes + "','" + blancoRes + "','" + partidoRes + "','" + enteroRes + "','" + yeso + "','" + danado + "','" + ip + "')");
 
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             Con.Desconectar();
@@ -353,7 +353,7 @@ public class laboratorioTiquete {
                 Con = new Conexion();
                 st = Con.conexion.createStatement();
                 st.executeUpdate("UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
-                ext.logs("UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
+                ext.logs("UPDATE","UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
          
                 JOptionPane.showMessageDialog(null, "El tiquete fue cerrado");
                 actualizar();
@@ -425,7 +425,7 @@ public class laboratorioTiquete {
             Con = new Conexion();
             st4 = Con.conexion.createStatement();
             st4.executeUpdate("Insert Into muetraestufa (idmuetraestufa,idLaboratorio,muestreo,hora,humedad) values (0,'" + IDLaboratorio + "','" + muestreo + "','" + hora + "','" + humedadEstufa + "')");
-            ext.logs("Insert Into muetraestufa (idmuetraestufa,idLaboratorio,muestreo,hora,humedad) values (0,'" + IDLaboratorio + "','" + muestreo + "','" + hora + "','" + humedadEstufa + "')");
+            ext.logs("INSERT","Insert Into muetraestufa (idmuetraestufa,idLaboratorio,muestreo,hora,humedad) values (0,'" + IDLaboratorio + "','" + muestreo + "','" + hora + "','" + humedadEstufa + "')");
      
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             Con.Desconectar();

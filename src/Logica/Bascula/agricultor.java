@@ -121,7 +121,7 @@ public class agricultor {
             st.executeUpdate("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
             
             //logger.info("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')+ fecha " +fecha);
-            ext.logs("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
+            ext.logs("INSERT","Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
             JOptionPane.showMessageDialog(null, "Agricultor registrado");
             //logs.logAgricultor("i", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
@@ -253,7 +253,7 @@ public class agricultor {
             st = Con.conexion.createStatement();
             //logs.logAgricultor("a", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
             st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
-            ext.logs("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
+            ext.logs("UPDATE","UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
             JOptionPane.showMessageDialog(null, "El Agriculto fue modificado");
             Con.Desconectar();
             limpiar_registros();

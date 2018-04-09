@@ -95,7 +95,7 @@ public class lote {
             //ACA FUE
             //logs.logLote("i", login.enviarUsuario(), ext.getNextIndex("lote"), nombre, descripcion,Integer.parseInt(ciudad));
             st.executeUpdate("INSERT INTO lote (idLote,nombre,descripcion,idMunicipio)VALUES(0,'" + nombre + "','" + descripcion + "','" + ciudad + "')");//inserta el nombre, descripcion y el id del municipio que se le envio en el metodo crear tipo luego de validarse en el metodo validar
-            ext.logs("INSERT INTO lote (idLote,nombre,descripcion,idMunicipio)VALUES(0,'" + nombre + "','" + descripcion + "','" + ciudad + "')");
+            ext.logs("INSERT","INSERT INTO lote (idLote,nombre,descripcion,idMunicipio)VALUES(0,'" + nombre + "','" + descripcion + "','" + ciudad + "')");
             JOptionPane.showMessageDialog(null, "lote arrocero creado registrado");//mensaje de verificacion de creacion
             bas = new bascula();
             Con.Desconectar();
@@ -139,7 +139,7 @@ public class lote {
             System.out.println(idLote);
             //logs.logLote("a", login.enviarUsuario(), Integer.parseInt(idLote), nombre, descripcion,Integer.parseInt(ciudad));
             st.executeUpdate("UPDATE lote SET nombre='" + nombre + "',descripcion='" + descripcion + "',idMunicipio='" + ciudad + "' WHERE lote.idLote='" + idLote + "'");
-            ext.logs("UPDATE lote SET nombre='" + nombre + "',descripcion='" + descripcion + "',idMunicipio='" + ciudad + "' WHERE lote.idLote='" + idLote + "'");
+            ext.logs("UPDATE","UPDATE lote SET nombre='" + nombre + "',descripcion='" + descripcion + "',idMunicipio='" + ciudad + "' WHERE lote.idLote='" + idLote + "'");
             JOptionPane.showMessageDialog(null, "La informacion fue modificada");
             Con.Desconectar();
         } catch (Exception e) {

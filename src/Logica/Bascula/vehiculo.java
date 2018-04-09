@@ -83,7 +83,7 @@ public class vehiculo {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO vehiculo(idVehiculo,idMarca,modelo,placa,color) VALUES (0,'" + marca + "','" + modelo + "','" + placa + "','" + color + "')");
-            ext.logs("INSERT INTO vehiculo(idVehiculo,idMarca,modelo,placa,color) VALUES (0,'" + marca + "','" + modelo + "','" + placa + "','" + color + "')");
+            ext.logs("INSERT","INSERT INTO vehiculo(idVehiculo,idMarca,modelo,placa,color) VALUES (0,'" + marca + "','" + modelo + "','" + placa + "','" + color + "')");
 
             JOptionPane.showMessageDialog(null, "Vehiculo registrado");
             //logs.logVehiculo("i", login.enviarUsuario(), placa, color, modelo, marca);
@@ -124,7 +124,7 @@ public class vehiculo {
             st = Con.conexion.createStatement();
             //logs.logVehiculo("a", login.enviarUsuario(), placa, color, modelo, marca);
             st.executeUpdate("UPDATE vehiculo SET idMarca='" + marca + "',modelo='" + modelo + "',placa='" + placa + "',color='" + color + "' WHERE idVehiculo='" + idVehiculo + "'");
-            ext.logs("UPDATE vehiculo SET idMarca='" + marca + "',modelo='" + modelo + "',placa='" + placa + "',color='" + color + "' WHERE idVehiculo='" + idVehiculo + "'");
+            ext.logs("UPDATE","UPDATE vehiculo SET idMarca='" + marca + "',modelo='" + modelo + "',placa='" + placa + "',color='" + color + "' WHERE idVehiculo='" + idVehiculo + "'");
 
             JOptionPane.showMessageDialog(null, "El vehiculo fue modificado");
             Con.Desconectar();

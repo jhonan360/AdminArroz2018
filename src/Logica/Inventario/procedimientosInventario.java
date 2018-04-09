@@ -186,7 +186,7 @@ public class procedimientosInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
-           ext.logs("INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
+           ext.logs("INSERT","INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
        
             int respuesta = JOptionPane.showConfirmDialog(null, "                  Procedimiento creado \n ¿Desea crear las etapas correspondientes?", "Confirmación", JOptionPane.CANCEL_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -206,7 +206,7 @@ public class procedimientosInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
-            ext.logs("UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
+            ext.logs("UPDATE","UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
   
             JOptionPane.showMessageDialog(null, "Procedimiento modificado");
             Con.Desconectar();

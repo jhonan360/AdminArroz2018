@@ -262,11 +262,11 @@ public class extras {
         String fec = formato.format(fecha);
         return fec;
     }
-    public void logs(String log){
+    public void logs(String evento,String log){
         PropertyConfigurator.configure("log4j.properties");
         String user = login.enviarUsuario();
         fecha = new Date();
-        logger.info(log+ " usuario: "+ user+ " Fecha: "+fecha);
+        logger.info(";"+evento+";"+log+";"+user+";"+fecha);
     }
     
 }

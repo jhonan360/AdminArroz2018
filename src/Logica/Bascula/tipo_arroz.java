@@ -106,7 +106,7 @@ public class tipo_arroz {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
-            ext.logs("INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
+            ext.logs("INSERT","INSERT INTO tipodearroz (idTipoDeArroz,nombre,idVariedad,descripcion) VALUES (0,'" + nombre + "','" + idVariedad + "','" + descripcion + "')");
             JOptionPane.showMessageDialog(null, "El tipo de arroz ha sido ingresado");
             bas = new bascula();
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class tipo_arroz {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
-            ext.logs("UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
+            ext.logs("UPDATE","UPDATE tipodearroz SET nombre='" + nombre + "',idVariedad='" + idVariedad + "',descripcion='" + descripcion + "'  WHERE idTipoDeArroz = '" + idTipoDeArroz + "'");
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             Con.Desconectar();
         } catch (Exception e) {

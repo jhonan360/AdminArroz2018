@@ -26,10 +26,10 @@ public class EtapaInventario extends javax.swing.JFrame {
      */
     public EtapaInventario() {
         initComponents();
-        CmbAlmacenamiento.setEnabled(false);
+        //CmbAlmacenamiento.setEnabled(false);
         TxtObs.setEnabled(false);
         LblObs.setEnabled(false);
-        LblAlma.setEnabled(false);
+      //  LblAlma.setEnabled(false);
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         cargar = new cargarCombo();
@@ -61,11 +61,9 @@ public class EtapaInventario extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        LblAlma = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         TxtObs = new javax.swing.JTextArea();
         LblObs = new javax.swing.JLabel();
-        CmbAlmacenamiento = new javax.swing.JComboBox<>();
         LblAlma1 = new javax.swing.JLabel();
         btnguardar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
@@ -217,22 +215,12 @@ public class EtapaInventario extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        LblAlma.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        LblAlma.setText("Lugar:");
-
         TxtObs.setColumns(20);
         TxtObs.setRows(5);
         jScrollPane6.setViewportView(TxtObs);
 
         LblObs.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         LblObs.setText("Observación:");
-
-        CmbAlmacenamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "silo", "trincho" }));
-        CmbAlmacenamiento.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CmbAlmacenamientoItemStateChanged(evt);
-            }
-        });
 
         LblAlma1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         LblAlma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -341,19 +329,16 @@ public class EtapaInventario extends javax.swing.JFrame {
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtSilo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnguardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel8Layout.createSequentialGroup()
-                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(LblObs)
-                                        .addComponent(LblAlma, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(16, 16, 16)
-                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(CmbAlmacenamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(16, Short.MAX_VALUE))))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(LblAlma1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblAlma1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LblObs)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -400,15 +385,11 @@ public class EtapaInventario extends javax.swing.JFrame {
                 .addComponent(LblAlma1)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LblAlma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CmbAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblObs, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(42, 42, 42)
                 .addComponent(btnguardar)
                 .addGap(6, 6, 6))
         );
@@ -550,7 +531,7 @@ public class EtapaInventario extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(6, 6, 6))
@@ -596,7 +577,7 @@ public class EtapaInventario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 515, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
@@ -704,9 +685,7 @@ public class EtapaInventario extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        etapa.guardar();
-        etapa.actualizar_procedimiento();
-
+        etapa.guardar_actualizar();
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtHumedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHumedadActionPerformed
@@ -740,24 +719,19 @@ public class EtapaInventario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtablecreadasKeyReleased
 
-    private void CmbAlmacenamientoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbAlmacenamientoItemStateChanged
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_CmbAlmacenamientoItemStateChanged
-
     private void cmbestadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbestadoItemStateChanged
         // TODO add your handling code here:
         String estado = cmbestado.getSelectedItem().toString();
         if (estado.equals("Seco")) {
-            CmbAlmacenamiento.setEnabled(true);
+           // CmbAlmacenamiento.setEnabled(true);
             TxtObs.setEnabled(true);
             LblObs.setEnabled(true);
-            LblAlma.setEnabled(true);
+           // LblAlma.setEnabled(true);
         } else {
-            CmbAlmacenamiento.setEnabled(false);
+            //CmbAlmacenamiento.setEnabled(false);
             TxtObs.setEnabled(false);
             LblObs.setEnabled(false);
-            LblAlma.setEnabled(false);
+            //LblAlma.setEnabled(false);
         }
     }//GEN-LAST:event_cmbestadoItemStateChanged
 
@@ -816,8 +790,6 @@ public class EtapaInventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JComboBox<String> CmbAlmacenamiento;
-    public javax.swing.JLabel LblAlma;
     public javax.swing.JLabel LblAlma1;
     public static javax.swing.JLabel LblObs;
     public static javax.swing.JLabel TxtBateria;

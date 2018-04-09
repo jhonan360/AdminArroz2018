@@ -91,7 +91,7 @@ public class laboratorioTiqueteInicial {
             Con = new Conexion();
             st2 = Con.conexion.createStatement();
             st2.executeUpdate("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
-            ext.logs("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
+            ext.logs("INSERT","INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
 
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
             labo.Tiquete.setText(String.valueOf(ext.getNextIndex("tiquete")));

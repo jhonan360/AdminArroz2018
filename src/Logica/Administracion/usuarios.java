@@ -142,7 +142,7 @@ public class usuarios {
             }
             if (conusu < 1) {
                 st.executeUpdate("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
-                ext.logs("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
+                ext.logs("INSERT","INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
                
                 limpiar_campos();
                 crearModelo();
@@ -204,7 +204,7 @@ public class usuarios {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
-       ext.logs("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
+       ext.logs("UPDATE","UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
      
         } catch (Exception e) {
             e.printStackTrace();

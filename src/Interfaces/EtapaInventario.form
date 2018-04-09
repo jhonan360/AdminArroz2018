@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <Properties>
@@ -281,7 +281,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jPanel7" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jPanel7" alignment="0" pref="515" max="32767" attributes="0"/>
                       <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
@@ -515,27 +515,22 @@
                                               <Component id="TxtSilo" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="btnguardar" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="LblObs" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="LblAlma" min="-2" pref="39" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="CmbAlmacenamiento" max="32767" attributes="0"/>
-                                                  <Component id="jScrollPane6" pref="266" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
+                                      <Component id="btnguardar" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="16" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="LblAlma1" min="-2" pref="362" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="LblAlma1" alignment="0" min="-2" pref="362" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="LblObs" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane6" min="-2" pref="266" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -596,17 +591,12 @@
                           <Component id="LblAlma1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jSeparator4" min="-2" pref="2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="LblAlma" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="CmbAlmacenamiento" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="LblObs" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="jScrollPane6" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="btnguardar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       </Group>
@@ -614,17 +604,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="LblAlma">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="12" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Lugar:"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane6">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -651,23 +630,6 @@
                     <Property name="text" type="java.lang.String" value="Observaci&#xf3;n:"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JComboBox" name="CmbAlmacenamiento">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="2">
-                        <StringItem index="0" value="silo"/>
-                        <StringItem index="1" value="trincho"/>
-                      </StringArray>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CmbAlmacenamientoItemStateChanged"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>
                 </Component>
@@ -904,7 +866,7 @@
                               <Component id="jScrollPane3" min="-2" pref="265" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane5" pref="271" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" pref="265" max="32767" attributes="0"/>
                                   <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
                                   <Component id="jLabel14" max="32767" attributes="0"/>
                               </Group>

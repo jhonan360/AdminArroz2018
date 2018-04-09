@@ -187,7 +187,7 @@ public class gerente {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
-            ext.logs("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
+            ext.logs("INSERT","Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
 
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             limpiarCampos();

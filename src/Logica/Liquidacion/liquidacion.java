@@ -345,7 +345,7 @@ public class liquidacion {
         try {
             Con = new Conexion();
             PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
-            ext.logs("INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
+            ext.logs("INSERT","INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
             ps.execute();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -373,7 +373,7 @@ public class liquidacion {
                 String valorKilo = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString());
                 String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString());
                 st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
-                ext.logs("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+                ext.logs("UPDATE","UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
 
                 if (i == row - 1) {
                     JOptionPane.showMessageDialog(null, "Creación exitosa");

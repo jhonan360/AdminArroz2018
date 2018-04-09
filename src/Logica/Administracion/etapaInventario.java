@@ -41,6 +41,7 @@ public class etapaInventario {
     public String headerEtapaSilo[] = new String[]{"5", "30", "40", "40", "10"};
     public static tablas tbl;
     public static String idSilos,idProcedimiento,idProcedimiento2;
+
     
     public etapaInventario() {
         crearModeloProcedimiento();
@@ -55,6 +56,7 @@ public class etapaInventario {
         tbl.alinearHeaderTable(Procedimiento.jtablependiente, headerEtapasProedimiento);
         tbl.alinearHeaderTable(Procedimiento.jTable1, headerSilo);
         tbl.alinearHeaderTable(Procedimiento.jTable2, headerEtapaSilo);
+
     }
             
     public void guardar(){
@@ -64,11 +66,18 @@ public class etapaInventario {
         String hora=Procedimiento.jhora.getFormatedTime();
         String humedad = Procedimiento.txtHumedad.getText();
         String estado = Procedimiento.cmbestado.getSelectedItem().toString();
-        insertar_procedimiento(fecha, hora, humedad, estado);
+        if(!humedad.equals("")){
+             insertar_procedimiento(fecha, hora, humedad, estado);
         crearModeloProcedimentosSecamiento();
-         String almacenamiento = Procedimiento.CmbAlmacenamiento.getSelectedItem().toString();
+
+       limpiar_campos();
+        }else{
+            JOptionPane.showMessageDialog(null,"La humedad no puede estar vacia");
+        }
+       
+
+         //String almacenamiento = Procedimiento.CmbAlmacenamiento.getSelectedItem().toString();
             String observacion= Procedimiento.TxtObs.getText();
-        
         
         
     }
@@ -77,14 +86,22 @@ public class etapaInventario {
             Con = new Conexion();
             
             st = Con.conexion.createStatement();
-            ext.logs("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
-         
+
+            
             st.executeUpdate("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
-        //    ext.logs("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
-         
+            ext.logs("INSERT","Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
+          JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
+            
+             st.executeUpdate("UPDATE procedimiento SET tipoAlmacenamiento='trincho' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+                ext.logs("UPDATE","UPDATE procedimiento SET tipoAlmacenamiento='trincho' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+        
+           
+      
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
+
             refrescar();
             crearModeloProcedimiento();
+            
             crearModelo2();
             
             
@@ -150,7 +167,7 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jtablecreadas, modeloemp, columnas1.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.fecha,procedimiento.hora from bateria,procedimiento,silos,secadora where procedimiento.idSilos=silos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.estado='proceso'");
+        tbl.llenarTabla(Procedimiento.jtablecreadas, modeloemp, columnas1.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.fecha,procedimiento.hora from bateria,procedimiento,silos,secadora where procedimiento.idSilos=silos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.estado='proceso' and procedimiento.observacion is null");
 
     }
      public void Datos_Campos_Procedimientos(){
@@ -189,7 +206,7 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.tipoAlmacenamiento from bateria,procedimiento,silos,secadora,etapa where procedimiento.idSilos=silos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='proceso' and etapa.etapa='seco'");
+        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.tipoAlmacenamiento from bateria,procedimiento,silos,secadora,etapa where procedimiento.idSilos=silos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='proceso' and etapa.etapa='seco' GROUP BY procedimiento.idProcedimiento ");
 
     }
     public void crearModeloEtapasSeco(String id) {
@@ -218,37 +235,68 @@ public class etapaInventario {
             e.printStackTrace();
         }
     }
+    public void limpiar_campos(){
+    // Procedimiento.TxtObs.setText("");
+     Procedimiento.TxtObservacion.setText("");
+     Procedimiento.TxtSecadora.setText("");
+     Procedimiento.TxtSilo.setText("");
+     Procedimiento.txtHumedad.setText("");
+     Procedimiento.TxtBateria.setText("");
+     Procedimiento.TxtObs.setVisible(false);
+        Procedimiento.LblObs.setVisible(false);
+       
+       // crearModeloEtapasSeco("0");
+     
+    }
     
     
     public void actualizar_procedimiento(){
         String estado= Procedimiento.cmbestado.getSelectedItem().toString();
-        String almacenamiento = Procedimiento.CmbAlmacenamiento.getSelectedItem().toString();
+       
             String observacion= Procedimiento.TxtObs.getText();
             System.out.println("estado"+estado);
-            System.out.println("almacenamiento"+almacenamiento);
+           // System.out.println("almacenamiento"+almacenamiento);
             System.out.println("onservacionnn"+observacion);
-         if (estado.equals("Seco") && !almacenamiento.equals("")&& !observacion.equals("")) {
+         if (estado.equals("Seco") && !observacion.equals("")) {
              System.out.println("llegueeeee");
                  try {
             Con = new Conexion();
             
             st = Con.conexion.createStatement();
             
-            st.executeUpdate("UPDATE procedimiento SET tipoAlmacenamiento='"+almacenamiento+"',observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
-            ext.logs("UPDATE procedimiento SET tipoAlmacenamiento='"+almacenamiento+"',observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+                st.executeUpdate("UPDATE procedimiento SET observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+                ext.logs("UPDATE","UPDATE procedimiento SET observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
         
             JOptionPane.showMessageDialog(null, "El registro ha sido modificado");
          
             crearModeloProcedimiento();
             crearModeloProcedimentosSecamiento();
+            idProcedimiento="0";
+            crearModelo2();
+             Procedimiento.cmbestado.setSelectedIndex(0);
+             Procedimiento.TxtObs.setText("");
+            limpiar_campos();
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
             }else{
-                
+             JOptionPane.showMessageDialog(null, "El campo observacion debe contener información");
+                 limpiar_campos();
             }
         
+    }
+    public void guardar_actualizar(){
+        
+            String observacion= Procedimiento.TxtObs.getText();
+            if(observacion.equals("")){
+                guardar();
+                idProcedimiento="0";
+            crearModelo2();
+            }else{
+                guardar();
+                actualizar_procedimiento();
+            }
     }
     public void trillar(){
         
@@ -265,13 +313,18 @@ public class etapaInventario {
             st = Con.conexion.createStatement();
             
             st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
-            ext.logs("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
+            ext.logs("UPDATE","UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
       
-            JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
+            JOptionPane.showMessageDialog(null, "El registro ha sido Modificado");
          
             crearModeloProcedimiento();
             crearModeloProcedimentosSecamiento();
+            
             Con.Desconectar();
+            idProcedimiento="0";
+               crearModeloEtapasSeco(idProcedimiento);
+            crearModelo2();
+            limpiar_campos();
         } catch (Exception e) {
             e.printStackTrace();
         } 
