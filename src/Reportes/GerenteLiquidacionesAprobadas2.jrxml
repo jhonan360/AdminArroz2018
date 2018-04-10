@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ddaba3-0f15-458f-8f5d-7b698c9aa7e3">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="189"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="68"/>
+	<property name="ireport.y" value="51"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -48,7 +48,7 @@
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
-			<![CDATA[SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,CONCAT(tipodearroz.nombre,' - ',variedad.nombre),tiquete.empaque,tiquete.kilosNetos,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete,tipodearroz,variedad WHERE liquidaciones.idLiquidaciones=$P!{id_liquidacion_tbl} AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones and detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad]]>
+			<![CDATA[SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,CONCAT(tipodearroz.nombre,' - ',variedad.nombre),tiquete.empaque,tiquete.kilosNetos,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete,tipodearroz,variedad WHERE liquidaciones.idLiquidaciones=$P!{id_liquidacion_tbl} AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad]]>
 		</queryString>
 		<field name="idTiquete" class="java.lang.Integer">
 			<fieldDescription><![CDATA[]]></fieldDescription>
@@ -89,7 +89,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT liquidaciones.idLiquidaciones,cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT( telefono, ' ', telefono2, ' ', telefono3 ), direccion,municipios.nombre, liquidaciones.fecha, liquidaciones.humedadIdeal, liquidaciones.impurezaIdeal, liquidaciones.fomArrocero, liquidaciones.impuesto, liquidaciones.porcenImpuesto, liquidaciones.kilosNeto, liquidaciones.kilosCompra, liquidaciones.subtotal, liquidaciones.valorFomArrocero, liquidaciones.valorImpuesto, liquidaciones.descuentoAnticipo, liquidaciones.netoPagar,(liquidaciones.kilosNeto-liquidaciones.kilosCompra) AS descuento FROM personalexterno, tiquete, detalleliquidacion, liquidaciones,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND liquidaciones.idLiquidaciones =$P!{id_liquidacion} AND detalleliquidacion.idliquidaciones=liquidaciones.idLiquidaciones AND detalleliquidacion.idTiquete = tiquete.idTiquete GROUP BY liquidaciones.idLiquidaciones]]>
+		<![CDATA[SELECT liquidaciones.idLiquidaciones,cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT( telefono, ' ', telefono2, ' ', telefono3 ), direccion,municipios.nombre, liquidaciones.fecha, liquidaciones.humedadIdeal, liquidaciones.impurezaIdeal, liquidaciones.fomArrocero, liquidaciones.impuesto, liquidaciones.porcenImpuesto, liquidaciones.kilosNeto, liquidaciones.kilosCompra, liquidaciones.subtotal, liquidaciones.valorFomArrocero, liquidaciones.valorImpuesto, liquidaciones.descuentoAnticipo, liquidaciones.netoPagar,(liquidaciones.kilosNeto-liquidaciones.kilosCompra) AS descuento FROM personalexterno, tiquete, detalleliquidacion, liquidaciones,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND liquidaciones.idLiquidaciones =$P!{id_liquidacion} AND detalleliquidacion.idliquidaciones=liquidaciones.idLiquidaciones AND detalleliquidacion.idTiquete = tiquete.idTiquete AND tiquete.idAgricultor = personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones]]>
 	</queryString>
 	<field name="idLiquidaciones" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -282,7 +282,7 @@
 				<textFieldExpression><![CDATA[$F{CONCAT( telefono, ' ', telefono2, ' ', telefono3 )}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="674" y="26" width="80" height="35" uuid="ee53a95e-ad3d-4d16-bbff-4b035da9647d"/>
+				<reportElement x="674" y="26" width="100" height="35" uuid="ee53a95e-ad3d-4d16-bbff-4b035da9647d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="17"/>
 				</textElement>
@@ -522,358 +522,200 @@
 					</jr:column>
 				</jr:table>
 			</componentElement>
-			<staticText>
-				<reportElement x="754" y="26" width="20" height="35" uuid="bd840da3-1a80-4cb4-acbb-bdf432ad4700"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="17"/>
-				</textElement>
-				<text><![CDATA[-T]]></text>
-			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="126" splitType="Stretch">
-			<textField pattern="###,###.##">
-				<reportElement x="123" y="43" width="100" height="12" uuid="cfeb33d0-6aa7-44b3-b1fb-caaf65d3ef12"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{impuesto}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="8" y="76" width="787" height="1" uuid="1f9ef303-1a21-40ad-9a09-3bc64b2d70d2"/>
-				<graphicElement>
-					<pen lineStyle="Dotted"/>
-				</graphicElement>
-			</line>
 			<staticText>
-				<reportElement mode="Transparent" x="16" y="65" width="135" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="e7a38a4f-329d-4263-84fd-1055cd5b3060"/>
+				<reportElement x="485" y="5" width="107" height="15" uuid="d1ad8c40-5eab-4ad2-bb87-6f6457776403"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Kilos Netos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="20" width="107" height="15" uuid="b3fcfa6a-4739-4be4-81aa-845822b1baba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Kilos Compra:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="35" width="107" height="15" uuid="343dca8b-0d54-4f66-ad11-2dc50f9c9c0f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Subtotal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="50" width="107" height="15" uuid="f3ce1390-0459-4d01-ab45-c9ae54b1c577"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vlr Fomento Arrocero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="64" width="107" height="15" uuid="fcaf77ea-b307-4a1e-b7dd-5e3d4b417f7e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vlr Impuesto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="79" width="107" height="15" uuid="4be39b4a-1ba2-47a8-863c-935d9c6d37dc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Descuento Anticipo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="94" width="107" height="15" forecolor="#000000" uuid="a2deae9d-679e-440a-abff-e5b93ab33473"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Neto a pagar:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="5" width="390" height="15" forecolor="#3300CC" uuid="61df6ad1-022a-43b1-940e-bd06e1f245a8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[*Está liquidacion se ha elaborado con base a los siguientes parametros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="21" width="107" height="15" uuid="930f89aa-4832-40a1-9d9a-69ee760fc2fc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Humedad Ideal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="36" width="107" height="15" uuid="7f87f2fb-8273-4a63-bff4-772769dfc0c4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Impureza Ideal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="51" width="107" height="15" uuid="0515a64e-e8c6-4f26-8486-206f8c35f270"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[% Fomento Arrocero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="65" width="107" height="15" uuid="e0b512b2-0d3c-4a1c-9fe8-3caef2e1035e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Impuesto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="80" width="107" height="15" uuid="cc24388d-650d-4e47-9bd8-932f9f1889f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[% Impuesto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="13" y="94" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="0d7ef5a1-d023-4f60-ae9c-298bc3cbcba3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Se realiza el descuento de:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="55" width="107" height="12" uuid="4170c65f-a56d-474c-a98f-df41c3760c38"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Descuento Anticipo:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="482" y="1" width="107" height="12" uuid="1823007c-e9a0-4667-ac63-8ababef5afd6"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Total Kilos Netos:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="482" y="66" width="107" height="12" forecolor="#000000" uuid="6c3f4e47-c4b8-4d31-96aa-b2726c0ba65f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Neto a pagar:]]></text>
-			</staticText>
-			<textField pattern="###,###.##">
-				<reportElement x="151" y="65" width="72" height="12" uuid="4c33ac8b-69fc-4141-919d-de370d5e5627"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="33" width="202" height="12" uuid="c692ef3d-47b0-4618-983c-8806d1cefbac"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valorFomArrocero}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="15" y="0" width="390" height="12" forecolor="#3300CC" uuid="3d668712-81d0-41e5-bf5b-18852dfa2113"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[*Está liquidacion se ha elaborado con base a los siguientes parametros:]]></text>
-			</staticText>
-			<textField pattern="###,###.##">
-				<reportElement x="589" y="11" width="202" height="12" uuid="c2eb6287-ae6d-4888-83ae-171277421655"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{kilosCompra}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="123" y="10" width="100" height="12" uuid="84b1c86e-2385-481f-a76d-1081577a86d3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{humedadIdeal}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="123" y="21" width="100" height="12" uuid="fe5e31ea-ad74-4d34-834f-a97bf233c8a3"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{impurezaIdeal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="482" y="11" width="107" height="12" uuid="fa43becb-fd4e-4cbf-ba2f-e8d410bac2e0"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Total Kilos Compra:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="16" y="43" width="107" height="12" uuid="13249bec-b597-4311-a150-8ff99a59577a"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Tipo Impuesto:]]></text>
-			</staticText>
-			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="44" width="202" height="12" uuid="66f35e44-9c9f-4ef7-af83-a8378a258913"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{valorImpuesto}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="16" y="10" width="107" height="12" uuid="90dc3e8c-ee00-4d32-b922-80db00675b6c"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Humedad Ideal:]]></text>
-			</staticText>
-			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="55" width="202" height="12" uuid="7eeca607-6b05-427a-b8ea-7dc53a020f8b"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{descuentoAnticipo}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="231" y="65" width="64" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="6891b9fc-f8b1-485f-805d-5433e0f75d74"/>
+				<reportElement mode="Transparent" x="228" y="94" width="24" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="f131d114-273f-4600-acc0-2765e81b0730"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Kg.]]></text>
 			</staticText>
+			<textField pattern="###,###.##">
+				<reportElement x="592" y="5" width="202" height="15" uuid="bfb1b173-80c6-4b0e-9bd6-161be874107a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kilosNeto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="592" y="20" width="202" height="15" uuid="ae062e90-e062-4eea-b14e-7ee76c97effd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kilosCompra}]]></textFieldExpression>
+			</textField>
 			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="66" width="202" height="12" uuid="036f21d2-d193-4279-87ad-f3b6dc577bad"/>
+				<reportElement x="592" y="35" width="202" height="15" uuid="81cbded2-6881-4b78-b9bf-24ba58c45d31"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement x="592" y="50" width="202" height="15" uuid="268273e8-6e31-4ef3-959b-e604dfb3221c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorFomArrocero}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement x="592" y="64" width="202" height="15" uuid="649fa22c-1c0d-4e8f-84d5-7a58161f9ca4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorImpuesto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement x="592" y="79" width="202" height="15" uuid="bb91e12c-9899-4ae7-8622-296ebb588f65"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descuentoAnticipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement x="592" y="93" width="202" height="16" uuid="2a09872c-c9d6-4bc7-92fb-bea6169582cf"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{netoPagar}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="451" y="1" width="1" height="75" uuid="b13760d6-1486-4fdf-82dd-15a3325de713"/>
-				<graphicElement>
-					<pen lineStyle="Dotted"/>
-				</graphicElement>
-			</line>
-			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="22" width="202" height="12" uuid="0dc616c2-1aee-4165-9404-053c2280e591"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="482" y="33" width="107" height="12" uuid="872d6ef7-869b-43ab-bcea-9d130d64a883"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Vlr Fomento Arrocero:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="482" y="22" width="107" height="12" uuid="93242361-3e1d-413b-b621-b167989d88c4"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Subtotal:]]></text>
-			</staticText>
 			<textField pattern="###,###.##">
-				<reportElement x="123" y="32" width="100" height="12" uuid="58dbc486-0645-4159-a27a-2a96e65a01f4"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
+				<reportElement x="120" y="21" width="100" height="15" uuid="635dab2c-30ed-4a7b-8cd9-bb55d77d3d2b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{humedadIdeal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="120" y="36" width="100" height="15" uuid="86f724d9-d907-4555-97a0-87d54343d5d2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{impurezaIdeal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="120" y="66" width="100" height="14" uuid="7dc6b2c7-2842-4f94-b1ad-291f38402a23"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{impuesto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="120" y="80" width="100" height="14" uuid="27790e07-913b-49e8-86ec-e104d062e8a6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{porcenImpuesto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="120" y="51" width="100" height="15" uuid="df4fe2ac-431b-492f-859b-bceb54f85a1f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fomArrocero}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###,###.##">
-				<reportElement x="123" y="54" width="100" height="12" uuid="5f5d4dc3-2c5a-4a68-8b3f-d34c7e3adeb6"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{porcenImpuesto}]]></textFieldExpression>
+				<reportElement x="148" y="95" width="72" height="14" uuid="a1903e5e-ab82-4e70-9146-0e6db012fc34"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="16" y="32" width="107" height="12" uuid="cdf731c8-b2ae-46fa-ae3a-1d544d4f6c28"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[% Fomento Arrocero:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="16" y="21" width="107" height="12" uuid="325d1319-7317-43be-9c84-2c0c5c4c448f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Impureza Ideal:]]></text>
-			</staticText>
-			<textField pattern="###,###.##">
-				<reportElement x="589" y="1" width="202" height="12" uuid="32d320a2-0c7c-4963-9751-c2cca98aa3a5"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{kilosNeto}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="16" y="54" width="107" height="12" uuid="84f61214-6299-4505-958f-642e22159196"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[% Impuesto:]]></text>
-			</staticText>
 			<line>
-				<reportElement x="8" y="1" width="787" height="1" uuid="5dd174a5-eb1a-4380-b115-b7ecb21c9a02"/>
+				<reportElement x="438" y="5" width="1" height="117" uuid="dc67aac9-2aba-4695-adf3-4cf0de24498e"/>
 				<graphicElement>
 					<pen lineStyle="Dotted"/>
 				</graphicElement>
 			</line>
-			<staticText>
-				<reportElement x="482" y="44" width="107" height="12" uuid="ea90cb2c-0f2c-466a-b65a-286ab7463824"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Vlr Impuesto:]]></text>
-			</staticText>
 			<line>
-				<reportElement x="310" y="111" width="135" height="1" uuid="75fff205-068e-4210-82a2-8cc2c697c7ef"/>
+				<reportElement x="13" y="4" width="781" height="1" uuid="e6f9e4db-62a5-415c-a44c-5d7d47aafca4"/>
 				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="163" y="79" width="100" height="9" uuid="5c2305ce-74a3-47ff-ad78-8edada56c769"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[REVISADO:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="612" y="111" width="179" height="1" uuid="bd9b0a9a-3874-4034-8050-8591bac7700b"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
+					<pen lineStyle="Dotted"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="603" y="79" width="1" height="42" uuid="1b2dc3c2-65e9-4cfa-b201-513c0c7369b4"/>
+				<reportElement x="13" y="122" width="781" height="1" uuid="1ea8f040-7dde-478d-a5ee-49becdae20f7"/>
 				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="612" y="112" width="14" height="9" uuid="11858ccf-9280-4fdf-9c83-6cfb436a1bf6"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[C.C.]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="627" y="112" width="165" height="9" uuid="2e58008b-5038-411c-8263-8cc174d235e8"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="9" y="78" width="787" height="1" uuid="88469cc9-1263-4a87-afaf-299dbadc7937"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="451" y="79" width="1" height="42" uuid="0ce113db-40fe-483a-8214-a9e286f65f30"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="612" y="79" width="99" height="9" uuid="49b77171-8921-4843-ac1d-9e7d5807ada3"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[FIRMA AGRICULTOR:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="459" y="111" width="135" height="1" uuid="044e695d-eee5-4cba-85ef-dd35ed8b2d66"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="796" y="79" width="1" height="42" uuid="6736319a-1821-4846-8d47-2406e93141dd"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="16" y="79" width="100" height="9" uuid="6ca6f4df-4a9a-4d50-927b-71bce877c0c8"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[POR APROBAR:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="157" y="79" width="1" height="42" uuid="ab65b3d4-890d-4492-b246-8e30fe12a27e"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="8" y="79" width="1" height="42" uuid="b42ee7ae-4465-4314-ad76-f84073a079a1"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="163" y="111" width="135" height="1" uuid="57277dbb-0276-4d5b-9275-d95a14cc997a"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="16" y="111" width="135" height="1" uuid="2cdf7da2-d2d7-405b-aeb3-c3db0f085acd"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="310" y="79" width="100" height="9" uuid="72286b66-b90d-4386-9b79-18151366aa98"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[APROBADO:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="304" y="79" width="1" height="42" uuid="1123d993-d09c-46eb-9c13-8e5fc004d261"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="459" y="78" width="99" height="9" uuid="afb30616-c4ac-4091-b94a-e705e1c2e5d4"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[CONTABILIZADO:]]></text>
-			</staticText>
-			<line>
-				<reportElement x="8" y="121" width="789" height="1" uuid="8d60c062-9f49-465e-b5c7-0f63c4209120"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<pen lineStyle="Dotted"/>
 				</graphicElement>
 			</line>
 		</band>

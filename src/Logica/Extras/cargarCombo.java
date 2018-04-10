@@ -238,4 +238,19 @@ public class cargarCombo {
             return false;
         }
     }
+    
+    public void cargarCuentas(JComboBox combo){
+        try {
+            Con = new Conexion();
+            st7 = Con.conexion.createStatement();
+            rs7 = st7.executeQuery("SELECT cuentas.nombre FROM cuentas");
+            combo.removeAllItems();
+            while (rs7.next()) {
+                combo.addItem(rs7.getString(1));
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

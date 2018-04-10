@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cefc5653-87b9-4c36-805e-bad4a92e4ffb">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="3" width="801" height="36" uuid="8300d957-9660-4ee7-9522-140103ab048a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bernard MT Condensed" size="28"/>
+				</textElement>
+				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="4" width="106" height="74" uuid="27f1af52-72c9-42f2-9a06-ed4db0ddf6d3"/>
+				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="63" width="801" height="13" uuid="abbf8b06-b465-4667-aee3-dad34f13ad29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="39" width="801" height="13" uuid="64716434-bcd4-458b-b08d-51937ca0bfb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT. 809.010.728-0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="50" width="801" height="13" uuid="b6ba5094-dc9d-4ccc-ba63-3b5afb2c0ff6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="-1" width="801" height="22" backcolor="#CCFFCC" uuid="a2c3d05b-ca1b-4f03-b73f-c710028f2d56"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELACIÓN RECAUDOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -7,8 +7,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,ag.cedula,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,empaque,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo WHERE idtiquete=$P!{id_tiquete} AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo]]>
+		<![CDATA[SELECT CONCAT(empleado.nombres,' ',empleado.apellidos),idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,ag.cedula,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,empaque,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo,usuario,empleado WHERE idtiquete=$P!{id_tiquete} AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.user=usuario.user AND empleado.user=usuario.user]]>
 	</queryString>
+	<field name="CONCAT(empleado.nombres,&apos; &apos;,empleado.apellidos)" class="java.lang.String"/>
 	<field name="idTiquete" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -342,18 +343,22 @@
 	</columnFooter>
 	<pageFooter>
 		<band height="21" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="61" height="20" uuid="b3b36f56-e65a-4642-a089-cfe5868ffe4e"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="61" y="0" width="40" height="20" uuid="e3a540d8-bd67-4cc2-83c8-1f82a4c4e72b"/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="455" y="0" width="100" height="20" uuid="a18ea353-c87a-4e7a-9905-77ee7ed2aa3f"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="0" width="88" height="20" uuid="647b61c8-a3d1-49cb-97df-29f0554c9a59"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Elaborado por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="0" width="196" height="20" uuid="90147662-ee4e-4a61-8572-73f05648c32a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CONCAT(empleado.nombres,' ',empleado.apellidos)}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

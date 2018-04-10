@@ -65,8 +65,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT idLaboratorio,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),CONCAT(tipodearroz.nombre,'-',variedad.nombre),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno,tipodearroz,variedad WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND laboratorio.idTiquete=$P!{id_tiquete}]]>
+		<![CDATA[SELECT CONCAT(empleado.nombres,' ',empleado.apellidos),idLaboratorio,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),CONCAT(tipodearroz.nombre,'-',variedad.nombre),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno,tipodearroz,variedad,empleado,usuario WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND laboratorio.idTiquete=$P!{id_tiquete} AND laboratorio.user=usuario.user AND empleado.user=usuario.user]]>
 	</queryString>
+	<field name="CONCAT(empleado.nombres,&apos; &apos;,empleado.apellidos)" class="java.lang.String"/>
 	<field name="idLaboratorio" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -452,15 +453,17 @@
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="10" y="0" width="77" height="20" uuid="eefe8dd3-ac3e-4e89-a3ea-f337774bc870"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Elaborado por:]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="0" y="0" width="57" height="20" uuid="5d98ce67-53fc-4498-ba6d-a66ae6ff069e"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="57" y="0" width="40" height="20" uuid="43bc43fc-0893-492d-8a30-9293ec9eaa93"/>
-				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<reportElement x="87" y="0" width="198" height="20" uuid="fbd863f5-88d0-418c-9c7c-f6f61b666cab"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CONCAT(empleado.nombres,' ',empleado.apellidos)}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
