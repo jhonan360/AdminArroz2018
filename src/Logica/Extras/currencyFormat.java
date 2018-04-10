@@ -67,4 +67,8 @@ public class currencyFormat {
         return "";
     }
 
+    public String getDateTimeNow() {
+        java.util.Date dateTime = new Date();
+        return DateTime(dateTime);
+    }
 }

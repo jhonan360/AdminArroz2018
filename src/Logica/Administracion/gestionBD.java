@@ -109,9 +109,9 @@ public class gestionBD {
                         break;
                     case "mac":
                         if (Con.pass.equals("")) {
-                            p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root " + Con.BD + "");
+                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root " + Con.BD + "");
                         } else {
-                            p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
                         }
                         break;
                 }
