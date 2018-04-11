@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 package Interfaces;
-
-import static Interfaces.LaboratorioTiquete.labor;
-import static Interfaces.LaboratorioTiquete.labora;
 import Logica.Bascula.bascula;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
-import Interfaces.Login;
 import Logica.Extras.cargarCombo;
-import Logica.Laboratorio.laboratorio_menu;
+import Logica.Laboratorio.laboratorioTiquete;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,10 +15,9 @@ import javax.swing.JOptionPane;
  * @author uriel
  */
 public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
-
-    public static laboratorioTiqueteInicial labo;
+    static laboratorioTiqueteInicial labo;
+    static laboratorioTiquete labor;
     public static Login log;
-    public static laboratorio_menu labor;
     public static bascula bascula;
     public static cargarCombo cargar;
 
@@ -78,6 +73,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnTiqueteLaboratorio = new javax.swing.JMenuItem();
+        mnAgricultor = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -316,8 +312,8 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
 
         jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/laboratorista3.png"))); // NOI18N
-        jMenu1.setText("Laboratorio");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Opciones");
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(195, 32));
 
@@ -331,6 +327,17 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnTiqueteLaboratorio);
+
+        mnAgricultor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgricultor.setText("Crear Agricultor");
+        mnAgricultor.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnAgricultor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgricultorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnAgricultor);
 
         jMenuBar1.add(jMenu1);
 
@@ -432,19 +439,22 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteLaboratorioActionPerformed
-        labor.tiquete2();
-        dispose();
+        labo.tiquete2();
+        //dispose();
     }//GEN-LAST:event_mnTiqueteLaboratorioActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
-        //gerente.salir();
-        dispose();
+        labo.salir();
+        //dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
-        labor.busquedaTiq();
+        labo.busquedaTiq();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
+        bascula.abrirAgricultor();
+    }//GEN-LAST:event_mnAgricultorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,6 +525,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnAgricultor;
     public static javax.swing.JMenuItem mnTiqueteLaboratorio;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JTextField txtAgricultor;

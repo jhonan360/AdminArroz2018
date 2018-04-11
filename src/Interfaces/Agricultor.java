@@ -17,14 +17,19 @@ import Logica.Extras.cargarCombo;
 import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
 import java.awt.Dimension;
+import Logica.Extras.login;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 
 public class Agricultor extends javax.swing.JFrame {
 
-    public static agricultor agr;
-    //public static tablas tbl;
+    static agricultor agr;
+    public static String user;
     public static validaciones vali;
     public static cargarCombo cargar;
-    public static bascula bascula;
+    static bascula bascula;
+    static laboratorioTiqueteInicial lab;
+    public static login login;
+    public static String privilegio;
 
     /**
      * Creates new form Agricultor
@@ -33,7 +38,39 @@ public class Agricultor extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        
         agr = new agricultor();
+        user = login.enviarUsuario();
+        
+        privilegio = login.getPrivilegio(user);
+        System.out.println(privilegio);
+        
+        switch (privilegio) {
+            case "laboratorista":
+                mnVerTiqueteLab.setVisible(true);
+                mnAgricultor.setVisible(true);
+                mnTiqLaboratorio.setVisible(true);
+                mnConductor.setVisible(false);
+                mnTipo_Arroz.setVisible(false);
+                mnVehiculo.setVisible(false);
+                mnLote.setVisible(false);
+                mnVerTiqueteMateriaPrima.setVisible(false);
+                mnVerTiqueteVarios.setVisible(false);
+                jMenu3.setVisible(false);
+                break;
+            case "basculista":
+                mnVerTiqueteLab.setVisible(false);
+                mnTiqLaboratorio.setVisible(false);
+                mnAgricultor.setVisible(true);
+                mnConductor.setVisible(true);
+                mnTipo_Arroz.setVisible(true);
+                mnVehiculo.setVisible(true);
+                mnLote.setVisible(true);
+                mnVerTiqueteMateriaPrima.setVisible(true);
+                mnVerTiqueteVarios.setVisible(true);
+                jMenu3.setVisible(true);
+                break;
+        }
         cargar = new cargarCombo();
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
@@ -50,8 +87,7 @@ public class Agricultor extends javax.swing.JFrame {
         vali.TELEFONOS(txtTelefono3);
         municipio();
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,7 +143,8 @@ public class Agricultor extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnTiqLaboratorio = new javax.swing.JMenuItem();
+        mnAgricultor = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
         mnTipo_Arroz = new javax.swing.JMenuItem();
         mnVehiculo = new javax.swing.JMenuItem();
@@ -118,6 +155,7 @@ public class Agricultor extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
+        mnVerTiqueteLab = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -168,11 +206,6 @@ public class Agricultor extends javax.swing.JFrame {
 
         txtBApellidos.setEditable(false);
         txtBApellidos.setSelectedTextColor(new java.awt.Color(240, 240, 240));
-        txtBApellidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBApellidosActionPerformed(evt);
-            }
-        });
 
         txtBCiudad.setEditable(false);
         txtBCiudad.setDisabledTextColor(new java.awt.Color(240, 240, 240));
@@ -198,11 +231,6 @@ public class Agricultor extends javax.swing.JFrame {
         chCiudad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 chCiudadItemStateChanged(evt);
-            }
-        });
-        chCiudad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chCiudadActionPerformed(evt);
             }
         });
 
@@ -422,12 +450,6 @@ public class Agricultor extends javax.swing.JFrame {
             }
         });
 
-        cmbDepartamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbDepartamentoActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel6.setText("Departamento:");
 
@@ -571,16 +593,27 @@ public class Agricultor extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
 
-        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        jMenuItem1.setText("Crear Agricultor");
-        jMenuItem1.setPreferredSize(new java.awt.Dimension(175, 22));
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnTiqLaboratorio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqLaboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqLaboratorio.setText("Tiquete Laboratorio");
+        mnTiqLaboratorio.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnTiqLaboratorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnTiqLaboratorioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(mnTiqLaboratorio);
+
+        mnAgricultor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgricultor.setText("Crear Agricultor");
+        mnAgricultor.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnAgricultor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgricultorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnAgricultor);
 
         mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
@@ -690,6 +723,19 @@ public class Agricultor extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteVarios);
 
+        mnVerTiqueteLab.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteLab.setText("Tiquete Laboratorio");
+        mnVerTiqueteLab.setToolTipText("");
+        mnVerTiqueteLab.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteLab.setRequestFocusEnabled(false);
+        mnVerTiqueteLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteLabActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteLab);
+
         jMenuBar1.add(jMenu4);
 
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -737,13 +783,9 @@ public class Agricultor extends javax.swing.JFrame {
         setBounds(0, 0, 1374, 756);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbDepartamentoActionPerformed
-
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
         // TODO add your handling code here:
-        if (ext.validar("a", this.txtCedula.getText()) && agr.estado=="crear") {
+        if (ext.validar("a", this.txtCedula.getText()) && agr.estado == "crear") {
             JOptionPane.showMessageDialog(null, "La cedula ya se encuentra registrada en el sistema");
             //this.txtCedula.requestFocus();
         }
@@ -756,14 +798,14 @@ public class Agricultor extends javax.swing.JFrame {
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
         agr.crearModelo();
-        agr.estado="crear";
+        agr.estado = "crear";
         agr.limpiar_registros();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         agr.limpiar_registros();
-        agr.estado="crear";
+        agr.estado = "crear";
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -780,41 +822,36 @@ public class Agricultor extends javax.swing.JFrame {
         agr.buscar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void chCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chCiudadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chCiudadActionPerformed
-
     private void chCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadItemStateChanged
         // TODO add your handling code here:
-        if (chCiudad.isSelected()==true){
+        if (chCiudad.isSelected() == true) {
             txtBCiudad.setEditable(true);
-        }else{
+        } else {
             txtBCiudad.setEditable(false);
             txtBCiudad.setText("");
         }
     }//GEN-LAST:event_chCiudadItemStateChanged
 
     private void chApellidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chApellidosItemStateChanged
-        if (chApellidos.isSelected()==true){
+        if (chApellidos.isSelected() == true) {
             txtBApellidos.setEditable(true);
-        }else{
+        } else {
             txtBApellidos.setEditable(false);
             txtBApellidos.setText("");
         }
     }//GEN-LAST:event_chApellidosItemStateChanged
 
     private void chCedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaItemStateChanged
-        if (chCedula.isSelected()==true){
+        if (chCedula.isSelected() == true) {
             txtBCedula.setEditable(true);
-           
-        }else{
+
+        } else {
             txtBCedula.setEditable(false);
             txtBCedula.setText("");
         }
     }//GEN-LAST:event_chCedulaItemStateChanged
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        // TODO add your handling code here:
         agr.limpiar_registros();
         agr.tabla_campos();
     }//GEN-LAST:event_jTable1KeyReleased
@@ -823,7 +860,7 @@ public class Agricultor extends javax.swing.JFrame {
         // TODO add your handling code here:
         agr.limpiar_registros();
         agr.tabla_campos();
-        agr.estado="editar";
+        agr.estado = "editar";
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -831,10 +868,9 @@ public class Agricultor extends javax.swing.JFrame {
         agr.crearModelo();
     }//GEN-LAST:event_formWindowClosed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
-        //setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mnAgricultorActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         bascula.abrirConductor();
@@ -873,9 +909,14 @@ public class Agricultor extends javax.swing.JFrame {
         bascula.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
-    private void txtBApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBApellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBApellidosActionPerformed
+    private void mnTiqLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLaboratorioActionPerformed
+        lab = new laboratorioTiqueteInicial();
+        lab.tiquete1();
+    }//GEN-LAST:event_mnTiqLaboratorioActionPerformed
+
+    private void mnVerTiqueteLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLabActionPerformed
+        lab.busquedaTiq();
+    }//GEN-LAST:event_mnVerTiqueteLabActionPerformed
 
     public void municipio() {
         cmbDepartamento.addActionListener(new ActionListener() {
@@ -949,10 +990,9 @@ public class Agricultor extends javax.swing.JFrame {
     public static javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    public static javax.swing.JMenu jMenu3;
     public static javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -963,12 +1003,15 @@ public class Agricultor extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     public static javax.swing.JTable jTable1;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnAgricultor;
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnLote;
     public static javax.swing.JMenuItem mnTipo_Arroz;
+    public static javax.swing.JMenuItem mnTiqLaboratorio;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
     public static javax.swing.JMenuItem mnVehiculo;
+    public static javax.swing.JMenuItem mnVerTiqueteLab;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTextField txtApellidos;

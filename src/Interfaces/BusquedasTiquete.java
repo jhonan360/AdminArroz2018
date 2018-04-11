@@ -7,7 +7,6 @@ package Interfaces;
 
 import static Interfaces.Conductor.vali;
 import Logica.Bascula.bascula;
-import static Logica.Bascula.bascula.Bas;
 import Logica.Bascula.busquedasTiquete;
 import Logica.Bascula.tiqueteVarios;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
@@ -20,6 +19,7 @@ import Logica.Extras.extras;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import Interfaces.Liquidacion;
+import static Interfaces.TiqueteVarios.Bas;
 
 /**
  *

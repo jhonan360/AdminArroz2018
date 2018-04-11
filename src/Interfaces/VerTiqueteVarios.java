@@ -169,11 +169,6 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
                 chDescripcionItemStateChanged(evt);
             }
         });
-        chDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chDescripcionActionPerformed(evt);
-            }
-        });
 
         txtDescripcion.setEditable(false);
 
@@ -633,12 +628,14 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void chDescripcionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chDescripcionItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chDescripcionItemStateChanged
+        if (chDescripcion.isSelected() == true) {
+            txtDescripcion.setEditable(true);
 
-    private void chDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chDescripcionActionPerformed
+        } else {
+            txtDescripcion.setEditable(false);
+            txtDescripcion.setText("");
+        }
+    }//GEN-LAST:event_chDescripcionItemStateChanged
 
     /**
      * @param args the command line arguments

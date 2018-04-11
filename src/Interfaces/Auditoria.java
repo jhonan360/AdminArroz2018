@@ -6,7 +6,7 @@
 package Interfaces;
 
 
-import Logica.Laboratorio.laboratorio_menu;
+//import Logica.Laboratorio.laboratorio_menu;
 import javax.swing.JOptionPane;
 import Logica.Auditor.auditoria;
 

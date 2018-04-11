@@ -29,13 +29,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Logica.Extras.log;
-import Logica.Laboratorio.laboratorio_menu;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 
 public class login {
 
     public static Gerente ger;
     public static Interfaces.Login log;
-    public static laboratorio_menu labor;
+    public static laboratorioTiqueteInicial labor;
     public static Conexion Con;
     public static String usu, con, priv, estado, usua;
     public static Statement st;

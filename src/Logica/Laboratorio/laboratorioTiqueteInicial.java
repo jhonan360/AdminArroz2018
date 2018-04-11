@@ -6,10 +6,13 @@
 package Logica.Laboratorio;
 import Interfaces.BusquedasTiquete;
 import Interfaces.BusquedasTiqueteInicial;
+import Interfaces.LaboratorioTiquete;
 import Interfaces.LaboratorioTiqueteInicial;
+import Interfaces.Login;
 import Logica.Extras.currencyFormat;
 import Logica.Extras.extras;
 import Logica.Extras.login;
+//import static Logica.Laboratorio.laboratorio_menu.Labo;
 import Negocio.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,14 +32,18 @@ public class laboratorioTiqueteInicial {
     public String user;
     public static extras ext;
     public static currencyFormat cu;
-    public static LaboratorioTiqueteInicial labo;
+    static LaboratorioTiqueteInicial labo;
     public static BusquedasTiquete BusTiquete;
     public static BusquedasTiqueteInicial BusInicial;
     public static Statement st, st1, st2, st3;
     public static Conexion Con;
     public static ResultSet rstipo, rstipo2, rsconsecutivo, rstipos;
     public static String consecutivo, idTiquete, ccAgricultor, idTipoDeArroz, idAgricultor, humedadUno, impurezaUno, fecha;
-
+    public static LaboratorioTiquete Labo;
+    static LaboratorioTiqueteInicial LaboTiquete;
+    static BusquedasTiqueteInicial busTiquete;
+    static Login Login;
+    
     public laboratorioTiqueteInicial() {
         ext = new extras();
         cu = new currencyFormat();
@@ -44,6 +51,38 @@ public class laboratorioTiqueteInicial {
         labo.Tiquete.setText(String.valueOf(ext.getNextIndex("tiquete")));
     }
 
+    public static void tiquete1() {
+        if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
+            LaboTiquete = new LaboratorioTiqueteInicial();
+            LaboTiquete.setVisible(true);
+        } else {
+            LaboTiquete = new LaboratorioTiqueteInicial();
+        }
+    }
+    
+    public static void tiquete2() {
+        if (!(Labo instanceof LaboratorioTiquete)) {
+            Labo = new LaboratorioTiquete();
+            Labo.setVisible(true);
+        } else {
+            Labo = new LaboratorioTiquete();
+        }
+    }
+
+    public static void busquedaTiq() {
+        if(!(busTiquete instanceof BusquedasTiqueteInicial)) {
+            busTiquete = new BusquedasTiqueteInicial();
+            busTiquete.setVisible(true);
+        }else {
+            busTiquete = new BusquedasTiqueteInicial();
+        }
+    }
+
+    public static void salir() {
+        Login = new Login();
+        Login.setVisible(true);
+    }
+    
     public static void abrirBusquedasTiquete(String TiqLab) {
         BusTiquete = new BusquedasTiquete(TiqLab);
         BusTiquete.setVisible(true);

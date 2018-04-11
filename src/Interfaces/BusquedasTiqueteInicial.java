@@ -7,8 +7,8 @@ package Interfaces;
 
 import Logica.Bascula.bascula;
 import Logica.Bascula.busquedasTiquete;
-import static Logica.Extras.login.labor;
 import Logica.Laboratorio.busquedaLaboratorio;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 import java.util.Date;
 
 /**
@@ -18,8 +18,9 @@ import java.util.Date;
 public class BusquedasTiqueteInicial extends javax.swing.JFrame {
 
     public static busquedasTiquete busTiquete;
-    public static busquedaLaboratorio busT;
+    static busquedaLaboratorio busT;
     public static bascula bascula;
+    static laboratorioTiqueteInicial labor;
 
     /**
      * Creates new form BusquedasTiquete

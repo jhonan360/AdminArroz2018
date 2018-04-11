@@ -148,6 +148,7 @@ public class verTiqueteVarios {
         }
 
         String tiquete = VerTiqVarios.txtTiquete.getText();
+        String descripcion = VerTiqVarios.txtDescripcion.getText();
 
         modelVerTiqVarios = new DefaultTableModel(null, columnas) {
             public boolean isCellEditable(int fila, int columna) {
@@ -155,10 +156,36 @@ public class verTiqueteVarios {
             }
         };
 
-        if (VerTiqVarios.chTiquete.isSelected() == true && VerTiqVarios.chFecha.isSelected()) {
+        if (VerTiqVarios.chTiquete.isSelected() == true && VerTiqVarios.chDescripcion.isSelected() == true && VerTiqVarios.chFecha.isSelected()) {
+            if (!tiquete.equals("") && !descripcion.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE tiqueteVarios.idTiqueteVarios='" + tiquete + "' AND entradas.descripcion LIKE '%" + descripcion + "%' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (VerTiqVarios.chTiquete.isSelected() == true && VerTiqVarios.chDescripcion.isSelected() == true) {
+            if (!tiquete.equals("") && !descripcion.equals("")) {
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE tiqueteVarios.idTiqueteVarios='" + tiquete + "' AND entradas.descripcion LIKE '%" + descripcion + "%' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (VerTiqVarios.chTiquete.isSelected() == true && VerTiqVarios.chFecha.isSelected()) {
             if (!tiquete.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
-                //tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.cedula like '%" + cedula + "%' and personalexterno.apellidos like '%" + apellidos + "%' and municipios.Nombre like '%" + ciudad + "%' and personalexterno.idMunicipio=municipios.idMunicipio and personalexterno.tipo='conductor' ");
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC ");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE tiqueteVarios.idTiqueteVarios='" + tiquete + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (VerTiqVarios.chDescripcion.isSelected() == true && VerTiqVarios.chFecha.isSelected() == true) {
+            if (!descripcion.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE entradas.descripcion LIKE '%" + descripcion + "%' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
                 tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
                 tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
                 formatoTabla();
@@ -167,7 +194,16 @@ public class verTiqueteVarios {
             }
         } else if (VerTiqVarios.chTiquete.isSelected() == true) {
             if (!tiquete.equals("")) {
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios='" + tiquete + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE tiqueteVarios.idTiqueteVarios='" + tiquete + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
+                tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
+                tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
+                formatoTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
+            }
+        } else if (VerTiqVarios.chDescripcion.isSelected() == true) {
+            if (!descripcion.equals("")) {
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE entradas.descripcion LIKE '%" + descripcion + "%' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
                 tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
                 tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
                 formatoTabla();
@@ -176,7 +212,7 @@ public class verTiqueteVarios {
             }
         } else if (VerTiqVarios.chFecha.isSelected() == true) {
             if (!fechaI.equals("") && !fechaF.equals("")) {
-                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 GROUP BY fecha DESC");
+                tbl.llenarTabla(VerTiqVarios.tblVerTiqVarios, modelVerTiqVarios, columnas.length, "SELECT tiqueteVarios.idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo,entradas WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "' AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00 AND entradas.idTiqueteVarios=tiquetevarios.idTiqueteVarios GROUP BY fecha DESC ");
                 tbl.alinearHeaderTable(VerTiqVarios.tblVerTiqVarios, headerColumnas);
                 tbl.alinearCamposTable(VerTiqVarios.tblVerTiqVarios, camposColumnas);
                 formatoTabla();

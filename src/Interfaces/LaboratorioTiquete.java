@@ -7,9 +7,9 @@ package Interfaces;
 
 import Logica.Administracion.usuarios;
 import Logica.Laboratorio.laboratorioTiquete;
-import Logica.Laboratorio.laboratorio_menu;
 import Interfaces.Login;
 import Logica.Extras.validaciones;
+import Logica.Laboratorio.laboratorioTiqueteInicial;
 
 /**
  *
@@ -17,9 +17,9 @@ import Logica.Extras.validaciones;
  */
 public class LaboratorioTiquete extends javax.swing.JFrame {
 
-    public static laboratorioTiquete labora;
-    public static Login log;
-    public static laboratorio_menu labor;
+    static laboratorioTiquete labora;
+    static Login log;
+    static laboratorioTiqueteInicial labor;
     public static validaciones vali;
 
     /**
@@ -984,12 +984,12 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
         labor.tiquete1();
-        dispose();
+        //dispose();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labor.salir();
-        dispose();
+        //dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
