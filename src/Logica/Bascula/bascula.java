@@ -81,7 +81,7 @@ public class bascula {
     public static Statement st;
     public static Conexion Con;
     public static tablas tbl;
-    public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
+   // public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
     public static String idTiqueteEspera = "", estadoTiquete;
     public static boolean estado;
     public static ConexionBascula ConBascula;
@@ -186,7 +186,7 @@ public class bascula {
     /*
     *----------------------------------------TIQUETES EN ESPERA------------------------------------------------------------
      */
-    public static void tiquetes_en_espera(boolean visible) {
+    public static void tiquetes_en_espera() {
 
         modeloentrada = new DefaultTableModel(null, columEspera) {
             public boolean isCellEditable(int fila, int columna) {
@@ -197,7 +197,7 @@ public class bascula {
         tbl.llenarTabla(Bas.tblEspera, modeloentrada, columEspera.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tiquete,personalexterno,tipodearroz,variedad WHERE tiquete.idConductor IS NULL AND tiquete.kilosBrutos IS NULL AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad ORDER BY tiquete.idTiquete ASC;");
         tbl.alinearHeaderTable(Bas.tblEspera, headerColumEspera);
         tbl.alinearCamposTable(Bas.tblEspera, camposColumEspera);
-        if (row1 == 0) {
+        /*if (row1 == 0) {
             row1 = modeloentrada.getRowCount();
         } else {
             row2 = modeloentrada.getRowCount();
@@ -212,7 +212,7 @@ public class bascula {
             }
             row1 = 0;
             row2 = 0;
-        }
+        }*/
     }
 
     public void tablaCampos_TiquetesEspera() {
@@ -463,7 +463,7 @@ public class bascula {
                         System.out.println("placa " + placa);
                         insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque,cuentas);//Llamado al metodo insertar
                         limpiarRegistros();
-                        tiquetes_en_espera(true);
+                        tiquetes_en_espera();
                         tiquetesEsperandoSegundoPesaje(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Ninguno de los campos puede estar vacio");
@@ -476,7 +476,7 @@ public class bascula {
                         System.out.println("placa " + placa);
                         insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque,cuentas);//Llamado al metodo insertar 
                         limpiarRegistros();
-                        tiquetes_en_espera(true);
+                        tiquetes_en_espera();
                         tiquetesEsperandoSegundoPesaje(true);
                         Bas.btnCapturarInicial.setEnabled(true);
                         Bas.btnCapturarFinal.setEnabled(true);
@@ -513,6 +513,8 @@ public class bascula {
         Bas.txtPesoInicial.setText("");
         Bas.txtPesoFinal.setText("");
         Bas.txtPesoNeto.setText("");
+        idTiqueteEspera="";
+        idTiquete=fecha=lote=tipoArroz=placa=idAgricultor=agricultor=idConductor=conductor=user=ccAgricultor=ccConductor=idVehiculo=observacion=kilosBrutos=destare=kilosNetos=empaque=kilos=cuentas="";
     }
 
     void cerrarVentana(int i) {

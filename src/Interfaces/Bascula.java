@@ -13,6 +13,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.cargarCombo;
 import javax.swing.JOptionPane;
+import Logica.Extras.notify;
 
 /**
  *
@@ -23,15 +24,20 @@ public class Bascula extends javax.swing.JFrame {
     public static bascula bascula;
     public static BusquedasTiquete busTiquete;
     public static cargarCombo cargar;
-    private aTask task;
+    //private aTask task;
+    private notify notify;
 
     /**
      * Creates new form Bascula
      */
     public Bascula() {
-        /**int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 500);*/
+        /**
+         * int ancho =
+         * java.awt.Toolkit.getDefaultToolkit().getScreenSize().width; int alto
+         * = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+         * this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) -
+         * (this.getHeight() / 2), 500, 500);
+         */
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -41,21 +47,29 @@ public class Bascula extends javax.swing.JFrame {
         cargar.cargarCuentas(cmbCuenta);
         System.out.println("isshowing " + isVisible());
         bascula = new bascula();
-        (task = new aTask()).execute();
-    }
-    
-    void close(){
-        this.dispose();
+        bascula.tiquetes_en_espera();
+        notify = new notify("basculista", bascula.login.enviarUsuario());
+        //(task = new aTask()).execute();
     }
 
-    void cerrar() {
+    void close() {
+        super.dispose();
+    }
+
+   private void cerrar() {
         bascula.limpiarRegistros();
         btnCapturarInicial.setEnabled(true);
         btnCapturarFinal.setEnabled(true);
         lblHumedad.setText("");
         lblImpureza.setText("");
-        dispose();
+        notify.stop();
+        notify = null;
         bascula.salir();
+        bascula.login.bas=null;
+        bascula = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
     }
 
     /**
@@ -143,7 +157,7 @@ public class Bascula extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel8.setForeground(new java.awt.Color(153, 153, 255));
 
@@ -954,7 +968,7 @@ public class Bascula extends javax.swing.JFrame {
         String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
             bascula.capturarPeso(1);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
         }
     }//GEN-LAST:event_btnCapturarInicialActionPerformed
@@ -963,7 +977,7 @@ public class Bascula extends javax.swing.JFrame {
         String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
             bascula.capturarPeso(2);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
         }
     }//GEN-LAST:event_btnCapturarFinalActionPerformed
@@ -1031,11 +1045,11 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_txtConductorActionPerformed
 
     private void tblEsperaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEsperaKeyReleased
-         bascula.tablaCampos_TiquetesEspera();
+        bascula.tablaCampos_TiquetesEspera();
     }//GEN-LAST:event_tblEsperaKeyReleased
 
     private void tblEsperaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEsperaMouseClicked
-        
+
         bascula.tablaCampos_TiquetesEspera();
     }//GEN-LAST:event_tblEsperaMouseClicked
 
@@ -1107,7 +1121,7 @@ public class Bascula extends javax.swing.JFrame {
         });
     }
 
-    private class aTask extends SwingWorker<Double, Void> {
+   /* private class aTask extends SwingWorker<Double, Void> {
 
         @Override
         protected Double doInBackground() throws InterruptedException {
@@ -1125,7 +1139,7 @@ public class Bascula extends javax.swing.JFrame {
             return null;
         }
 
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnBuscarConductor;

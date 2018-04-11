@@ -14,6 +14,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Logica.Extras.currencyFormat;
+import Interfaces.*;
+import javax.swing.table.DefaultTableModel;
+import Logica.Extras.tablas;
 
 /**
  *
@@ -21,11 +24,18 @@ import Logica.Extras.currencyFormat;
  */
 public class notify {
 
+    private hilo hilo;
+
     public notify(String privilegio, String user) {
-        hilo hilo = new hilo();
+        hilo = new hilo();
         hilo.privilegio = privilegio;
         hilo.user = user;
         hilo.start();
+    }
+
+    public void stop() {
+        hilo.desactivar();
+
     }
 
     private class hilo extends Thread {
@@ -36,10 +46,13 @@ public class notify {
         private ResultSet rs;
         public String privilegio, user;
         private currencyFormat cu;
+        private Bascula Bas;
+        private tablas tbl;
 
         public hilo() {
             active = true;
             cu = new currencyFormat();
+            tbl = new tablas();
         }
 
         public void desactivar() {
@@ -102,8 +115,13 @@ public class notify {
             }
             switch (privilegio) {
                 case "basculista":
-                    if (titulo.indexOf("tiquete") != -1) {
-                        System.out.println("HOLA");
+                    if (titulo.indexOf("Tiquete") != -1) {
+                        String[] split = texto.split(" ");
+                        String idTiquete = split[2];
+                        if (!tbl.searchColumnTable(Bas.tblEspera, 0, idTiquete)) {
+                            DefaultTableModel model = (DefaultTableModel) Bas.tblEspera.getModel();
+                            tbl.llenarTabla(Bas.tblEspera, model, Bas.bascula.columEspera.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tiquete,personalexterno,tipodearroz,variedad WHERE tiquete.idTiquete='" + idTiquete + "' AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad");
+                        }
                     }
                     DesktopNotify.showDesktopMessage(titulo, texto, type, time);
                     break;
@@ -120,9 +138,12 @@ public class notify {
                     DesktopNotify.showDesktopMessage(titulo, texto, type, time);
                     break;
             }
+            Con = new Conexion();
             stupdate = Con.conexion.createStatement();
-             java.util.Date date = new Date();
+            java.util.Date date = new Date();
             stupdate.executeUpdate("UPDATE notificaciones SET fechaVisualizacion='" + cu.DateTime(date) + "' WHERE idNotificacion='" + id + "'");
+            Con.Desconectar();
         }
+
     }
 }

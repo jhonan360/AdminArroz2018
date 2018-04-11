@@ -79,4 +79,12 @@ public class tablas {
             }
         }
     }
+    public boolean searchColumnTable(JTable table,int columm,String item){
+        for (int i = 0; i < table.getRowCount(); i++) {
+            if (table.getValueAt(i, columm).toString().equals(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
