@@ -47,20 +47,19 @@ public class Agricultor extends javax.swing.JFrame {
         
         switch (privilegio) {
             case "laboratorista":
-                mnVerTiqueteLab.setVisible(true);
+                mnVerTiqueteLaboratorio.setVisible(true);
                 mnAgricultor.setVisible(true);
-                mnTiqLaboratorio.setVisible(true);
+                mnTiqLab.setVisible(true);
+                mnTipo_Arroz.setVisible(true);
                 mnConductor.setVisible(false);
-                mnTipo_Arroz.setVisible(false);
                 mnVehiculo.setVisible(false);
                 mnLote.setVisible(false);
                 mnVerTiqueteMateriaPrima.setVisible(false);
                 mnVerTiqueteVarios.setVisible(false);
                 jMenu3.setVisible(false);
+                //jMenuBar1.setVisible(false);
                 break;
             case "basculista":
-                mnVerTiqueteLab.setVisible(false);
-                mnTiqLaboratorio.setVisible(false);
                 mnAgricultor.setVisible(true);
                 mnConductor.setVisible(true);
                 mnTipo_Arroz.setVisible(true);
@@ -68,7 +67,10 @@ public class Agricultor extends javax.swing.JFrame {
                 mnLote.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
-                jMenu3.setVisible(true);
+                jMenu3.setVisible(true);                        
+                mnVerTiqueteLaboratorio.setVisible(false);
+                mnTiqLab.setVisible(false);
+                //jMenuBar1.setVisible(true);
                 break;
         }
         cargar = new cargarCombo();
@@ -143,7 +145,7 @@ public class Agricultor extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnTiqLaboratorio = new javax.swing.JMenuItem();
+        mnTiqLab = new javax.swing.JMenuItem();
         mnAgricultor = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
         mnTipo_Arroz = new javax.swing.JMenuItem();
@@ -153,9 +155,9 @@ public class Agricultor extends javax.swing.JFrame {
         mnTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnTiqueteVarios = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteLaboratorio = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
-        mnVerTiqueteLab = new javax.swing.JMenuItem();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -593,16 +595,16 @@ public class Agricultor extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
 
-        mnTiqLaboratorio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnTiqLaboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnTiqLaboratorio.setText("Tiquete Laboratorio");
-        mnTiqLaboratorio.setPreferredSize(new java.awt.Dimension(175, 22));
-        mnTiqLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+        mnTiqLab.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqLab.setText("Tiquete Laboratorio");
+        mnTiqLab.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnTiqLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnTiqLaboratorioActionPerformed(evt);
+                mnTiqLabActionPerformed(evt);
             }
         });
-        jMenu1.add(mnTiqLaboratorio);
+        jMenu1.add(mnTiqLab);
 
         mnAgricultor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
@@ -699,16 +701,16 @@ public class Agricultor extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(195, 32));
 
-        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
-        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
-        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+        mnVerTiqueteLaboratorio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteLaboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteLaboratorio.setText("Tiquete Laboratorio");
+        mnVerTiqueteLaboratorio.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteLaboratorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnVerTiqueteMateriaPrimaActionPerformed(evt);
+                mnVerTiqueteLaboratorioActionPerformed(evt);
             }
         });
-        jMenu4.add(mnVerTiqueteMateriaPrima);
+        jMenu4.add(mnVerTiqueteLaboratorio);
 
         mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
@@ -723,18 +725,16 @@ public class Agricultor extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteVarios);
 
-        mnVerTiqueteLab.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnVerTiqueteLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnVerTiqueteLab.setText("Tiquete Laboratorio");
-        mnVerTiqueteLab.setToolTipText("");
-        mnVerTiqueteLab.setPreferredSize(new java.awt.Dimension(195, 22));
-        mnVerTiqueteLab.setRequestFocusEnabled(false);
-        mnVerTiqueteLab.addActionListener(new java.awt.event.ActionListener() {
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnVerTiqueteLabActionPerformed(evt);
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
             }
         });
-        jMenu4.add(mnVerTiqueteLab);
+        jMenu4.add(mnVerTiqueteMateriaPrima);
 
         jMenuBar1.add(jMenu4);
 
@@ -896,9 +896,9 @@ public class Agricultor extends javax.swing.JFrame {
         bascula.abrirTiqueteVarios();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
-    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
-        bascula.abrirVerTiqueteMateriaPrima();
-    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+    private void mnVerTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLaboratorioActionPerformed
+        lab.busquedaTiq();
+    }//GEN-LAST:event_mnVerTiqueteLaboratorioActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
@@ -909,14 +909,13 @@ public class Agricultor extends javax.swing.JFrame {
         bascula.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
-    private void mnTiqLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLaboratorioActionPerformed
-        lab = new laboratorioTiqueteInicial();
+    private void mnTiqLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLabActionPerformed
         lab.tiquete1();
-    }//GEN-LAST:event_mnTiqLaboratorioActionPerformed
+    }//GEN-LAST:event_mnTiqLabActionPerformed
 
-    private void mnVerTiqueteLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLabActionPerformed
-        lab.busquedaTiq();
-    }//GEN-LAST:event_mnVerTiqueteLabActionPerformed
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     public void municipio() {
         cmbDepartamento.addActionListener(new ActionListener() {
@@ -1007,11 +1006,11 @@ public class Agricultor extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnLote;
     public static javax.swing.JMenuItem mnTipo_Arroz;
-    public static javax.swing.JMenuItem mnTiqLaboratorio;
+    public static javax.swing.JMenuItem mnTiqLab;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
     public static javax.swing.JMenuItem mnVehiculo;
-    public static javax.swing.JMenuItem mnVerTiqueteLab;
+    public static javax.swing.JMenuItem mnVerTiqueteLaboratorio;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTextField txtApellidos;

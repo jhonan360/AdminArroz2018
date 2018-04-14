@@ -52,21 +52,21 @@ public class laboratorioTiqueteInicial {
     }
 
     public static void tiquete1() {
-        if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
+        //if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
             LaboTiquete = new LaboratorioTiqueteInicial();
             LaboTiquete.setVisible(true);
-        } else {
-            LaboTiquete = new LaboratorioTiqueteInicial();
-        }
+        //} else {
+        //    LaboTiquete = new LaboratorioTiqueteInicial();
+        //}
     }
     
     public static void tiquete2() {
-        if (!(Labo instanceof LaboratorioTiquete)) {
+        //f (!(Labo instanceof LaboratorioTiquete)) {
             Labo = new LaboratorioTiquete();
             Labo.setVisible(true);
-        } else {
-            Labo = new LaboratorioTiquete();
-        }
+        //} else {
+        //    Labo = new LaboratorioTiquete();
+        //}
     }
 
     public static void busquedaTiq() {

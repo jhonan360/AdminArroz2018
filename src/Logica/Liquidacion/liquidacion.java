@@ -83,7 +83,7 @@ public class liquidacion {
                     return false;
                 }
             };
-            tbl.llenarTabla(Liqui.tblSeleccionTiquete, modeloSeleccionTiquete, columnasSeleccionTiquete.length, "SELECT tiquete.idTiquete,tiquete.fecha,CONCAT(personalexterno.apellidos,' ',personalexterno.nombres),detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion,personalexterno WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.idAgricultor='" + idAgricultor + "'");
+            tbl.llenarTabla(Liqui.tblSeleccionTiquete, modeloSeleccionTiquete, columnasSeleccionTiquete.length, "SELECT tiquete.idTiquete,tiquete.fecha,CONCAT(personalexterno.apellidos,' ',personalexterno.nombres),detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion,personalexterno WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND detalleliquidacion.idliquidaciones IS NULL AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.idCuenta=1 AND tiquete.idAgricultor='" + idAgricultor + "'");
             tbl.alinearCamposTable(Liqui.tblSeleccionTiquete, camposCcolumnasSeleccionTiquete);
             completarTablaTiquete();
             modeloSeleccionLiquidacion = new DefaultTableModel(null, columnasLiquidacion) {

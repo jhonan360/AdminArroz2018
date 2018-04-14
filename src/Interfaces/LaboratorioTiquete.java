@@ -984,7 +984,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
         labor.tiquete1();
-        //dispose();
+        dispose();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

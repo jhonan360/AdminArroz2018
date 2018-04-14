@@ -16,7 +16,7 @@ public class Conexion {
     public static Connection conexionInformation;
     public static String BD = "admiarroz";
     public static String user = "root";
-    public static String pass = "root";
+    public static String pass = "";
 
     public Conexion() {
         Conectar();

@@ -74,6 +74,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnTiqueteLaboratorio = new javax.swing.JMenuItem();
         mnAgricultor = new javax.swing.JMenuItem();
+        mnTipoArroz = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -89,7 +90,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
 
         jMenuItem3.setText("jMenuItem3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -339,6 +340,17 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         });
         jMenu1.add(mnAgricultor);
 
+        mnTipoArroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTipoArroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTipoArroz.setText("Crear Tipo de arroz");
+        mnTipoArroz.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTipoArroz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTipoArrozActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnTipoArroz);
+
         jMenuBar1.add(jMenu1);
 
         jMenu5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -440,11 +452,15 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
 
     private void mnTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteLaboratorioActionPerformed
         labo.tiquete2();
-        //dispose();
+        dispose();
     }//GEN-LAST:event_mnTiqueteLaboratorioActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labo.salir();
+        bascula.Agricultor=null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
         //dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
@@ -455,6 +471,10 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
     }//GEN-LAST:event_mnAgricultorActionPerformed
+
+    private void mnTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipoArrozActionPerformed
+        bascula.tipo_de_arroz();
+    }//GEN-LAST:event_mnTipoArrozActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,6 +546,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JMenuItem menuSalir;
     public static javax.swing.JMenuItem mnAgricultor;
+    public static javax.swing.JMenuItem mnTipoArroz;
     public static javax.swing.JMenuItem mnTiqueteLaboratorio;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JTextField txtAgricultor;

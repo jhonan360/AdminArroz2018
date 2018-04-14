@@ -527,7 +527,7 @@ public class bascula {
             Connection c= Con.ConectarReport();
 
             JasperReport reporte=null;
-            String path="src\\}reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
+            String path="src\\reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
             reporte=(JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
             JasperPrint jprint = JasperFillManager.fillReport(path,null,c);//enviamos parametros
             JasperViewer view= new JasperViewer(jprint,false);//vista del reporte

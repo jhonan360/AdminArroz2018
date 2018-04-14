@@ -8,6 +8,7 @@ import Logica.Bascula.tipo_arroz;
 import Logica.Extras.cargarCombo;
 import Interfaces.Variedad;
 import Logica.Bascula.bascula;
+import Logica.Extras.login;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     public static cargarCombo cargar;
     public static Variedad Variedad;
     public static bascula bascula;
+    public String user,privilegio;
+    public static login login;
+    
     /**
      * Creates new form Tipo_Arroz
      */
@@ -26,7 +30,18 @@ public class Tipo_Arroz extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         tipo_arroz = new tipo_arroz();
-         cargar = new cargarCombo();
+        user = login.enviarUsuario();
+        privilegio = login.getPrivilegio(user);
+        System.out.println(privilegio);
+        switch (privilegio) {
+            case "laboratorista":
+                jMenuBar1.setVisible(false);
+                break;
+            case "basculista":
+                jMenuBar1.setVisible(true);
+                break;
+        }
+        cargar = new cargarCombo();
         cargar.variedad(cmbVariedad);
     }
 

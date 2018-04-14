@@ -352,7 +352,7 @@ public class laboratorioTiquete {
                 String id = Laboratorio.TxtIDTiqueteEstufa.getText();
                 Con = new Conexion();
                 st = Con.conexion.createStatement();
-                st.executeUpdate("UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
+                st.executeUpdate("UPDATE laboratorio SET estado = 'cerrado',user='"+user+"' WHERE idLaboratorio ='" + id + "'");
                 ext.logs("UPDATE","UPDATE laboratorio SET estado = 'cerrado' WHERE idLaboratorio ='" + id + "'");
          
                 JOptionPane.showMessageDialog(null, "El tiquete fue cerrado");

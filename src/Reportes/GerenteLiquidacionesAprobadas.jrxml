@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ddaba3-0f15-458f-8f5d-7b698c9aa7e3">
 	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="189"/>
+	<property name="ireport.y" value="172"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -88,6 +88,7 @@
 	<parameter name="id_liquidacion" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="nom_contador" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT liquidaciones.idLiquidaciones,cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT( telefono, ' ', telefono2, ' ', telefono3 ), direccion,municipios.nombre, liquidaciones.fecha, liquidaciones.humedadIdeal, liquidaciones.impurezaIdeal, liquidaciones.fomArrocero, liquidaciones.impuesto, liquidaciones.porcenImpuesto, liquidaciones.kilosNeto, liquidaciones.kilosCompra, liquidaciones.subtotal, liquidaciones.valorFomArrocero, liquidaciones.valorImpuesto, liquidaciones.descuentoAnticipo, liquidaciones.netoPagar,(liquidaciones.kilosNeto-liquidaciones.kilosCompra) AS descuento FROM personalexterno, tiquete, detalleliquidacion, liquidaciones,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND liquidaciones.idLiquidaciones =$P!{id_liquidacion} AND detalleliquidacion.idliquidaciones=liquidaciones.idLiquidaciones AND detalleliquidacion.idTiquete = tiquete.idTiquete GROUP BY liquidaciones.idLiquidaciones]]>
 	</queryString>
@@ -876,6 +877,13 @@
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="16" y="112" width="128" height="9" uuid="45c47c81-cf71-47d7-98e1-e2a365360b56"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nom_contador}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
