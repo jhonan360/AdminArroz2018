@@ -68,6 +68,7 @@ public class conductor {
         tbl.llenarTabla(Cdt.jTable1, modelCdt, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,telefono,municipios.Nombre,Direccion FROM personalexterno,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND personalexterno.tipo='conductor'");
         tbl.alinearHeaderTable(Cdt.jTable1, headerColumnas);
         tbl.alinearCamposTable(Cdt.jTable1, camposColumnas);
+        tbl.rowNumberTabel(Cdt.jTable1);
     }
 
     public void crearConductor() {//Metodo para crear un nuevo conductor 
@@ -161,8 +162,8 @@ public class conductor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             //logs.logConductor("a", login.enviarUsuario(), cedula, nombres, apellidos, telefono, direccion, Integer.parseInt(ciudad));
-            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idPersonalExterno='" + idConductor + "'");
-            ext.logs("UPDATE","UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE idPersonalExterno='" + idConductor + "'");
+            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE personalexterno.cedula='" + cedula + "'");
+            ext.logs("UPDATE","UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',telefono='" + telefono + "',Direccion='" + direccion + "',idMunicipio='" + ciudad + "' WHERE personalexterno.cedula='" + cedula + "'");
             JOptionPane.showMessageDialog(null, "El conductor fue modificado");
             Con.Desconectar();
         } catch (Exception e) {
@@ -314,7 +315,7 @@ public class conductor {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkbox();
-
+        tbl.rowNumberTabel(Cdt.jTable1);
     }
 
 }

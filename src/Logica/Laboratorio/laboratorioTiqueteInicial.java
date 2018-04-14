@@ -131,7 +131,7 @@ public class laboratorioTiqueteInicial {
             st2 = Con.conexion.createStatement();
             st2.executeUpdate("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
             ext.logs("INSERT","INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
-            st2.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen) VALUES (0,'basculista',NULL,'Nuevo Tiquete De Entrada De Materia Prima','Tiquete Nº "+idTiquete+" del agricultor "+labo.txtAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'laboratorio')");
+            st2.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'basculista',NULL,'Nuevo Tiquete De Entrada De Materia Prima','Tiquete Nº "+idTiquete+" del agricultor "+labo.txtAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'laboratorio','"+idTiquete+"')");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
             labo.Tiquete.setText(String.valueOf(ext.getNextIndex("tiquete")));
             Con.Desconectar();

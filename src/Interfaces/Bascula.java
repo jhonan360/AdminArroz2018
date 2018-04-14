@@ -57,7 +57,7 @@ public class Bascula extends javax.swing.JFrame {
     }
 
    private void cerrar() {
-        bascula.limpiarRegistros();
+       bascula.limpiarRegistros();
         btnCapturarInicial.setEnabled(true);
         btnCapturarFinal.setEnabled(true);
         lblHumedad.setText("");

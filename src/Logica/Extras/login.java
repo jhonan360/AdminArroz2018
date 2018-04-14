@@ -30,6 +30,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Logica.Extras.log;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
+import Interfaces.Auditoria;
 
 public class login {
 
@@ -47,7 +48,7 @@ public class login {
     public static conductor cond;
     public static Administracion admi;
     public static AlmacenarInventario Inventario;
-
+public static Auditoria Auditoria;
     public static Liquidacion Liqui;
     public static Gerencia Ger;
     public boolean bandera = false;
@@ -148,12 +149,12 @@ public class login {
                         }
                         bandera = true;
                     } else if (priv.equals("auditor") && estado.equals("activo")) {
-                        if (audi == null) {
-                            audi = new Auditor();
-                            audi.setVisible(true);
+                        if (Auditoria == null) {
+                            Auditoria = new Auditoria();
+                            Auditoria.setVisible(true);
                             enviarUsuario();
                         } else {
-                            audi.setVisible(true);
+                            Auditoria.setVisible(true);
                         }
                         bandera = true;
                         /*} else if (priv.equals("supervisor") && estado.equals("activo")) {

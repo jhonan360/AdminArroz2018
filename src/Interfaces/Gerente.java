@@ -7,7 +7,9 @@ package Interfaces;
 
 import Interfaces.AgricultorGerencia;
 import Interfaces.ConductorGerencia;
+import Logica.Extras.notify;
 import Logica.Extras.validaciones;
+import Logica.Gerencia.agendarAgricultor;
 import Logica.Gerente.gerente;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class Gerente extends javax.swing.JFrame {
 
     public static gerente gerente;
     public static validaciones vali;
+    private notify notify;
 
     /**
      * Creates new form Gerencia
@@ -31,6 +34,19 @@ public class Gerente extends javax.swing.JFrame {
         gerente = new gerente();
         vali = new validaciones();
         vali.DECIMAL(TxtValor);
+        gerente.checkReminder();
+        notify = new notify("gerente", gerente.login.enviarUsuario());
+    }
+
+    private void cerrar() {
+        notify.stop();
+        notify = null;
+        gerente.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
     }
 
     /**
@@ -102,6 +118,8 @@ public class Gerente extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnAgendar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -673,6 +691,20 @@ public class Gerente extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setText("Agendar");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        mnAgendar.setText("Agricultor");
+        mnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgendarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnAgendar);
+
+        jMenuBar1.add(jMenu3);
+
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         jMenu2.setText("Cuenta");
@@ -761,31 +793,25 @@ public class Gerente extends javax.swing.JFrame {
             jDatefinal.setEnabled(false);
             jDateinicial.setDate(null);
             jDatefinal.setDate(null);
-        }       
+        }
     }//GEN-LAST:event_chfechaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         if (jDatefinal.getDate() == null && jDateinicial.getDate() == null) {
+        if (jDatefinal.getDate() == null && jDateinicial.getDate() == null) {
             gerente.BuscarTiquetes();
-        } else {
-            if (jDatefinal.getDate() == null) {
-                Date FechaInicial = jDateinicial.getDate();
-                jDatefinal.setDate(FechaInicial);
-            } else {
-                if (jDateinicial.getDate() == null) {
-                    Date FechaFinal = jDatefinal.getDate();
-                    jDateinicial.setDate(FechaFinal);
-               }
-            }
+        } else if (jDatefinal.getDate() == null) {
+            Date FechaInicial = jDateinicial.getDate();
+            jDatefinal.setDate(FechaInicial);
+        } else if (jDateinicial.getDate() == null) {
+            Date FechaFinal = jDatefinal.getDate();
+            jDateinicial.setDate(FechaFinal);
         }
         gerente.BuscarTiquetes();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
-        gerente.salir();
-        dispose();
+        cerrar();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
@@ -802,12 +828,16 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void TablaPendienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaPendienteKeyPressed
-        
+
     }//GEN-LAST:event_TablaPendienteKeyPressed
 
     private void TablaPendienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaPendienteKeyReleased
         gerente.tablaCamposLiquidacion();
     }//GEN-LAST:event_TablaPendienteKeyReleased
+
+    private void mnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgendarActionPerformed
+        gerente.mnAgendar();
+    }//GEN-LAST:event_mnAgendarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -889,6 +919,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
@@ -903,6 +934,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JMenuItem mnAgendar;
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JLabel txtConductor;

@@ -57,7 +57,15 @@ public class currencyFormat {
         }
         return "";
     }
-
+    public String dateNotTime(Date Date) {
+        try {
+            //Date Date = ftDate.parse(date);
+            return ftDate.format(Date);
+        } catch (Exception e) {
+        }
+        return "";
+    }
+    
     public String DateTime(Date dateTime) {
         try {
             return ftDateTime.format(dateTime);
