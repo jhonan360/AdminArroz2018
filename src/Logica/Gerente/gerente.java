@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Interfaces.Gerente;
+import Interfaces.AgendarAgricultor;
 import Interfaces.GerenteApruebaLiquidaciones;
 import Interfaces.LiquidacionesAprobadas;
 import Interfaces.Login;
@@ -19,19 +20,24 @@ import Logica.Extras.currencyFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Logica.Extras.extras;
+import Logica.Extras.login;
+import java.sql.SQLException;
 
 /**
  *
  * @author uriel
  */
 public class gerente {
+
+    public static login login;
     public static extras ext;
     public static LiquidacionesAprobadas LiqAprobada;
     public static Login Login;
     public static GerenteApruebaLiquidaciones GApruebaL;
+    public static AgendarAgricultor Agendar;
     public static Conexion Con;
-    public static ResultSet rs;
-    public static Statement st;
+    public static ResultSet rs, rsNotify;
+    public static Statement st, stNotify;
     public DefaultTableModel modelo, modelobuscar;
     public static Gerente Ger;
     public String columnas[] = new String[]{"N° Tiquete", "Agricultor", "Fecha Creación"};
@@ -40,8 +46,10 @@ public class gerente {
     public tablas tbl;
     public String tiquete, valor;
     public static currencyFormat cu;
+    private Date date;
 
     public gerente() {
+        date = new Date();
         tbl = new tablas();
         cu = new currencyFormat();
         crearModeloTabla();
@@ -66,6 +74,15 @@ public class gerente {
         }
     }
 
+    public static void mnAgendar() {
+        if (!(Agendar instanceof AgendarAgricultor)) {
+            Agendar = new AgendarAgricultor();
+            Agendar.setVisible(true);
+        } else {
+            Agendar.setVisible(true);
+        }
+    }
+
     public static void salir() {
         Login = new Login();
         Login.setVisible(true);
@@ -77,7 +94,6 @@ public class gerente {
                 return false;
             }
         };
-
         tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz order by tiquete.idTiquete ASC");
         tbl.alinearHeaderTable(Ger.TablaPendiente, headerColumnas);
         tbl.alinearCamposTable(Ger.TablaPendiente, camposColumnas);
@@ -152,7 +168,7 @@ public class gerente {
 
     }
 
-    public void limpiarCampos() {
+    public void limpiarRegistros() {
         Ger.TxtNumTiquete.setText("");
         //Ger.TxtCedula.setText("");
         Ger.TxtNombre.setText("");
@@ -168,6 +184,7 @@ public class gerente {
         Ger.TxtValor.setText("");
         Ger.txtConductor.setText("");
         Ger.txtLote.setText("");
+        
         crearModeloTabla();
     }
 
@@ -187,10 +204,10 @@ public class gerente {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
-            ext.logs("INSERT","Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
+            ext.logs("INSERT", "Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
 
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
-            limpiarCampos();
+            limpiarRegistros();
             crearModeloTabla();
             Con.Desconectar();
         } catch (Exception e) {
@@ -200,8 +217,8 @@ public class gerente {
 
     public void BuscarTiquetes() {
         String FechaIni, FechaFin;
-        Date Fechainicial,FechaFinal;
-        
+        Date Fechainicial, FechaFinal;
+
         SimpleDateFormat formatoI = new SimpleDateFormat("yyy-MM-dd 00:00:00");
         SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
         Fechainicial = Ger.jDateinicial.getDate();
@@ -214,7 +231,7 @@ public class gerente {
             FechaIni = formatoI.format(Fechainicial);
             FechaFin = formato.format(FechaFinal);
         }
-        
+
         String cedula = Ger.cedula.getText();
 
         modelobuscar = new DefaultTableModel(null, columnas) {
@@ -251,5 +268,59 @@ public class gerente {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
         }
+    }
+
+    /// ----- verificar recordatorios --- \\\\\\
+    public void checkReminder() {
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT idRecordatorio, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), observacion, fecha, diasAntes, fechaAntes FROM recordatorio JOIN personalexterno ON personalexterno.idPersonalExterno=recordatorio.idPersonalExterno  WHERE fecha='" + cu.dateNotTime(date) + "'OR fechaAntes='" + cu.dateNotTime(date) + "'");
+            while (rs.next()) {
+                String fecha = rs.getString(4);
+                String diasAntes = rs.getString(5);
+                String fechaAntes = rs.getString(6);
+                if (fechaAntes.equals(cu.dateNotTime(date))&&!diasAntes.equals("0")) {
+                    createNotify(rs, "antes");
+                }
+                if (fecha.equals(cu.dateNotTime(date))) {
+                    createNotify(rs, "hoy");
+                }
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createNotify(ResultSet rs, String opc) throws SQLException {
+        String idRecordatorio = rs.getString(1);
+        String agricultor = rs.getString(2);
+        String observacion = rs.getString(3);
+        Con = new Conexion();
+        stNotify = Con.conexion.createStatement();
+        switch (opc) {
+            case "antes":
+                String diasAntes = rs.getString(5);
+                rsNotify = stNotify.executeQuery("SELECT idNotificacion FROM notificaciones WHERE id='" + idRecordatorio + "' AND origen='gerente' AND titulo LIKE '%Día%'");
+                if (!rsNotify.next()) {
+                    if (Integer.parseInt(diasAntes)>1) {
+                        stNotify.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar A " + agricultor + " En " + diasAntes + " Días','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
+                    }else{
+                        stNotify.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar A " + agricultor + " En " + diasAntes + " Día','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
+                    }
+                    
+                }
+                //tenga palabra Días
+                break;
+            case "hoy":
+                rsNotify = stNotify.executeQuery("SELECT idNotificacion FROM notificaciones WHERE id='" + idRecordatorio + "' AND origen='gerente' AND titulo LIKE '%Hoy%'");
+                if (!rsNotify.next()) {
+                    System.out.println("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar Hoy A " + agricultor + "','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
+                    stNotify.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar Hoy A " + agricultor + "','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
+                }
+                break;
+        }
+        Con.Desconectar();
     }
 }

@@ -40,9 +40,9 @@ public class almacenarInventario {
     public static Conexion Con;
     public static ResultSet rs;
     public static Statement st;
-    String columnasTabla[] = new String[]{"N", "Fecha", "Agricultor", "Kilos Netos"};
-    String alineaHeader[] = new String[]{"10", "40", "150", "40"};
-    String alineaCampo[] = new String[]{"center", "center", "left", "right"};
+    String columnasTabla[] = new String[]{"N", "Fecha", "Agricultor", "Kilos Netos", "Cuenta"};
+    String alineaHeader[] = new String[]{"10", "40", "150", "40", "40"};
+    String alineaCampo[] = new String[]{"center", "center", "left", "right", "right"};
     DefaultTableModel modeloTabla;
     String idTiquete = "", movimientos = "";
     int lastIndex;
@@ -107,7 +107,7 @@ public class almacenarInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(AlmacenarI.tblMateriaPrima, modeloTabla, columnasTabla.length, "SELECT tiquete.idTiquete, tiquete.fecha, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosNetos FROM personalexterno,tiquete  WHERE tiquete.idTiquete NOT IN (SELECT idTiquete FROM tiqueteensilos) AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.kilosNetos>0.00");
+        tbl.llenarTabla(AlmacenarI.tblMateriaPrima, modeloTabla, columnasTabla.length, "SELECT tiquete.idTiquete, tiquete.fecha, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosNetos,cuentas.nombre FROM personalexterno,tiquete,cuentas  WHERE tiquete.idTiquete NOT IN (SELECT idTiquete FROM tiqueteensilos) AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.kilosNetos>0.00 AND tiquete.idCuenta=cuentas.idCuenta");
         tbl.alinearHeaderTable(AlmacenarI.tblMateriaPrima, alineaHeader);
         tbl.alinearCamposTable(AlmacenarI.tblMateriaPrima, alineaCampo);
         formatoTabla();
@@ -390,22 +390,29 @@ public class almacenarInventario {
 
     public void switchSecadora(JLabel label) {
         int secadora = getNumberSecadora(label.getName(), 1);
-        if (pesoActual > 0) {
-            if (estados[secadora].equals("apagado")) {
-                int respuesta = JOptionPane.showConfirmDialog(null, "La secadora esta apagada, ¿Desea encenderla? \nRecuerde el consumo energetico", "Confirmación", JOptionPane.CANCEL_OPTION);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    estados[secadora] = "encendido";
-                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
-                }
-            } else if (verificarContenidoSecadoras(secadora)) {
+        //if (pesoActual > 0) {
+        if (estados[secadora].equals("apagado")) {
+            int respuesta = JOptionPane.showConfirmDialog(null, "La secadora esta apagada, ¿Desea encenderla? \nRecuerde el consumo energetico", "Confirmación", JOptionPane.CANCEL_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                estados[secadora] = "encendido";
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/green circle.png")));
+            }
+        } else if (verificarContenidoSecadoras(secadora)) {
+            int respuesta = JOptionPane.showConfirmDialog(null, "La secadora esta encendida, ¿Desea apagarla? \nLa secadora no tiene contenido", "Confirmación", JOptionPane.CANCEL_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
                 estados[secadora] = "apagado";
                 label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede apagar la secadora porque los silos tienen contenido");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe tener kilos para manipular la secadora");
+            int respuesta = JOptionPane.showConfirmDialog(null, "La secadora esta encendida, ¿Desea apagarla? \nRecuerde que los silos tienen contenido", "Confirmación", JOptionPane.CANCEL_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                estados[secadora] = "apagado";
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/red circle.png")));
+            }
         }
+        /* } else {
+            JOptionPane.showMessageDialog(null, "Debe tener kilos para manipular la secadora");
+        }*/
     }
 
     public void llenarSilo(JProgressBar progressBar, double silo[][], int fila) {
@@ -530,8 +537,8 @@ public class almacenarInventario {
     }
 
     public void almacenar() {
-        if (pesoActual == 0) {
-            String[] silos = movimientos.split(",");
+        String[] silos = movimientos.split(",");
+        if (pesoActual == 0 && silos.length > 1) {
             for (int i = 0; i < silos.length; i++) {
                 if (!silos[i].equals("")) {
                     insert(getSilo(silos[i]), getRowSilo(silos[i]));
@@ -541,6 +548,9 @@ public class almacenarInventario {
             crearModelo();
             limpiar();
             JOptionPane.showMessageDialog(null, "Almacenamiento exitoso");
+        } else {
+            guardarEstadoSecadora();
+            JOptionPane.showMessageDialog(null, "Estado de secadoras Guardado");
         }
     }
 
@@ -550,11 +560,9 @@ public class almacenarInventario {
             st = Con.conexion.createStatement();
             for (int i = 0; i < estados.length; i++) {
                 int idSecadora = i + 1;
-                if (!verificarContenidoSecadoras(idSecadora)) {
-                    st.executeUpdate("UPDATE secadora SET estado='" + estados[i] + "' WHERE idSecadora='" + idSecadora + "';");
-                }else{
-                    
-                }
+                //if (!verificarContenidoSecadoras(idSecadora)) {
+                st.executeUpdate("UPDATE secadora SET estado='" + estados[i] + "' WHERE idSecadora='" + idSecadora + "';");
+                //}
             }
             Con.Desconectar();
         } catch (Exception e) {
@@ -577,8 +585,8 @@ public class almacenarInventario {
             }
             st.executeUpdate("INSERT INTO tiqueteensilos (idTiqueteSilos, idTiquete, idSilos, kilos, estado) VALUES(0,'" + idTiquete + "','" + idSilo + "','" + kilos + "','secamiento')");
             st.executeUpdate("UPDATE silos SET kilos='" + silo[fila][2] + "',estado='" + estadoSilo + "' WHERE idSilos='" + idSilo + "';");
-            ext.logs("INSERT","INSERT INTO tiqueteensilos (idTiqueteSilos, idTiquete, idSilos, kilos, estado) VALUES(0,'" + idTiquete + "','" + idSilo + "','" + kilos + "','secamiento')");
-            ext.logs("UPDATE","UPDATE silos SET kilos='" + silo[fila][2] + "',estado='" + estadoSilo + "' WHERE idSilos='" + idSilo + "';");
+            ext.logs("INSERT", "INSERT INTO tiqueteensilos (idTiqueteSilos, idTiquete, idSilos, kilos, estado) VALUES(0,'" + idTiquete + "','" + idSilo + "','" + kilos + "','secamiento')");
+            ext.logs("UPDATE", "UPDATE silos SET kilos='" + silo[fila][2] + "',estado='" + estadoSilo + "' WHERE idSilos='" + idSilo + "';");
 
             Con.Desconectar();
         } catch (Exception e) {

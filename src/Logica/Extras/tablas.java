@@ -87,4 +87,10 @@ public class tablas {
         }
         return false;
     }
+    public void rowNumberTabel(JTable table) {
+        int rowlength = table.getRowCount();
+        for (int i = 0; i < rowlength; i++) {
+            table.setValueAt(i + 1, i, 0);
+        }
+    }
 }

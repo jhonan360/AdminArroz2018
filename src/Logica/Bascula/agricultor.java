@@ -22,6 +22,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import Logica.Extras.login;
 import java.util.Date;
+
 public class agricultor {
 
     //Variables a utilizar
@@ -42,12 +43,12 @@ public class agricultor {
     //public static log logs;
     public static login login;
     public String estado = "crear";
-   // final static Logger logger = Logger.getLogger(agricultor.class); 
+    // final static Logger logger = Logger.getLogger(agricultor.class); 
 
     public agricultor() {//constructor de la clase
-     //   PropertyConfigurator.configure("log4j.properties");
+        //   PropertyConfigurator.configure("log4j.properties");
         fecha = new Date();
- 
+
         ext = new extras();
         // logs = new log();
         crearModelo();
@@ -81,6 +82,7 @@ public class agricultor {
         tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE tipo='agricultor' AND personalexterno.idMunicipio=municipios.idMunicipio");
         tbl.alinearHeaderTable(Agr.jTable1, headerColumnas);
         tbl.alinearCamposTable(Agr.jTable1, camposColumnas);
+        tbl.rowNumberTabel(Agr.jTable1);
     }
 
     public void crearAgricultor() {//crear el agricultor se ejecuta cuando se da clic el boton crear
@@ -119,9 +121,9 @@ public class agricultor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
-            
+
             //logger.info("Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')+ fecha " +fecha);
-            ext.logs("INSERT","Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
+            ext.logs("INSERT", "Insert INTO personalexterno (idPersonalExterno,cedula,nombres,apellidos,direccion,telefono,telefono2,telefono3,idMunicipio,tipo) VALUES (0,'" + cedula + "','" + nombres + "','" + apellidos + "','" + direccion + "','" + telefono + "','" + telefono2 + "','" + telefono3 + "','" + ciudad + "','agricultor')");
             JOptionPane.showMessageDialog(null, "Agricultor registrado");
             //logs.logAgricultor("i", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
             Con.Desconectar();
@@ -252,8 +254,8 @@ public class agricultor {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             //logs.logAgricultor("a", login.enviarUsuario(), cedula, nombres, apellidos, direccion, Integer.parseInt(ciudad));
-            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
-            ext.logs("UPDATE","UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idPersonalExterno='" + idAgricultor + "'");
+            st.executeUpdate("UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.cedula='" + cedula + "'");
+            ext.logs("UPDATE", "UPDATE personalexterno SET nombres='" + nombres + "',apellidos='" + apellidos + "',direccion='" + direccion + "',idMunicipio='" + ciudad + "',telefono='" + telefono + "',telefono2='" + telefono2 + "',telefono3='" + telefono3 + "' WHERE personalexterno.idAgricultor='" + cedula + "'");
             JOptionPane.showMessageDialog(null, "El Agriculto fue modificado");
             Con.Desconectar();
             limpiar_registros();
@@ -330,7 +332,7 @@ public class agricultor {
             }
         } else if (Agr.chCiudad.isSelected() == true) {
             if (!ciudad.equals("")) {
-                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE municipios.Nombre LIKE '" + ciudad + "' AND  personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
+                tbl.llenarTabla(Agr.jTable1, modeloagr, columnas.length, "SELECT idPersonalExterno,cedula,nombres,apellidos,municipios.Nombre,direccion,telefono,telefono2,telefono3 FROM personalexterno,municipios WHERE municipios.Nombre LIKE '%" + ciudad + "%' AND  personalexterno.idMunicipio=municipios.idMunicipio AND tipo='agricultor' GROUP BY cedula");
                 tbl.alinearHeaderTable(Agr.jTable1, headerColumnas);
                 tbl.alinearCamposTable(Agr.jTable1, camposColumnas);
             } else {
@@ -340,5 +342,6 @@ public class agricultor {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkbox();
+        tbl.rowNumberTabel(Agr.jTable1);
     }
 }
