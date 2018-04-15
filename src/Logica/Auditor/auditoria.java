@@ -12,6 +12,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import Interfaces.Auditoria;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -21,9 +28,15 @@ import javax.swing.JOptionPane;
  */
 public class auditoria {
     public static Auditoria Auditoria;
+    static final Logger LOGGER = Logger.getAnonymousLogger();
+    String path = System.getProperty("user.dir");
     JFileChooser seleccionado1 = new JFileChooser();//Declaracion del objeto filechooser el cual abre la ventana encargada de recivir el archivo
     File Archivo1;//elemento tipo file almacena el arcivo
-     File fichero=new File("C:\\Users\\uriel\\Documents\\GitHub\\AdminArroz2018\\logs.log");
+     File fichero= new File (path + "/logs/logs.log");
+     File fichero2= new File(path + "/descarga_logs/logs.log");
+     String ficheroini = path + "/logs/logs.log";
+     String ficherofin = path + "/descarga_logs/logs.log";
+     File Dir = null;
     long Tamaño_Archivo1 = 0;//almacena el tamaño del archivo el kilobytes
     String NombreArchivo1 = "";//Almacena el nombre del archivo 1
     String Extension_Archivo1 = "";//almacena la extencion del archivo 1
@@ -384,4 +397,24 @@ public class auditoria {
       Auditoria.CmbEvento.setSelectedIndex(0);
       
   }
+  
+        public void CopiarArchivo() {
+            try {
+                 Dir = new File(path + "/descarga_logs");
+        if (!Dir.exists()) {
+            Dir.mkdirs();
+        }
+                Path origenPath = Paths.get(ficheroini);
+                Path destinoPath = Paths.get(ficherofin);
+                //sobreescribir el fichero de destino si existe y lo copia
+                Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(null,"El archivo fue descargado en la ruta= "+ficherofin);
+            } catch (FileNotFoundException ex) {
+                LOGGER.log(Level.SEVERE, ex.getMessage());
+            } catch (IOException ex) {
+                LOGGER.log(Level.SEVERE, ex.getMessage());
+            }
+        }
+
+      
 }

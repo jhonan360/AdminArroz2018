@@ -148,6 +148,9 @@ public class extras {
             case "v":
                 sentencia = "SELECT placa FROM vehiculo WHERE placa='" + cedula + "'";
                 break;
+            case "x":
+                sentencia = "SELECT nit FROM cuentas WHERE nit='" + cedula + "'";
+                break;
         }
         try {
             Con = new Conexion();

@@ -118,6 +118,7 @@ public class Gerente extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -689,6 +690,14 @@ public class Gerente extends javax.swing.JFrame {
         });
         jMenu1.add(mnGenerar);
 
+        jMenuItem1.setText("Cuentas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -839,6 +848,10 @@ public class Gerente extends javax.swing.JFrame {
         gerente.mnAgendar();
     }//GEN-LAST:event_mnAgendarActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -923,6 +936,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

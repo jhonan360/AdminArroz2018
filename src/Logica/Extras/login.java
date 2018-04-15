@@ -128,6 +128,7 @@ public static Auditoria Auditoria;
                         if (admi == null) {
                             admi = new Administracion();
                             admi.setVisible(true);
+                            enviarUsuario();
                         } else {
                             admi.setVisible(true);
                         }
@@ -143,7 +144,9 @@ public static Auditoria Auditoria;
                     } else if (priv.equals("gerente") && estado.equals("activo")) {
                         if (ger == null) {
                             ger = new Gerente();
+                            enviarUsuario();
                             ger.setVisible(true);
+                            
                         } else {
                             ger.setVisible(true);
                         }

@@ -22,6 +22,7 @@ import java.util.Date;
 import Logica.Extras.extras;
 import Logica.Extras.login;
 import java.sql.SQLException;
+import Interfaces.Cuentas_Terceros;
 
 /**
  *
@@ -30,6 +31,7 @@ import java.sql.SQLException;
 public class gerente {
 
     public static login login;
+    public static Cuentas_Terceros Cuentas_Terceros;
     public static extras ext;
     public static LiquidacionesAprobadas LiqAprobada;
     public static Login Login;
@@ -80,6 +82,14 @@ public class gerente {
             Agendar.setVisible(true);
         } else {
             Agendar.setVisible(true);
+        }
+    }
+    public static void cuentas_Terceros() {
+        if (!(Cuentas_Terceros instanceof Cuentas_Terceros)) {
+            Cuentas_Terceros = new Cuentas_Terceros();
+            Cuentas_Terceros.setVisible(true);
+        } else {
+            Cuentas_Terceros.setVisible(true);
         }
     }
 
