@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import static Interfaces.Gerente.gerente;
 import Logica.Extras.validaciones;
 import javax.swing.JOptionPane;
 import Logica.Liquidacion.liquidacion;
@@ -119,6 +120,9 @@ public class Liquidacion extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
+        mnCuentas = new javax.swing.JMenuItem();
+        mnReportes = new javax.swing.JMenu();
+        mnCuotaFomento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -734,12 +738,12 @@ public class Liquidacion extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
         jMenu1.setText("Liquidaciones");
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+        jMenu1.setPreferredSize(new java.awt.Dimension(205, 32));
 
         mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnPorAprobar.setText("Crear");
-        mnPorAprobar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(205, 22));
         mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnPorAprobarActionPerformed(evt);
@@ -758,18 +762,48 @@ public class Liquidacion extends javax.swing.JFrame {
         });
         jMenu1.add(mnGenerar);
 
+        mnCuentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuentas.setText("Crear cuentas terceros");
+        mnCuentas.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuentasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCuentas);
+
         jMenuBar1.add(jMenu1);
+
+        mnReportes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        mnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        mnReportes.setText("Reportes");
+        mnReportes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        mnReportes.setPreferredSize(new java.awt.Dimension(205, 32));
+
+        mnCuotaFomento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuotaFomento.setText("Cuota fomento arrocero");
+        mnCuotaFomento.setPreferredSize(new java.awt.Dimension(205, 22));
+        mnCuotaFomento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuotaFomentoActionPerformed(evt);
+            }
+        });
+        mnReportes.add(mnCuotaFomento);
+
+        jMenuBar1.add(mnReportes);
 
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         jMenu2.setText("Cuenta");
         jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
+        jMenu2.setPreferredSize(new java.awt.Dimension(205, 32));
 
         menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         menuSalir.setText("Cerrar Sesión");
-        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
+        menuSalir.setPreferredSize(new java.awt.Dimension(205, 22));
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSalirActionPerformed(evt);
@@ -886,6 +920,14 @@ public class Liquidacion extends javax.swing.JFrame {
         
          
     }//GEN-LAST:event_txtAgricultorMouseClicked
+
+    private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnCuotaFomentoActionPerformed
+
+    private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed
+        gerente.cuentas_Terceros();
+    }//GEN-LAST:event_mnCuentasActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -985,8 +1027,11 @@ public class Liquidacion extends javax.swing.JFrame {
     private javax.swing.JLabel lblTotalKilosCompra;
     private javax.swing.JLabel lblTotalKilosNetos;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnCuentas;
+    public static javax.swing.JMenuItem mnCuotaFomento;
     public static javax.swing.JMenuItem mnGenerar;
     public static javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenu mnReportes;
     public static javax.swing.JTable tblSeleccionLiquidacion;
     public static javax.swing.JTable tblSeleccionTiquete;
     public static javax.swing.JTextField txtAgricultor;

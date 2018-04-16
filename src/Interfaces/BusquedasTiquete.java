@@ -29,6 +29,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
 
     public static LaboratorioTiqueteInicial Lab;
     public static busquedasTiquete busTiquete;
+    public static BusquedasTiquete BusTiquete;
     public static bascula bascula;
     public static String claseTiquete, conductor, agricultor;
     public static TiqueteVarios TiqVarios;
@@ -47,10 +48,11 @@ public class BusquedasTiquete extends javax.swing.JDialog {
      * Creates new form BusquedasTiquete
      */
     public BusquedasTiquete(String tiquete) {
-        initComponents();
-        setLocationRelativeTo(null);
+
         claseTiquete = tiquete;
         System.out.println(claseTiquete);
+        initComponents();
+        setLocationRelativeTo(null);
         busTiquete = new busquedasTiquete(claseTiquete);
         ext = new extras();
         vali = new validaciones();
@@ -61,8 +63,9 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         vali.NOMBRES(txtBApellidosConductor);
         vali.NOMBRES(txtBCiudadConductor);
         vali.NOMBRES(txtBMarcaVehiculo);
+        
     }
-
+    
     public BusquedasTiquete(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

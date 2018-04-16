@@ -38,16 +38,6 @@ public class Gerente extends javax.swing.JFrame {
         notify = new notify("gerente", gerente.login.enviarUsuario());
     }
 
-    private void cerrar() {
-        notify.stop();
-        notify = null;
-        gerente.salir();
-        gerente.login.ger = null;
-        gerente = null;
-        System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
-        super.dispose();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +64,8 @@ public class Gerente extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnRefrescar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        chCuenta = new javax.swing.JCheckBox();
+        cmbCuenta = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaPendiente = new javax.swing.JTable();
@@ -121,6 +113,9 @@ public class Gerente extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnReporTrilla = new javax.swing.JMenuItem();
+        mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -196,6 +191,14 @@ public class Gerente extends javax.swing.JFrame {
         jLabel3.setText("-");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        chCuenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chCuenta.setText("Cuenta");
+        chCuenta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chCuentaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -212,7 +215,13 @@ public class Gerente extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chcedula)
                             .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(chCuenta))
+                            .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,12 +258,16 @@ public class Gerente extends javax.swing.JFrame {
                                             .addComponent(chfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, 0)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jDatefinal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(chCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 4, Short.MAX_VALUE)))
                         .addGap(4, 4, 4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -523,7 +536,7 @@ public class Gerente extends javax.swing.JFrame {
                         .addComponent(TxtKilosNetos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(TxtNumTiquete, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -666,12 +679,12 @@ public class Gerente extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
         jMenu1.setText("Liquidaciones");
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+        jMenu1.setPreferredSize(new java.awt.Dimension(200, 32));
 
         mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnPorAprobar.setText("Por Aprobar");
-        mnPorAprobar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(200, 22));
         mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnPorAprobarActionPerformed(evt);
@@ -690,7 +703,9 @@ public class Gerente extends javax.swing.JFrame {
         });
         jMenu1.add(mnGenerar);
 
-        jMenuItem1.setText("Cuentas");
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        jMenuItem1.setText("Crear cuentas terceros");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -701,10 +716,15 @@ public class Gerente extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agendar.png"))); // NOI18N
         jMenu3.setText("Agendar");
         jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(200, 36));
 
+        mnAgendar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnAgendar.setText("Agricultor");
+        mnAgendar.setPreferredSize(new java.awt.Dimension(200, 22));
         mnAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnAgendarActionPerformed(evt);
@@ -713,6 +733,36 @@ public class Gerente extends javax.swing.JFrame {
         jMenu3.add(mnAgendar);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporTrilla.setText("Materia prima trillada");
+        mnReporTrilla.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporTrilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporTrillaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporTrilla);
+
+        mnReporAgricultores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporAgricultores.setText("Agricultores");
+        mnReporAgricultores.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporAgricultores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporAgricultoresActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporAgricultores);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
@@ -820,7 +870,14 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        cerrar();
+        notify.stop();
+        notify = null;
+        gerente.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
@@ -849,8 +906,26 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAgendarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        gerente.cuentas_Terceros();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporTrillaActionPerformed
+
+    private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporAgricultoresActionPerformed
+
+    private void chCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCuentaItemStateChanged
+        if (chCuenta.isSelected() == true) {
+            cmbCuenta.setEnabled(true);
+
+        } else {
+            cmbCuenta.setEnabled(false);
+            cmbCuenta.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_chCuentaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -903,8 +978,10 @@ public class Gerente extends javax.swing.JFrame {
     public static javax.swing.JTextField TxtValor;
     public static javax.swing.JButton btnRefrescar;
     public static javax.swing.JTextField cedula;
+    public static javax.swing.JCheckBox chCuenta;
     public static javax.swing.JCheckBox chcedula;
     public static javax.swing.JCheckBox chfecha;
+    public static javax.swing.JComboBox<String> cmbCuenta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     public static com.toedter.calendar.JDateChooser jDatefinal;
@@ -933,6 +1010,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
@@ -951,6 +1029,8 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnAgendar;
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnReporAgricultores;
+    public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JLabel txtConductor;
     public static javax.swing.JLabel txtLote;
     // End of variables declaration//GEN-END:variables

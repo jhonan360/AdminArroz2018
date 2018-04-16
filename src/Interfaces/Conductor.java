@@ -149,7 +149,7 @@ public class Conductor extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(470, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel1.setText("Cedula:");
+        jLabel1.setText("Cedula*:");
 
         txtCedula.setPreferredSize(new java.awt.Dimension(253, 37));
         txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -164,13 +164,13 @@ public class Conductor extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel2.setText("Nombres:");
+        jLabel2.setText("Nombres*:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel3.setText("Apellidos:");
+        jLabel3.setText("Apellidos*:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel4.setText("Telefono:");
+        jLabel4.setText("Telefono*:");
 
         txtNombres.setPreferredSize(new java.awt.Dimension(253, 37));
 
@@ -179,13 +179,13 @@ public class Conductor extends javax.swing.JFrame {
         txtTelefono.setPreferredSize(new java.awt.Dimension(253, 37));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel5.setText("Departamento:");
+        jLabel5.setText("Departamento*:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel6.setText("Ciudad:");
+        jLabel6.setText("Ciudad*:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel7.setText("Direccion:");
+        jLabel7.setText("Direccion*:");
 
         cmbDepartamento.setPreferredSize(new java.awt.Dimension(253, 37));
         cmbDepartamento.addActionListener(new java.awt.event.ActionListener() {
@@ -502,15 +502,15 @@ public class Conductor extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane1)))

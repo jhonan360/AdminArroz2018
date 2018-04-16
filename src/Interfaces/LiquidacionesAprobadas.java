@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Interfaces;
+
+import static Interfaces.Gerente.gerente;
 import Logica.Extras.login;
+import Logica.Extras.notify;
 import Logica.Gerente.gerente;
 import Logica.Liquidacion.liquidacionesAprobadas;
 import java.util.Date;
@@ -22,6 +25,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static String privilegio;
     public static Liquidacion Liquidacion;
     public static gerente gerente;
+    private notify notify;
+
     /**
      * Creates new form LiquidacionesAprobadas
      */
@@ -30,18 +35,29 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         liqAprobadas = new liquidacionesAprobadas();
-        user= login.enviarUsuario();
+        user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
-        switch (privilegio){
+
+        switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);
-                mnPorAprobar.setVisible(false);
                 mnGenerar.setVisible(true);
+                mnPorAprobar.setVisible(false);
+                mnCuentas.setVisible(false);
+                jMenu3.setVisible(false);
+                mnReporTrilla.setVisible(false);
+                mnReporAgricultores.setVisible(false);
+                mnCuotaFomento.setVisible(true);
                 break;
             case "gerente":
                 mnCrear.setVisible(false);
-                mnPorAprobar.setVisible(true);
                 mnGenerar.setVisible(true);
+                mnPorAprobar.setVisible(true);
+                mnCuentas.setVisible(true);
+                jMenu3.setVisible(true);
+                mnReporTrilla.setVisible(true);
+                mnReporAgricultores.setVisible(true);
+                mnCuotaFomento.setVisible(false);
                 break;
         }
     }
@@ -154,6 +170,13 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         mnCrear = new javax.swing.JMenuItem();
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
+        mnCuentas = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnAgendar = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnReporTrilla = new javax.swing.JMenuItem();
+        mnReporAgricultores = new javax.swing.JMenuItem();
+        mnCuotaFomento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -583,13 +606,13 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
 
         lblVlrImpuesto.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        lblNomKilosDescuento1.setForeground(new java.awt.Color(255, 0, 0));
+        lblNomKilosDescuento1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNomKilosDescuento1.setText("Se realiza el descuento de:");
         lblNomKilosDescuento1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         lblKilosDescuent.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        lblNomKilosDescuento2.setForeground(new java.awt.Color(255, 0, 0));
+        lblNomKilosDescuento2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNomKilosDescuento2.setText("Kg.");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -911,12 +934,12 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
         jMenu1.setText("Liquidaciones");
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+        jMenu1.setPreferredSize(new java.awt.Dimension(200, 32));
 
         mnCrear.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnCrear.setText("Crear");
-        mnCrear.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnCrear.setPreferredSize(new java.awt.Dimension(200, 22));
         mnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnCrearActionPerformed(evt);
@@ -927,7 +950,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnPorAprobar.setText("Por Aprobar");
-        mnPorAprobar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(200, 22));
         mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnPorAprobarActionPerformed(evt);
@@ -946,7 +969,77 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         });
         jMenu1.add(mnGenerar);
 
+        mnCuentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuentas.setText("Crear cuentas terceros");
+        mnCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuentasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCuentas);
+
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agendar.png"))); // NOI18N
+        jMenu3.setText("Agendar");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnAgendar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgendar.setText("Agricultor");
+        mnAgendar.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgendarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnAgendar);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporTrilla.setText("Materia prima trillada");
+        mnReporTrilla.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporTrilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporTrillaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporTrilla);
+
+        mnReporAgricultores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporAgricultores.setText("Agricultores");
+        mnReporAgricultores.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporAgricultores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporAgricultoresActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporAgricultores);
+
+        mnCuotaFomento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuotaFomento.setText("Cuota fomento arrocero");
+        mnCuotaFomento.setPreferredSize(new java.awt.Dimension(205, 22));
+        mnCuotaFomento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuotaFomentoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnCuotaFomento);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
@@ -1051,7 +1144,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        liqAprobadas.reporteGerenteLiquidacion();  
+        liqAprobadas.reporteGerenteLiquidacion();
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void tblLiquidacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLiquidacionesMouseClicked
@@ -1073,8 +1166,44 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chTiqueteItemStateChanged
 
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        gerente.mnAbrirLiqPorAprobar();
+        //setVisible(false);
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
+
+    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
+        gerente.mnGenerarLiquidacion();
+    }//GEN-LAST:event_mnGenerarActionPerformed
+
+    private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed
+        gerente.cuentas_Terceros();
+    }//GEN-LAST:event_mnCuentasActionPerformed
+
+    private void mnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgendarActionPerformed
+        gerente.mnAgendar();
+    }//GEN-LAST:event_mnAgendarActionPerformed
+
+    private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporTrillaActionPerformed
+
+    private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporAgricultoresActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        notify.stop();
+        notify = null;
+        gerente.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     private void mnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCrearActionPerformed
-         if (!(Liquidacion instanceof Liquidacion)) {
+        if (!(Liquidacion instanceof Liquidacion)) {
             Liquidacion = new Liquidacion();
             Liquidacion.setVisible(true);
         } else {
@@ -1082,19 +1211,9 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnCrearActionPerformed
 
-    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
-        gerente.mnGenerarLiquidacion();
-    }//GEN-LAST:event_mnGenerarActionPerformed
-
-    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
-        gerente.salir();
-        dispose();
-    }//GEN-LAST:event_menuSalirActionPerformed
-
-    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
-        gerente.mnAbrirLiqPorAprobar();
-    }//GEN-LAST:event_mnPorAprobarActionPerformed
+    private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
+        
+    }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1169,6 +1288,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1225,9 +1346,14 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static javax.swing.JLabel lblVlrFomento;
     public static javax.swing.JLabel lblVlrImpuesto;
     private javax.swing.JMenuItem menuSalir;
-    public static javax.swing.JMenuItem mnCrear;
+    private javax.swing.JMenuItem mnAgendar;
+    private javax.swing.JMenuItem mnCrear;
+    private javax.swing.JMenuItem mnCuentas;
+    public static javax.swing.JMenuItem mnCuotaFomento;
     public static javax.swing.JMenuItem mnGenerar;
-    public static javax.swing.JMenuItem mnPorAprobar;
+    private javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnReporAgricultores;
+    public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JTable tblDetalleL;
     public static javax.swing.JTable tblLiquidaciones;
     public static javax.swing.JTextField txtAgricultor;

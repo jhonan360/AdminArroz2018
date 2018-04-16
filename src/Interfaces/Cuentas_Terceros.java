@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import static Interfaces.LiquidacionesAprobadas.Liquidacion;
+import static Interfaces.LiquidacionesAprobadas.gerente;
 import Logica.Bascula.agricultor;
 import static Logica.Bascula.agricultor.ext;
 import Logica.Bascula.bascula;
@@ -18,8 +20,11 @@ import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
 import java.awt.Dimension;
 import Logica.Extras.login;
+import Logica.Extras.notify;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Logica.Gerente.cuentas_terceros;
+import Logica.Gerente.gerente;
+
 
 public class Cuentas_Terceros extends javax.swing.JFrame {
 
@@ -31,7 +36,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     static laboratorioTiqueteInicial lab;
     public static login login;
     public static String privilegio;
-
+    private notify notify;
     /**
      * Creates new form Agricultor
      */
@@ -41,6 +46,31 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         cuentas_terceros = new cuentas_terceros();
+        user = login.enviarUsuario();
+        privilegio = login.getPrivilegio(user);
+
+        switch (privilegio) {
+            case "contador":
+                mnCrear.setVisible(true);
+                mnGenerar.setVisible(true);
+                mnPorAprobar.setVisible(false);
+                mnCuentas.setVisible(true);
+                jMenu3.setVisible(false);
+                mnReporTrilla.setVisible(false);
+                mnReporAgricultores.setVisible(false);
+                mnCuotaFomento.setVisible(true);
+                break;
+            case "gerente":
+                mnCrear.setVisible(false);
+                mnGenerar.setVisible(true);
+                mnPorAprobar.setVisible(true);
+                mnCuentas.setVisible(true);
+                jMenu3.setVisible(true);
+                mnReporTrilla.setVisible(true);
+                mnReporAgricultores.setVisible(true);
+                mnCuotaFomento.setVisible(false);
+                break;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +84,6 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txtBCedula = new javax.swing.JTextField();
@@ -82,6 +111,20 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtTelefono1 = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnCrear = new javax.swing.JMenuItem();
+        mnPorAprobar = new javax.swing.JMenuItem();
+        mnGenerar = new javax.swing.JMenuItem();
+        mnCuentas = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnAgendar = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnReporTrilla = new javax.swing.JMenuItem();
+        mnReporAgricultores = new javax.swing.JMenuItem();
+        mnCuotaFomento = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -95,31 +138,19 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cuentasTerceros.png"))); // NOI18N
         jLabel13.setText("REGISTRO DE CUENTAS TERCEROS");
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Agricultor.png"))); // NOI18N
-        jLabel14.setPreferredSize(new java.awt.Dimension(80, 90));
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(352, 352, 352)
-                .addComponent(jLabel13)
-                .addGap(6, 6, 6)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(352, 352, 352))
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 114, Short.MAX_VALUE)
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -298,7 +329,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,13 +349,13 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel1.setText("Cedula-NIT:");
+        jLabel1.setText("Cedula-NIT*:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Nombre*:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel5.setText("Direccion:");
+        jLabel5.setText("Direccion*:");
 
         txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -333,7 +364,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel7.setText("Telefono:");
+        jLabel7.setText("Telefono*:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -413,7 +444,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -423,6 +454,143 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu1.setText("Liquidaciones");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(200, 32));
+
+        mnCrear.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCrear.setText("Crear");
+        mnCrear.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCrearActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCrear);
+
+        mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnPorAprobar.setText("Por Aprobar");
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPorAprobarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnPorAprobar);
+
+        mnGenerar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnGenerar.setText("Generar");
+        mnGenerar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGenerarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnGenerar);
+
+        mnCuentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuentas.setText("Crear cuentas terceros");
+        mnCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuentasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCuentas);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agendar.png"))); // NOI18N
+        jMenu3.setText("Agendar");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnAgendar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgendar.setText("Agricultor");
+        mnAgendar.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgendarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnAgendar);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporTrilla.setText("Materia prima trillada");
+        mnReporTrilla.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporTrilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporTrillaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporTrilla);
+
+        mnReporAgricultores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporAgricultores.setText("Agricultores");
+        mnReporAgricultores.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporAgricultores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporAgricultoresActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporAgricultores);
+
+        mnCuotaFomento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuotaFomento.setText("Cuota fomento arrocero");
+        mnCuotaFomento.setPreferredSize(new java.awt.Dimension(205, 22));
+        mnCuotaFomento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuotaFomentoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnCuotaFomento);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
+        jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSalir);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -431,7 +599,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1359, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1338, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -513,6 +681,55 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         cuentas_terceros.tabla_campos();
     }//GEN-LAST:event_jTable1KeyPressed
 
+    private void mnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCrearActionPerformed
+        if (!(Liquidacion instanceof Liquidacion)) {
+            Liquidacion = new Liquidacion();
+            Liquidacion.setVisible(true);
+        } else {
+            Liquidacion.setVisible(true);
+        }
+    }//GEN-LAST:event_mnCrearActionPerformed
+
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        gerente.mnAbrirLiqPorAprobar();
+        //setVisible(false);
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
+
+    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
+        gerente.mnGenerarLiquidacion();
+    }//GEN-LAST:event_mnGenerarActionPerformed
+
+    private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed
+        gerente.cuentas_Terceros();
+    }//GEN-LAST:event_mnCuentasActionPerformed
+
+    private void mnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgendarActionPerformed
+        gerente.mnAgendar();
+    }//GEN-LAST:event_mnAgendarActionPerformed
+
+    private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporTrillaActionPerformed
+
+    private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporAgricultoresActionPerformed
+
+    private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
+
+    }//GEN-LAST:event_mnCuotaFomentoActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        notify.stop();
+        notify = null;
+        gerente.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -562,11 +779,15 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -576,6 +797,15 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     public static javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JMenuItem mnAgendar;
+    private javax.swing.JMenuItem mnCrear;
+    private javax.swing.JMenuItem mnCuentas;
+    public static javax.swing.JMenuItem mnCuotaFomento;
+    public static javax.swing.JMenuItem mnGenerar;
+    private javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnReporAgricultores;
+    public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JTextField txtBCedula;
     public static javax.swing.JTextField txtBNombres;
     public static javax.swing.JTextField txtCedula;
