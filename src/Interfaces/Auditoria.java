@@ -9,6 +9,9 @@ package Interfaces;
 //import Logica.Laboratorio.laboratorio_menu;
 import javax.swing.JOptionPane;
 import Logica.Auditor.auditoria;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -300,8 +303,12 @@ public class Auditoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        auditoria.BuscarRegistros();
+     try {
+         // TODO add your handling code here:
+         auditoria.BuscarRegistros();
+     } catch (ParseException ex) {
+         Logger.getLogger(Auditoria.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void CmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbEventoActionPerformed

@@ -14,6 +14,8 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import Logica.Extras.login;
+import Logica.Extras.currencyFormat;
+import java.text.ParseException;
 
 public class extras {
     final static Logger logger = Logger.getLogger(extras.class);
@@ -21,6 +23,7 @@ public class extras {
     public static Statement st, st1;
     public static ResultSet rs, rs1;
     public static Date fecha;
+    public static currencyFormat cu;
 
     public String getIdMunicipio(String nombre, String idDeparta) { // Metodo que retorna el id del municipio recibe el nombre del municipio y el ID del depatamento
         try {
@@ -265,11 +268,15 @@ public class extras {
         String fec = formato.format(fecha);
         return fec;
     }
-    public void logs(String evento,String log){
+    public void logs(String evento,String log) throws ParseException{
+        
         PropertyConfigurator.configure("log4j.properties");
+        cu = new currencyFormat();
         String user = login.enviarUsuario();
-        fecha = new Date();
+        String fecha = cu.getDateTimeNow();
+       // fecha = new Date();
         logger.info(";"+evento+";"+log+";"+user+";"+fecha);
+       
     }
     
 }
