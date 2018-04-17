@@ -144,10 +144,10 @@ public class vehiculo {
         int rec = Vhc.jTable1.getSelectedRow();
 
         idVehiculo = Vhc.jTable1.getValueAt(rec, 0).toString();
-        String marca = Vhc.jTable1.getValueAt(rec, 1).toString();
+        String marca = Vhc.jTable1.getValueAt(rec, 2).toString();
         Vhc.cmbMarca.setSelectedItem(marca);
-        Vhc.txtModelo.setText(Vhc.jTable1.getValueAt(rec, 2).toString());
-        Vhc.txtPlaca.setText(Vhc.jTable1.getValueAt(rec, 3).toString());
+        Vhc.txtModelo.setText(Vhc.jTable1.getValueAt(rec, 3).toString());
+        Vhc.txtPlaca.setText(Vhc.jTable1.getValueAt(rec, 1).toString());
         Vhc.txtColor.setText(Vhc.jTable1.getValueAt(rec, 4).toString());
 
     }
