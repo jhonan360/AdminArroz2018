@@ -104,7 +104,7 @@ public class gerente {
                 return false;
             }
         };
-        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and tiquete.idCuenta=cuentas.idCuenta order by tiquete.idTiquete ASC");
+        tbl.llenarTabla(Ger.TablaPendiente, modelo, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and tiquete.idCuenta=cuentas.idCuenta and tiquete.idCuenta=1 order by tiquete.idTiquete ASC");
         tbl.alinearHeaderTable(Ger.TablaPendiente, headerColumnas);
         tbl.alinearCamposTable(Ger.TablaPendiente, camposColumnas);
         formatoTbl();
@@ -252,7 +252,7 @@ public class gerente {
 
         if (Ger.chfecha.isSelected() == true && Ger.chcedula.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("") && !cedula.equals("")) {
-                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' AND tiquete.fecha >= '" + FechaIni + "' AND tiquete.fecha <='" + FechaFin + "' and tiquete.idCuenta=cuentas.idCuenta order by tiquete.idTiquete ASC");
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' AND tiquete.fecha >= '" + FechaIni + "' AND tiquete.fecha <='" + FechaFin + "' and tiquete.idCuenta=cuentas.idCuenta and tiquete.idCuenta=1 order by tiquete.idTiquete ASC");
                 tbl.alinearHeaderTable(Ger.TablaPendiente, headerColumnas);
                 tbl.alinearCamposTable(Ger.TablaPendiente, camposColumnas);
                 formatoTbl();
@@ -261,7 +261,7 @@ public class gerente {
             }
         } else if (Ger.chfecha.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("")) {
-                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz AND tiquete.fecha >= '" + FechaIni + "' AND tiquete.fecha <='" + FechaFin + "' and tiquete.idCuenta=cuentas.idCuenta order by tiquete.idTiquete ASC");
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz AND tiquete.fecha >= '" + FechaIni + "' AND tiquete.fecha <='" + FechaFin + "' and tiquete.idCuenta=cuentas.idCuenta and tiquete.idCuenta=1 order by tiquete.idTiquete ASC");
                 tbl.alinearHeaderTable(Ger.TablaPendiente, headerColumnas);
                 tbl.alinearCamposTable(Ger.TablaPendiente, camposColumnas);
                 formatoTbl();
@@ -270,7 +270,7 @@ public class gerente {
             }
         } else if (Ger.chcedula.isSelected() == true) {
             if (!cedula.equals("")) {
-                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' and tiquete.idCuenta=cuentas.idCuenta order by tiquete.idTiquete ASC");
+                tbl.llenarTabla(Ger.TablaPendiente, modelobuscar, columnas.length, "SELECT tiquete.idTiquete,cuentas.nombre,concat(personalexterno.nombres,' ',personalexterno.apellidos),tiquete.fecha FROM tiquete,personalexterno,tipodearroz,cuentas WHERE tiquete.idTiquete NOT IN(SELECT detalleliquidacion.idTiquete from detalleliquidacion) and tiquete.kilosBrutos<>0.00 and tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 and tiquete.idAgricultor= personalexterno.idPersonalExterno and tipodearroz.idTipoDeArroz=tiquete.idTipoDeArroz and personalexterno.cedula = '" + cedula + "' and tiquete.idCuenta=cuentas.idCuenta and tiquete.idCuenta=1 order by tiquete.idTiquete ASC");
                 tbl.alinearHeaderTable(Ger.TablaPendiente, headerColumnas);
                 tbl.alinearCamposTable(Ger.TablaPendiente, camposColumnas);
                 formatoTbl();

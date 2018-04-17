@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Logica.Administracion.administracion;
 import Logica.Extras.cargarCombo;
 
 import Logica.Administracion.empleado;
@@ -28,6 +29,7 @@ public class Empleado extends javax.swing.JFrame {
     public static empleado emp;
     public static tablas tbl;
     public static validaciones vali;
+    public static administracion admin;
 
     public Empleado() {
 
@@ -36,6 +38,7 @@ public class Empleado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         emp = new empleado();
         cargar = new cargarCombo();
+        admin = new administracion();
         //cargar.CargarMuni(cmbMunicipio);
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
@@ -106,6 +109,17 @@ public class Empleado extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         lblTextoTabla = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnConductor = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnGestionBD = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnReporUsuarios = new javax.swing.JMenuItem();
+        mnReporEmpleados = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Empleado");
@@ -126,7 +140,7 @@ public class Empleado extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -255,8 +269,7 @@ public class Empleado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6))
+                            .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -274,8 +287,8 @@ public class Empleado extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtBApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(6, 6, 6))))
+                                    .addComponent(txtBUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(6, 6, 6))
         );
 
         btnBuscar.getAccessibleContext().setAccessibleName("btnBuscar");
@@ -544,8 +557,8 @@ public class Empleado extends javax.swing.JFrame {
                             .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -554,6 +567,111 @@ public class Empleado extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(139, 34));
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user2.png"))); // NOI18N
+        jMenu1.setText("Usuarios");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        jMenuItem1.setText("Crear Usuario");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(175, 22));
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mnConductor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnConductor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnConductor.setText("Crear Empleado");
+        mnConductor.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnConductor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnConductorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnConductor);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/configuration.png"))); // NOI18N
+        jMenu3.setText("Sistema");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        mnGestionBD.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnGestionBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnGestionBD.setText("Gestion BD");
+        mnGestionBD.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnGestionBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGestionBDActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnGestionBD);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu4.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        mnReporUsuarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporUsuarios.setText("Usuarios");
+        mnReporUsuarios.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnReporUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporUsuariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporUsuarios);
+
+        mnReporEmpleados.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporEmpleados.setText("Empleados");
+        mnReporEmpleados.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnReporEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporEmpleadosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporEmpleados);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
+        jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSalir);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -687,6 +805,32 @@ public class Empleado extends javax.swing.JFrame {
         emp.estado="crear";
     }//GEN-LAST:event_jTable2KeyPressed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        admin.abrirUsuario();
+        //setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
+        admin.abrirEmpleado();
+    }//GEN-LAST:event_mnConductorActionPerformed
+
+    private void mnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGestionBDActionPerformed
+        admin.abrirGestionBD();
+    }//GEN-LAST:event_mnGestionBDActionPerformed
+
+    private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
+        admin.reporteUsuarios();
+    }//GEN-LAST:event_mnReporUsuariosActionPerformed
+
+    private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
+        admin.reporteEmpleados();
+    }//GEN-LAST:event_mnReporEmpleadosActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        dispose();
+        admin.salir();
+    }//GEN-LAST:event_menuSalirActionPerformed
+
     public void municipio() {
         cmbDepartamento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -755,6 +899,12 @@ public class Empleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -766,6 +916,11 @@ public class Empleado extends javax.swing.JFrame {
     public static javax.swing.JTable jTable1;
     public static javax.swing.JTable jTable2;
     private javax.swing.JLabel lblTextoTabla;
+    private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnConductor;
+    public static javax.swing.JMenuItem mnGestionBD;
+    public static javax.swing.JMenuItem mnReporEmpleados;
+    public static javax.swing.JMenuItem mnReporUsuarios;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtBApellidos;
     public static javax.swing.JTextField txtBCedula;

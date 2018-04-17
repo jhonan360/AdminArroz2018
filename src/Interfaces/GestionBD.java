@@ -5,6 +5,7 @@
  */
 package Interfaces;
 import static Interfaces.Administracion.admin;
+import Logica.Administracion.administracion;
 import Logica.Administracion.gestionBD;
 /**
  *
@@ -20,6 +21,7 @@ public class GestionBD extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         gestionBD = new gestionBD();
+        admin = new administracion();
     }
 
     /**
@@ -175,24 +177,21 @@ public class GestionBD extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel32)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel33)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel34))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRespaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnRespaldar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
                             .addComponent(jLabel29)
                             .addGap(3, 3, 3)
                             .addComponent(jLabel30)
@@ -356,11 +355,11 @@ public class GestionBD extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.abrirReportes();
+        admin.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        // TODO add your handling code here:
+        admin.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

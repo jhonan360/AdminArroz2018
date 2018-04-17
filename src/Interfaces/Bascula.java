@@ -69,6 +69,9 @@ public class Bascula extends javax.swing.JFrame {
         bascula = null;
         bascula.Agricultor=null;
         bascula.Arroz=null;
+        bascula.VerTiqPrincipal=null;
+        bascula.VerTiqVarios=null;
+        
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();

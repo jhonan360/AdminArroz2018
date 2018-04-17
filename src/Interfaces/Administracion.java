@@ -32,6 +32,8 @@ public class Administracion extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        admin = new administracion();
+        
     }
 
     /**
@@ -466,7 +468,7 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.abrirReportes();
+        admin.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void btnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBDActionPerformed
@@ -474,15 +476,15 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionBDActionPerformed
 
     private void btnReporUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporUserActionPerformed
-        // TODO add your handling code here:
+        admin.reporteUsuarios();
     }//GEN-LAST:event_btnReporUserActionPerformed
 
     private void btnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporEmpleadosActionPerformed
-        // TODO add your handling code here:
+        admin.reporteEmpleados();
     }//GEN-LAST:event_btnReporEmpleadosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        // TODO add your handling code here:
+        admin.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     /**

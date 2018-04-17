@@ -5,9 +5,12 @@
  */
 package Interfaces;
 
+import static Interfaces.LiquidacionesAprobadas.Liquidacion;
 import Logica.Bascula.bascula;
 import Logica.Bascula.verTiquetePrincipal;
 import Logica.Extras.cargarCombo;
+import Logica.Extras.login;
+import Logica.Gerente.gerente;
 import java.util.Date;
 
 /**
@@ -26,9 +29,33 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     public VerTiquetePrincipal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);             
+        setLocationRelativeTo(null);
         verTiqPrincipal = new verTiquetePrincipal();
-        cmb =new cargarCombo();
+        String user = login.enviarUsuario();
+        String privilegio = login.getPrivilegio(user);
+
+        switch (privilegio) {
+            case "basculista":
+                jMenu1.setVisible(true);
+                jMenu3.setVisible(true);
+                jMenu4.setVisible(true);
+                jMenu5.setVisible(false);
+                jMenu6.setVisible(false);
+                jMenu7.setVisible(false);
+                jMenu2.setVisible(true);
+                break;
+            case "gerente":
+                jMenu1.setVisible(false);
+                jMenu3.setVisible(false);
+                jMenu4.setVisible(false);
+                jMenu5.setVisible(true);
+                jMenu6.setVisible(true);
+                jMenu7.setVisible(true);
+                jMenu2.setVisible(true);
+                break;
+        }
+
+        cmb = new cargarCombo();
         cmb.cargarCuentas(cmbCuenta);
         cmbCuenta.setEnabled(false);
     }
@@ -79,6 +106,16 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        mnPorAprobar = new javax.swing.JMenuItem();
+        mnGenerar = new javax.swing.JMenuItem();
+        mnCuentas = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        mnAgendar = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima1 = new javax.swing.JMenuItem();
+        mnReporTrilla = new javax.swing.JMenuItem();
+        mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
@@ -462,6 +499,106 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/plus.png"))); // NOI18N
+        jMenu5.setText("Liquidaciones");
+        jMenu5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu5.setPreferredSize(new java.awt.Dimension(200, 32));
+
+        mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnPorAprobar.setText("Por Aprobar");
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPorAprobarActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnPorAprobar);
+
+        mnGenerar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnGenerar.setText("Generar");
+        mnGenerar.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGenerarActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnGenerar);
+
+        mnCuentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuentas.setText("Crear cuentas terceros");
+        mnCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCuentasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnCuentas);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agendar.png"))); // NOI18N
+        jMenu6.setText("Agendar");
+        jMenu6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu6.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnAgendar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgendar.setText("Agricultor");
+        mnAgendar.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgendarActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnAgendar);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/search2.png"))); // NOI18N
+        jMenu7.setText("Reportes");
+        jMenu7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu7.setPreferredSize(new java.awt.Dimension(200, 36));
+
+        mnVerTiqueteMateriaPrima1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima1.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima1.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteMateriaPrima1ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnVerTiqueteMateriaPrima1);
+
+        mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporTrilla.setText("Materia prima trillada");
+        mnReporTrilla.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporTrilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporTrillaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnReporTrilla);
+
+        mnReporAgricultores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporAgricultores.setText("Agricultores");
+        mnReporAgricultores.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporAgricultores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporAgricultoresActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnReporAgricultores);
+
+        jMenuBar1.add(jMenu7);
+
         jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
         jMenu2.setText("Cuenta");
@@ -554,7 +691,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
                 if (dcFechaInicial.getDate() == null) {
                     Date FechaFinal = dcFechaFinal.getDate();
                     dcFechaInicial.setDate(FechaFinal);
-               }
+                }
             }
         }
         verTiqPrincipal.buscar();
@@ -624,6 +761,35 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chCuentaItemStateChanged
 
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        gerente.mnAbrirLiqPorAprobar();
+        //setVisible(false);
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
+
+    private void mnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarActionPerformed
+        gerente.mnGenerarLiquidacion();
+    }//GEN-LAST:event_mnGenerarActionPerformed
+
+    private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed
+        gerente.cuentas_Terceros();
+    }//GEN-LAST:event_mnCuentasActionPerformed
+
+    private void mnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgendarActionPerformed
+        gerente.mnAgendar();
+    }//GEN-LAST:event_mnAgendarActionPerformed
+
+    private void mnVerTiqueteMateriaPrima1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrima1ActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrima1ActionPerformed
+
+    private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporTrillaActionPerformed
+
+    private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnReporAgricultoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -681,6 +847,9 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     public static javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
@@ -689,13 +858,20 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JMenuItem mnAgendar;
     public static javax.swing.JMenuItem mnConductor;
+    private javax.swing.JMenuItem mnCuentas;
+    public static javax.swing.JMenuItem mnGenerar;
     public static javax.swing.JMenuItem mnLote;
+    private javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnReporAgricultores;
+    public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JMenuItem mnTipo_Arroz;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
     public static javax.swing.JMenuItem mnVehiculo;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima1;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblVerTiqPrincipal;
     public static javax.swing.JTextField txtAgricultor;

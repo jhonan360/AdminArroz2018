@@ -9,6 +9,7 @@ import Logica.Extras.validaciones;
 import Logica.Gerencia.agendarAgricultor;
 import Interfaces.Gerente;
 import static Interfaces.LiquidacionesAprobadas.gerente;
+import Logica.Bascula.bascula;
 import Logica.Extras.notify;
 import Logica.Gerente.gerente;
 
@@ -82,6 +83,7 @@ public class AgendarAgricultor extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -456,6 +458,17 @@ public class AgendarAgricultor extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(200, 36));
 
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteMateriaPrima);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -630,6 +643,10 @@ public class AgendarAgricultor extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,6 +718,7 @@ public class AgendarAgricultor extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;
     public static javax.swing.JMenuItem mnReporTrilla;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JTable tblAgenda;
     public static javax.swing.JTable tblAgricultor;
     public static javax.swing.JTextField txtBApellidos;

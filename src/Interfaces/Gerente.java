@@ -7,6 +7,7 @@ package Interfaces;
 
 import Interfaces.AgricultorGerencia;
 import Interfaces.ConductorGerencia;
+import Logica.Bascula.bascula;
 import Logica.Extras.notify;
 import Logica.Extras.validaciones;
 import Logica.Gerencia.agendarAgricultor;
@@ -64,8 +65,6 @@ public class Gerente extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnRefrescar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        chCuenta = new javax.swing.JCheckBox();
-        cmbCuenta = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaPendiente = new javax.swing.JTable();
@@ -114,6 +113,8 @@ public class Gerente extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -191,14 +192,6 @@ public class Gerente extends javax.swing.JFrame {
         jLabel3.setText("-");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        chCuenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        chCuenta.setText("Cuenta");
-        chCuenta.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chCuentaItemStateChanged(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -215,13 +208,7 @@ public class Gerente extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chcedula)
                             .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(chCuenta))
-                            .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,7 +217,7 @@ public class Gerente extends javax.swing.JFrame {
                                 .addGap(4, 4, 4)
                                 .addComponent(jDatefinal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(chfecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -262,11 +249,7 @@ public class Gerente extends javax.swing.JFrame {
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jDatefinal, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jDateinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(chCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(cmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 4, Short.MAX_VALUE)))
                         .addGap(4, 4, 4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -740,6 +723,30 @@ public class Gerente extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(200, 36));
 
+        mnVerTiqueteMateriaPrima.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteMateriaPrima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteMateriaPrima.setText("Tiquete Materia Prima");
+        mnVerTiqueteMateriaPrima.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteMateriaPrima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteMateriaPrimaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteMateriaPrima);
+
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -875,6 +882,8 @@ public class Gerente extends javax.swing.JFrame {
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
+        bascula.VerTiqPrincipal=null;
+        bascula.VerTiqVarios=null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();
@@ -917,15 +926,13 @@ public class Gerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
-    private void chCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCuentaItemStateChanged
-        if (chCuenta.isSelected() == true) {
-            cmbCuenta.setEnabled(true);
+    private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
+        bascula.abrirVerTiqueteMateriaPrima();
+    }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
-        } else {
-            cmbCuenta.setEnabled(false);
-            cmbCuenta.setSelectedIndex(0);
-        }
-    }//GEN-LAST:event_chCuentaItemStateChanged
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -978,10 +985,8 @@ public class Gerente extends javax.swing.JFrame {
     public static javax.swing.JTextField TxtValor;
     public static javax.swing.JButton btnRefrescar;
     public static javax.swing.JTextField cedula;
-    public static javax.swing.JCheckBox chCuenta;
     public static javax.swing.JCheckBox chcedula;
     public static javax.swing.JCheckBox chfecha;
-    public static javax.swing.JComboBox<String> cmbCuenta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     public static com.toedter.calendar.JDateChooser jDatefinal;
@@ -1031,6 +1036,8 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;
     public static javax.swing.JMenuItem mnReporTrilla;
+    public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JLabel txtConductor;
     public static javax.swing.JLabel txtLote;
     // End of variables declaration//GEN-END:variables
