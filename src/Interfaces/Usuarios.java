@@ -201,13 +201,10 @@ public class Usuarios extends javax.swing.JFrame {
 
         tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Usuario", "Contraseña", "Privilegio", "Estado"
+                "Usuario", "Privilegio", "Estado"
             }
         ));
         tblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {

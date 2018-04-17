@@ -36,8 +36,8 @@ public class usuarios {
     public static Conexion Con;
     public static StringEncrypt encrip;
     public static String columnas[] = new String[]{"N", "Cedula", "Nombres", "Apellidos"};
-    public static String columnasUsu[] = new String[]{"Usuario", "Contrasena", "Privilegio", "Estado"};
-    public static String headeColumnasUsu[] = new String[]{"default", "default", "default", "default"};
+    public static String columnasUsu[] = new String[]{"Usuario", "Privilegio", "Estado"};
+    public static String headeColumnasUsu[] = new String[]{"default", "default", "default"};
     public static Usuarios Usu;
     public static Statement st;
     public static ResultSet rs, rs1, rs2;
@@ -70,7 +70,7 @@ public class usuarios {
             }
         };
 
-        tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,contrasena,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios");
+        tbl.llenarTabla(Usu.tblUsuario, modelusu, columnasUsu.length, "SELECT user,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios");
         tbl.alinearHeaderTable(Usu.tblUsuario, headeColumnasUsu);
     }
 
@@ -83,10 +83,16 @@ public class usuarios {
         try {
             int rec = Usu.tblUsuario.getSelectedRow();
             Usu.txtUsuario.setText(Usu.tblUsuario.getValueAt(rec, 0).toString());
-            Usu.txtContrasena.setText(encrip.decrypt(Usu.tblUsuario.getValueAt(rec, 1).toString()));
-            Usu.txtConfiContraseña.setText(encrip.decrypt(Usu.tblUsuario.getValueAt(rec, 1).toString()));
-            Usu.cmbPrivilegio.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 2).toString());
-            Usu.cmbEstado.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 3).toString());
+            Usu.cmbPrivilegio.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 1).toString());
+            Usu.cmbEstado.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 2).toString());
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rs = st.executeQuery("SELECT contrasena FROM usuario WHERE user='" + Usu.tblUsuario.getValueAt(rec, 0).toString() + "'");
+            while (rs.next()) {
+                Usu.txtContrasena.setText(encrip.decrypt(rs.getString(1)));
+                Usu.txtConfiContraseña.setText(encrip.decrypt(rs.getString(1)));
+            }
+            Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,8 +148,8 @@ public class usuarios {
             }
             if (conusu < 1) {
                 st.executeUpdate("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
-                ext.logs("INSERT","INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
-               
+                ext.logs("INSERT", "INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
+
                 limpiar_campos();
                 crearModelo();
                 int respuesta = JOptionPane.showConfirmDialog(null, "El usuario a sido ingresado \n ¿desea crear el empleado del usuario?", "Confirmación", JOptionPane.CANCEL_OPTION);
@@ -204,8 +210,8 @@ public class usuarios {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
-       ext.logs("UPDATE","UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
-     
+            ext.logs("UPDATE", "UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
