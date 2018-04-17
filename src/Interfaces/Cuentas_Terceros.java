@@ -5,11 +5,8 @@
  */
 package Interfaces;
 
+import static Interfaces.Bascula.bascula;
 import static Interfaces.LiquidacionesAprobadas.Liquidacion;
-import static Interfaces.LiquidacionesAprobadas.gerente;
-import Logica.Bascula.agricultor;
-import static Logica.Bascula.agricultor.ext;
-import Logica.Bascula.bascula;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -21,10 +18,9 @@ import Logica.Extras.validaciones;
 import java.awt.Dimension;
 import Logica.Extras.login;
 import Logica.Extras.notify;
-import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Logica.Gerente.cuentas_terceros;
 import Logica.Gerente.gerente;
-
+import Reportes.logicaReportes;
 
 public class Cuentas_Terceros extends javax.swing.JFrame {
 
@@ -32,11 +28,12 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     public static String user;
     public static validaciones vali;
     public static cargarCombo cargar;
-    static bascula bascula;
-    static laboratorioTiqueteInicial lab;
     public static login login;
     public static String privilegio;
+    public static logicaReportes reportes;
+    public static gerente gerente;
     private notify notify;
+
     /**
      * Creates new form Agricultor
      */
@@ -44,10 +41,10 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-        
         cuentas_terceros = new cuentas_terceros();
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
+        reportes = new logicaReportes();
 
         switch (privilegio) {
             case "contador":
@@ -58,6 +55,8 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 jMenu3.setVisible(false);
                 mnReporTrilla.setVisible(false);
                 mnReporAgricultores.setVisible(false);
+                mnVerTiqueteMateriaPrima.setVisible(false);
+                mnVerTiqueteVarios.setVisible(false);
                 mnCuotaFomento.setVisible(true);
                 break;
             case "gerente":
@@ -68,10 +67,13 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 jMenu3.setVisible(true);
                 mnReporTrilla.setVisible(true);
                 mnReporAgricultores.setVisible(true);
+                mnVerTiqueteMateriaPrima.setVisible(true);
+                mnVerTiqueteVarios.setVisible(true);
                 mnCuotaFomento.setVisible(false);
                 break;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,6 +123,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         mnCuotaFomento = new javax.swing.JMenuItem();
@@ -547,6 +550,19 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteMateriaPrima);
 
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -628,13 +644,13 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
-     
+
     }//GEN-LAST:event_txtCedulaFocusLost
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
         cuentas_terceros.crearModelo();
-       
+
         cuentas_terceros.limpiar_registros();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
@@ -650,15 +666,15 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
-      cuentas_terceros.crearCuenta();
+        cuentas_terceros.crearCuenta();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-       cuentas_terceros.buscar();      
+        cuentas_terceros.buscar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void chNombresItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNombresItemStateChanged
-       
+
         if (chNombres.isSelected() == true) {
             txtBNombres.setEditable(true);
 
@@ -669,7 +685,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }//GEN-LAST:event_chNombresItemStateChanged
 
     private void chCedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaItemStateChanged
-      
+
         if (chCedula.isSelected() == true) {
             txtBCedula.setEditable(true);
 
@@ -680,7 +696,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }//GEN-LAST:event_chCedulaItemStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-       
+
     }//GEN-LAST:event_formWindowClosed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -720,20 +736,18 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAgendarActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-
+        reportes.reporteCuotaFomento();
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        notify.stop();
-        notify = null;
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
@@ -746,7 +760,10 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         bascula.abrirVerTiqueteMateriaPrima();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
-    
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -823,6 +840,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnReporAgricultores;
     public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTextField txtBCedula;
     public static javax.swing.JTextField txtBNombres;
     public static javax.swing.JTextField txtCedula;

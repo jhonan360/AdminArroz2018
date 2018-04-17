@@ -9,6 +9,7 @@ import Logica.Bascula.bascula;
 import Logica.Bascula.busquedasTiquete;
 import Logica.Laboratorio.busquedaLaboratorio;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
+import Reportes.logicaReportes;
 import java.util.Date;
 
 /**
@@ -21,6 +22,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     static busquedaLaboratorio busT;
     public static bascula bascula;
     static laboratorioTiqueteInicial labor;
+    public static logicaReportes reportes;
 
     /**
      * Creates new form BusquedasTiquete
@@ -31,6 +33,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         //setLocationRelativeTo(null);
         busT = new busquedaLaboratorio();
+        reportes = new logicaReportes();
     }
 
     /**
@@ -523,7 +526,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_tblLaboratorioKeyReleased
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        busT.reporteBasculaTiqPrincipal();
+        reportes.reportLaboratorioTiquete();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed

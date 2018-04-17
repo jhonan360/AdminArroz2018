@@ -21,18 +21,7 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -232,36 +221,6 @@ public class busquedaLaboratorio {
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
             }
-        }
-    }
-
-    public void reporteBasculaTiqPrincipal() {
-        int row = BusT.tblLaboratorio.getSelectedRow();
-        if (row != -1) {
-            String idTiquete = BusT.tblLaboratorio.getValueAt(row, 0).toString();
-            Map parametro = new HashMap();//mapeo de parametros
-            parametro.put("id_tiquete", idTiquete);//colocar parametros
-
-            try {
-                Con = new Conexion();
-                Connection c = Con.ConectarReport();
-
-                JasperReport reporte = null;
-                JasperReport reporte2 = null;
-                String path = "src\\reportes\\LaboratorioTiqLab.jasper";//aqui se encuentra el archivo del reporte
-                //String path2 = "src\\reportes\\BasculaTiqueVarios_subreport1.jasper";//aqui se encuentra el archivo del reporte
-                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
-                //reporte2 = (JasperReport) JRLoader.loadObjectFromFile(path2);//igualamos la variable reporte y enviamos el path para cargar el reporte
-                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, c);//enviamos parametros
-                //JasperPrint jprint2 = JasperFillManager.fillReport(reporte2, parametro, c);//enviamos parametros
-                JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
-                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
-                view.setVisible(true);//mostrar visible el reporte
-            } catch (JRException ex) {
-                Logger.getLogger(busquedaLaboratorio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un tiquete para generarlo");
         }
     }
 }

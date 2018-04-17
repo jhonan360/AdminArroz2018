@@ -11,6 +11,8 @@ import Logica.Bascula.verTiquetePrincipal;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.login;
 import Logica.Gerente.gerente;
+import Logica.Inventario.verProcedimientoInventario;
+import Reportes.logicaReportes;
 import java.util.Date;
 
 /**
@@ -22,6 +24,8 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     public static verTiquetePrincipal verTiqPrincipal;
     public static bascula bascula;
     public static cargarCombo cmb;
+    public static gerente gerente;
+    public static logicaReportes reportes;
 
     /**
      * Creates new form VisualizarTiquetePrincipal
@@ -33,7 +37,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         verTiqPrincipal = new verTiquetePrincipal();
         String user = login.enviarUsuario();
         String privilegio = login.getPrivilegio(user);
-
+        reportes =new logicaReportes();
         switch (privilegio) {
             case "basculista":
                 jMenu1.setVisible(true);
@@ -114,6 +118,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         mnAgendar = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima1 = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios1 = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -575,6 +580,19 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         });
         jMenu7.add(mnVerTiqueteMateriaPrima1);
 
+        mnVerTiqueteVarios1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios1.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios1.setToolTipText("");
+        mnVerTiqueteVarios1.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios1.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVarios1ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnVerTiqueteVarios1);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -702,7 +720,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        verTiqPrincipal.reporteBasculaTiqPrincipal();
+        reportes.reporteBasculaTiqPrincipal();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void chFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chFechaActionPerformed
@@ -783,12 +801,16 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteMateriaPrima1ActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
+
+    private void mnVerTiqueteVarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVarios1ActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVarios1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -873,6 +895,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima1;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios1;
     public static javax.swing.JTable tblVerTiqPrincipal;
     public static javax.swing.JTextField txtAgricultor;
     public static javax.swing.JTextField txtTiquete;

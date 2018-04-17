@@ -7,6 +7,7 @@ package Interfaces;
 import Logica.Administracion.administracion;
 import Logica.Administracion.usuarios;
 import Logica.Extras.cargarCombo;
+import Reportes.logicaReportes;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -21,6 +22,7 @@ public class Usuarios extends javax.swing.JFrame {
     public static usuarios usu;
     public static cargarCombo cargar;
     public static administracion admin;
+    public static logicaReportes reportes;
     public static boolean cerrar=false;
     public Usuarios() {
         
@@ -28,7 +30,8 @@ public class Usuarios extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         usu = new usuarios();
-        admin= new administracion();
+        admin = new administracion();
+        reportes = new logicaReportes();
         cargar = new cargarCombo();
         cargar.privilegios(cmbPrivilegio);
         
@@ -641,11 +644,11 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.reporteUsuarios();
+        reportes.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        admin.reporteEmpleados();
+        reportes.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

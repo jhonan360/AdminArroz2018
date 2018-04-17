@@ -11,6 +11,7 @@ import Logica.Bascula.bascula;
 import Logica.Extras.notify;
 import Logica.Gerencia.gerenteApruebaLiquidaciones;
 import Logica.Gerente.gerente;
+import Reportes.logicaReportes;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -27,6 +28,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
 
     public static gerenteApruebaLiquidaciones gApruebaL;
     public static gerente gerente;
+    public static logicaReportes reportes;
     private notify notify;
 
     /**
@@ -37,7 +39,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         gApruebaL = new gerenteApruebaLiquidaciones();
-
+        reportes =new logicaReportes();
     }
 
     @SuppressWarnings("unchecked")
@@ -130,6 +132,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -826,6 +829,19 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteMateriaPrima);
 
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -947,16 +963,14 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAgendarActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        notify.stop();
-        notify = null;
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
@@ -968,6 +982,10 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1100,6 +1118,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnReporAgricultores;
     public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblDetalleL;
     public static javax.swing.JTable tblLiquidaciones;
     // End of variables declaration//GEN-END:variables

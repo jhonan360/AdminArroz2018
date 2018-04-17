@@ -7,12 +7,14 @@ package Interfaces;
 import static Interfaces.Administracion.admin;
 import Logica.Administracion.administracion;
 import Logica.Administracion.gestionBD;
+import Reportes.logicaReportes;
 /**
  *
  * @author jhonansmith
  */
 public class GestionBD extends javax.swing.JFrame {
     public static gestionBD gestionBD;
+    public static logicaReportes reportes;
     /**
      * Creates new form GestionBD
      */
@@ -21,7 +23,7 @@ public class GestionBD extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         gestionBD = new gestionBD();
-        admin = new administracion();
+        reportes = new logicaReportes();
     }
 
     /**
@@ -355,11 +357,11 @@ public class GestionBD extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.reporteUsuarios();
+        reportes.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        admin.reporteEmpleados();
+        reportes.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

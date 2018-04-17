@@ -9,6 +9,7 @@ import static Interfaces.Gerente.gerente;
 import Logica.Extras.validaciones;
 import javax.swing.JOptionPane;
 import Logica.Liquidacion.liquidacion;
+import Reportes.logicaReportes;
 
 /**
  *
@@ -18,6 +19,7 @@ public class Liquidacion extends javax.swing.JFrame {
 
     public static liquidacion liqui;
     public static validaciones vali;
+    public static logicaReportes reportes;
 
     /**
      * Creates new form Liquidacion
@@ -27,6 +29,7 @@ public class Liquidacion extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         liqui = new liquidacion();
+        reportes = new logicaReportes();
         vali = new validaciones();
         vali.DECIMAL(txtHumedadIdeal);
         vali.DECIMAL(txtImpurezaIdeal);
@@ -922,7 +925,7 @@ public class Liquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAgricultorMouseClicked
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteCuotaFomento();
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed

@@ -12,6 +12,8 @@ import Logica.Extras.notify;
 import Logica.Extras.validaciones;
 import Logica.Gerencia.agendarAgricultor;
 import Logica.Gerente.gerente;
+import Logica.Inventario.verProcedimientoInventario;
+import Reportes.logicaReportes;
 import java.util.Date;
 
 //import static Interfaces.Administracion.Cdt;
@@ -23,7 +25,9 @@ public class Gerente extends javax.swing.JFrame {
 
     public static gerente gerente;
     public static validaciones vali;
+    public static verProcedimientoInventario verProcedI;
     private notify notify;
+    public static logicaReportes reportes;
 
     /**
      * Creates new form Gerencia
@@ -34,11 +38,11 @@ public class Gerente extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         gerente = new gerente();
         vali = new validaciones();
+        reportes = new logicaReportes();
         vali.DECIMAL(TxtValor);
         gerente.checkReminder();
         notify = new notify("gerente", gerente.login.enviarUsuario());
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -277,9 +281,6 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
         TablaPendiente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TablaPendienteKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TablaPendienteKeyReleased(evt);
             }
@@ -574,13 +575,7 @@ public class Gerente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pesos.png"))); // NOI18N
-        jLabel2.setText("Valor de la carga:");
-
-        TxtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtValorActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Valor de la carga*:");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         jButton1.setText("Asignar");
@@ -830,10 +825,6 @@ public class Gerente extends javax.swing.JFrame {
         gerente.tablaCamposLiquidacion();
     }//GEN-LAST:event_TablaPendienteMouseClicked
 
-    private void TxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtValorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtValorActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         gerente.TomarValoresTiquete();
@@ -882,8 +873,7 @@ public class Gerente extends javax.swing.JFrame {
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
-        bascula.VerTiqPrincipal=null;
-        bascula.VerTiqVarios=null;
+        gerente.Cuentas_Terceros = null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();
@@ -902,10 +892,6 @@ public class Gerente extends javax.swing.JFrame {
         gerente.crearModeloTabla();
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
-    private void TablaPendienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaPendienteKeyPressed
-
-    }//GEN-LAST:event_TablaPendienteKeyPressed
-
     private void TablaPendienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaPendienteKeyReleased
         gerente.tablaCamposLiquidacion();
     }//GEN-LAST:event_TablaPendienteKeyReleased
@@ -919,11 +905,11 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed

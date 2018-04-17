@@ -11,6 +11,8 @@ import Logica.Extras.login;
 import Logica.Extras.notify;
 import Logica.Gerente.gerente;
 import Logica.Liquidacion.liquidacionesAprobadas;
+import Reportes.logicaReportes;
+import static java.lang.System.gc;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -26,6 +28,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static String privilegio;
     public static Liquidacion Liquidacion;
     public static gerente gerente;
+    public static logicaReportes reportes;
     private notify notify;
 
     /**
@@ -38,7 +41,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         liqAprobadas = new liquidacionesAprobadas();
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
-
+        reportes = new logicaReportes();
+        
         switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);
@@ -46,6 +50,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 mnPorAprobar.setVisible(false);
                 mnCuentas.setVisible(false);
                 mnVerTiqueteMateriaPrima.setVisible(false);
+                mnVerTiqueteVarios.setVisible(false);
                 jMenu3.setVisible(false);
                 mnReporTrilla.setVisible(false);
                 mnReporAgricultores.setVisible(false);
@@ -60,6 +65,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 mnReporTrilla.setVisible(true);
                 mnReporAgricultores.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
+                mnVerTiqueteVarios.setVisible(true);
                 mnCuotaFomento.setVisible(false);
                 break;
         }
@@ -178,6 +184,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
+        mnVerTiqueteVarios = new javax.swing.JMenuItem();
         mnReporTrilla = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         mnCuotaFomento = new javax.swing.JMenuItem();
@@ -1021,6 +1028,19 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteMateriaPrima);
 
+        mnVerTiqueteVarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnVerTiqueteVarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnVerTiqueteVarios.setText("Tiquete Entrada Varios");
+        mnVerTiqueteVarios.setToolTipText("");
+        mnVerTiqueteVarios.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnVerTiqueteVarios.setRequestFocusEnabled(false);
+        mnVerTiqueteVarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnVerTiqueteVariosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnVerTiqueteVarios);
+
         mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnReporTrilla.setText("Materia prima trillada");
@@ -1159,7 +1179,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        liqAprobadas.reporteGerenteLiquidacion();
+        reportes.reporteGerenteLiquidacion();
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void tblLiquidacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLiquidacionesMouseClicked
@@ -1199,19 +1219,18 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     }//GEN-LAST:event_mnAgendarActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        notify.stop();
-        notify = null;
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
+        gerente.Cuentas_Terceros=null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();
@@ -1227,12 +1246,16 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     }//GEN-LAST:event_mnCrearActionPerformed
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-        
+        reportes.reporteCuotaFomento();
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
+
+    private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
+        bascula.abrirVerTiqueteVarios();
+    }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1374,6 +1397,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnReporAgricultores;
     public static javax.swing.JMenuItem mnReporTrilla;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
+    public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblDetalleL;
     public static javax.swing.JTable tblLiquidaciones;
     public static javax.swing.JTextField txtAgricultor;

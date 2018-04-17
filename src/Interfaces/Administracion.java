@@ -10,6 +10,7 @@ import Interfaces.LaboratorioTiquete;
 import Interfaces.Conductor;
 import Interfaces.Agricultor;
 import Interfaces.Reportes;
+import Reportes.logicaReportes;
 import javax.swing.JOptionPane;
 /**
  *
@@ -23,6 +24,7 @@ public class Administracion extends javax.swing.JFrame {
     public static Reportes repor;
     public static LaboratorioTiquete Labo;
     public static GestionBD gestionBD;
+    public static logicaReportes reportes;
     
             
     /**
@@ -33,6 +35,7 @@ public class Administracion extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         admin = new administracion();
+        reportes = new logicaReportes();
         
     }
 
@@ -468,7 +471,7 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.reporteUsuarios();
+        reportes.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void btnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBDActionPerformed
@@ -476,15 +479,15 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionBDActionPerformed
 
     private void btnReporUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporUserActionPerformed
-        admin.reporteUsuarios();
+        reportes.reporteUsuarios();
     }//GEN-LAST:event_btnReporUserActionPerformed
 
     private void btnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporEmpleadosActionPerformed
-        admin.reporteEmpleados();
+        reportes.reporteEmpleados();
     }//GEN-LAST:event_btnReporEmpleadosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        admin.reporteEmpleados();
+        reportes.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     /**

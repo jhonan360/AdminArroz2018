@@ -23,6 +23,16 @@ import Logica.Extras.extras;
 import Logica.Extras.login;
 import java.sql.SQLException;
 import Interfaces.Cuentas_Terceros;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -332,5 +342,5 @@ public class gerente {
                 break;
         }
         Con.Desconectar();
-    }
+    } 
 }

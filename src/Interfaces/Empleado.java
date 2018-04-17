@@ -12,6 +12,7 @@ import Logica.Administracion.empleado;
 import static Logica.Bascula.agricultor.ext;
 import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
+import Reportes.logicaReportes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -30,6 +31,7 @@ public class Empleado extends javax.swing.JFrame {
     public static tablas tbl;
     public static validaciones vali;
     public static administracion admin;
+    public static logicaReportes reportes;
 
     public Empleado() {
 
@@ -38,7 +40,7 @@ public class Empleado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         emp = new empleado();
         cargar = new cargarCombo();
-        admin = new administracion();
+        reportes = new logicaReportes();
         //cargar.CargarMuni(cmbMunicipio);
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
@@ -819,11 +821,11 @@ public class Empleado extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
-        admin.reporteUsuarios();
+        reportes.reporteUsuarios();
     }//GEN-LAST:event_mnReporUsuariosActionPerformed
 
     private void mnReporEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEmpleadosActionPerformed
-        admin.reporteEmpleados();
+        reportes.reporteEmpleados();
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

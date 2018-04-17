@@ -9,6 +9,8 @@ import Logica.Bascula.bascula;
 import Logica.Bascula.verTiqueteVarios;
 import Logica.Extras.login;
 import Logica.Gerente.gerente;
+import Logica.Inventario.verProcedimientoInventario;
+import Reportes.logicaReportes;
 import java.util.Date;
 
 /**
@@ -19,6 +21,8 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
 
     public static verTiqueteVarios verTiqVarios;
     public static bascula bascula;
+    public static gerente gerente;
+    public static logicaReportes reportes;
 
     /**
      * Creates new form VisualizarTiquetePrincipal
@@ -28,9 +32,9 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         verTiqVarios = new verTiqueteVarios();
+        reportes = new logicaReportes();
         String user = login.enviarUsuario();
         String privilegio = login.getPrivilegio(user);
-
         switch (privilegio) {
             case "basculista":
                 jMenu1.setVisible(true);
@@ -709,7 +713,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        verTiqVarios.reporteBasculaTiqVarios();
+        reportes.reporteBasculaTiqVarios();
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void tblEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntradasMouseClicked
@@ -811,11 +815,11 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteVarios1ActionPerformed
 
     private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteMateriaPrimaTrillada();
     }//GEN-LAST:event_mnReporTrillaActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
-        // TODO add your handling code here:
+        reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     /**
