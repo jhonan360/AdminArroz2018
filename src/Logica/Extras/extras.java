@@ -15,6 +15,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 import Logica.Extras.login;
 import Logica.Extras.currencyFormat;
+import java.io.File;
 import java.text.ParseException;
 
 public class extras {
@@ -24,6 +25,9 @@ public class extras {
     public static ResultSet rs, rs1;
     public static Date fecha;
     public static currencyFormat cu;
+    String path = System.getProperty("user.dir");
+    
+    File Dir = null;
 
     public String getIdMunicipio(String nombre, String idDeparta) { // Metodo que retorna el id del municipio recibe el nombre del municipio y el ID del depatamento
         try {
@@ -269,7 +273,10 @@ public class extras {
         return fec;
     }
     public void logs(String evento,String log) throws ParseException{
-        
+         Dir = new File(path + "/logs");
+        if (!Dir.exists()) {
+            Dir.mkdirs();
+        }
         PropertyConfigurator.configure("log4j.properties");
         cu = new currencyFormat();
         String user = login.enviarUsuario();
