@@ -153,7 +153,7 @@
 		<band height="75" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="1" width="106" height="74" uuid="cbdeae60-66af-4ef9-ab74-4c10ff648742"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="47" width="801" height="13" uuid="a1b94f3c-ae02-4c99-8887-b3a0def683a3"/>

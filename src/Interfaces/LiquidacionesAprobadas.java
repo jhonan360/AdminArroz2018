@@ -48,7 +48,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 mnCrear.setVisible(true);
                 mnGenerar.setVisible(true);
                 mnPorAprobar.setVisible(false);
-                mnCuentas.setVisible(false);
+                mnCuentas.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(false);
                 mnVerTiqueteVarios.setVisible(false);
                 jMenu3.setVisible(false);

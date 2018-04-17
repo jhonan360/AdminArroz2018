@@ -59,7 +59,7 @@
 		</field>
 	</subDataset>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Reportes\\"]]></defaultValueExpression>
+		
 	</parameter>
 	<parameter name="id_tiquete" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -113,7 +113,7 @@
 		<band height="75" splitType="Stretch">
 			<image>
 				<reportElement x="10" y="1" width="106" height="74" uuid="e35ab260-3969-4cd2-80de-3ef9f3eedbbc"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="60" y="62" width="494" height="13" uuid="6114a8d0-af95-4087-8788-499e6a9f3cb4"/>
@@ -184,7 +184,7 @@
 			</staticText>
 			<image>
 				<reportElement x="307" y="53" width="15" height="20" uuid="c4544ff9-a78a-4768-815d-fb18b82bdb98"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\impurezas.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\impurezas.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="327" y="33" width="108" height="20" uuid="f203735a-fe6c-4dbb-9739-8c42f43325e7"/>
@@ -202,7 +202,7 @@
 			</staticText>
 			<image>
 				<reportElement x="307" y="33" width="16" height="20" uuid="b6cfb78d-37b6-4df0-b546-51f19be2c274"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\humedad.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\humedad.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="11" y="104" width="77" height="16" uuid="98d111e7-63f2-4810-9c47-35a8032e2738"/>

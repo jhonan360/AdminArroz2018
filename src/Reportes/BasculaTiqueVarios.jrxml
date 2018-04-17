@@ -80,8 +80,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Reportes\\"]]></defaultValueExpression>
-	</parameter>
+		</parameter>
 	<queryString>
 		<![CDATA[SELECT idTiqueteVarios,fecha,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,vehiculo.placa,destino,observacion,kilosBrutos,destare,kilosNetos FROM tiquetevarios,personalexterno,vehiculo WHERE idTiqueteVarios=$P!{id_tiquete} AND tiquetevarios.idConductor=personalexterno.idPersonalExterno AND tiquetevarios.idVehiculo=vehiculo.idVehiculo AND tiquetevarios.destare<>0.00 AND tiquetevarios.kilosNetos<>0.00]]>
 	</queryString>
@@ -148,7 +147,7 @@
 			</staticText>
 			<image>
 				<reportElement x="11" y="2" width="106" height="74" uuid="eb3a875b-391d-4e02-8640-235aa36e81c5"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

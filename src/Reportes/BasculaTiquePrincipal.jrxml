@@ -84,7 +84,7 @@
 			</staticText>
 			<image>
 				<reportElement x="11" y="0" width="106" height="74" uuid="cf8bf6be-980c-4309-9ba5-f97d2120cc4a"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\logoOvalo.png"]]></imageExpression>
+				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
