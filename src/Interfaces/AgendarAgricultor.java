@@ -652,11 +652,10 @@ public class AgendarAgricultor extends javax.swing.JFrame {
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        gerente.salir();
-        gerente.login.ger = null;
-        gerente = null;
-        System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
+        agendar=null;
+        reportes=null;
+        Gerente.gerente.Agendar=null;
+        Gerente.gerente.login.ger.cerrar();
         super.dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 

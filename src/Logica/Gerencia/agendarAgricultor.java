@@ -182,6 +182,7 @@ public class agendarAgricultor {
                 insertar(observacion, diasAnticipo, fecha);
                 limpiar_registros();
                 crearModelo();
+                crearModeloAgenda();
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un Agricultor");
             }

@@ -67,7 +67,7 @@ public class notify {
                     try {
                         Con = new Conexion();
                         st = Con.conexion.createStatement();
-                        rs = st.executeQuery("SELECT  idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen FROM notificaciones WHERE (fechaVisualizacion IS NULL AND privilegio='" + privilegio + "') OR (fechaVisualizacion IS NULL AND usuario='" + user + "')");
+                        rs = st.executeQuery("SELECT  idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen, id FROM notificaciones WHERE (fechaVisualizacion IS NULL AND privilegio='" + privilegio + "') OR (fechaVisualizacion IS NULL AND usuario='" + user + "')");
                         while (rs.next()) {
                             showNotify(rs);
                         }
@@ -88,6 +88,7 @@ public class notify {
             String titulo = rs.getString(4);
             String texto = rs.getString(5);
             String tipo = rs.getString(6);
+            String idOrigin = rs.getString(10);
             int type = 0;
             int time = 15000;
             switch (tipo) {
@@ -116,23 +117,21 @@ public class notify {
             switch (privilegio) {
                 case "basculista":
                     if (titulo.indexOf("Tiquete") != -1) {
-                        String[] split = texto.split(" ");
-                        String idTiquete = split[2];
-                        if (!tbl.searchColumnTable(Bas.tblEspera, 0, idTiquete)) {
+                        if (!tbl.searchColumnTable(Bas.tblEspera, 0, idOrigin)) {
                             DefaultTableModel model = (DefaultTableModel) Bas.tblEspera.getModel();
-                            tbl.llenarTabla(Bas.tblEspera, model, Bas.bascula.columEspera.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tiquete,personalexterno,tipodearroz,variedad WHERE tiquete.idTiquete='" + idTiquete + "' AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad");
+                            tbl.llenarTabla(Bas.tblEspera, model, Bas.bascula.columEspera.length, "SELECT tiquete.idTiquete, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT(tipodearroz.nombre,' - ',variedad.nombre) FROM tiquete,personalexterno,tipodearroz,variedad WHERE tiquete.idTiquete='" + idOrigin + "' AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad");
                         }
                     }
                     DesktopNotify.showDesktopMessage(titulo, texto, type, time);
                     break;
                 case "laboratorista":
-                    DesktopNotify.showDesktopMessage(titulo, texto, type, time);
+                    DesktopNotify.showDesktopMessage(titulo, texto, type,time);
                     break;
                 case "contador":
                     DesktopNotify.showDesktopMessage(titulo, texto, type, time);
                     break;
                 case "gerente":
-                    DesktopNotify.showDesktopMessage(titulo, texto, type, time);
+                    DesktopNotify.showDesktopMessage(titulo, texto, type);
                     break;
                 case "molinero":
                     DesktopNotify.showDesktopMessage(titulo, texto, type, time);

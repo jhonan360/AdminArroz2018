@@ -44,6 +44,20 @@ public class Gerente extends javax.swing.JFrame {
         notify = new notify("gerente", gerente.login.enviarUsuario());
     }
 
+     public void cerrar() {
+        notify.stop();
+        notify = null;
+        gerente.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        bascula.VerTiqPrincipal = null;
+        bascula.VerTiqVarios = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -868,15 +882,7 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        notify.stop();
-        notify = null;
-        gerente.salir();
-        gerente.login.ger = null;
-        gerente = null;
-        gerente.Cuentas_Terceros = null;
-        System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
-        super.dispose();
+        this.cerrar();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
