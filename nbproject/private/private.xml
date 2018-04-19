@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/LaboratorioTiqueteInicial.java</file>
-            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/Agricultor.java</file>
-            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Laboratorio/laboratorio_menu.java</file>
-            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Logica/Bascula/bascula.java</file>
-            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/LiquidacionesAprobadas.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Reportes/ContadorFedearroz.jrxml</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/cuotaFometo.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Interfaces/ProcedimientosInventario.java</file>
+            <file>file:/C:/Users/Lizeth/Documents/GitHub/AdminArroz2018/src/Reportes/logicaReportes.java</file>
         </group>
     </open-files>
 </project-private>

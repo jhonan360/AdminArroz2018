@@ -42,7 +42,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
         reportes = new logicaReportes();
-        
+
         switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);
@@ -1230,7 +1230,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
-        gerente.Cuentas_Terceros=null;
+        gerente.Cuentas_Terceros = null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();

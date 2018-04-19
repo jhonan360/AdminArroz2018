@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cefc5653-87b9-4c36-805e-bad4a92e4ffb">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<property name="ireport.zoom" value="1.3310000000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="56"/>
+	<property name="ireport.y" value="18"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#E6E6FA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFBFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#E6E6FA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFBFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="liquidaciones" uuid="471c0e31-a646-4d0b-97c7-c7453ab0e092">
+		<queryString>
+			<![CDATA[select liquidaciones.fecha,liquidaciones.idLiquidaciones,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,liquidaciones.subTotal,liquidaciones.kilosCompra,liquidaciones.valorFomArrocero,SUM(liquidaciones.subTotal) AS totalSub,SUM(liquidaciones.kilosCompra)AS totalCompra,SUM(liquidaciones.valorFomArrocero) AS totalCuota FROM detalleliquidacion,liquidaciones,tiquete,personalexterno WHERE liquidaciones.estado='aprobado' AND MONTH(liquidaciones.fecha)=02 AND YEAR(liquidaciones.fecha)=2018 AND liquidaciones.idLiquidaciones=detalleliquidacion.idLiquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones]]>
+		</queryString>
+		<field name="fecha" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="idLiquidaciones" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="CONCAT(personalexterno.nombres,&apos; &apos;,personalexterno.apellidos)" class="java.lang.String"/>
+		<field name="cedula" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="subTotal" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="kilosCompra" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="valorFomArrocero" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="totalSub" class="java.math.BigDecimal"/>
+		<field name="totalCompra" class="java.math.BigDecimal"/>
+		<field name="totalCuota" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT 1 AS DUMMY]]>
+	</queryString>
+	<field name="DUMMY" class="java.lang.Long"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -15,10 +87,6 @@
 				</textElement>
 				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
 			</staticText>
-			<image>
-				<reportElement x="2" y="4" width="106" height="74" uuid="27f1af52-72c9-42f2-9a06-ed4db0ddf6d3"/>
-				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="2" y="63" width="801" height="13" uuid="abbf8b06-b465-4667-aee3-dad34f13ad29"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -54,18 +122,34 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="228" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="5" width="80" height="20" uuid="c7edc238-410f-4a38-9b3b-dd9a899132d3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="5" width="40" height="20" uuid="201b745b-657a-4082-9435-30cdb63fb4ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="665" y="5" width="137" height="20" uuid="886aeb07-fade-4ced-8ee6-732c32d41409"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -48,12 +48,12 @@ public class login {
     public static conductor cond;
     public static Administracion admi;
     public static AlmacenarInventario Inventario;
-public static Auditoria Auditoria;
+    public static Auditoria Auditoria;
     public static Liquidacion Liqui;
     public static Gerencia Ger;
     public boolean bandera = false;
     public static int contIntentos = 0;
-    private static String usuario2 = "";
+    private static String usuario2 = "",user="";
     public static log logs;
 
     public static Auditor audi;
@@ -146,7 +146,7 @@ public static Auditoria Auditoria;
                             ger = new Gerente();
                             enviarUsuario();
                             ger.setVisible(true);
-                            
+
                         } else {
                             ger.setVisible(true);
                         }
@@ -251,6 +251,22 @@ public static Auditoria Auditoria;
             }
             Con.Desconectar();
             return usua;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String getEmpleado(String usuario) {
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            rsbas = st.executeQuery("SELECT CONCAT(nombres,' ',apellidos) from empleado,usuario where empleado.user = '" + usuario + "' and usuario.user = empleado.user");
+            while (rsbas.next()) {
+                user = rsbas.getObject(1) + "";
+            }
+            Con.Desconectar();
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
         }

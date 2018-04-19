@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63e5f64a-1515-4bf9-ae20-2e263c6ac358">
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -196,10 +197,6 @@
 				</textElement>
 				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="5" width="106" height="74" uuid="63a6819c-7c06-4458-9508-95d61398dde6"/>
-				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="61" y="36" width="494" height="13" uuid="f84cdbae-aa0e-492e-881e-6ebfe05b5979"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -214,6 +211,10 @@
 				</textElement>
 				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="106" height="74" uuid="13f9f297-3d85-4310-8138-d1aa646c2620"/>
+				<imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

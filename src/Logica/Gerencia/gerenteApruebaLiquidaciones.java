@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import Logica.Extras.tablas;
 import Logica.Extras.extras;
 import Logica.Extras.login;
+import Reportes.logicaReportes;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -40,7 +41,8 @@ public class gerenteApruebaLiquidaciones {
     public static GerenteApruebaLiquidaciones GApruebaL;
     public static extras ext;
     public tablas tbl;
-    public static String placa, color, modelo, marca, idVehiculo, idLiquidacion;
+    public static logicaReportes reportes;
+    public static String placa, color, modelo, marca, idVehiculo, idLiquidacion,user,gerente;
     public static DefaultTableModel modelPendientes, modelTiquetes;
     public static String columPendientes[] = new String[]{"N°", "Agricultor", "Subtotal", "Neto Pagar"};
     public static String alinearHeaderPendientes[] = new String[]{"10", "default", "default", "default"};
@@ -295,9 +297,7 @@ public class gerenteApruebaLiquidaciones {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
-           ext.logs("UPDATE","UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
-
-            System.out.println("liquidacion actualizada");
+            ext.logs("UPDATE","UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();

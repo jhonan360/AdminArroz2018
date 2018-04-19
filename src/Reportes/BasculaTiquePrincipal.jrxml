@@ -1,368 +1,369 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="382" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9067f82-5b99-4564-90c7-6d9ee3fd9da6">
-	<property name="ireport.zoom" value="1.1000000000000003"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="id_tiquete" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<queryString>
+    <property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>	
+    <property name="ireport.zoom" value="1.1000000000000003"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="id_tiquete" class="java.lang.Integer">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
 		<![CDATA[SELECT CONCAT(empleado.nombres,' ',empleado.apellidos),idTiquete,fecha,CONCAT(ag.nombres,' ',ag.apellidos) AS agricultor,ag.cedula,CONCAT(tipodearroz.nombre,'-',variedad.nombre),lote.nombre,CONCAT(co.nombres,' ',co.apellidos) AS conductor,vehiculo.placa,kilosBrutos,destare,kilosNetos,humedadUno,impurezaUno,empaque,observacion FROM personalexterno ag, personalexterno co,tiquete,tipodearroz,variedad,lote,vehiculo,usuario,empleado WHERE idtiquete=$P!{id_tiquete} AND tiquete.idAgricultor=ag.idPersonalExterno AND tiquete.idConductor=co.idPersonalExterno AND tiquete.destare<>0.00 AND tiquete.kilosNetos<>0.00 AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad AND tiquete.idLote=lote.idLote AND tiquete.idVehiculo=vehiculo.idVehiculo AND tiquete.user=usuario.user AND empleado.user=usuario.user]]>
-	</queryString>
-	<field name="CONCAT(empleado.nombres,&apos; &apos;,empleado.apellidos)" class="java.lang.String"/>
-	<field name="idTiquete" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fecha" class="java.sql.Timestamp">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="agricultor" class="java.lang.String"/>
-	<field name="cedula" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="CONCAT(tipodearroz.nombre,&apos;-&apos;,variedad.nombre)" class="java.lang.String"/>
-	<field name="nombre" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="conductor" class="java.lang.String"/>
-	<field name="placa" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="kilosBrutos" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="destare" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="kilosNetos" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="humedadUno" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="impurezaUno" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="empaque" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="observacion" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="74" splitType="Stretch">
-			<staticText>
-				<reportElement x="61" y="60" width="494" height="13" uuid="1593678d-ce86-4a26-b4c7-b94f3976c540"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="61" y="36" width="494" height="13" uuid="e879f0cb-9fe2-43d6-a6b2-fcdb6237e72f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NIT. 809.010.728-0]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="61" y="49" width="494" height="13" uuid="1335ba3a-23f2-4066-83d0-c4d827a47e58"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="61" y="0" width="494" height="36" uuid="ca4ba89c-8811-4b31-af1c-a7d93978649d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bernard MT Condensed" size="28"/>
-				</textElement>
-				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="11" y="0" width="106" height="74" uuid="cf8bf6be-980c-4309-9ba5-f97d2120cc4a"/>
-				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
-			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="30" splitType="Stretch">
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="4" width="555" height="22" backcolor="#CCCCFF" uuid="f60009ea-18de-4537-8fed-ad082a95d934"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TIQUETE DE ENTRADA DE MATERIA PRIMA]]></text>
-			</staticText>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="212" splitType="Stretch">
-			<staticText>
-				<reportElement x="15" y="92" width="90" height="20" uuid="42841df2-4942-4621-9c92-15d2672ca938"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Lote:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="189" width="90" height="20" uuid="3766f7de-935d-443d-b641-2445c44352f4"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Observación:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="73" width="90" height="20" uuid="ac3f1d09-e977-4467-930c-537ee2d1f0ad"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[CC Proveedor:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="169" width="90" height="20" uuid="63fdea95-9db0-4eb5-953c-647876f70766"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Empaque:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="131" width="90" height="20" uuid="0658ec1a-3b85-473b-894c-93114f582bdf"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Conductor:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="32" width="90" height="22" uuid="17d8cea9-4e18-473b-a78c-25c00ec2f24c"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="53" width="90" height="20" uuid="87014bca-fd15-43c2-84f8-43b68b01001d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Proveedor:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="150" width="90" height="20" uuid="9d1c4d6e-cecc-436b-8df7-8a004e00546f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Placa:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="338" y="36" width="77" height="19" uuid="f09a42b5-b4b3-40fc-b703-d35ac4b0132d"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="12"/>
-				</textElement>
-				<text><![CDATA[KILOS BRUTOS:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="338" y="54" width="77" height="19" uuid="6ef3d5a4-749b-4413-9b46-b97cae61dea5"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="12"/>
-				</textElement>
-				<text><![CDATA[DESTARE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="338" y="72" width="77" height="19" uuid="90a20919-cd7b-4133-8344-9f0a64da356f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="12"/>
-				</textElement>
-				<text><![CDATA[KILOS NETOS:]]></text>
-			</staticText>
-			<image>
-				<reportElement x="338" y="132" width="16" height="20" uuid="25f98527-5b2e-4156-94b6-bd7dcfc55992"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\humedad.png"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="338" y="155" width="15" height="20" uuid="4c377165-75bf-4dce-a64f-f2704503b7ad"/>
-				<imageExpression><![CDATA["C:\\Users\\Lizeth\\Documents\\GitHub\\AdminArroz2018\\src\\Img\\impurezas.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="354" y="132" width="63" height="20" uuid="a738adde-8819-4fa2-9605-b087fff0b97b"/>
-				<textElement>
-					<font fontName="Franklin Gothic Demi Cond" size="12"/>
-				</textElement>
-				<text><![CDATA[HUMEDAD:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="353" y="155" width="64" height="20" uuid="0c76bfcc-e94d-4929-8f02-de8d3ac680c9"/>
-				<textElement>
-					<font fontName="Franklin Gothic Demi Cond" size="12"/>
-				</textElement>
-				<text><![CDATA[IMPUREZA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="326" y="9" width="89" height="22" backcolor="#CCCCFF" uuid="82639e88-92fd-41d1-9a7d-8b0d0d717d50"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N° Tiquete:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="326" y="104" width="227" height="22" backcolor="#CCFFCC" uuid="f118cf83-6243-43cf-8e29-d82ad7f00092"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
-				</textElement>
-				<text><![CDATA[CONTROL DE CALIDAD]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="15" y="8" width="286" height="22" backcolor="#CCFFCC" uuid="fa4da4e1-3c2c-4d2f-a80e-278fc41d3353"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
-				</textElement>
-				<text><![CDATA[MATERIA PRIMA RECIBIDA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="112" width="90" height="20" uuid="1872e653-0905-465e-a92c-54a1fae0d34a"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="15"/>
-				</textElement>
-				<text><![CDATA[Tipo de Arroz:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="415" y="9" width="100" height="23" uuid="f8b53011-ee2f-4499-9927-f717d46830b8"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{idTiquete}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="32" width="196" height="21" uuid="a6001822-dbf9-411f-a81c-d269613e7ba5"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="53" width="196" height="20" uuid="57546b66-9497-42da-a7bd-a299dd8ea3e5"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{agricultor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="73" width="196" height="20" uuid="0f13acec-3d03-4571-8cfa-5f91164bca15"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="93" width="196" height="20" uuid="4340cffc-b55b-4097-8dfa-7e8412b026a1"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="113" width="196" height="20" uuid="f113df7c-9b4c-4ac9-803f-fcb8819bdb49"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{CONCAT(tipodearroz.nombre,'-',variedad.nombre)}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="131" width="196" height="20" uuid="a4483ca4-9637-4d25-966e-5d251cc92142"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{conductor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="149" width="196" height="20" uuid="641e56ab-c5a3-4af8-859b-326f6da203e9"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="169" width="196" height="20" uuid="ecae9a6b-3752-45cd-bee0-bc92309cc2ec"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{empaque}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="105" y="189" width="196" height="20" uuid="0c2b7b56-6f0e-4129-a1fe-c827b7d6c673"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="415" y="36" width="100" height="19" uuid="a166d729-bff7-4677-bd76-ada6b1ec77a5"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{kilosBrutos}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="415" y="54" width="100" height="18" uuid="c4967d62-dbb4-4fd9-af43-f7f56a12dfbf"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{destare}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="415" y="72" width="100" height="19" uuid="b5603ff2-849c-4641-90cb-6d5a29197923"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{kilosNetos}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="417" y="131" width="100" height="20" uuid="d88f67d4-10fd-428a-8543-bb99ce8d234a"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{humedadUno}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###.##">
-				<reportElement x="417" y="154" width="100" height="20" uuid="4a313839-9b17-4108-9e11-0d6665662cd5"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{impurezaUno}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="21" splitType="Stretch">
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="455" y="0" width="100" height="20" uuid="a18ea353-c87a-4e7a-9905-77ee7ed2aa3f"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="17" y="0" width="88" height="20" uuid="647b61c8-a3d1-49cb-97df-29f0554c9a59"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Elaborado por:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="105" y="0" width="196" height="20" uuid="90147662-ee4e-4a61-8572-73f05648c32a"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{CONCAT(empleado.nombres,' ',empleado.apellidos)}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+    </queryString>
+    <field name="CONCAT(empleado.nombres,&apos; &apos;,empleado.apellidos)" class="java.lang.String"/>
+    <field name="idTiquete" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="fecha" class="java.sql.Timestamp">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="agricultor" class="java.lang.String"/>
+    <field name="cedula" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="CONCAT(tipodearroz.nombre,&apos;-&apos;,variedad.nombre)" class="java.lang.String"/>
+    <field name="nombre" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="conductor" class="java.lang.String"/>
+    <field name="placa" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="kilosBrutos" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="destare" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="kilosNetos" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="humedadUno" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="impurezaUno" class="java.math.BigDecimal">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="empaque" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="observacion" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="74" splitType="Stretch">
+            <staticText>
+                <reportElement x="61" y="60" width="494" height="13" uuid="1593678d-ce86-4a26-b4c7-b94f3976c540"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="36" width="494" height="13" uuid="e879f0cb-9fe2-43d6-a6b2-fcdb6237e72f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[NIT. 809.010.728-0]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="49" width="494" height="13" uuid="1335ba3a-23f2-4066-83d0-c4d827a47e58"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="0" width="494" height="36" uuid="ca4ba89c-8811-4b31-af1c-a7d93978649d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Bernard MT Condensed" size="28"/>
+                </textElement>
+                <text><![CDATA[MOLINO ESPINAL S.A.]]></text>
+            </staticText>
+            <image>
+                <reportElement x="0" y="-1" width="106" height="74" uuid="d5d7bc12-2d46-4bca-bbf7-627a1002cfcf"/>
+                <imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="30" splitType="Stretch">
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="4" width="555" height="22" backcolor="#CCCCFF" uuid="f60009ea-18de-4537-8fed-ad082a95d934"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[TIQUETE DE ENTRADA DE MATERIA PRIMA]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="212" splitType="Stretch">
+            <staticText>
+                <reportElement x="15" y="92" width="90" height="20" uuid="42841df2-4942-4621-9c92-15d2672ca938"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Lote:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="189" width="90" height="20" uuid="3766f7de-935d-443d-b641-2445c44352f4"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Observación:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="73" width="90" height="20" uuid="ac3f1d09-e977-4467-930c-537ee2d1f0ad"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[CC Proveedor:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="169" width="90" height="20" uuid="63fdea95-9db0-4eb5-953c-647876f70766"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Empaque:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="131" width="90" height="20" uuid="0658ec1a-3b85-473b-894c-93114f582bdf"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Conductor:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="32" width="90" height="22" uuid="17d8cea9-4e18-473b-a78c-25c00ec2f24c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Fecha:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="53" width="90" height="20" uuid="87014bca-fd15-43c2-84f8-43b68b01001d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Proveedor:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="150" width="90" height="20" uuid="9d1c4d6e-cecc-436b-8df7-8a004e00546f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Placa:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="338" y="36" width="77" height="19" uuid="f09a42b5-b4b3-40fc-b703-d35ac4b0132d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="12"/>
+                </textElement>
+                <text><![CDATA[KILOS BRUTOS:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="338" y="54" width="77" height="19" uuid="6ef3d5a4-749b-4413-9b46-b97cae61dea5"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="12"/>
+                </textElement>
+                <text><![CDATA[DESTARE:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="338" y="72" width="77" height="19" uuid="90a20919-cd7b-4133-8344-9f0a64da356f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="12"/>
+                </textElement>
+                <text><![CDATA[KILOS NETOS:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="354" y="132" width="63" height="20" uuid="a738adde-8819-4fa2-9605-b087fff0b97b"/>
+                <textElement>
+                    <font fontName="Franklin Gothic Demi Cond" size="12"/>
+                </textElement>
+                <text><![CDATA[HUMEDAD:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="353" y="155" width="64" height="20" uuid="0c76bfcc-e94d-4929-8f02-de8d3ac680c9"/>
+                <textElement>
+                    <font fontName="Franklin Gothic Demi Cond" size="12"/>
+                </textElement>
+                <text><![CDATA[IMPUREZA:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="326" y="9" width="89" height="22" backcolor="#CCCCFF" uuid="82639e88-92fd-41d1-9a7d-8b0d0d717d50"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[N° Tiquete:]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="326" y="104" width="227" height="22" backcolor="#CCFFCC" uuid="f118cf83-6243-43cf-8e29-d82ad7f00092"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
+                </textElement>
+                <text><![CDATA[CONTROL DE CALIDAD]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="15" y="8" width="286" height="22" backcolor="#CCFFCC" uuid="fa4da4e1-3c2c-4d2f-a80e-278fc41d3353"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
+                </textElement>
+                <text><![CDATA[MATERIA PRIMA RECIBIDA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="15" y="112" width="90" height="20" uuid="1872e653-0905-465e-a92c-54a1fae0d34a"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="15"/>
+                </textElement>
+                <text><![CDATA[Tipo de Arroz:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="415" y="9" width="100" height="23" uuid="f8b53011-ee2f-4499-9927-f717d46830b8"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="13" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{idTiquete}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="32" width="196" height="21" uuid="a6001822-dbf9-411f-a81c-d269613e7ba5"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="53" width="196" height="20" uuid="57546b66-9497-42da-a7bd-a299dd8ea3e5"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{agricultor}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="73" width="196" height="20" uuid="0f13acec-3d03-4571-8cfa-5f91164bca15"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="93" width="196" height="20" uuid="4340cffc-b55b-4097-8dfa-7e8412b026a1"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="113" width="196" height="20" uuid="f113df7c-9b4c-4ac9-803f-fcb8819bdb49"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{CONCAT(tipodearroz.nombre,'-',variedad.nombre)}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="131" width="196" height="20" uuid="a4483ca4-9637-4d25-966e-5d251cc92142"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{conductor}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="149" width="196" height="20" uuid="641e56ab-c5a3-4af8-859b-326f6da203e9"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="169" width="196" height="20" uuid="ecae9a6b-3752-45cd-bee0-bc92309cc2ec"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{empaque}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="105" y="189" width="196" height="20" uuid="0c2b7b56-6f0e-4129-a1fe-c827b7d6c673"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###,###.##">
+                <reportElement x="415" y="36" width="100" height="19" uuid="a166d729-bff7-4677-bd76-ada6b1ec77a5"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{kilosBrutos}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###,###.##">
+                <reportElement x="415" y="54" width="100" height="18" uuid="c4967d62-dbb4-4fd9-af43-f7f56a12dfbf"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{destare}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###,###.##">
+                <reportElement x="415" y="72" width="100" height="19" uuid="b5603ff2-849c-4641-90cb-6d5a29197923"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{kilosNetos}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###,###.##">
+                <reportElement x="417" y="131" width="100" height="20" uuid="d88f67d4-10fd-428a-8543-bb99ce8d234a"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{humedadUno}]]></textFieldExpression>
+            </textField>
+            <textField pattern="###,###.##">
+                <reportElement x="417" y="154" width="100" height="20" uuid="4a313839-9b17-4108-9e11-0d6665662cd5"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="11"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{impurezaUno}]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement x="326" y="133" width="27" height="19" uuid="44cab16c-bad3-4f66-bdb5-bb80824bbd2f"/>
+                <imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//humedad.png"]]></imageExpression>
+            </image>
+            <image>
+                <reportElement x="325" y="155" width="27" height="19" uuid="bd234f55-bf62-41b1-93eb-38921b47cd12"/>
+                <imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//impurezas.png"]]></imageExpression>
+            </image>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="21" splitType="Stretch">
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="455" y="0" width="100" height="20" uuid="a18ea353-c87a-4e7a-9905-77ee7ed2aa3f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="17" y="0" width="88" height="20" uuid="647b61c8-a3d1-49cb-97df-29f0554c9a59"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true" isUnderline="false"/>
+                </textElement>
+                <text><![CDATA[Elaborado por:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="105" y="0" width="196" height="20" uuid="90147662-ee4e-4a61-8572-73f05648c32a"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{CONCAT(empleado.nombres,' ',empleado.apellidos)}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
 </jasperReport>

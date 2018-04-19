@@ -1,248 +1,250 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63e5f64a-1515-4bf9-ae20-2e263c6ac358">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="69"/>
-	<property name="ireport.y" value="66"/>
-	<style name="table">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TH" mode="Opaque" backcolor="#5F9EA0">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_CH" mode="Opaque" backcolor="#BFFDFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_TH" mode="Opaque" backcolor="#008B8B">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_CH" mode="Opaque" backcolor="#BFFFFF">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 3">
-		<box>
-			<pen lineWidth="1.0" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<subDataset name="usuarios" uuid="c5bfe176-1c8c-4dc3-bd63-5adc0399a729">
-		<queryString>
+    <property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+    <property name="ireport.zoom" value="1.4641000000000006"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="table">
+        <box>
+            <pen lineWidth="1.0" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_TH" mode="Opaque" backcolor="#5F9EA0">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_CH" mode="Opaque" backcolor="#BFFDFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 1">
+        <box>
+            <pen lineWidth="1.0" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 1_TH" mode="Opaque" backcolor="#008B8B">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 1_CH" mode="Opaque" backcolor="#BFFFFF">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 2">
+        <box>
+            <pen lineWidth="1.0" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 3">
+        <box>
+            <pen lineWidth="1.0" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <subDataset name="usuarios" uuid="c5bfe176-1c8c-4dc3-bd63-5adc0399a729">
+        <queryString>
 			<![CDATA[SELECT user,privilegios.nombre,estado FROM usuario,privilegios WHERE privilegios.idPrivilegios=usuario.idPrivilegios]]>
-		</queryString>
-		<field name="user" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="nombre" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-		<field name="estado" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
-	</subDataset>
-	<queryString>
+        </queryString>
+        <field name="user" class="java.lang.String">
+            <fieldDescription><![CDATA[]]></fieldDescription>
+        </field>
+        <field name="nombre" class="java.lang.String">
+            <fieldDescription><![CDATA[]]></fieldDescription>
+        </field>
+        <field name="estado" class="java.lang.String">
+            <fieldDescription><![CDATA[]]></fieldDescription>
+        </field>
+    </subDataset>
+    <queryString>
 		<![CDATA[SELECT 1 AS DUMMY]]>
-	</queryString>
-	<field name="DUMMY" class="java.lang.Long"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="61" y="0" width="494" height="36" uuid="5f872cef-30a5-4d35-a98b-7875c2fb2709"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bernard MT Condensed" size="28"/>
-				</textElement>
-				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="61" y="49" width="494" height="13" uuid="0a81d4b7-9dbc-4270-912b-500be9bda6ea"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
-			</staticText>
-			<image>
-				<reportElement x="0" y="5" width="106" height="74" uuid="63a6819c-7c06-4458-9508-95d61398dde6"/>
-				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="61" y="36" width="494" height="13" uuid="f84cdbae-aa0e-492e-881e-6ebfe05b5979"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NIT. 809.010.728-0]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="61" y="60" width="494" height="13" uuid="7dd2cb07-21a5-4265-b7e1-1052b1413034"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Book" isBold="true"/>
-				</textElement>
-				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="28" splitType="Stretch">
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="3" width="555" height="25" backcolor="#CCFFCC" uuid="d76d57ec-86c1-4c8c-ba03-0e748ff1a6d1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[USUARIOS DEL SISTEMA]]></text>
-			</staticText>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="8" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="194" splitType="Stretch">
-			<componentElement>
-				<reportElement key="table 3" style="table 1" mode="Opaque" x="0" y="0" width="555" height="194" forecolor="#000000" backcolor="#FFFFFF" uuid="50e14645-5858-4da6-ba6b-27c26637f853"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="usuarios" uuid="8a071788-9766-42bb-9d0e-580cd0201846">
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					</datasetRun>
-					<jr:column width="160" uuid="3a519bd1-6e09-46ab-911b-9361fa5fe219">
-						<jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="160" height="21" uuid="8419273a-b13a-43e9-8373-91113807dcd9"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="false"/>
-								</textElement>
-								<text><![CDATA[USUARIO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="11" y="0" width="149" height="20" uuid="ae3d7134-1b2a-45eb-a747-c993aa1b1f61"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="214" uuid="78ec36ba-f22a-4ecb-aec0-633fda7a8d1d">
-						<jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="214" height="21" uuid="a384425a-f8ba-4e48-9e1c-35e0d39063f4"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="false"/>
-								</textElement>
-								<text><![CDATA[PRIVILEGIO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="11" y="0" width="203" height="20" uuid="0fabd896-8918-4b8d-9d7e-163d13a10d8a"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="179" uuid="6871ffcd-1ba3-42ed-ad17-27539286d966">
-						<jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="179" height="21" uuid="809fb6da-416d-4560-90a6-439bac761967"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="false"/>
-								</textElement>
-								<text><![CDATA[ESTADO]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 3_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="10" y="0" width="169" height="20" uuid="b2e40982-654b-4590-a19f-809792d577e4"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-				</jr:table>
-			</componentElement>
-		</band>
-	</detail>
-	<pageFooter>
-		<band height="24" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="4" width="80" height="20" uuid="6f8f1ad5-61bb-494b-baad-64c600f8b287"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement x="80" y="4" width="40" height="20" uuid="01978efb-234e-47aa-8ba5-628010117f06"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="455" y="4" width="100" height="20" uuid="35bd8807-9e33-465e-a147-02c58325ff87"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
+    </queryString>
+    <field name="DUMMY" class="java.lang.Long"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="79" splitType="Stretch">
+            <staticText>
+                <reportElement x="61" y="0" width="494" height="36" uuid="5f872cef-30a5-4d35-a98b-7875c2fb2709"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Bernard MT Condensed" size="28"/>
+                </textElement>
+                <text><![CDATA[MOLINO ESPINAL S.A.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="49" width="494" height="13" uuid="0a81d4b7-9dbc-4270-912b-500be9bda6ea"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="36" width="494" height="13" uuid="f84cdbae-aa0e-492e-881e-6ebfe05b5979"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[NIT. 809.010.728-0]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="61" y="60" width="494" height="13" uuid="7dd2cb07-21a5-4265-b7e1-1052b1413034"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Book" isBold="true"/>
+                </textElement>
+                <text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
+            </staticText>
+            <elementGroup/>
+            <image>
+                <reportElement x="0" y="1" width="106" height="74" uuid="38a51ed8-c7bb-4a04-902c-5ecbb504f04d"/>
+                <imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="28" splitType="Stretch">
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="3" width="555" height="25" backcolor="#CCFFCC" uuid="d76d57ec-86c1-4c8c-ba03-0e748ff1a6d1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[USUARIOS DEL SISTEMA]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="8" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="194" splitType="Stretch">
+            <componentElement>
+                <reportElement key="table 3" style="table 1" mode="Opaque" x="0" y="0" width="555" height="194" forecolor="#000000" backcolor="#FFFFFF" uuid="50e14645-5858-4da6-ba6b-27c26637f853"/>
+                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <datasetRun subDataset="usuarios" uuid="8a071788-9766-42bb-9d0e-580cd0201846">
+                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    </datasetRun>
+                    <jr:column width="160" uuid="3a519bd1-6e09-46ab-911b-9361fa5fe219">
+                        <jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
+                            <staticText>
+                                <reportElement x="0" y="0" width="160" height="21" uuid="8419273a-b13a-43e9-8373-91113807dcd9"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font isBold="false"/>
+                                </textElement>
+                                <text><![CDATA[USUARIO]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+                            <textField>
+                                <reportElement x="11" y="0" width="149" height="20" uuid="ae3d7134-1b2a-45eb-a747-c993aa1b1f61"/>
+                                <textElement verticalAlignment="Middle"/>
+                                <textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+                    <jr:column width="214" uuid="78ec36ba-f22a-4ecb-aec0-633fda7a8d1d">
+                        <jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
+                            <staticText>
+                                <reportElement x="0" y="0" width="214" height="21" uuid="a384425a-f8ba-4e48-9e1c-35e0d39063f4"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font isBold="false"/>
+                                </textElement>
+                                <text><![CDATA[PRIVILEGIO]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+                            <textField>
+                                <reportElement x="11" y="0" width="203" height="20" uuid="0fabd896-8918-4b8d-9d7e-163d13a10d8a"/>
+                                <textElement verticalAlignment="Middle"/>
+                                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+                    <jr:column width="179" uuid="6871ffcd-1ba3-42ed-ad17-27539286d966">
+                        <jr:columnHeader style="table 3_CH" height="22" rowSpan="1">
+                            <staticText>
+                                <reportElement x="0" y="0" width="179" height="21" uuid="809fb6da-416d-4560-90a6-439bac761967"/>
+                                <textElement textAlignment="Center" verticalAlignment="Middle">
+                                    <font isBold="false"/>
+                                </textElement>
+                                <text><![CDATA[ESTADO]]></text>
+                            </staticText>
+                        </jr:columnHeader>
+                        <jr:detailCell style="table 3_TD" height="20" rowSpan="1">
+                            <textField>
+                                <reportElement x="10" y="0" width="169" height="20" uuid="b2e40982-654b-4590-a19f-809792d577e4"/>
+                                <textElement verticalAlignment="Middle"/>
+                                <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+                            </textField>
+                        </jr:detailCell>
+                    </jr:column>
+                </jr:table>
+            </componentElement>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="24" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="4" width="80" height="20" uuid="6f8f1ad5-61bb-494b-baad-64c600f8b287"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="80" y="4" width="40" height="20" uuid="01978efb-234e-47aa-8ba5-628010117f06"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="455" y="4" width="100" height="20" uuid="35bd8807-9e33-465e-a147-02c58325ff87"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
 </jasperReport>

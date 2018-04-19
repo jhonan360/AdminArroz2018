@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ddaba3-0f15-458f-8f5d-7b698c9aa7e3">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="420"/>
+	<property name="ireport.y" value="450"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -88,18 +89,18 @@
 	<parameter name="id_liquidacion" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="nom_contador" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT liquidaciones.idLiquidaciones,cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT( telefono, ' ', telefono2, ' ', telefono3 ), direccion,municipios.nombre, liquidaciones.fecha, liquidaciones.humedadIdeal, liquidaciones.impurezaIdeal, liquidaciones.fomArrocero, liquidaciones.impuesto, liquidaciones.porcenImpuesto, liquidaciones.kilosNeto, liquidaciones.kilosCompra, liquidaciones.subtotal, liquidaciones.valorFomArrocero, liquidaciones.valorImpuesto, liquidaciones.descuentoAnticipo, liquidaciones.netoPagar,(liquidaciones.kilosNeto-liquidaciones.kilosCompra) AS descuento FROM personalexterno, tiquete, detalleliquidacion, liquidaciones,municipios WHERE personalexterno.idMunicipio=municipios.idMunicipio AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND liquidaciones.idLiquidaciones =$P!{id_liquidacion} AND detalleliquidacion.idliquidaciones=liquidaciones.idLiquidaciones AND detalleliquidacion.idTiquete = tiquete.idTiquete GROUP BY liquidaciones.idLiquidaciones]]>
+		<![CDATA[SELECT liquidaciones.idLiquidaciones,CONCAT(empleado.nombres,' ',empleado.apellidos),cedula,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), CONCAT( personalexterno.telefono, ' ', personalexterno.telefono2, ' ', personalexterno.telefono3 ), personalexterno.direccion,municipios.nombre, liquidaciones.fecha, liquidaciones.humedadIdeal, liquidaciones.impurezaIdeal, liquidaciones.fomArrocero, liquidaciones.impuesto, liquidaciones.porcenImpuesto, liquidaciones.kilosNeto, liquidaciones.kilosCompra, liquidaciones.subtotal, liquidaciones.valorFomArrocero, liquidaciones.valorImpuesto, liquidaciones.descuentoAnticipo, liquidaciones.netoPagar,(liquidaciones.kilosNeto-liquidaciones.kilosCompra) AS descuento FROM personalexterno, tiquete, detalleliquidacion, liquidaciones,municipios,empleado,usuario WHERE personalexterno.idMunicipio=municipios.idMunicipio AND tiquete.idAgricultor=personalexterno.idPersonalExterno AND liquidaciones.idLiquidaciones =$P!{id_liquidacion} AND detalleliquidacion.idliquidaciones=liquidaciones.idLiquidaciones AND detalleliquidacion.idTiquete = tiquete.idTiquete AND liquidaciones.user=usuario.user AND usuario.user=empleado.user GROUP BY liquidaciones.idLiquidaciones]]>
 	</queryString>
 	<field name="idLiquidaciones" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="CONCAT(empleado.nombres,&apos; &apos;,empleado.apellidos)" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="CONCAT(personalexterno.nombres,&apos; &apos;,personalexterno.apellidos)" class="java.lang.String"/>
-	<field name="CONCAT( telefono, &apos; &apos;, telefono2, &apos; &apos;, telefono3 )" class="java.lang.String"/>
+	<field name="CONCAT( personalexterno.telefono, &apos; &apos;, personalexterno.telefono2, &apos; &apos;, personalexterno.telefono3 )" class="java.lang.String"/>
 	<field name="direccion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -151,10 +152,6 @@
 	</background>
 	<title>
 		<band height="75" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="1" width="106" height="74" uuid="cbdeae60-66af-4ef9-ab74-4c10ff648742"/>
-				<imageExpression><![CDATA["Img\\logoOvalo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="0" y="47" width="801" height="13" uuid="a1b94f3c-ae02-4c99-8887-b3a0def683a3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -177,12 +174,16 @@
 				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="801" height="36" uuid="f0a0b6ef-e91e-436b-a46f-29a89f59b23f"/>
+				<reportElement x="4" y="0" width="792" height="36" uuid="f0a0b6ef-e91e-436b-a46f-29a89f59b23f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Bernard MT Condensed" size="28"/>
 				</textElement>
 				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="1" width="106" height="74" uuid="c08c7c8d-95ac-4273-a559-38dc34fa54be"/>
+				<imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -202,42 +203,42 @@
 	<detail>
 		<band height="267" splitType="Stretch">
 			<staticText>
-				<reportElement x="7" y="25" width="54" height="15" uuid="a5be25b2-49c7-4295-935c-07b891b6b40a"/>
+				<reportElement x="7" y="25" width="68" height="15" uuid="a5be25b2-49c7-4295-935c-07b891b6b40a"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+					<font fontName="Franklin Gothic Demi Cond" size="12"/>
 				</textElement>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="40" width="54" height="15" uuid="1735f257-e549-4d8a-bce9-8eed61e0e245"/>
+				<reportElement x="7" y="40" width="68" height="15" uuid="1735f257-e549-4d8a-bce9-8eed61e0e245"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+					<font fontName="Franklin Gothic Demi Cond" size="12"/>
 				</textElement>
 				<text><![CDATA[Cedula:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="55" width="54" height="15" uuid="51a3665f-d653-4381-b06c-c73d1922a301"/>
+				<reportElement x="7" y="55" width="68" height="15" uuid="51a3665f-d653-4381-b06c-c73d1922a301"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+					<font fontName="Franklin Gothic Demi Cond" size="12"/>
 				</textElement>
 				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="85" width="54" height="15" uuid="b4187f18-d494-44ad-bbe6-11179b36bc66"/>
+				<reportElement x="7" y="85" width="68" height="15" uuid="b4187f18-d494-44ad-bbe6-11179b36bc66"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+					<font fontName="Franklin Gothic Demi Cond" size="12"/>
 				</textElement>
 				<text><![CDATA[Telefono:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="7" y="70" width="54" height="15" uuid="e1e21105-ff4f-408c-a0ee-32a81e7cfca4"/>
+				<reportElement x="7" y="70" width="68" height="15" uuid="e1e21105-ff4f-408c-a0ee-32a81e7cfca4"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Franklin Gothic Demi Cond" size="13"/>
+					<font fontName="Franklin Gothic Demi Cond" size="12"/>
 				</textElement>
 				<text><![CDATA[Ciudad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="-1" y="5" width="439" height="19" backcolor="#CCCCFF" uuid="9e348711-dd42-443e-851a-2b78f69f8289"/>
+				<reportElement mode="Opaque" x="-1" y="5" width="453" height="19" backcolor="#CCCCFF" uuid="9e348711-dd42-443e-851a-2b78f69f8289"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="14" isBold="false"/>
 				</textElement>
@@ -258,32 +259,22 @@
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="61" y="40" width="377" height="15" uuid="35464681-9dba-4000-a431-0d06fec655d3"/>
+				<reportElement x="75" y="39" width="377" height="15" uuid="35464681-9dba-4000-a431-0d06fec655d3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="61" y="25" width="377" height="15" uuid="7b2baed9-3c09-48ad-9f65-09a98bc3e713"/>
+				<reportElement x="75" y="24" width="377" height="15" uuid="7b2baed9-3c09-48ad-9f65-09a98bc3e713"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{CONCAT(personalexterno.nombres,' ',personalexterno.apellidos)}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="61" y="55" width="377" height="15" uuid="4e3bde31-18f2-4895-b97c-86f52e963cd9"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="61" y="70" width="377" height="15" uuid="02130f12-8954-424f-a651-6d51611465bb"/>
+				<reportElement x="75" y="69" width="377" height="15" uuid="02130f12-8954-424f-a651-6d51611465bb"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="61" y="85" width="377" height="15" uuid="f0064c60-5973-4b95-ab1d-f580172bffc4"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{CONCAT( telefono, ' ', telefono2, ' ', telefono3 )}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="674" y="26" width="80" height="35" uuid="ee53a95e-ad3d-4d16-bbff-4b035da9647d"/>
+				<reportElement x="674" y="26" width="69" height="35" uuid="ee53a95e-ad3d-4d16-bbff-4b035da9647d"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="17"/>
 				</textElement>
@@ -305,10 +296,10 @@
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="57" uuid="3034bb64-c332-4fad-bd33-5849e14435c3">
+					<jr:column width="50" uuid="3034bb64-c332-4fad-bd33-5849e14435c3">
 						<jr:columnHeader style="table 1_TH" height="21" rowSpan="1">
 							<staticText>
-								<reportElement x="3" y="0" width="53" height="21" uuid="efa276bc-a87f-4bc7-a768-9c6c5531c267"/>
+								<reportElement x="3" y="0" width="47" height="21" uuid="efa276bc-a87f-4bc7-a768-9c6c5531c267"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="9" isBold="true"/>
 								</textElement>
@@ -317,16 +308,18 @@
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
-								<reportElement x="3" y="0" width="53" height="15" uuid="71cd13c0-b107-4c67-a48b-3316c453e1f7"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="3" y="0" width="47" height="15" uuid="71cd13c0-b107-4c67-a48b-3316c453e1f7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{idTiquete}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="49" uuid="886373c5-229f-4f15-95e3-e869336eb43a">
+					<jr:column width="57" uuid="886373c5-229f-4f15-95e3-e869336eb43a">
 						<jr:columnHeader style="table 1_TH" height="21" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="49" height="21" uuid="f65d98e4-2ff1-4405-aeb1-c6f5ac9a48dc"/>
+								<reportElement x="0" y="0" width="57" height="21" uuid="f65d98e4-2ff1-4405-aeb1-c6f5ac9a48dc"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="9" isBold="true"/>
 								</textElement>
@@ -335,8 +328,10 @@
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="dd/MM/yy">
-								<reportElement x="0" y="0" width="49" height="15" uuid="2de1f659-4676-4733-8e0c-a8db88b1587d"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="57" height="15" uuid="2de1f659-4676-4733-8e0c-a8db88b1587d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -354,7 +349,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
 								<reportElement x="2" y="0" width="86" height="15" uuid="d859b977-dcf2-4f16-8e38-01053fb56074"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{CONCAT(tipodearroz.nombre,' - ',variedad.nombre)}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -372,7 +369,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField>
 								<reportElement x="2" y="0" width="54" height="15" uuid="3623ad86-c5f5-46eb-8865-8ee223563001"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{empaque}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -390,7 +389,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="0" y="0" width="68" height="15" uuid="43208776-7b1e-4cb8-9067-faa5661d0a91"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{kilosNetos}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -408,7 +409,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="1" y="0" width="49" height="15" uuid="02c12213-184b-44d6-806d-1879aab155c3"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{humedadUno}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -426,7 +429,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="0" y="0" width="51" height="15" uuid="41b81d2a-89d8-45f0-b930-b785ce3b4b00"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{impurezaUno}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -444,7 +449,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="0" y="0" width="66" height="15" uuid="f26c3141-3ffe-434a-88b6-764b8c9868df"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{castigoHumedad}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -462,7 +469,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="0" y="0" width="64" height="15" uuid="07954af3-67e5-4c7e-bb90-cf0691a6033a"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{castigoImpureza}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -480,7 +489,9 @@
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
 							<textField pattern="###,###.##">
 								<reportElement x="0" y="0" width="74" height="15" uuid="f331288d-5548-403b-80a9-bec24bb515ca"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{pesoCompra}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -496,9 +507,11 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
-							<textField pattern="###,###.##">
+							<textField pattern="$ ###,###.##">
 								<reportElement x="0" y="0" width="62" height="15" uuid="4963b7e6-0785-4e9d-9a7f-b2167c6724f2"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{valorKilo}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -514,9 +527,11 @@
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="15" rowSpan="1">
-							<textField pattern="###,###.##">
+							<textField pattern="$ ###,###.##">
 								<reportElement x="0" y="0" width="71" height="15" uuid="c32348f7-13a0-4de6-ba92-45f3d66a769e"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="9"/>
+								</textElement>
 								<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -524,12 +539,22 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="754" y="26" width="20" height="35" uuid="bd840da3-1a80-4cb4-acbb-bdf432ad4700"/>
+				<reportElement x="743" y="26" width="31" height="35" uuid="bd840da3-1a80-4cb4-acbb-bdf432ad4700"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="17"/>
 				</textElement>
 				<text><![CDATA[-T]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="75" y="84" width="377" height="14" uuid="f6334ea9-72a6-41e7-b3fd-074b75f8f8fc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CONCAT( personalexterno.telefono, ' ', personalexterno.telefono2, ' ', personalexterno.telefono3 )}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="54" width="377" height="15" uuid="46848016-eb8a-4df5-a936-7afdf96ebfe5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -570,9 +595,9 @@
 				<text><![CDATA[Total Kilos Netos:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="66" width="107" height="12" forecolor="#000000" uuid="6c3f4e47-c4b8-4d31-96aa-b2726c0ba65f"/>
+				<reportElement x="482" y="65" width="107" height="11" forecolor="#000000" uuid="6c3f4e47-c4b8-4d31-96aa-b2726c0ba65f"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Neto a pagar:]]></text>
 			</staticText>
@@ -662,7 +687,7 @@
 				<text><![CDATA[Kg.]]></text>
 			</staticText>
 			<textField pattern="$ ###,###.##">
-				<reportElement x="589" y="66" width="202" height="12" uuid="036f21d2-d193-4279-87ad-f3b6dc577bad"/>
+				<reportElement x="589" y="65" width="202" height="11" uuid="036f21d2-d193-4279-87ad-f3b6dc577bad"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -776,14 +801,14 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="612" y="112" width="14" height="9" uuid="11858ccf-9280-4fdf-9c83-6cfb436a1bf6"/>
+				<reportElement x="612" y="112" width="24" height="9" uuid="11858ccf-9280-4fdf-9c83-6cfb436a1bf6"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<text><![CDATA[C.C.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="627" y="112" width="165" height="9" uuid="2e58008b-5038-411c-8263-8cc174d235e8"/>
+				<reportElement x="636" y="112" width="156" height="9" uuid="2e58008b-5038-411c-8263-8cc174d235e8"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
@@ -878,12 +903,19 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="16" y="112" width="128" height="9" uuid="45c47c81-cf71-47d7-98e1-e2a365360b56"/>
+				<reportElement x="16" y="112" width="135" height="9" uuid="6557b24c-92c9-4b30-8837-38ab6f55cc1f"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nom_contador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CONCAT(empleado.nombres,' ',empleado.apellidos)}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="459" y="111" width="130" height="9" uuid="fa0f9cb1-a9c4-43cf-8db5-6393bd76514f"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Jose Otoniel Bocanegra]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
