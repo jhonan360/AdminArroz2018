@@ -10,6 +10,7 @@ import Logica.Bascula.bascula;
 import Logica.Extras.login;
 import Logica.Extras.notify;
 import Logica.Gerente.gerente;
+import Logica.Liquidacion.liquidacion;
 import Logica.Liquidacion.liquidacionesAprobadas;
 import Reportes.logicaReportes;
 import static java.lang.System.gc;
@@ -23,6 +24,8 @@ import javax.swing.JOptionPane;
 public class LiquidacionesAprobadas extends javax.swing.JFrame {
 
     public static liquidacionesAprobadas liqAprobadas;
+    public static liquidacion liqui;
+    public static CuotaFomento Fomento;
     public static login login;
     public static String user;
     public static String privilegio;
@@ -1246,7 +1249,12 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     }//GEN-LAST:event_mnCrearActionPerformed
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-        reportes.reporteCuotaFomento();
+         if (!(Fomento instanceof CuotaFomento)) {
+            Fomento =new CuotaFomento(this, rootPaneCheckingEnabled);
+            Fomento.setVisible(true);
+        } else {
+            Fomento.setVisible(true);
+        }
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed

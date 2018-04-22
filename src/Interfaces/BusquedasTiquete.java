@@ -48,7 +48,6 @@ public class BusquedasTiquete extends javax.swing.JDialog {
      * Creates new form BusquedasTiquete
      */
     public BusquedasTiquete(String tiquete) {
-
         claseTiquete = tiquete;
         System.out.println(claseTiquete);
         initComponents();

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaces;
+
 import Logica.Bascula.tipo_arroz;
 import Logica.Extras.cargarCombo;
 import Interfaces.Variedad;
@@ -16,14 +17,15 @@ import Logica.Laboratorio.laboratorioTiqueteInicial;
  * @author uriel
  */
 public class Tipo_Arroz extends javax.swing.JFrame {
+
     public static tipo_arroz tipo_arroz;
     public static cargarCombo cargar;
     public static Variedad Variedad;
     public static bascula bascula;
-    public String user,privilegio;
+    public String user, privilegio;
     static laboratorioTiqueteInicial lab;
     public static login login;
-    
+
     /**
      * Creates new form Tipo_Arroz
      */
@@ -56,7 +58,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                 mnLote.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
-                jMenu3.setVisible(true);                        
+                jMenu3.setVisible(true);
                 mnVerTiqueteLaboratorio.setVisible(false);
                 mnTiqLab.setVisible(false);
                 break;
@@ -674,9 +676,9 @@ public class Tipo_Arroz extends javax.swing.JFrame {
 
     private void chNombreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNombreItemStateChanged
         // TODO add your handling code here:
-        if (chNombre.isSelected()==true){
+        if (chNombre.isSelected() == true) {
             txtBNombre.setEditable(true);
-        }else{
+        } else {
             txtBNombre.setEditable(false);
             txtBNombre.setText("");
         }
@@ -684,9 +686,9 @@ public class Tipo_Arroz extends javax.swing.JFrame {
 
     private void chVariedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chVariedadItemStateChanged
         // TODO add your handling code here:
-        if (chVariedad.isSelected()==true){
+        if (chVariedad.isSelected() == true) {
             txtBVariedad.setEditable(true);
-        }else{
+        } else {
             txtBVariedad.setEditable(false);
             txtBVariedad.setText("");
         }
@@ -701,8 +703,8 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void btnVariedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVariedadActionPerformed
-              if (!(Variedad instanceof Variedad)) {
-              Variedad=new Variedad(this, rootPaneCheckingEnabled);
+        if (!(Variedad instanceof Variedad)) {
+            Variedad = new Variedad(this, rootPaneCheckingEnabled);
             Variedad.setVisible(true);
         } else {
             Variedad.setVisible(true);

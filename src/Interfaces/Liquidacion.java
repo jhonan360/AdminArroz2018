@@ -18,6 +18,7 @@ import Reportes.logicaReportes;
 public class Liquidacion extends javax.swing.JFrame {
 
     public static liquidacion liqui;
+    public static CuotaFomento Fomento;
     public static validaciones vali;
     public static logicaReportes reportes;
 
@@ -925,7 +926,12 @@ public class Liquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAgricultorMouseClicked
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-        reportes.reporteCuotaFomento();
+         if (!(Fomento instanceof CuotaFomento)) {
+            Fomento =new CuotaFomento(this, rootPaneCheckingEnabled);
+            Fomento.setVisible(true);
+        } else {
+            Fomento.setVisible(true);
+        }
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cefc5653-87b9-4c36-805e-bad4a92e4ffb">
 	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
-	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.zoom" value="1.948717100000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="18"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -44,9 +44,10 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="liquidaciones" uuid="471c0e31-a646-4d0b-97c7-c7453ab0e092">
 		<queryString>
-			<![CDATA[select liquidaciones.fecha,liquidaciones.idLiquidaciones,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,liquidaciones.subTotal,liquidaciones.kilosCompra,liquidaciones.valorFomArrocero,SUM(liquidaciones.subTotal) AS totalSub,SUM(liquidaciones.kilosCompra)AS totalCompra,SUM(liquidaciones.valorFomArrocero) AS totalCuota FROM detalleliquidacion,liquidaciones,tiquete,personalexterno WHERE liquidaciones.estado='aprobado' AND MONTH(liquidaciones.fecha)=02 AND YEAR(liquidaciones.fecha)=2018 AND liquidaciones.idLiquidaciones=detalleliquidacion.idLiquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones]]>
+			<![CDATA[select liquidaciones.fecha,liquidaciones.idLiquidaciones,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,liquidaciones.subTotal,liquidaciones.kilosCompra,liquidaciones.valorFomArrocero FROM detalleliquidacion,liquidaciones,tiquete,personalexterno WHERE liquidaciones.estado='aprobado' AND MONTH(liquidaciones.fecha)=02 AND YEAR(liquidaciones.fecha)=2018 AND liquidaciones.idLiquidaciones=detalleliquidacion.idLiquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones]]>
 		</queryString>
 		<field name="fecha" class="java.sql.Timestamp">
 			<fieldDescription><![CDATA[]]></fieldDescription>
@@ -67,19 +68,52 @@
 		<field name="valorFomArrocero" class="java.math.BigDecimal">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="totalSub" class="java.math.BigDecimal"/>
-		<field name="totalCompra" class="java.math.BigDecimal"/>
-		<field name="totalCuota" class="java.math.BigDecimal"/>
 	</subDataset>
+	<parameter name="mes" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="anio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT 1 AS DUMMY]]>
+		<![CDATA[select liquidaciones.fecha,liquidaciones.idLiquidaciones,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),personalexterno.cedula,liquidaciones.subTotal,liquidaciones.kilosCompra,liquidaciones.valorFomArrocero FROM detalleliquidacion,liquidaciones,tiquete,personalexterno WHERE liquidaciones.estado='aprobado' AND MONTH(liquidaciones.fecha)=$P{mes} AND YEAR(liquidaciones.fecha)=$P{anio} AND liquidaciones.idLiquidaciones=detalleliquidacion.idLiquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idAgricultor=personalexterno.idPersonalExterno GROUP BY liquidaciones.idLiquidaciones]]>
 	</queryString>
-	<field name="DUMMY" class="java.lang.Long"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idLiquidaciones" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONCAT(personalexterno.nombres,&apos; &apos;,personalexterno.apellidos)" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kilosCompra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorFomArrocero" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="valorFomArrocero_1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorFomArrocero}]]></variableExpression>
+	</variable>
+	<variable name="valorFomArrocero_2" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorFomArrocero}]]></variableExpression>
+	</variable>
+	<variable name="kilosCompra_1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{kilosCompra}]]></variableExpression>
+	</variable>
+	<variable name="kilosCompra_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{kilosCompra}]]></variableExpression>
+	</variable>
+	<variable name="subTotal_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{subTotal}]]></variableExpression>
+	</variable>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="76" splitType="Stretch">
 			<staticText>
 				<reportElement x="2" y="3" width="801" height="36" uuid="8300d957-9660-4ee7-9522-140103ab048a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -111,9 +145,9 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="23" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="1" y="-1" width="801" height="22" backcolor="#CCFFCC" uuid="a2c3d05b-ca1b-4f03-b73f-c710028f2d56"/>
+				<reportElement mode="Opaque" x="2" y="0" width="801" height="22" backcolor="#E4F7E9" uuid="a2c3d05b-ca1b-4f03-b73f-c710028f2d56"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
 				</textElement>
@@ -122,34 +156,150 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement style="table_CH" mode="Opaque" x="0" y="0" width="80" height="25" backcolor="#E4F7E9" uuid="294f421b-ab82-4b72-8548-2706559ce78d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9" isBold="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FECHA<br>OPERACIÓN"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_CH" mode="Opaque" x="80" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="00bda237-2740-4355-9313-5eca73fc7584"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FACTURA O <br> COMPROBANTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_CH" mode="Opaque" x="194" y="0" width="148" height="25" backcolor="#E4F7E9" uuid="4f3f3315-db45-4a0a-8c5e-1e955596d43a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOMBRE DE QUIEN ENTREGA<br>(VENDE O AUTODECLARA)"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table_CH" mode="Opaque" x="342" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="76f4c8dc-0418-4b2d-b075-4ccf952ea25b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" mode="Opaque" x="456" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="d95eb60a-4cc2-4acf-9bc8-6306d874f3fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" mode="Opaque" x="570" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="1447ee7e-4e84-4aa8-a935-d0f4ec9ba99e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KILOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" mode="Opaque" x="684" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="14695ae7-4215-4890-9c46-a48a52f2afd4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUOTA]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="228" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="table_TH" mode="Transparent" x="0" y="0" width="80" height="20" uuid="2b2a1b89-b766-4c4d-8ecc-11755337ae7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_CH" positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="80" y="0" width="114" height="20" isRemoveLineWhenBlank="true" uuid="9590550f-863b-45fa-9466-5b4730300223"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idLiquidaciones}+"-T"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" mode="Transparent" x="194" y="0" width="148" height="20" uuid="31d873aa-2474-49e1-aca0-32001ad07209"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" "+$F{CONCAT(personalexterno.nombres,' ',personalexterno.apellidos)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TH" mode="Transparent" x="342" y="0" width="114" height="20" uuid="cc26c567-0811-44f0-8ce7-7a1445847554"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" "+$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement style="table_TH" mode="Transparent" x="456" y="0" width="114" height="20" uuid="8dbad279-0f10-486b-8d54-8db007ee8dd5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{subTotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement style="table_TH" mode="Transparent" x="570" y="0" width="114" height="20" uuid="e644c558-5033-42cc-8958-50ff4d7fd5a7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kilosCompra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement style="table_TH" mode="Transparent" x="684" y="0" width="114" height="20" uuid="08238de8-027e-481e-85a0-48595157d9f0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorFomArrocero}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="25" splitType="Stretch">
+		<band height="22">
 			<textField>
-				<reportElement x="0" y="5" width="80" height="20" uuid="c7edc238-410f-4a38-9b3b-dd9a899132d3"/>
+				<reportElement x="0" y="1" width="80" height="20" uuid="083835d8-084a-45d4-bba2-a99ce73231ae"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="80" y="5" width="40" height="20" uuid="201b745b-657a-4082-9435-30cdb63fb4ba"/>
+				<reportElement x="80" y="1" width="40" height="20" uuid="72fe4fff-41ef-4525-9d9c-dffe09e70a3e"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="665" y="5" width="137" height="20" uuid="886aeb07-fade-4ced-8ee6-732c32d41409"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="684" y="2" width="118" height="20" uuid="467e7010-e707-4a21-a1d4-9c6ed3e7e2dc"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField pattern="$ ###,###.##" isBlankWhenNull="true">
+				<reportElement style="table_CH" mode="Transparent" x="684" y="0" width="114" height="20" uuid="5e1f41a3-5b60-4e79-873e-c82ada3b69a2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{valorFomArrocero_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement style="table_CH" mode="Transparent" x="570" y="0" width="114" height="20" uuid="1527e5d6-517f-4fae-a144-2528e32e5edd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{kilosCompra_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ ###,###.##">
+				<reportElement style="table_CH" mode="Transparent" x="456" y="0" width="114" height="20" uuid="9627ea62-f30e-4c38-91c3-aef4e4bc839d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{subTotal_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_CH" mode="Opaque" x="0" y="0" width="456" height="20" backcolor="#E4F7E9" uuid="71b27798-b56b-419c-b9dd-420c490c7a73"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "+"TOTALES:"]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

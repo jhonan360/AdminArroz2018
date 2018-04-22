@@ -20,11 +20,13 @@ import Logica.Extras.login;
 import Logica.Extras.notify;
 import Logica.Gerente.cuentas_terceros;
 import Logica.Gerente.gerente;
+import Logica.Liquidacion.liquidacion;
 import Reportes.logicaReportes;
 
 public class Cuentas_Terceros extends javax.swing.JFrame {
 
     static cuentas_terceros cuentas_terceros;
+    static CuotaFomento Fomento;
     public static String user;
     public static validaciones vali;
     public static cargarCombo cargar;
@@ -744,7 +746,12 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-        reportes.reporteCuotaFomento();
+        if (!(Fomento instanceof CuotaFomento)) {
+            Fomento =new CuotaFomento(this, rootPaneCheckingEnabled);
+            Fomento.setVisible(true);
+        } else {
+            Fomento.setVisible(true);
+        }
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

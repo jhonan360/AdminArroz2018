@@ -6,6 +6,7 @@
 package Logica.Liquidacion;
 
 import Interfaces.BusquedasTiquete;
+import Interfaces.CuotaFomento;
 import Interfaces.Liquidacion;
 import Interfaces.LiquidacionesAprobadas;
 import Interfaces.Login;
@@ -25,6 +26,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Logica.Extras.currencyFormat;
+import Logica.Extras.login;
 
 /**
  *
@@ -33,8 +35,10 @@ import Logica.Extras.currencyFormat;
 public class liquidacion {
 
     public static LiquidacionesAprobadas LiqAprobadas;
+    public static CuotaFomento Fomento;
     public static Liquidacion Liqui;
     public static Login Login;
+    public static login login;
     public static Conexion Con;
     public static ResultSet rs;
     public static Statement st;
@@ -47,7 +51,7 @@ public class liquidacion {
     public String headerColumnasLiquidacion[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default"};
     public String camposColumnasLiquidacion[] = new String[]{"center", "right", "riht", "right", "right", "right", "right", "right", "right"};
     public static tablas tbl;
-    public String idAgricultor;
+    public String idAgricultor, user;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
     long kiloNetos, totalKilosCompra, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar;
     currencyFormat cu;
@@ -327,6 +331,7 @@ public class liquidacion {
         FomArroz = Liqui.txtFomArroz.getText();
         tipoImpuesto = Liqui.cmbImpuesto.getSelectedItem().toString();
         impuesto = Liqui.txtImpuesto.getText();
+        user = login.enviarUsuario();
         if (!humedadIdeal.equals("") && !impurezaIdeal.equals("") && !FomArroz.equals("") && !tipoImpuesto.equals("") && !impuesto.equals("")) {
             if (Liqui.tblSeleccionLiquidacion.getRowCount() > 0) {
                 insertarLiquidacion();
@@ -344,8 +349,8 @@ public class liquidacion {
     public void insertarLiquidacion() {
         try {
             Con = new Conexion();
-            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
-            ext.logs("INSERT","INSERT INTO liquidaciones(idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
+            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'"+user+"','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
+            ext.logs("INSERT", "INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'"+user+"','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
             ps.execute();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -373,7 +378,7 @@ public class liquidacion {
                 String valorKilo = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString());
                 String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString());
                 st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
-                ext.logs("UPDATE","UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
+                ext.logs("UPDATE", "UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "';");
 
                 if (i == row - 1) {
                     JOptionPane.showMessageDialog(null, "Creación exitosa");

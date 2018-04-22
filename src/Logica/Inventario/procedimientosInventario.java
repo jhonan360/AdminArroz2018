@@ -69,7 +69,7 @@ public class procedimientosInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,secadora.nombre,silos.numero,silos.kilos FROM bateria,secadora,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos) AND silos.kilos<>0.00 AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria");
+        tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,secadora.nombre,silos.numero,silos.kilos FROM bateria,secadora,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos and procedimiento.estado='proceso') AND silos.kilos<>0.00 AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria");
         tbl.alinearHeaderTable(ProcedI.tblSilos, alinearHeaderSilos);
         tbl.alinearCamposTable(ProcedI.tblSilos, alinearCampoSilos);
         formatoTablaSilos();
@@ -186,8 +186,8 @@ public class procedimientosInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
-           ext.logs("INSERT","INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
-       
+            ext.logs("INSERT", "INSERT INTO procedimiento (idProcedimiento,idSilos,fecha,hora,estado) VALUES ('" + idProcedimiento + "','" + idSilo + "','" + fecha + "','" + hora + "','proceso')");
+
             int respuesta = JOptionPane.showConfirmDialog(null, "                  Procedimiento creado \n ¿Desea crear las etapas correspondientes?", "Confirmación", JOptionPane.CANCEL_OPTION);
             if (respuesta == JOptionPane.YES_OPTION) {
                 ProcedI.cerrar = true;
@@ -206,8 +206,8 @@ public class procedimientosInventario {
             Con = new Conexion();
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
-            ext.logs("UPDATE","UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
-  
+            ext.logs("UPDATE", "UPDATE procedimiento SET fecha='" + fecha + "',hora='" + hora + "' WHERE idProcedimiento='" + idProcedimiento + "'");
+
             JOptionPane.showMessageDialog(null, "Procedimiento modificado");
             Con.Desconectar();
         } catch (Exception e) {

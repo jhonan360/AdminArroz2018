@@ -61,7 +61,7 @@ public class logicaReportes {
     public static VerTiqueteVarios VerTiqVarios;
     public static LiquidacionesAprobadas LiqAprobadas;
     public static BusquedasTiqueteInicial BusT;
-    String paths = System.getProperty("user.dir");
+    static String paths = System.getProperty("user.dir");
 
     /**
      * BASCULA*
@@ -151,35 +151,29 @@ public class logicaReportes {
     /**
      * CONTADURIA*
      */
-    public void reporteCuotaFomento() {
-        //JOptionPane.showMessageDialog(null, "EN PROCESOOO");
+    public static void reporteCuotaFomento(int mes, int anio) {
 
-            String mes = "04";
-            String anio = "2018";
-            Map parametroMes = new HashMap();//mapeo de parametros
-            parametroMes.put("mes", mes);//colocar parametros
-            
-            Map parametroAnio = new HashMap();//mapeo de parametros
-            parametroAnio.put("anio", anio);
-            
-            
-            try {
-                Con = new Conexion();
-                Connection c = Con.ConectarReport();
+        Map parametro = new HashMap();//mapeo de parametros
+        parametro.put("mes", mes);//colocar parametros
+        parametro.put("anio", anio);//colocar parametros
 
-                JasperReport reporte = null;
-                String path = paths + "//src//reportes//ContadorFedearroz.jasper";//aqui se encuentra el archivo del reporte
-                reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
-                JasperPrint jprint = JasperFillManager.fillReport(reporte, parametroMes, c);//enviamos parametros
-                JasperPrint jprint2 = JasperFillManager.fillReport(reporte, parametroAnio, c);//enviamos parametros
-                JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
-                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
-                view.setVisible(true);//mostrar visible el reporte
-            } catch (JRException ex) {
-                Logger.getLogger(logicaReportes.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            Con = new Conexion();
+            Connection c = Con.ConectarReport();
+            JasperReport reporte = null;
+            String path = paths + "//src//reportes//ContadorFedearroz.jasper";//aqui se encuentra el archivo del reporte
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, c);//enviamos parametros
+            System.out.println("s" + mes);
+            System.out.println("s" + anio);
+            JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//Cerrar reporte
+            view.setVisible(true);//mostrar visible el reporte
+        } catch (JRException ex) {
+            Logger.getLogger(logicaReportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+    
     public void reporteGerenteLiquidacion() {
         int row = LiqAprobadas.tblLiquidaciones.getSelectedRow();
 
@@ -237,44 +231,43 @@ public class logicaReportes {
         try {
             InputStream is = new FileInputStream(paths + "//src//Img//logoOvalo.png"); //agregar logo
             byte[] bytes = IOUtils.toByteArray(is);//traer la imagen y convertirla
-            int imgIndex = book.addPicture(bytes,Workbook.PICTURE_TYPE_PNG);//traemos el index de la imagen
+            int imgIndex = book.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);//traemos el index de la imagen
             is.close();//cerrar el input stream para no dejar archivos temporas abiertos
-            
+
             CreationHelper help = book.getCreationHelper();//agregar imagen a ntro archivo
             Drawing draw = sheet.createDrawingPatriarch();//para poder crer la imagen
-            
+
             //colocar imagen
             ClientAnchor anchor = help.createClientAnchor();//sacar el ancho de esta imagen
             anchor.setCol1(0);
             anchor.setRow1(0);
             Picture pict = draw.createPicture(anchor, imgIndex);
-            pict.resize(1,3);
-            
+            pict.resize(1, 3);
+
             //estilo titulo
             CellStyle tituloEstilo = book.createCellStyle();
             tituloEstilo.setAlignment(HorizontalAlignment.CENTER);//Alineacion horizontal centrada
             tituloEstilo.setVerticalAlignment(VerticalAlignment.CENTER);//Alineacion vertical centrada
-            
+
             //tipo fuente
-            Font fuenteTitulo=book.createFont();
+            Font fuenteTitulo = book.createFont();
             fuenteTitulo.setFontName("Arial");
             fuenteTitulo.setBold(true);
-            fuenteTitulo.setFontHeightInPoints((short)14);
+            fuenteTitulo.setFontHeightInPoints((short) 14);
             tituloEstilo.setFont(fuenteTitulo);
-            
+
             //crear fila en donde va a estar el titulo
             Row filaTitulo = sheet.createRow(2);
             Cell celdaTitulo = filaTitulo.createCell(2);
             celdaTitulo.setCellStyle(tituloEstilo);
             celdaTitulo.setCellValue("MAteria prima trillada");
             sheet.addMergedRegion(new CellRangeAddress(2, 3, 1, 3));//fi,fu,ci,cu
-            
+
             //columnas del reporte
-            
             //FileOutputStream fileout = new FileOutputStream("trilla.xls");//guardar archivo version antigua excel
             FileOutputStream fileout = new FileOutputStream("trilla.xlsx");//guardar archivo version nueva
             book.write(fileout);
-            fileout.close();            
+            fileout.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(logicaReportes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

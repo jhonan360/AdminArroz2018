@@ -350,7 +350,6 @@ public class bascula {
 
     public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
         BusTiquete = new BusquedasTiquete(TiqPrincipal);
-        
         BusTiquete.setVisible(true);
 
         switch (num) {
