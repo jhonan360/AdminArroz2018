@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cefc5653-87b9-4c36-805e-bad4a92e4ffb">
 	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
-	<property name="ireport.zoom" value="1.948717100000002"/>
+	<property name="ireport.zoom" value="1.6105100000000019"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -112,6 +112,9 @@
 	<variable name="subTotal_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{subTotal}]]></variableExpression>
 	</variable>
+	<variable name="valorFomArrocero_3" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorFomArrocero}]]></variableExpression>
+	</variable>
 	<title>
 		<band height="76" splitType="Stretch">
 			<staticText>
@@ -142,6 +145,10 @@
 				</textElement>
 				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
 			</staticText>
+			<image>
+				<reportElement x="1" y="1" width="106" height="74" uuid="d3984efc-ccca-48e2-b43d-288fc35b9c1a"/>
+				<imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -156,61 +163,75 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="25" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<textField>
-				<reportElement style="table_CH" mode="Opaque" x="0" y="0" width="80" height="25" backcolor="#E4F7E9" uuid="294f421b-ab82-4b72-8548-2706559ce78d"/>
+				<reportElement style="table_CH" mode="Opaque" x="0" y="36" width="80" height="25" backcolor="#E4F7E9" uuid="294f421b-ab82-4b72-8548-2706559ce78d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="9" isBold="true" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["FECHA<br>OPERACIÓN"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table_CH" mode="Opaque" x="80" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="00bda237-2740-4355-9313-5eca73fc7584"/>
+				<reportElement style="table_CH" mode="Opaque" x="80" y="36" width="114" height="25" backcolor="#E4F7E9" uuid="00bda237-2740-4355-9313-5eca73fc7584"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["FACTURA O <br> COMPROBANTE"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table_CH" mode="Opaque" x="194" y="0" width="148" height="25" backcolor="#E4F7E9" uuid="4f3f3315-db45-4a0a-8c5e-1e955596d43a"/>
+				<reportElement style="table_CH" mode="Opaque" x="194" y="36" width="148" height="25" backcolor="#E4F7E9" uuid="4f3f3315-db45-4a0a-8c5e-1e955596d43a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["NOMBRE DE QUIEN ENTREGA<br>(VENDE O AUTODECLARA)"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="table_CH" mode="Opaque" x="342" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="76f4c8dc-0418-4b2d-b075-4ccf952ea25b"/>
+				<reportElement style="table_CH" mode="Opaque" x="342" y="36" width="114" height="25" backcolor="#E4F7E9" uuid="76f4c8dc-0418-4b2d-b075-4ccf952ea25b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IDENTIFICACIÓN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table_CH" mode="Opaque" x="456" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="d95eb60a-4cc2-4acf-9bc8-6306d874f3fd"/>
+				<reportElement style="table_CH" mode="Opaque" x="456" y="36" width="114" height="25" backcolor="#E4F7E9" uuid="d95eb60a-4cc2-4acf-9bc8-6306d874f3fd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[COMPRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table_CH" mode="Opaque" x="570" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="1447ee7e-4e84-4aa8-a935-d0f4ec9ba99e"/>
+				<reportElement style="table_CH" mode="Opaque" x="570" y="36" width="114" height="25" backcolor="#E4F7E9" uuid="1447ee7e-4e84-4aa8-a935-d0f4ec9ba99e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[KILOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table_CH" mode="Opaque" x="684" y="0" width="114" height="25" backcolor="#E4F7E9" uuid="14695ae7-4215-4890-9c46-a48a52f2afd4"/>
+				<reportElement style="table_CH" mode="Opaque" x="684" y="36" width="114" height="25" backcolor="#E4F7E9" uuid="14695ae7-4215-4890-9c46-a48a52f2afd4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CUOTA]]></text>
 			</staticText>
+			<textField evaluationTime="Column" pattern="$ ###,###.##">
+				<reportElement x="90" y="8" width="138" height="20" uuid="674d0b49-bd6d-475a-a8cf-0ff71aa505b0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{valorFomArrocero_3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="2" y="8" width="78" height="20" backcolor="#E4F7E9" uuid="68ac9ba8-a7b5-4c24-bbd6-7761818034a5"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CUOTA:]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy">
+			<textField pattern="dd/MM/yy">
 				<reportElement style="table_TH" mode="Transparent" x="0" y="0" width="80" height="20" uuid="2b2a1b89-b766-4c4d-8ecc-11755337ae7e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
