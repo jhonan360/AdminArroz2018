@@ -33,7 +33,6 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static gerente gerente;
     public static logicaReportes reportes;
     private notify notify;
-
     /**
      * Creates new form LiquidacionesAprobadas
      */
@@ -55,7 +54,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 mnVerTiqueteMateriaPrima.setVisible(false);
                 mnVerTiqueteVarios.setVisible(false);
                 jMenu3.setVisible(false);
-                mnReporTrilla.setVisible(false);
+                mnReporEstadisticas.setVisible(false);
+                mnReporGeneral.setVisible(false);
                 mnReporAgricultores.setVisible(false);
                 mnCuotaFomento.setVisible(true);
                 break;
@@ -65,7 +65,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
                 mnPorAprobar.setVisible(true);
                 mnCuentas.setVisible(true);
                 jMenu3.setVisible(true);
-                mnReporTrilla.setVisible(true);
+                mnReporEstadisticas.setVisible(true);
+                mnReporGeneral.setVisible(true);
                 mnReporAgricultores.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
@@ -188,7 +189,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
-        mnReporTrilla = new javax.swing.JMenuItem();
+        mnReporGeneral = new javax.swing.JMenuItem();
+        mnReporEstadisticas = new javax.swing.JMenuItem();
         mnReporAgricultores = new javax.swing.JMenuItem();
         mnCuotaFomento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -1044,19 +1046,30 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         });
         jMenu4.add(mnVerTiqueteVarios);
 
-        mnReporTrilla.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnReporTrilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnReporTrilla.setText("Materia prima trillada");
-        mnReporTrilla.setPreferredSize(new java.awt.Dimension(200, 22));
-        mnReporTrilla.addActionListener(new java.awt.event.ActionListener() {
+        mnReporGeneral.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/excel.png"))); // NOI18N
+        mnReporGeneral.setText("Informe General Materia Prima");
+        mnReporGeneral.setPreferredSize(new java.awt.Dimension(260, 22));
+        mnReporGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnReporTrillaActionPerformed(evt);
+                mnReporGeneralActionPerformed(evt);
             }
         });
-        jMenu4.add(mnReporTrilla);
+        jMenu4.add(mnReporGeneral);
+
+        mnReporEstadisticas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnReporEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
+        mnReporEstadisticas.setText("Estadisticas Materia Prima");
+        mnReporEstadisticas.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnReporEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReporEstadisticasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnReporEstadisticas);
 
         mnReporAgricultores.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporAgricultores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         mnReporAgricultores.setText("Agricultores");
         mnReporAgricultores.setPreferredSize(new java.awt.Dimension(200, 22));
         mnReporAgricultores.addActionListener(new java.awt.event.ActionListener() {
@@ -1067,7 +1080,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         jMenu4.add(mnReporAgricultores);
 
         mnCuotaFomento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         mnCuotaFomento.setText("Cuota fomento arrocero");
         mnCuotaFomento.setPreferredSize(new java.awt.Dimension(205, 22));
         mnCuotaFomento.addActionListener(new java.awt.event.ActionListener() {
@@ -1221,10 +1234,6 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         gerente.mnAgendar();
     }//GEN-LAST:event_mnAgendarActionPerformed
 
-    private void mnReporTrillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporTrillaActionPerformed
-        reportes.reporteMateriaPrimaTrillada();
-    }//GEN-LAST:event_mnReporTrillaActionPerformed
-
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
         reportes.reporteAgriculores();
     }//GEN-LAST:event_mnReporAgricultoresActionPerformed
@@ -1264,6 +1273,14 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
+
+    private void mnReporEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEstadisticasActionPerformed
+         gerente.mnReporEstadisticas(this);
+    }//GEN-LAST:event_mnReporEstadisticasActionPerformed
+
+    private void mnReporGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporGeneralActionPerformed
+        reportes.reporteGeneralMateriaPrima();
+    }//GEN-LAST:event_mnReporGeneralActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1403,7 +1420,8 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;
-    public static javax.swing.JMenuItem mnReporTrilla;
+    public static javax.swing.JMenuItem mnReporEstadisticas;
+    public static javax.swing.JMenuItem mnReporGeneral;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
     public static javax.swing.JTable tblDetalleL;

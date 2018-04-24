@@ -6,6 +6,7 @@
 package Logica.Liquidacion;
 import Interfaces.CuotaFomento;
 import Reportes.logicaReportes;
+import javax.swing.JFrame;
 
 /**
  *

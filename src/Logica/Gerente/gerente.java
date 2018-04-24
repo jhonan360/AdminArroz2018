@@ -23,9 +23,11 @@ import Logica.Extras.extras;
 import Logica.Extras.login;
 import java.sql.SQLException;
 import Interfaces.Cuentas_Terceros;
+import Interfaces.GerenteEstadisticas;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -42,6 +44,7 @@ public class gerente {
 
     public static login login;
     public static Cuentas_Terceros Cuentas_Terceros;
+    public static GerenteEstadisticas Estadisticas;
     public static extras ext;
     public static LiquidacionesAprobadas LiqAprobada;
     public static Login Login;
@@ -106,6 +109,15 @@ public class gerente {
     public static void salir() {
         Login = new Login();
         Login.setVisible(true);
+    }
+    
+    public static void mnReporEstadisticas(JFrame form){
+        if (!(Estadisticas instanceof GerenteEstadisticas)) {
+            Estadisticas =new GerenteEstadisticas(form, true);
+            Estadisticas.setVisible(true);
+        } else {
+            Estadisticas.setVisible(true);
+        }
     }
 
     public void crearModeloTabla() {// crea los modelos de las tablas

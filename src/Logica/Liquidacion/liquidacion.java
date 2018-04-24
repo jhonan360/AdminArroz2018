@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import Logica.Extras.currencyFormat;
 import Logica.Extras.login;
+import javax.swing.JFrame;
 
 /**
  *
@@ -440,6 +441,15 @@ public class liquidacion {
             LiqAprobadas.setVisible(true);
         } else {
             LiqAprobadas.setVisible(true);
+        }
+    }
+    
+    public static void mnReporCuotaFomento(JFrame form){
+        if (!(Fomento instanceof CuotaFomento)) {
+            Fomento =new CuotaFomento(form, true);
+            Fomento.setVisible(true);
+        } else {
+            Fomento.setVisible(true);
         }
     }
 

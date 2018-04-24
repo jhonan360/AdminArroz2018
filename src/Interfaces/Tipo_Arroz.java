@@ -23,7 +23,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     public static Variedad Variedad;
     public static bascula bascula;
     public String user, privilegio;
-    static laboratorioTiqueteInicial lab;
+    static laboratorioTiqueteInicial labo;
     public static login login;
 
     /**
@@ -42,6 +42,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                 mnVerTiqueteLaboratorio.setVisible(true);
                 mnAgricultor.setVisible(true);
                 mnTiqLab.setVisible(true);
+                mnPorAprobar.setVisible(true);
                 mnTipo_Arroz.setVisible(true);
                 mnConductor.setVisible(false);
                 mnVehiculo.setVisible(false);
@@ -61,6 +62,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                 jMenu3.setVisible(true);
                 mnVerTiqueteLaboratorio.setVisible(false);
                 mnTiqLab.setVisible(false);
+                mnPorAprobar.setVisible(false);
                 break;
         }
         cargar = new cargarCombo();
@@ -107,6 +109,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnPorAprobar = new javax.swing.JMenuItem();
         mnTiqLab = new javax.swing.JMenuItem();
         mnAgricultor = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
@@ -456,6 +459,17 @@ public class Tipo_Arroz extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(175, 32));
 
+        mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnPorAprobar.setText("Tiquete Entrada");
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPorAprobarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnPorAprobar);
+
         mnTiqLab.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnTiqLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnTiqLab.setText("Tiquete Laboratorio");
@@ -758,12 +772,17 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnTiqLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLabActionPerformed
-        lab.tiquete1();
+        labo.tiquete2();
     }//GEN-LAST:event_mnTiqLabActionPerformed
 
     private void mnVerTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLaboratorioActionPerformed
-        lab.busquedaTiq();
+        labo.busquedaTiq();
     }//GEN-LAST:event_mnVerTiqueteLaboratorioActionPerformed
+
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        labo.tiquete1();
+        //dispose();
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -835,6 +854,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnAgricultor;
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnLote;
+    public static javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnTipo_Arroz;
     public static javax.swing.JMenuItem mnTiqLab;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;

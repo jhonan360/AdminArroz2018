@@ -493,7 +493,7 @@ public class Usuarios extends javax.swing.JFrame {
         jMenu4.setPreferredSize(new java.awt.Dimension(175, 32));
 
         mnReporUsuarios.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnReporUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         mnReporUsuarios.setText("Usuarios");
         mnReporUsuarios.setPreferredSize(new java.awt.Dimension(175, 22));
         mnReporUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -504,7 +504,7 @@ public class Usuarios extends javax.swing.JFrame {
         jMenu4.add(mnReporUsuarios);
 
         mnReporEmpleados.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnReporEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnReporEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         mnReporEmpleados.setText("Empleados");
         mnReporEmpleados.setPreferredSize(new java.awt.Dimension(175, 22));
         mnReporEmpleados.addActionListener(new java.awt.event.ActionListener() {

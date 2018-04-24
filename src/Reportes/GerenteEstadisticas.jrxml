@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa434748-9371-4ff9-93f8-0bc062fcec98">
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="351"/>
+	<parameter name="mes1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="anio1" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT SUM(tiquete.kilosNetos),MONTH(tiquete.fecha) FROM tiquete WHERE tiquete.kilosNetos<>0.00 AND MONTH(tiquete.fecha)>=$P{mes1} AND MONTH(tiquete.fecha)<=$P{mes2} AND YEAR(tiquete.fecha)=$P{anio1} GROUP BY MONTH(tiquete.fecha) ORDER BY MONTH(tiquete.fecha) ASC]]>
+	</queryString>
+	<field name="SUM(tiquete.kilosNetos)" class="java.math.BigDecimal"/>
+	<field name="MONTH(tiquete.fecha)" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="49" width="555" height="13" uuid="de12946a-1e9f-446f-957b-01a6e5af2954"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="36" uuid="f21afea2-5973-4460-877b-dc1b8101a3db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bernard MT Condensed" size="28"/>
+				</textElement>
+				<text><![CDATA[MOLINO ESPINAL S.A.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="555" height="13" uuid="30e28b67-e3f9-4671-af39-6ccd75208a6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT. 809.010.728-0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="555" height="13" uuid="a77b3176-a7b1-4a57-bc2a-ed8fa58d51b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Book" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail:molinoespinal_sa@hotmail.com]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="1" width="106" height="72" uuid="8aabc652-eebc-4f54-a157-9f8cd30dbf7d"/>
+				<imageExpression><![CDATA[System.getProperty("user.dir")+"//src//Img//logoOvalo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="0" width="555" height="22" backcolor="#CCCCFF" uuid="2c3c732c-e228-477b-bc79-5a6cc392de73"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Franklin Gothic Demi Cond" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE MATERIA PRIMA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="72">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="50" width="100" height="18" forecolor="#000000" backcolor="#E4F7E9" uuid="29c3d676-fc25-4ad8-bd12-0e130a2c5608"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="50" width="100" height="19" forecolor="#000000" backcolor="#E4F7E9" uuid="efee49ba-03a7-47ac-b858-b2a6c4087d6c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[KILOS NETOS(Kg)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="69" width="199" height="1" uuid="4f8afec6-a646-4ad5-b237-007eb3e15695"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="1" y="49" width="199" height="1" uuid="2bbf00dd-d938-4327-97f2-05574d1ef8eb"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="36" width="199" height="13" forecolor="#000000" backcolor="#E4F7E9" uuid="45fc9c00-fc43-4e71-8e96-1da8b67e1f59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="html">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AÑO "+$P{anio1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="35" width="199" height="1" uuid="7686703c-8986-491e-be0a-1a9ca2f0e919"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="13" uuid="363c7933-c4e4-4162-a29b-66e7fa87343c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{MONTH(tiquete.fecha)}.equals(new Integer(1))?"Enero":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(2))?"Febrero":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(3))?"Marzo":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(4))?"Abril":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(5))?"Mayo":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(6))?"Junio":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(7))?"Julio":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(8))?"Agosto":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(9))?"Septiembre":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(10))?"Octubre":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(11))?"Noviembre":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(12))?"Diciembre":
+"N/A"))))))))))))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###.##">
+				<reportElement x="100" y="0" width="100" height="13" uuid="5956525c-048a-4a7c-8c99-a9b0000c8b15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUM(tiquete.kilosNetos)}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="12" width="199" height="1" uuid="3b36f3e2-39e1-4ac5-accf-2d27d918ff32"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="35">
+			<textField>
+				<reportElement x="0" y="12" width="80" height="20" uuid="6da647b8-6342-4395-9862-9ac54b6a8852"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="80" y="12" width="40" height="20" uuid="5a9e025e-7614-4d51-9464-414cb7c37124"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="397" y="12" width="159" height="20" uuid="dfd5b1a8-5bdb-487a-a0c9-e848621fe688"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="410" splitType="Stretch">
+			<barChart>
+				<chart renderType="draw" theme="default">
+					<reportElement x="1" y="33" width="555" height="289" isRemoveLineWhenBlank="true" uuid="ded9b61f-6bcf-42df-a98f-5b65c1fb2fea"/>
+					<chartTitle position="Top">
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["MATERIA PRIMA INGRESADA AL MOLINO ESPINAL S.A"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[($F{MONTH(tiquete.fecha)}.equals(new Integer(1))?"Ene":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(2))?"Feb":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(3))?"Mar":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(4))?"Abr":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(5))?"May":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(6))?"Jun":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(7))?"Jul":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(8))?"Ago":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(9))?"Sep":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(10))?"Oct":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(11))?"Nov":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(12))?"Dic":
+"N/A"))))))))))))]]></seriesExpression>
+						<categoryExpression><![CDATA[($F{MONTH(tiquete.fecha)}.equals(new Integer(1))?"Ene":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(2))?"Feb":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(3))?"Mar":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(4))?"Abr":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(5))?"May":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(6))?"Jun":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(7))?"Jul":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(8))?"Ago":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(9))?"Sep":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(10))?"Oct":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(11))?"Nov":
+($F{MONTH(tiquete.fecha)}.equals(new Integer(12))?"Dic":
+"N/A"))))))))))))]]></categoryExpression>
+						<valueExpression><![CDATA[$F{SUM(tiquete.kilosNetos)}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="true">
+					<plot orientation="Horizontal"/>
+					<itemLabel>
+						<font isBold="true"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="true"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat verticalTickLabels="false"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<line>
+				<reportElement x="0" y="32" width="555" height="1" uuid="8e7efc63-9e23-4b68-a7e3-f81deed24e92"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="322" width="554" height="1" uuid="238e50f3-d330-476b-aaf8-05d6088f7bd6"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="-1" y="341" width="555" height="57" uuid="a8c8f990-8450-44b2-9f7a-7f6af547c29d"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Las estadisticas presentadas en el presente informe corresponden al total de kilos netos ingresados al MOLINO ESPINAL S.A en los meses comprendidos entre "+
+($P{mes1}.equals(new Integer(1))?"Enero":
+($P{mes1}.equals(new Integer(2))?"Febrero":
+($P{mes1}.equals(new Integer(3))?"Marzo":
+($P{mes1}.equals(new Integer(4))?"Abril":
+($P{mes1}.equals(new Integer(5))?"Mayo":
+($P{mes1}.equals(new Integer(6))?"Junio":
+($P{mes1}.equals(new Integer(7))?"Julio":
+($P{mes1}.equals(new Integer(8))?"Agosto":
+($P{mes1}.equals(new Integer(9))?"Septiembre":
+($P{mes1}.equals(new Integer(10))?"Octubre":
+($P{mes1}.equals(new Integer(11))?"Noviembre":
+($P{mes1}.equals(new Integer(12))?"Diciembre":
+"N/A"))))))))))))+" y "+
+($P{mes2}.equals(new Integer(1))?"Enero":
+($P{mes2}.equals(new Integer(2))?"Febrero":
+($P{mes2}.equals(new Integer(3))?"Marzo":
+($P{mes2}.equals(new Integer(4))?"Abril":
+($P{mes2}.equals(new Integer(5))?"Mayo":
+($P{mes2}.equals(new Integer(6))?"Junio":
+($P{mes2}.equals(new Integer(7))?"Julio":
+($P{mes2}.equals(new Integer(8))?"Agosto":
+($P{mes2}.equals(new Integer(9))?"Septiembre":
+($P{mes2}.equals(new Integer(10))?"Octubre":
+($P{mes2}.equals(new Integer(11))?"Noviembre":
+($P{mes2}.equals(new Integer(12))?"Diciembre":
+"N/A"))))))))))))+" del año "+$P{anio1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

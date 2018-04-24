@@ -18,7 +18,6 @@ import Reportes.logicaReportes;
 public class Liquidacion extends javax.swing.JFrame {
 
     public static liquidacion liqui;
-    public static CuotaFomento Fomento;
     public static validaciones vali;
     public static logicaReportes reportes;
 
@@ -37,7 +36,17 @@ public class Liquidacion extends javax.swing.JFrame {
         vali.DECIMAL(txtFomArroz);
         vali.DECIMAL(txtImpuesto);
     }
-
+    
+    public void cerrar() {
+        liqui.salir();
+        gerente.login.ger = null;
+        gerente = null;
+        gerente.Cuentas_Terceros=null;
+        liqui = null;
+        System.gc(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria
+        super.dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -786,7 +795,7 @@ public class Liquidacion extends javax.swing.JFrame {
         mnReportes.setPreferredSize(new java.awt.Dimension(205, 32));
 
         mnCuotaFomento.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnCuotaFomento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pdf.png"))); // NOI18N
         mnCuotaFomento.setText("Cuota fomento arrocero");
         mnCuotaFomento.setPreferredSize(new java.awt.Dimension(205, 22));
         mnCuotaFomento.addActionListener(new java.awt.event.ActionListener() {
@@ -916,8 +925,7 @@ public class Liquidacion extends javax.swing.JFrame {
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         // TODO add your handling code here:
-        liqui.salir();
-        dispose();
+        this.cerrar();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void txtAgricultorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgricultorMouseClicked
@@ -926,12 +934,7 @@ public class Liquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAgricultorMouseClicked
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-         if (!(Fomento instanceof CuotaFomento)) {
-            Fomento =new CuotaFomento(this, rootPaneCheckingEnabled);
-            Fomento.setVisible(true);
-        } else {
-            Fomento.setVisible(true);
-        }
+        liqui.mnReporCuotaFomento(this);
     }//GEN-LAST:event_mnCuotaFomentoActionPerformed
 
     private void mnCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuentasActionPerformed

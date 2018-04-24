@@ -40,9 +40,9 @@ public class laboratorioTiqueteInicial {
     public static ResultSet rstipo, rstipo2, rsconsecutivo, rstipos;
     public static String consecutivo, idTiquete, ccAgricultor, idTipoDeArroz, idAgricultor, humedadUno, impurezaUno, fecha;
     public static LaboratorioTiquete Labo;
-    static LaboratorioTiqueteInicial LaboTiquete;
-    static BusquedasTiqueteInicial busTiquete;
-    static Login Login;
+    public static LaboratorioTiqueteInicial LaboTiquete;
+    public static BusquedasTiqueteInicial busTiquete;
+    public static Login Login;
     
     public laboratorioTiqueteInicial() {
         ext = new extras();
@@ -52,21 +52,21 @@ public class laboratorioTiqueteInicial {
     }
 
     public static void tiquete1() {
-        //if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
+        if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
             LaboTiquete = new LaboratorioTiqueteInicial();
             LaboTiquete.setVisible(true);
-        //} else {
-        //    LaboTiquete = new LaboratorioTiqueteInicial();
-        //}
+        } else {
+           LaboTiquete.setVisible(true);
+        }
     }
     
     public static void tiquete2() {
-        //f (!(Labo instanceof LaboratorioTiquete)) {
+        if (!(Labo instanceof LaboratorioTiquete)) {
             Labo = new LaboratorioTiquete();
             Labo.setVisible(true);
-        //} else {
-        //    Labo = new LaboratorioTiquete();
-        //}
+        } else {
+            Labo.setVisible(true);
+        }
     }
 
     public static void busquedaTiq() {
@@ -74,7 +74,7 @@ public class laboratorioTiqueteInicial {
             busTiquete = new BusquedasTiqueteInicial();
             busTiquete.setVisible(true);
         }else {
-            busTiquete = new BusquedasTiqueteInicial();
+            busTiquete .setVisible(true);
         }
     }
 

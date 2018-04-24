@@ -8,6 +8,7 @@ package Interfaces;
 import Logica.Administracion.usuarios;
 import Logica.Laboratorio.laboratorioTiquete;
 import Interfaces.Login;
+import Logica.Bascula.bascula;
 import Logica.Extras.validaciones;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
 
@@ -21,7 +22,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
     static Login log;
     static laboratorioTiqueteInicial labor;
     public static validaciones vali;
-
+    public static bascula bascula;
     /**
      * Creates new form Reportes
      */
@@ -132,6 +133,8 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
+        mnAgricultor = new javax.swing.JMenuItem();
+        mnTipoArroz = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -865,6 +868,28 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         });
         jMenu1.add(mnPorAprobar);
 
+        mnAgricultor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAgricultor.setText("Crear Agricultor");
+        mnAgricultor.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnAgricultor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgricultorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnAgricultor);
+
+        mnTipoArroz.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTipoArroz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTipoArroz.setText("Crear Tipo de arroz");
+        mnTipoArroz.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTipoArroz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTipoArrozActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnTipoArroz);
+
         jMenuBar1.add(jMenu1);
 
         jMenu5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -984,12 +1009,10 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
         labor.tiquete1();
-        dispose();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labor.salir();
-        //dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
@@ -999,6 +1022,14 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         labora.estado();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
+        bascula.abrirAgricultor();
+    }//GEN-LAST:event_mnAgricultorActionPerformed
+
+    private void mnTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipoArrozActionPerformed
+        bascula.tipo_de_arroz();
+    }//GEN-LAST:event_mnTipoArrozActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1125,7 +1156,9 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
     public static lu.tudor.santec.jtimechooser.JTimeChooser jTimeChooser1;
     public static javax.swing.JLabel lblFecha;
     private javax.swing.JMenuItem menuSalir;
-    private javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnAgricultor;
+    public static javax.swing.JMenuItem mnPorAprobar;
+    public static javax.swing.JMenuItem mnTipoArroz;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JLabel txtIdTiquete;
     // End of variables declaration//GEN-END:variables
