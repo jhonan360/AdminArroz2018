@@ -300,7 +300,7 @@ public class auditoria {
 
         }
 
-        buscarFecha();
+        buscarFecha2();
     }
 
     public void buscarEventoUsuario(String usuario) {
@@ -398,12 +398,93 @@ public class auditoria {
         int contcantidad1 = 0;
         int contDiferencias = 0;
         int posDiferencias = 0;
+        for (int f = 0; f < matriz1.length; f++) {
+            for (int g = 0; g < matriz1[f].length; g++) {
+                System.out.println("tamaño matriz:" + matriz1[f].length);
+                if (g == 4) {
+                    System.out.println("hola que hace");
+                    SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+                    System.out.println("matriz2[f][g]" + matriz1[f][g]);
+                    Date date1 = formato.parse(matriz1[f][g]);
+                    Date date2 = formato.parse(fechaInicial);
+                    Date date3 = formato.parse(fechaFinal);
+
+                    System.out.println("Date1" + date1);
+                    System.out.println("resultado1"+date1.after(date2));
+                     System.out.println("resultado2"+date1.before(date3));
+                    System.out.println("Dateini" + date2);
+
+                    System.out.println("Datefin" + date3);
+                    if (date1.after(date2) && date1.before(date3)) {
+                        contcantidad1 = contcantidad1 + 1;
+                    }
+                }
+                // SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+                // Date date1=formato.parse(fecha1);
+                //Date date2=formato.parse(fecha2);
+                //System.out.println("resultado="+date1.before(date2));
+
+            }
+
+        }
+        System.out.println("contador"+contcantidad1);
+        matriz3 = new String[contcantidad1][5];
+        for (int i = 0; i < matriz1.length; i++) {
+            for (int j = 0; j < matriz1[i].length; j++) {
+               if (j == 4) {
+                    System.out.println("hola que hace2");
+                    SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+                    Date date1 = formato.parse(matriz1[i][j]);
+                    Date date2 = formato.parse(fechaInicial);
+                    Date date3 = formato.parse(fechaFinal);
+
+                    System.out.println("Date1" + date1);
+                    System.out.println("resultado1"+date1.after(date2));
+                     System.out.println("resultado2"+date1.before(date3));
+                    System.out.println("Dateini" + date2);
+
+                    System.out.println("Datefin" + date3);
+                    if (date1.after(date2) && date1.before(date3)) {
+                        
+                         matriz3[cont][0] = matriz1[i][0];
+                    matriz3[cont][1] = matriz1[i][1];
+                    matriz3[cont][2] = matriz1[i][2];
+                    matriz3[cont][3] = matriz1[i][3];
+                    matriz3[cont][4] = matriz1[i][4];
+                    cont = cont + 1;
+                    }
+                } else {
+
+                    System.out.println("Los archivos son diferentes en la columna " + i + " y en la columna " + j);
+                }
+            }
+
+        }
+
+        CargarTablas2(matriz3, contcantidad1);
+        matriz3 = new String[0][5];
+        limpiar();
+
+    }
+public void buscarFecha2() throws ParseException {
+        int cont = 0;
+        int cont2 = 0;
+
+        Date fecha, fecha2;
+        fecha = Auditoria.dcFechaInicial.getDate();
+        fecha2 = Auditoria.dcFechaFinal.getDate();
+        String fechaInicial = cu.dateNotTime(fecha);
+        String fechaFinal = cu.dateNotTime(fecha2);
+        int contcantidad1 = 0;
+        int contDiferencias = 0;
+        int posDiferencias = 0;
         for (int f = 0; f < matriz2.length; f++) {
             for (int g = 0; g < matriz2[f].length; g++) {
                 System.out.println("tamaño matriz:" + matriz2[f].length);
                 if (g == 4) {
                     System.out.println("hola que hace");
                     SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd");
+                    System.out.println("matriz2[f][g]" + matriz2[f][g]);
                     Date date1 = formato.parse(matriz2[f][g]);
                     Date date2 = formato.parse(fechaInicial);
                     Date date3 = formato.parse(fechaFinal);
@@ -465,7 +546,6 @@ public class auditoria {
         limpiar();
 
     }
-
     public void limpiar() {
         Auditoria.TxtUsuario.setText("");
         Auditoria.CmbEvento.setSelectedIndex(0);

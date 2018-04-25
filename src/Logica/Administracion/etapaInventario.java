@@ -30,6 +30,7 @@ public class etapaInventario {
     public static Conexion Con;
     public DefaultTableModel modeloemp,modeloemp2,modeloemp3,modeloemp5;
     public static cargarCombo cargar;
+    public String idsilo,secadora,numsilo,idsilo2,numsilo2,secadora2;
     //public String columnas[] = new String[]{"N° procedimiento", "N° silo", "Fecha", "Hora", "estado"};
     public String columnas2[] = new String[]{"N°", "Etapa", "Fecha", "Hora", "Humedad"};
     public String headerEtapasProedimiento[] = new String[]{"10", "30", "30", "30", "30"};
@@ -125,6 +126,7 @@ public class etapaInventario {
 //        Procedimiento.txtHora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
 
         String silo=Procedimiento.jtablecreadas.getValueAt(rec, 1).toString();
+        idsilo=Procedimiento.jtablecreadas.getValueAt(rec, 1).toString();
         numsilo(silo);
     }
     public void numsilo(String idsilo){
@@ -178,6 +180,10 @@ public class etapaInventario {
         Procedimiento.TxtBateria.setText(Procedimiento.jtablecreadas.getValueAt(rec, 1).toString());
         Procedimiento.TxtSecadora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 2).toString());
         Procedimiento.TxtSilo.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
+        secadora=Procedimiento.jtablecreadas.getValueAt(rec, 2).toString();
+        numsilo=Procedimiento.jtablecreadas.getValueAt(rec, 3).toString();
+         getIdSilo();
+        
         crearModelo2();
        
     }
@@ -187,6 +193,9 @@ public class etapaInventario {
         idProcedimiento2= Procedimiento.jTable1.getValueAt(rec, 0).toString();
         crearModeloEtapasSeco(idProcedimiento2);
         llenarTabla(idProcedimiento2);
+        secadora2=Procedimiento.jTable1.getValueAt(rec, 2).toString();
+        numsilo2=Procedimiento.jTable1.getValueAt(rec, 3).toString();
+        getIdSilo2();
         
       }
     public void crearModelo2() {
@@ -252,6 +261,8 @@ public class etapaInventario {
     
     public void actualizar_procedimiento(){
         String estado= Procedimiento.cmbestado.getSelectedItem().toString();
+        String silo = Procedimiento.TxtSilo.getText();
+        
        
             String observacion= Procedimiento.TxtObs.getText();
             System.out.println("estado"+estado);
@@ -266,8 +277,10 @@ public class etapaInventario {
             
                 st.executeUpdate("UPDATE procedimiento SET observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
                 ext.logs("UPDATE","UPDATE procedimiento SET observacion='"+observacion+"' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
-        
-            JOptionPane.showMessageDialog(null, "El registro ha sido modificado");
+                st.executeUpdate("UPDATE silos SET kilos='0' Where silos.idSilos='" + idsilo + "'");
+                st.executeUpdate("UPDATE tiqueteensilos SET estado='seco' Where tiqueteensilos.idSilos='" + idsilo + "' and tiqueteensilos.estado='secamiento'");
+          
+                JOptionPane.showMessageDialog(null, "El registro ha sido modificado");
          
             crearModeloProcedimiento();
             crearModeloProcedimentosSecamiento();
@@ -284,6 +297,42 @@ public class etapaInventario {
              JOptionPane.showMessageDialog(null, "El campo observacion debe contener información");
                  limpiar_campos();
             }
+        
+    }
+    public void getIdSilo(){
+         try {
+            
+            Con = new Conexion();
+            st2 = Con.conexion.createStatement();
+            rs2 = st2.executeQuery("SELECT silos.idSilos FROM silos,secadora WHERE silos.numero = '" + numsilo + "' and secadora.nombre = '" + secadora + "' and silos.idSecadora=secadora.idSecadora");
+            while (rs2.next()) {
+            idsilo = rs2.getObject(1) + "";
+            
+            }
+           System.out.println("id silo = "+idsilo);
+           
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        
+    }
+     public void getIdSilo2(){
+         try {
+            
+            Con = new Conexion();
+            st2 = Con.conexion.createStatement();
+            rs2 = st2.executeQuery("SELECT silos.idSilos FROM silos,secadora WHERE silos.numero = '" + numsilo2 + "' and secadora.nombre = '" + secadora2 + "' and silos.idSecadora=secadora.idSecadora");
+            while (rs2.next()) {
+            idsilo2 = rs2.getObject(1) + "";
+            
+            }
+           System.out.println("id silo = "+idsilo);
+           
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
         
     }
     public void guardar_actualizar(){
@@ -314,7 +363,8 @@ public class etapaInventario {
             
             st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
             ext.logs("UPDATE","UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
-      
+            st.executeUpdate("UPDATE tiqueteensilos SET estado='trilla' Where tiqueteensilos.idSilos='" + idsilo + "' and tiqueteensilos.estado='seco'");
+          
             JOptionPane.showMessageDialog(null, "El registro ha sido Modificado");
          
             crearModeloProcedimiento();
