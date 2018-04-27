@@ -435,19 +435,19 @@ public class Agricultor extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel1.setText("Cedula-NIT:");
+        jLabel1.setText("Cedula-NIT*:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel2.setText("Nombres:");
+        jLabel2.setText("Nombres*:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel3.setText("Apellidos:");
+        jLabel3.setText("Apellidos*:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel4.setText("Ciudad:");
+        jLabel4.setText("Ciudad*:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel5.setText("Direccion:");
+        jLabel5.setText("Direccion*:");
 
         txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -456,10 +456,10 @@ public class Agricultor extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel6.setText("Departamento:");
+        jLabel6.setText("Departamento*:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel7.setText("Telefono 1:");
+        jLabel7.setText("Telefono 1*:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel8.setText("Telefono 2:");

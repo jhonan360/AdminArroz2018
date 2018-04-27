@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Logica.Extras.cargarCombo;
+import Logica.Extras.validaciones;
 import Logica.Inventario.almacenarInventario;
 import Logica.Inventario.verProcedimientoInventario;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
     public static verProcedimientoInventario verProcedI;
     public static cargarCombo cargar;
     public static almacenarInventario almacenarI;
+    public static validaciones vali;
 
     /**
      * Creates new form VerProcedimientosInventario
@@ -38,6 +40,8 @@ public class VerProcedimientoInventario extends javax.swing.JFrame {
         cmbBateria.setEnabled(false);
         chSilo.setEnabled(false);
         cmbSilo.setEnabled(false);
+        vali= new validaciones();
+        vali.IDENTIFICACION(txtProcedimiento);
     }
 
     public void silos() {

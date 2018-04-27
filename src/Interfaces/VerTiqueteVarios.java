@@ -8,6 +8,7 @@ package Interfaces;
 import Logica.Bascula.bascula;
 import Logica.Bascula.verTiqueteVarios;
 import Logica.Extras.login;
+import Logica.Extras.validaciones;
 import Logica.Gerente.gerente;
 import Logica.Inventario.verProcedimientoInventario;
 import Reportes.logicaReportes;
@@ -23,6 +24,8 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     public static bascula bascula;
     public static gerente gerente;
     public static logicaReportes reportes;
+    public static validaciones vali;
+
     /**
      * Creates new form VisualizarTiquetePrincipal
      */
@@ -53,7 +56,11 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
                 jMenu7.setVisible(true);
                 jMenu2.setVisible(true);
                 break;
+
         }
+        vali = new validaciones();
+        vali.IDENTIFICACION(txtTiquete);
+     
     }
 
     /**
@@ -711,7 +718,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
                 if (dcFechaInicial.getDate() == null) {
                     Date FechaFinal = dcFechaFinal.getDate();
                     dcFechaInicial.setDate(FechaFinal);
-               }
+                }
             }
         }
         verTiqVarios.crearModeloEntradas();
@@ -740,7 +747,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     private void tblVerTiqVariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVerTiqVariosMouseClicked
         verTiqVarios.crearModeloEntradas();
         verTiqVarios.tablaCamposEntrada();
-        
+
     }//GEN-LAST:event_tblVerTiqVariosMouseClicked
 
     private void tblVerTiqVariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVerTiqVariosKeyReleased

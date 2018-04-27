@@ -148,13 +148,13 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jLabel14.setText("Fecha:");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("Destino:");
+        jLabel15.setText("Destino*:");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("Conductor:");
+        jLabel16.setText("Conductor*:");
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel18.setText("Placa:");
+        jLabel18.setText("Placa*:");
 
         txtFecha.setEditable(false);
 

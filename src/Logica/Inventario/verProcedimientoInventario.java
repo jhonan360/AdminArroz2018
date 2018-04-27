@@ -59,7 +59,7 @@ public class verProcedimientoInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,silos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora WHERE procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria ORDER BY procedimiento.idProcedimiento ASC");
+        tbl.llenarTabla(VerProcedI.tblVerProcedI, modelVerProcedI, columnProced.length, "SELECT idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,tiqueteensilos.kilos,fecha,hora,tipoAlmacenamiento,observacion FROM procedimiento,silos,bateria,secadora,tiqueteensilos WHERE procedimiento.estado='finalizado' AND procedimiento.idSilos=silos.idSilos AND silos.idSilos=tiqueteensilos.idSilos AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria GROUP by procedimiento.idProcedimiento ORDER BY procedimiento.idProcedimiento ASC");
         tbl.alinearHeaderTable(VerProcedI.tblVerProcedI, alineaHeaderProced);
         tbl.alinearCamposTable(VerProcedI.tblVerProcedI, alineaCampoProced);
         tbl.alinearHeaderTable(VerProcedI.tblEtapas, alineaHeaderEtapas);

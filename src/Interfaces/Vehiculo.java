@@ -134,7 +134,7 @@ public class Vehiculo extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(470, 450));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel2.setText("Placa:");
+        jLabel2.setText("Placa*:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel3.setText("Color:");

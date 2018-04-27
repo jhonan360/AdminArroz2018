@@ -10,6 +10,7 @@ import Logica.Bascula.bascula;
 import Logica.Bascula.verTiquetePrincipal;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.login;
+import Logica.Extras.validaciones;
 import Logica.Gerente.gerente;
 import Logica.Inventario.verProcedimientoInventario;
 import Reportes.logicaReportes;
@@ -25,6 +26,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     public static bascula bascula;
     public static cargarCombo cmb;
     public static gerente gerente;
+    public static validaciones vali;
     public static logicaReportes reportes;
     /**
      * Creates new form VisualizarTiquetePrincipal
@@ -61,6 +63,10 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
         cmb = new cargarCombo();
         cmb.cargarCuentas(cmbCuenta);
         cmbCuenta.setEnabled(false);
+        vali = new validaciones();
+        vali.IDENTIFICACION(txtTiquete);
+        vali.IDENTIFICACION(txtTiquete);
+        vali.IDENTIFICACION(txtAgricultor);
     }
 
     /**

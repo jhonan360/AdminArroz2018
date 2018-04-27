@@ -470,23 +470,24 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel5" pref="64" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" max="32767" attributes="0"/>
                                       <Component id="jLabel4" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jfecha" pref="135" max="32767" attributes="0"/>
                                       <Component id="txtHumedad" max="32767" attributes="0"/>
+                                      <Component id="jfecha" pref="121" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="cmbestado" max="32767" attributes="0"/>
                                       <Component id="jhora" max="32767" attributes="0"/>
@@ -521,7 +522,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="LblAlma1" min="-2" pref="349" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -736,7 +737,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Etapa:"/>
+                    <Property name="text" type="java.lang.String" value="Etapa*:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
@@ -744,7 +745,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Hora:"/>
+                    <Property name="text" type="java.lang.String" value="Hora*:"/>
                   </Properties>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="jfecha">
@@ -765,7 +766,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Humedad:"/>
+                    <Property name="text" type="java.lang.String" value="Humedad*:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
@@ -773,7 +774,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Fecha:"/>
+                    <Property name="text" type="java.lang.String" value="Fecha*:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
@@ -856,7 +857,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel15" min="-2" pref="235" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane5" max="32767" attributes="0"/>
                                   <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
