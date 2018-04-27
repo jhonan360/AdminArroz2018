@@ -28,7 +28,7 @@ public class EtapaInventario extends javax.swing.JFrame {
         initComponents();
         //CmbAlmacenamiento.setEnabled(false);
         TxtObs.setEnabled(false);
-        LblObs.setEnabled(false);
+        //LblObs.setEnabled(false);
       //  LblAlma.setEnabled(false);
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -703,7 +703,20 @@ public class EtapaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jtablecreadasKeyPressed
 
     private void cmbestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbestadoActionPerformed
-        // TODO add your handling code here:
+     // TODO add your handling code here:
+        String estado = cmbestado.getSelectedItem().toString();
+        System.out.println("Estado del combo =" +estado);
+        if (cmbestado.getSelectedIndex()==1) {
+           // CmbAlmacenamiento.setEnabled(true);
+            TxtObs.setEnabled(true);
+            LblObs.setEnabled(true);
+           // LblAlma.setEnabled(true);
+        } else {
+            //CmbAlmacenamiento.setEnabled(false);
+            TxtObs.setEnabled(false);
+           LblObs.setEnabled(false);
+            //LblAlma.setEnabled(false);
+        }
     }//GEN-LAST:event_cmbestadoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -716,7 +729,7 @@ public class EtapaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jtablecreadasKeyReleased
 
     private void cmbestadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbestadoItemStateChanged
-        // TODO add your handling code here:
+      /**  // TODO add your handling code here:
         String estado = cmbestado.getSelectedItem().toString();
         if (estado.equals("Seco")) {
            // CmbAlmacenamiento.setEnabled(true);
@@ -728,7 +741,7 @@ public class EtapaInventario extends javax.swing.JFrame {
             TxtObs.setEnabled(false);
             LblObs.setEnabled(false);
             //LblAlma.setEnabled(false);
-        }
+        }**/
     }//GEN-LAST:event_cmbestadoItemStateChanged
 
     private void mnProcediminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProcediminetoActionPerformed
