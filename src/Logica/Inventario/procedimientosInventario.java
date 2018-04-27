@@ -69,6 +69,7 @@ public class procedimientosInventario {
                 return false;
             }
         };
+        
         tbl.llenarTabla(ProcedI.tblSilos, modelSilos, columSilos.length, "SELECT bateria.nombre,secadora.nombre,silos.numero,silos.kilos FROM bateria,secadora,silos where silos.idSilos NOT IN(SELECT procedimiento.idSilos from silos,procedimiento WHERE procedimiento.idSilos=silos.idSilos and procedimiento.estado='proceso') AND silos.kilos<>0.00 AND silos.idSecadora=secadora.idSecadora AND secadora.idBateria=bateria.idBateria");
         tbl.alinearHeaderTable(ProcedI.tblSilos, alinearHeaderSilos);
         tbl.alinearCamposTable(ProcedI.tblSilos, alinearCampoSilos);
