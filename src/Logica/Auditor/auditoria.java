@@ -549,6 +549,9 @@ public void buscarFecha2() throws ParseException {
     public void limpiar() {
         Auditoria.TxtUsuario.setText("");
         Auditoria.CmbEvento.setSelectedIndex(0);
+        Auditoria.chFecha.setSelected(false);
+        Auditoria.ChUsuario.setSelected(false);
+        Auditoria.ChEvento.setSelected(false);
 
     }
 
