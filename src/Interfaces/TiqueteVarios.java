@@ -11,6 +11,8 @@ import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 import Logica.Bascula.tiqueteVarios;
 import Logica.Extras.validaciones;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -24,19 +26,29 @@ public class TiqueteVarios extends javax.swing.JFrame {
     public static Bascula Bas;
     public static tiqueteVarios tiqVarios;
     public static int i = 0;
+    public static Toolkit T;
+    public static Dimension D;
     //private aTask task;
 
     /**
      * Creates new form TiqueteVarios
      */
     public TiqueteVarios() {
+        setLayout(null);
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
+        T = Toolkit.getDefaultToolkit();
+        D = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println("La resolución es " + D.width + " X " + D.height);
+        //this.setExtendedState(MAXIMIZED_BOTH);
+        setSize(D.width, D.height);
         setLocationRelativeTo(null);
         tiqVarios = new tiqueteVarios();
         vali = new validaciones();
         vali.TELEFONOS(txtCantidad);
+        jPanel7.setBounds(6, 200, 355, 650);
+        System.out.println(jPanel7.getBounds());
         //(task = new aTask()).execute();
+        repaint();
     }
 
     void cerrar() {
@@ -556,6 +568,8 @@ public class TiqueteVarios extends javax.swing.JFrame {
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setAlignmentX(20.0F);
+        jPanel7.setAlignmentY(20.0F);
         jPanel7.setPreferredSize(new java.awt.Dimension(343, 367));
 
         tblSegundoPesaje.setModel(new javax.swing.table.DefaultTableModel(

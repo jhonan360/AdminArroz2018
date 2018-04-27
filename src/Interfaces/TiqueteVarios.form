@@ -1117,6 +1117,8 @@
             <EtchetBorder/>
           </Border>
         </Property>
+        <Property name="alignmentX" type="float" value="20.0"/>
+        <Property name="alignmentY" type="float" value="20.0"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[343, 367]"/>
         </Property>

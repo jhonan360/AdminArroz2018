@@ -41,6 +41,7 @@ public class Bascula extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        //setSize(500,500);
         cargar = new cargarCombo();
         cargar.lote(cmbLote);
         cargar.tipoArroz(cmbTipoArroz);
@@ -163,6 +164,7 @@ public class Bascula extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 707));
 
         jPanel8.setForeground(new java.awt.Color(153, 153, 255));
 
