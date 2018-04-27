@@ -40,6 +40,7 @@ public class Gerente extends javax.swing.JFrame {
         vali = new validaciones();
         reportes = new logicaReportes();
         vali.DECIMAL(TxtValor);
+        vali.IDENTIFICACION(cedula);
         gerente.checkReminder();
         notify = new notify("gerente", gerente.login.enviarUsuario());
     }

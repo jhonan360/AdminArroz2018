@@ -47,7 +47,13 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
         reportes = new logicaReportes();
-
+        vali = new validaciones();
+        vali.IDENTIFICACION(txtCedula);
+        vali.NOMBRES(txtNombres);
+        vali.DIRECCION(txtDireccion);
+        vali.TELEFONOS(txtTelefono1);
+        vali.IDENTIFICACION(txtBCedula);
+        vali.NOMBRES(txtBNombres);
         switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);

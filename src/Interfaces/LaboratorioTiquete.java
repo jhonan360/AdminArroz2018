@@ -194,7 +194,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         jLabel25.setText("RESULTADOS");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Integral:");
+        jLabel5.setText("Integral *:");
 
         TxtIntegral.setPreferredSize(new java.awt.Dimension(6, 25));
         TxtIntegral.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -212,13 +212,13 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         TxtCascarilla.setPreferredSize(new java.awt.Dimension(6, 25));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Blanco(rp):");
+        jLabel7.setText("Blanco(rp)*:");
         jLabel7.setPreferredSize(new java.awt.Dimension(61, 25));
 
         TxtBlanco.setPreferredSize(new java.awt.Dimension(6, 25));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel9.setText("Partido:");
+        jLabel9.setText("Partido*:");
         jLabel9.setPreferredSize(new java.awt.Dimension(65, 25));
 
         TxtPartido.setPreferredSize(new java.awt.Dimension(6, 25));
@@ -235,7 +235,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         enteroRes.setEditable(false);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel20.setText("Yeso");
+        jLabel20.setText("Yeso:");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setText("Grano Dañado:");
@@ -613,7 +613,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/humedad.png"))); // NOI18N
-        jLabel16.setText("Humedad:");
+        jLabel16.setText("Humedad *:");
         jLabel16.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel16.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
@@ -725,7 +725,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(jTimeChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

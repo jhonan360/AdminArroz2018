@@ -16,6 +16,7 @@ import Reportes.logicaReportes;
 import static java.lang.System.gc;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import Logica.Extras.validaciones;
 
 /**
  *
@@ -33,6 +34,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static gerente gerente;
     public static logicaReportes reportes;
     private notify notify;
+    public static validaciones vali;
     /**
      * Creates new form LiquidacionesAprobadas
      */
@@ -44,7 +46,10 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
         reportes = new logicaReportes();
-
+       vali = new validaciones();
+       vali.IDENTIFICACION(txtTiquete);
+vali.IDENTIFICACION(txtLiquidacion);
+       vali.IDENTIFICACION(txtAgricultor);
         switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);

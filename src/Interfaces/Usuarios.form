@@ -389,18 +389,27 @@
                                   <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbPrivilegio" min="-2" pref="333" max="-2" attributes="0"/>
-                                  <Component id="txtUsuario" alignment="0" min="-2" pref="333" max="-2" attributes="0"/>
-                                  <Component id="txtContrasena" alignment="0" min="-2" pref="333" max="-2" attributes="0"/>
-                                  <Component id="cmbEstado" alignment="0" min="-2" pref="333" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtContrasena" alignment="0" min="-2" pref="321" max="-2" attributes="0"/>
+                                          <Component id="txtUsuario" min="-2" pref="321" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cmbEstado" alignment="1" pref="321" max="32767" attributes="0"/>
+                                          <Component id="cmbPrivilegio" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Component id="txtConfiContraseña" min="-2" pref="333" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtConfiContraseña" min="-2" pref="321" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -457,7 +466,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Usuario:"/>
+                <Property name="text" type="java.lang.String" value="Usuario *:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtContrasena">
@@ -470,7 +479,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a *:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbPrivilegio">
@@ -497,7 +506,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Privilegios:"/>
+                <Property name="text" type="java.lang.String" value="Privilegios *:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
@@ -505,7 +514,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Estado:"/>
+                <Property name="text" type="java.lang.String" value="Estado *:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbEstado">
@@ -540,7 +549,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
+                <Property name="text" type="java.lang.String" value="Contrase&#xf1;a *:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="txtConfiContrase&#xf1;a">

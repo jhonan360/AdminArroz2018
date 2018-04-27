@@ -9,6 +9,7 @@ import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Logica.Extras.cargarCombo;
 import Logica.Laboratorio.laboratorioTiquete;
 import javax.swing.JOptionPane;
+import Logica.Extras.validaciones;
 
 /**
  *
@@ -20,6 +21,9 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     public static Login log;
     public static bascula bascula;
     public static cargarCombo cargar;
+    public static validaciones vali;
+    
+    
 
     /**
      * Creates new form Reportes
@@ -31,6 +35,9 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         labo = new laboratorioTiqueteInicial();
         cargar = new cargarCombo();
         cargar.tipoArroz(cmbTipoArroz);
+        vali =new validaciones();
+        vali.DECIMAL(TxtHumedadUno);
+        vali.DECIMAL(TxtImpurezaUno);
     }
 
     /**
@@ -113,7 +120,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Impureza inicial:");
+        jLabel4.setText("Impureza inicial *:");
 
         txtAgricultor.setEditable(false);
         txtAgricultor.addActionListener(new java.awt.event.ActionListener() {
@@ -123,16 +130,16 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Agricultor:");
+        jLabel1.setText("Agricultor *:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Tipo de arroz:");
+        jLabel2.setText("Tipo de arroz *:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Fecha:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Humedad inicial:");
+        jLabel3.setText("Humedad inicial *:");
 
         LBFECHA.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         LBFECHA.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

@@ -11,6 +11,7 @@ import Logica.Laboratorio.busquedaLaboratorio;
 import Logica.Laboratorio.laboratorioTiqueteInicial;
 import Reportes.logicaReportes;
 import java.util.Date;
+import Logica.Extras.validaciones;
 
 /**
  *
@@ -23,6 +24,7 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
     public static bascula bascula;
     static laboratorioTiqueteInicial labo;
     public static logicaReportes reportes;
+    public static validaciones vali;
 
     /**
      * Creates new form BusquedasTiquete
@@ -34,6 +36,9 @@ public class BusquedasTiqueteInicial extends javax.swing.JFrame {
         //setLocationRelativeTo(null);
         busT = new busquedaLaboratorio();
         reportes = new logicaReportes();
+        vali = new validaciones();
+        vali.IDENTIFICACION(txtcedula);
+        vali.IDENTIFICACION(txttiquete);
     }
 
     /**

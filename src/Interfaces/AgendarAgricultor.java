@@ -12,6 +12,8 @@ import static Interfaces.LiquidacionesAprobadas.gerente;
 import Logica.Bascula.bascula;
 import Logica.Extras.notify;
 import Reportes.logicaReportes;
+import Logica.Extras.validaciones;
+
 
 /**
  *
@@ -24,6 +26,7 @@ public class AgendarAgricultor extends javax.swing.JFrame {
     public Gerente Gerente;
     public logicaReportes reportes;
     private notify notify;
+    
     /**
      * Creates new form AgendarAgricultor
      */
@@ -31,6 +34,9 @@ public class AgendarAgricultor extends javax.swing.JFrame {
         initComponents();
         vali = new validaciones();
         vali.TELEFONOS(txtDiasAntes);
+        vali.NOMBRES(txtBCiudad);
+        vali.NOMBRES(txtBNombre);
+        vali.NOMBRES(txtBApellidos);
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         agendar = new agendarAgricultor();
