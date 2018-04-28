@@ -289,7 +289,7 @@ public class logicaReportes {
             fuenteVarias.setBold(true);//negrita
             fuenteVarias.setFontHeightInPoints((short) 12);//indicamos el tamaño
             tituloEstilo.setFont(fuenteVarias);//asignamos el formato al estilo
-            
+
             //crear fila en donde va a estar el titulo
             Row filaTitulo = sheet.createRow(0);//fila donde esta el titulo
             Cell celdaTitulo = filaTitulo.createCell(2);//creamos celda
@@ -303,29 +303,29 @@ public class logicaReportes {
             celdafilaNit.setCellStyle(tituloVarias);//agregamos a la celda el estilo
             celdafilaNit.setCellValue("NIT. 809.010.728-0");//agregamos contenido de la celda
             sheet.addMergedRegion(new CellRangeAddress(2, 2, 2, 13));//fi,fu,ci,cu
-            
+
             //crear fila en donde va direccion
             Row filaDir = sheet.createRow(3);//fila donde esta el titulo
             Cell celdaDir = filaDir.createCell(2);//creamos celda
             celdaDir.setCellStyle(tituloVarias);//agregamos a la celda el estilo
             celdaDir.setCellValue("Km 1 via Espinal Ibagué Tels: 2485131 - 2483407 - Espinal - Tol.");//agregamos contenido de la celda
             sheet.addMergedRegion(new CellRangeAddress(3, 3, 2, 13));//fi,fu,ci,cu
-            
+
             //crear fila en donde va correo
             Row filaEmail = sheet.createRow(4);//fila donde esta el titulo
             Cell celdEmail = filaEmail.createCell(2);//creamos celda
             celdEmail.setCellStyle(tituloVarias);//agregamos a la celda el estilo
             celdEmail.setCellValue("E-mail:molinoespinal_sa@hotmail.com");//agregamos contenido de la celda
             sheet.addMergedRegion(new CellRangeAddress(4, 4, 2, 13));//fi,fu,ci,cu
-            
+
             //crear fila en donde va correo
             Row filaNomRepor = sheet.createRow(6);//fila donde esta el titulo
             Cell celdNomRepor = filaNomRepor.createCell(0);//creamos celda
             celdNomRepor.setCellStyle(tituloEstilo);//agregamos a la celda el estilo
             celdNomRepor.setCellValue("REPORTE GENERAL DE MATERIA PRIMA");//agregamos contenido de la celda
             sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 13));//fi,fu,ci,cu
-            sheet.addMergedRegion(new CellRangeAddress(6, 6,0, 13));//fi,fu,ci,cu
-            
+            sheet.addMergedRegion(new CellRangeAddress(6, 6, 0, 13));//fi,fu,ci,cu
+
             //columnas del reporte
             String[] cabecera = new String[]{"N°", "Cuenta", "Fecha", "Agricultor", "Tipo Arroz", "Lote", "Conductor", "Vehiculo", "Kl Brutos", "Destare", "Kl Netos", "Humedad", "Impureza", "Observación"};
 

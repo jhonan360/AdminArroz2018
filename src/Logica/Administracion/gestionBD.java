@@ -102,16 +102,16 @@ public class gestionBD {
                 switch (os) {
                     case "win":
                         if (Con.pass.equals("")) {
-                            p = Runtime.getRuntime().exec("mysqldump -u root " + Con.BD + "");
+                            p = Runtime.getRuntime().exec("mysqldump -u "+Con.user+" " + Con.BD + "");
                         } else {
-                            p = Runtime.getRuntime().exec("mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                            p = Runtime.getRuntime().exec("mysqldump -u "+Con.user+" -p" + Con.pass + "  " + Con.BD + "");
                         }
                         break;
                     case "mac":
                         if (Con.pass.equals("")) {
-                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root " + Con.BD + "");
+                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u "+Con.user+" " + Con.BD + "");
                         } else {
-                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u root -p" + Con.pass + "  " + Con.BD + "");
+                           p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysqldump -u "+Con.user+" -p" + Con.pass + "  " + Con.BD + "");
                         }
                         break;
                 }
@@ -154,16 +154,16 @@ public class gestionBD {
                     switch (os) {
                         case "win":
                             if (Con.pass.equals("")) {
-                                p = Runtime.getRuntime().exec("mysql -u root " + Con.BD + "");
+                                p = Runtime.getRuntime().exec("mysql -u "+Con.user+" " + Con.BD + "");
                             } else {
-                                p = Runtime.getRuntime().exec("mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                                p = Runtime.getRuntime().exec("mysql -u "+Con.user+" -p" + Con.pass + "  " + Con.BD + "");
                             }
                             break;
                         case "mac":
                             if (Con.pass.equals("")) {
-                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u root " + Con.BD + "");
+                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u "+Con.user+" " + Con.BD + "");
                             } else {
-                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u root -p" + Con.pass + "  " + Con.BD + "");
+                                p = Runtime.getRuntime().exec("/usr/local/mysql/bin/mysql -u "+Con.user+" -p" + Con.pass + "  " + Con.BD + "");
                             }
                             break;
                     }
