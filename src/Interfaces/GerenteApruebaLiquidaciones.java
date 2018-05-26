@@ -128,6 +128,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mnEstandares = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -792,6 +793,16 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        mnEstandares.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnEstandares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnEstandares.setText("Estandares de liquidación");
+        mnEstandares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEstandaresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnEstandares);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1003,6 +1014,10 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
         reportes.reporteGeneralMateriaPrima();
     }//GEN-LAST:event_mnReporGeneralActionPerformed
 
+    private void mnEstandaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEstandaresActionPerformed
+        gerente.mnParametros();
+    }//GEN-LAST:event_mnEstandaresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1129,6 +1144,7 @@ public class GerenteApruebaLiquidaciones extends javax.swing.JFrame {
     public static javax.swing.JLabel lblValorImpuesto;
     private javax.swing.JMenuItem menuSalir;
     private javax.swing.JMenuItem mnAgendar;
+    public static javax.swing.JMenuItem mnEstandares;
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;

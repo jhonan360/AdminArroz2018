@@ -35,6 +35,7 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
     public static logicaReportes reportes;
     private notify notify;
     public static validaciones vali;
+
     /**
      * Creates new form LiquidacionesAprobadas
      */
@@ -46,10 +47,10 @@ public class LiquidacionesAprobadas extends javax.swing.JFrame {
         user = login.enviarUsuario();
         privilegio = login.getPrivilegio(user);
         reportes = new logicaReportes();
-       vali = new validaciones();
-       vali.IDENTIFICACION(txtTiquete);
-vali.IDENTIFICACION(txtLiquidacion);
-       vali.IDENTIFICACION(txtAgricultor);
+        vali = new validaciones();
+        vali.IDENTIFICACION(txtTiquete);
+        vali.IDENTIFICACION(txtLiquidacion);
+        vali.IDENTIFICACION(txtAgricultor);
         switch (privilegio) {
             case "contador":
                 mnCrear.setVisible(true);
@@ -62,6 +63,7 @@ vali.IDENTIFICACION(txtLiquidacion);
                 mnReporEstadisticas.setVisible(false);
                 mnReporGeneral.setVisible(false);
                 mnReporAgricultores.setVisible(false);
+                mnEstandares.setVisible(false);
                 mnCuotaFomento.setVisible(true);
                 break;
             case "gerente":
@@ -75,6 +77,7 @@ vali.IDENTIFICACION(txtLiquidacion);
                 mnReporAgricultores.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
+                mnEstandares.setVisible(true);
                 mnCuotaFomento.setVisible(false);
                 break;
         }
@@ -189,6 +192,7 @@ vali.IDENTIFICACION(txtLiquidacion);
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
         mnCuentas = new javax.swing.JMenuItem();
+        mnEstandares = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -1000,6 +1004,16 @@ vali.IDENTIFICACION(txtLiquidacion);
         });
         jMenu1.add(mnCuentas);
 
+        mnEstandares.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnEstandares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnEstandares.setText("Estandares de liquidación");
+        mnEstandares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEstandaresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnEstandares);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1263,8 +1277,8 @@ vali.IDENTIFICACION(txtLiquidacion);
     }//GEN-LAST:event_mnCrearActionPerformed
 
     private void mnCuotaFomentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCuotaFomentoActionPerformed
-         if (!(Fomento instanceof CuotaFomento)) {
-            Fomento =new CuotaFomento(this, rootPaneCheckingEnabled);
+        if (!(Fomento instanceof CuotaFomento)) {
+            Fomento = new CuotaFomento(this, rootPaneCheckingEnabled);
             Fomento.setVisible(true);
         } else {
             Fomento.setVisible(true);
@@ -1280,12 +1294,16 @@ vali.IDENTIFICACION(txtLiquidacion);
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void mnReporEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEstadisticasActionPerformed
-         gerente.mnReporEstadisticas(this);
+        gerente.mnReporEstadisticas(this);
     }//GEN-LAST:event_mnReporEstadisticasActionPerformed
 
     private void mnReporGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporGeneralActionPerformed
         reportes.reporteGeneralMateriaPrima();
     }//GEN-LAST:event_mnReporGeneralActionPerformed
+
+    private void mnEstandaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEstandaresActionPerformed
+        gerente.mnParametros();
+    }//GEN-LAST:event_mnEstandaresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1422,6 +1440,7 @@ vali.IDENTIFICACION(txtLiquidacion);
     private javax.swing.JMenuItem mnCrear;
     private javax.swing.JMenuItem mnCuentas;
     public static javax.swing.JMenuItem mnCuotaFomento;
+    public static javax.swing.JMenuItem mnEstandares;
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;

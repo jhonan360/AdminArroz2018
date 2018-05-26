@@ -36,6 +36,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     public static gerente gerente;
     public static liquidacion liqui;
     private notify notify;
+
     /**
      * Creates new form Agricultor
      */
@@ -66,6 +67,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 mnReporAgricultores.setVisible(false);
                 mnVerTiqueteMateriaPrima.setVisible(false);
                 mnVerTiqueteVarios.setVisible(false);
+                mnEstandares.setVisible(false);
                 mnCuotaFomento.setVisible(true);
                 break;
             case "gerente":
@@ -79,6 +81,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
                 mnReporAgricultores.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
+                mnEstandares.setVisible(true);
                 mnCuotaFomento.setVisible(false);
                 break;
         }
@@ -129,6 +132,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
         mnCuentas = new javax.swing.JMenuItem();
+        mnEstandares = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnAgendar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -523,6 +527,16 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         });
         jMenu1.add(mnCuentas);
 
+        mnEstandares.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnEstandares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnEstandares.setText("Estandares de liquidación");
+        mnEstandares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEstandaresActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnEstandares);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -769,7 +783,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
         gerente.salir();
         gerente.login.ger = null;
         gerente = null;
-        liqui=null;
+        liqui = null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
         super.dispose();
@@ -784,12 +798,16 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void mnReporEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEstadisticasActionPerformed
-         gerente.mnReporEstadisticas(this);
+        gerente.mnReporEstadisticas(this);
     }//GEN-LAST:event_mnReporEstadisticasActionPerformed
 
     private void mnReporGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporGeneralActionPerformed
         reportes.reporteGeneralMateriaPrima();
     }//GEN-LAST:event_mnReporGeneralActionPerformed
+
+    private void mnEstandaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEstandaresActionPerformed
+        gerente.mnParametros();
+    }//GEN-LAST:event_mnEstandaresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -862,6 +880,7 @@ public class Cuentas_Terceros extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnCrear;
     private javax.swing.JMenuItem mnCuentas;
     public static javax.swing.JMenuItem mnCuotaFomento;
+    public static javax.swing.JMenuItem mnEstandares;
     public static javax.swing.JMenuItem mnGenerar;
     private javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnReporAgricultores;

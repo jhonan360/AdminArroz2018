@@ -24,6 +24,7 @@ import Logica.Extras.login;
 import java.sql.SQLException;
 import Interfaces.Cuentas_Terceros;
 import Interfaces.GerenteEstadisticas;
+import Interfaces.Parametros;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +44,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class gerente {
 
     public static login login;
+    public static Parametros Parametros;
     public static Cuentas_Terceros Cuentas_Terceros;
     public static GerenteEstadisticas Estadisticas;
     public static extras ext;
@@ -106,6 +108,15 @@ public class gerente {
         }
     }
 
+        public static void mnParametros() {
+        if (!(Parametros instanceof Parametros)) {
+            Parametros = new Parametros(Login, true);
+            Parametros.setVisible(true);
+        } else {
+            Parametros.setVisible(true);
+        }
+    }
+    
     public static void salir() {
         Login = new Login();
         Login.setVisible(true);
