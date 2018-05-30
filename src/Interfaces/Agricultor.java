@@ -38,13 +38,13 @@ public class Agricultor extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-        
+
         agr = new agricultor();
         user = login.enviarUsuario();
-        
+
         privilegio = login.getPrivilegio(user);
         System.out.println(privilegio);
-        
+
         switch (privilegio) {
             case "laboratorista":
                 mnVerTiqueteLaboratorio.setVisible(true);
@@ -68,7 +68,7 @@ public class Agricultor extends javax.swing.JFrame {
                 mnLote.setVisible(true);
                 mnVerTiqueteMateriaPrima.setVisible(true);
                 mnVerTiqueteVarios.setVisible(true);
-                jMenu3.setVisible(true);                        
+                jMenu3.setVisible(true);
                 mnVerTiqueteLaboratorio.setVisible(false);
                 mnTiqLab.setVisible(false);
                 mnPorAprobar.setVisible(false);
@@ -884,55 +884,66 @@ public class Agricultor extends javax.swing.JFrame {
 
     private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
+        hide();
     }//GEN-LAST:event_mnAgricultorActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         bascula.abrirConductor();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
         bascula.abrirVehiculo();
+        hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
-        bascula.abrirTiqueteMateriaPrima();
+       bascula.abrirTiqueteMateriaPrima();
+       hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLaboratorioActionPerformed
         labo.busquedaTiq();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteLaboratorioActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         bascula.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnTiqLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLabActionPerformed
         labo.tiquete2();
+        hide();
     }//GEN-LAST:event_mnTiqLabActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
-        labo.tiquete1();
+       labo.tiquete1();
+       hide();
         //dispose();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
@@ -952,7 +963,7 @@ public class Agricultor extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

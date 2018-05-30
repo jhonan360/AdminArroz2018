@@ -9,11 +9,11 @@ package Logica.Extras;
  *
  * @author uriel
  */
+import Interfaces.CambioContrasena;
 import Interfaces.Bascula;
 import Logica.Bascula.bascula;
 
 import Interfaces.Gerente;
-import Logica.Laboratorio.laboratorioTiquete;
 
 import Logica.Bascula.conductor;
 import Logica.Gerencia.gerencia;
@@ -29,18 +29,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Logica.Extras.log;
-import Logica.Laboratorio.laboratorioTiqueteInicial;
+import Interfaces.LaboratorioTiqueteInicial;
 import Interfaces.Auditoria;
+import javax.swing.JFrame;
 
 public class login {
 
     public static Gerente ger;
     public static Interfaces.Login log;
-    public static laboratorioTiqueteInicial labor;
+    public static LaboratorioTiqueteInicial labor;
     public static Conexion Con;
     public static String usu, con, priv, estado, usua;
-    public static Statement st;
-    public static ResultSet rs, rsusu, rsbas;
+    public static Statement st,stc;
+    public static ResultSet rs, rsusu, rsbas,rsc;
     public static ResultSet rs1;
     public static ResultSet rs2;
     public static Bascula bas;
@@ -55,7 +56,7 @@ public class login {
     public static int contIntentos = 0;
     private static String usuario2 = "",user="";
     public static log logs;
-
+    public static CambioContrasena cambioContrasena;
     public static Auditor audi;
     public static String contraencript = "";
     public static StringEncrypt encrip;
@@ -101,64 +102,76 @@ public class login {
                         JOptionPane.showMessageDialog(null, "El usuario no existe o esta inhabilitado");
                         return false;
                     }
-                    rs1 = st.executeQuery("SELECT privilegios.nombre from usuario, privilegios where usuario.user = '" + usu + "' and usuario.idPrivilegios = privilegios.idPrivilegios");
+                    rs1 = st.executeQuery("SELECT privilegios.nombre,usuario.estado from usuario, privilegios where usuario.user = '" + usu + "' and usuario.idPrivilegios = privilegios.idPrivilegios");
                     if (rs1.next()) {
                         priv = rs1.getObject(1) + "";
+                        estado = rs1.getObject(2) + "";
                         System.out.println("Privilegio encontrado " + priv);
+                        System.out.print("estado" + estado);
                     }
-                    rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
+                  /*  rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
                     if (rs2.next()) {
                         estado = rs2.getObject(1) + "";
                         System.out.print("estado" + estado);
-                    }
+                    } */
                     if (priv.equals("basculista") && estado.equals("activo")) {
-                        if (bas == null) {
+                        if (bas != null) {
+                            bas.dispose();
                             bas = new Bascula();
-                            bas.setVisible(true);
+                        } else {
+                            bas = new Bascula();
+                        }
+                        bas.setVisible(true);
+                        cambiarContrasena(bas);
                             /*
                             Envia al metodo usuario en la clase bascula el nombre del usuario
                             que ingreso con privilegio 2 para realizar un tiquete
                              */
-                            enviarUsuario();
-                        } else {
-                            bas.setVisible(true);
-                        }
+                        enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("administrador") && estado.equals("activo")) {
-                        if (admi == null) {
+                        if (admi != null) {
+                            admi.dispose();
                             admi = new Administracion();
-                            admi.setVisible(true);
-                            enviarUsuario();
                         } else {
-                            admi.setVisible(true);
+                            admi = new Administracion();
                         }
+                        admi.setVisible(true);
+                        cambiarContrasena(admi);
+                        enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("laboratorista") && estado.equals("activo")) {
-                        if (labor == null) {
-                            labor.tiquete1();
-                            enviarUsuario();
+                        if (labor != null) {
+                            labor.dispose();
+                            labor = new LaboratorioTiqueteInicial();
                         } else {
-                            labor.tiquete1();
+                            labor = new LaboratorioTiqueteInicial();
                         }
+                        labor.setVisible(true);
+                        cambiarContrasena(labor);
+                        enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("gerente") && estado.equals("activo")) {
-                        if (ger == null) {
+                        if (ger != null) {
+                            ger.dispose();
                             ger = new Gerente();
-                            enviarUsuario();
-                            ger.setVisible(true);
-
                         } else {
-                            ger.setVisible(true);
+                            ger = new Gerente();
                         }
+                        ger.setVisible(true);
+                        cambiarContrasena(ger);
+                        enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("auditor") && estado.equals("activo")) {
-                        if (Auditoria == null) {
+                        if (Auditoria != null) {
+                            Auditoria.dispose();
                             Auditoria = new Auditoria();
-                            Auditoria.setVisible(true);
-                            enviarUsuario();
                         } else {
-                            Auditoria.setVisible(true);
+                            Auditoria = new Auditoria();
                         }
+                        Auditoria.setVisible(true);
+                        cambiarContrasena(Auditoria);
+                        enviarUsuario();
                         bandera = true;
                         /*} else if (priv.equals("supervisor") && estado.equals("activo")) {
                         if (supe == null) {
@@ -170,22 +183,26 @@ public class login {
                         }
                         bandera = true;*/
                     } else if (priv.equals("contador") && estado.equals("activo")) {
-                        if (Liqui == null) {
+                        if (Liqui != null) {
+                            Liqui.dispose();
                             Liqui = new Liquidacion();
-                            Liqui.setVisible(true);
-                            enviarUsuario();
                         } else {
-                            Liqui.setVisible(true);
+                            Liqui = new Liquidacion();
                         }
+                        Liqui.setVisible(true);
+                        cambiarContrasena(Liqui);
+                        enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("molinero") && estado.equals("activo")) {
-                        if (Inventario == null) {
+                        if (Inventario != null) {
+                            Inventario.dispose();
                             Inventario = new AlmacenarInventario();
-                            Inventario.setVisible(true);
-                            enviarUsuario();
                         } else {
-                            Inventario.setVisible(true);
+                            Inventario = new AlmacenarInventario();
                         }
+                        Inventario.setVisible(true);
+                        cambiarContrasena(Inventario);
+                        enviarUsuario();
                         bandera = true;
                     } else {
                         if (!estado.equals("activo")) {
@@ -305,5 +322,29 @@ public class login {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void cambiarContrasena(JFrame jFrame) {
+        try {
+            Con = new Conexion();
+            stc = Con.conexion.createStatement();
+            rsc = stc.executeQuery("SELECT cambioContrasena FROM usuario WHERE user = '" + enviarUsuario() + "'");
+            while (rsc.next()) {
+                if (rsc.getString(1).equals("true")) {
+                    Con.Desconectar();
+                    if (cambioContrasena != null) {
+                        cambioContrasena.dispose();
+                        cambioContrasena = new CambioContrasena(jFrame,true);
+                    } 
+                    else {
+                        cambioContrasena = new CambioContrasena(jFrame,true);//PREGUNTAR A LUCHO SI SE SOBRECARGA LA MEMORIA
+                    }
+                    cambioContrasena.setVisible(true);
+                }
+            }
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }

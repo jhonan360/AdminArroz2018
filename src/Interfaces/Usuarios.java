@@ -66,6 +66,7 @@ public class Usuarios extends javax.swing.JFrame {
         lbliIdEmpleado = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtConfiContraseña = new javax.swing.JPasswordField();
+        chContrasena = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblUsuario = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -150,6 +151,14 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel11.setText("Contraseña *:");
 
+        chContrasena.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        chContrasena.setText("Cambio Contraseña Al Iniciar Sesión");
+        chContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chContrasenaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,9 +180,13 @@ public class Usuarios extends javax.swing.JFrame {
                                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 321, Short.MAX_VALUE)
-                                    .addComponent(cmbPrivilegio, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(chContrasena))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cmbEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 321, Short.MAX_VALUE)
+                                        .addComponent(cmbPrivilegio, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
@@ -207,7 +220,9 @@ public class Usuarios extends javax.swing.JFrame {
                             .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lbliIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chContrasena)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         cmbPrivilegio.getAccessibleContext().setAccessibleName("cmbPrivilegio");
@@ -666,6 +681,10 @@ public class Usuarios extends javax.swing.JFrame {
         admin.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
+    private void chContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chContrasenaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -707,6 +726,7 @@ public class Usuarios extends javax.swing.JFrame {
     public static javax.swing.JButton btnModificar;
     public static javax.swing.JButton btnRefrescar;
     public static javax.swing.JButton btnbuscar;
+    public static javax.swing.JCheckBox chContrasena;
     public static javax.swing.JCheckBox chEstado;
     public static javax.swing.JCheckBox chPrivilegio;
     public static javax.swing.JCheckBox chUsuario;

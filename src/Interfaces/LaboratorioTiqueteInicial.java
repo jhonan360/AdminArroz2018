@@ -465,7 +465,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labo.salir();
         bascula.Agricultor=null;
-        bascula.Arroz=null;
+        //bascula.Arroz=null;
         labo=null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria

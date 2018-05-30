@@ -23,7 +23,7 @@ public class Conductor extends javax.swing.JFrame {
     public static cargarCombo cargar;
     public static login log;
     public static bascula bascula;
-       
+
     public Conductor() {//Constructor de la clase
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -32,7 +32,7 @@ public class Conductor extends javax.swing.JFrame {
         cargar=new cargarCombo();
         cargar.CargarDepa(cmbDepartamento);
         cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex()+1), cmbCiudad );
-        
+
         //Validaciones de las cajas de texto
         vali=new validaciones();
         vali.IDENTIFICACION(txtCedula);
@@ -40,11 +40,11 @@ public class Conductor extends javax.swing.JFrame {
         vali.NOMBRES(txtApellidos);
         vali.DIRECCION(txtDireccion);
         vali.TELEFONOS(txtTelefono);
-        
+
         vali.IDENTIFICACION(txtBCedula);
         vali.NOMBRES(txtBCiudad);
         vali.NOMBRES(txtBApellido);
-        
+
         municipio();
     }
 
@@ -255,7 +255,7 @@ public class Conductor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         txtCedula.getAccessibleContext().setAccessibleName("txtCedula");
@@ -510,7 +510,7 @@ public class Conductor extends javax.swing.JFrame {
                         .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane1)))
@@ -722,7 +722,7 @@ public class Conductor extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cdt.limpiarRegistros();
-         cdt.estado ="crear"; 
+         cdt.estado ="crear";
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -744,7 +744,7 @@ public class Conductor extends javax.swing.JFrame {
     private void chCedulaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCedulaItemStateChanged
         if (chCedula.isSelected()==true){
             txtBCedula.setEditable(true);
-            
+
         }else{
             txtBCedula.setEditable(false);
             txtBCedula.setText("");
@@ -764,7 +764,7 @@ public class Conductor extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (chCiudad.isSelected()==true){
             txtBCiudad.setEditable(true);
-            
+
         }else{
             txtBCiudad.setEditable(false);
             txtBCiudad.setText("");
@@ -803,43 +803,50 @@ public class Conductor extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         bascula.abrirAgricultor();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
-        bascula.abrirConductor();
+        //bascula.abrirConductor();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
         bascula.abrirVehiculo();
+        hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
         bascula.abrirTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         bascula.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
@@ -850,7 +857,7 @@ public class Conductor extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static void main(String args[]) {//Main de la clase
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

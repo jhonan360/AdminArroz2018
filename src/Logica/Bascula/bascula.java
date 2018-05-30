@@ -34,6 +34,7 @@ import Negocio.ConexionBascula;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -87,6 +88,7 @@ public class bascula {
     public static ConexionBascula ConBascula;
     public static currencyFormat cu;
     //public static Double kilosBrutoss,destare,kilosNetos;
+    public static JFrame Ventanas[] = new JFrame[]{Arroz,Conductor,Agricultor,Vehiculo,Lote,Bas,TiqVarios,VerTiqPrincipal,VerTiqVarios,};
 
     public bascula() {
         //ConBascula = new ConexionBascula();
@@ -98,88 +100,109 @@ public class bascula {
     }
 
     public static void tipo_de_arroz() {
-        if (!(Arroz instanceof Tipo_Arroz)) {
+        if (Arroz != null) {
+            Arroz.dispose();
             Arroz = new Tipo_Arroz();
-            Arroz.setVisible(true);
         } else {
-            Arroz.setVisible(true);
+            Arroz = new Tipo_Arroz();
         }
+        Arroz.setVisible(true);
     }
 
     public static void abrirConductor() {
-        if (!(Conductor instanceof Conductor)) {
+        if (Conductor != null) {
+            Conductor.dispose();
             Conductor = new Conductor();
-            Conductor.setVisible(true);
         } else {
-            Conductor.setVisible(true);
+            Conductor = new Conductor();
         }
+        Conductor.setVisible(true);
     }
 
     public static void abrirAgricultor() {
-        if (!(Agricultor instanceof Agricultor)) {
+        if (Agricultor != null) {
+            Agricultor.dispose();
             Agricultor = new Agricultor();
-            Agricultor.setVisible(true);
         } else {
-            Agricultor.setVisible(true);
+            Agricultor = new Agricultor();
         }
+        Agricultor.setVisible(true);
     }
 
     public static void abrirVehiculo() {
-        if (!(Vehiculo instanceof Vehiculo)) {
+        if (Vehiculo != null) {
+            Vehiculo.dispose();
             Vehiculo = new Vehiculo();
-            Vehiculo.setVisible(true);
         } else {
-            Vehiculo.setVisible(true);
+            Vehiculo = new Vehiculo();
         }
+        Vehiculo.setVisible(true);
     }
 
     public static void abrirLote() {
-        if (!(Lote instanceof Lote)) {
+        if (Lote != null) {
+            Lote.dispose();
             Lote = new Lote();
-            Lote.setVisible(true);
         } else {
-            Lote.setVisible(true);
-        }
+            Lote = new Lote();
+        } 
+       Lote.setVisible(true);
     }
 
     public static void abrirTiqueteMateriaPrima() {
-        if (!(Bas instanceof Bascula)) {
+        if (Bas != null) {
+            Bas.dispose();
             Bas = new Bascula();
-            Bas.setVisible(true);
         } else {
-            Bas.setVisible(true);
-        }
+            Bas = new Bascula();
+        } 
+       Bas.setVisible(true);
     }
 
     public static void abrirTiqueteVarios() {
-        if (!(TiqVarios instanceof TiqueteVarios)) {
+        if (TiqVarios != null) {
+            TiqVarios.dispose();
             TiqVarios = new TiqueteVarios();
-            TiqVarios.setVisible(true);
         } else {
-            TiqVarios.setVisible(true);
+            TiqVarios = new TiqueteVarios();
         }
+        TiqVarios.setVisible(true);
+
     }
 
     public static void abrirVerTiqueteMateriaPrima() {
-        if (!(VerTiqPrincipal instanceof VerTiquetePrincipal)) {
+        if (VerTiqPrincipal != null) {
+            VerTiqPrincipal.dispose();
             VerTiqPrincipal = new VerTiquetePrincipal();
-            VerTiqPrincipal.setVisible(true);
         } else {
-            VerTiqPrincipal.setVisible(true);
+            VerTiqPrincipal = new VerTiquetePrincipal();
         }
+        VerTiqPrincipal.setVisible(true);
     }
 
     public static void abrirVerTiqueteVarios() {
-        if (!(VerTiqVarios instanceof VerTiqueteVarios)) {
+        if (VerTiqVarios != null) {
+            VerTiqVarios.dispose();
             VerTiqVarios = new VerTiqueteVarios();
-            VerTiqVarios.setVisible(true);
         } else {
-            VerTiqVarios.setVisible(true);
+            VerTiqVarios = new VerTiqueteVarios();
         }
+        VerTiqPrincipal.setVisible(true);
+       
     }
 
     public static void salir() {
-        Login = new Login();
+        for (int i = 0; i < Ventanas.length; i++) {
+            if (Ventanas[i] != null) {
+                Ventanas[i].dispose();
+            }
+        }
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
     }
 

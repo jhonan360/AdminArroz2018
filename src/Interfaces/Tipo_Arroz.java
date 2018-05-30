@@ -226,7 +226,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -277,7 +277,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -427,7 +427,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
                         .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -731,56 +731,67 @@ public class Tipo_Arroz extends javax.swing.JFrame {
 
     private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_mnAgricultorActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         bascula.abrirConductor();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
         bascula.abrirVehiculo();
+        hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
         bascula.abrirTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         bascula.salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnTiqLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqLabActionPerformed
         labo.tiquete2();
+        hide();
     }//GEN-LAST:event_mnTiqLabActionPerformed
 
     private void mnVerTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteLaboratorioActionPerformed
         labo.busquedaTiq();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteLaboratorioActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
         labo.tiquete1();
+        hide();
         //dispose();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
@@ -791,7 +802,7 @@ public class Tipo_Arroz extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -87,10 +87,16 @@ public class usuarios {
             Usu.cmbEstado.setSelectedItem(Usu.tblUsuario.getValueAt(rec, 2).toString());
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            rs = st.executeQuery("SELECT contrasena FROM usuario WHERE user='" + Usu.tblUsuario.getValueAt(rec, 0).toString() + "'");
+            rs = st.executeQuery("SELECT contrasena,cambioContrasena FROM usuario WHERE user='" + Usu.tblUsuario.getValueAt(rec, 0).toString() + "'");
             while (rs.next()) {
                 Usu.txtContrasena.setText(encrip.decrypt(rs.getString(1)));
                 Usu.txtConfiContraseña.setText(encrip.decrypt(rs.getString(1)));
+                if (rs.getString(2).equals("true")) {
+                    Usu.chContrasena.setSelected(true);
+                }else{
+                    Usu.chContrasena.setSelected(false);
+
+                }
             }
             Con.Desconectar();
         } catch (Exception e) {
@@ -126,7 +132,7 @@ public class usuarios {
                         e.printStackTrace();
                     }
                     //(System.out.println("sss"+hope );
-                    insertar_usuario(usuario, contraencript, privilegio, estado);
+                    insertar_usuario(usuario, contraencript, privilegio, estado,Usu.chContrasena.isSelected());
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "La contraseña no coincide");
@@ -137,7 +143,7 @@ public class usuarios {
         }
     }
 
-    public void insertar_usuario(String usuario, String contrasena, String privilegio, String estado) {
+    public void insertar_usuario(String usuario, String contrasena, String privilegio, String estado,boolean cambioContrasena) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -147,8 +153,8 @@ public class usuarios {
                 conusu = ((Number) rs2.getObject(1)).intValue();
             }
             if (conusu < 1) {
-                st.executeUpdate("INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
-                ext.logs("INSERT", "INSERT INTO usuario (user,contrasena,idPrivilegios,estado) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "')");
+                st.executeUpdate("INSERT INTO usuario (user,contrasena,idPrivilegios,estado,cambioContrasena) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "','"+cambioContrasena+"')");
+                ext.logs("INSERT", "INSERT INTO usuario (user,contrasena,idPrivilegios,estado,cambioContrasena) VALUES('" + usuario + "','" + contrasena + "','" + privilegio + "','" + estado + "','"+cambioContrasena+"')");
 
                 limpiar_campos();
                 crearModelo();
@@ -188,7 +194,7 @@ public class usuarios {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        actualizar_usuario(usuario, contraencript, privilegio, estado);
+                        actualizar_usuario(usuario, contraencript, privilegio, estado,Usu.chContrasena.isSelected());
                         contraencript = "";
                         crearModelo();
                         limpiar_campos();
@@ -205,12 +211,12 @@ public class usuarios {
         }
     }
 
-    public void actualizar_usuario(String usuario, String contrasena, String privilegio, String estado) {
+    public void actualizar_usuario(String usuario, String contrasena, String privilegio, String estado,boolean cambioContrasena) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
-            ext.logs("UPDATE", "UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "' WHERE usuario.user='" + usuario + "'");
+            st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena='"+cambioContrasena+"' WHERE usuario.user='" + usuario + "'");
+            ext.logs("UPDATE", "UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena'"+cambioContrasena+"' WHERE usuario.user='" + usuario + "'");
 
         } catch (Exception e) {
             e.printStackTrace();

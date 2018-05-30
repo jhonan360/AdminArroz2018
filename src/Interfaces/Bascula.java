@@ -26,7 +26,15 @@ public class Bascula extends javax.swing.JFrame {
     public static cargarCombo cargar;
     //private aTask task;
     private notify notify;
-
+    public static Tipo_Arroz Arroz;
+    public static Conductor Conductor;
+    public static Agricultor Agricultor;
+    public static Vehiculo Vehiculo;
+    public static Lote Lote;
+    public static Lote Zona;
+    public static TiqueteVarios TiqVarios;
+    public static VerTiquetePrincipal VerTiqPrincipal;
+    public static VerTiqueteVarios VerTiqVarios;
     /**
      * Creates new form Bascula
      */
@@ -50,7 +58,6 @@ public class Bascula extends javax.swing.JFrame {
         bascula = new bascula();
         bascula.tiquetes_en_espera();
         notify = new notify("basculista", bascula.login.enviarUsuario());
-        //(task = new aTask()).execute();
     }
 
     void close() {
@@ -66,16 +73,16 @@ public class Bascula extends javax.swing.JFrame {
         notify.stop();
         notify = null;
         bascula.salir();
-        bascula.login.bas=null;
+       /* bascula.login.bas=null;
         bascula = null;
         bascula.Agricultor=null;
         bascula.Arroz=null;
         bascula.VerTiqPrincipal=null;
         bascula.VerTiqVarios=null;
-        
+
         System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
-        super.dispose();
+        System.runFinalization(); //metodo para liberar memoria*/
+        dispose();
     }
 
     /**
@@ -164,7 +171,6 @@ public class Bascula extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 707));
 
         jPanel8.setForeground(new java.awt.Color(153, 153, 255));
 
@@ -950,10 +956,12 @@ public class Bascula extends javax.swing.JFrame {
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         bascula.abrirConductor();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
@@ -962,14 +970,16 @@ public class Bascula extends javax.swing.JFrame {
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
         bascula.abrirVehiculo();
+        hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        bascula.crearTiquete();
+         bascula.crearTiquete();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void btnCapturarInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarInicialActionPerformed
@@ -1062,11 +1072,13 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_tblEsperaMouseClicked
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
-        bascula.abrirTiqueteMateriaPrima();
+
+        //bascula.abrirTiqueteMateriaPrima();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void cmbTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoArrozActionPerformed
@@ -1083,15 +1095,18 @@ public class Bascula extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         bascula.abrirAgricultor();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**
@@ -1203,7 +1218,7 @@ public class Bascula extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JLabel lblHumedad;
-    public static javax.swing.JLabel lblHumedad1;
+    private javax.swing.JLabel lblHumedad1;
     public static javax.swing.JLabel lblImpureza;
     public static javax.swing.JLabel lblNumeroTiquete;
     private javax.swing.JMenuItem menuSalir;

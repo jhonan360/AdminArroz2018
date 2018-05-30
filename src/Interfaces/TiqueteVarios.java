@@ -877,39 +877,48 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         bascula.abrirAgricultor();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         bascula.abrirConductor();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
         bascula.abrirVehiculo();
+        hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
         bascula.abrirTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     /**

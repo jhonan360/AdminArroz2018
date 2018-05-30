@@ -14,6 +14,7 @@ import Negocio.Conexion;
 import Logica.Extras.login;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -136,6 +137,11 @@ public class Login extends javax.swing.JFrame {
                 txtcontraFocusGained(evt);
             }
         });
+        txtcontra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcontraKeyPressed(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setAlignmentX(0.8F);
@@ -226,11 +232,11 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyPressed
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnIngresarActionPerformed(null);
         }
     }//GEN-LAST:event_btnIngresarKeyPressed
@@ -257,6 +263,15 @@ public class Login extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtusuarioKeyPressed
+
+    private void txtcontraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            log = new login();
+            if (log.bandera == true) {
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_txtcontraKeyPressed
 
     public static void main(String args[]) {
 
