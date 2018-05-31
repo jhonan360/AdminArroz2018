@@ -187,7 +187,7 @@ public class bascula {
         } else {
             VerTiqVarios = new VerTiqueteVarios();
         }
-        VerTiqPrincipal.setVisible(true);
+        VerTiqVarios.setVisible(true);
        
     }
 

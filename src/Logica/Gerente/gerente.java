@@ -110,7 +110,7 @@ public class gerente {
 
         public static void mnParametros() {
         if (!(Parametros instanceof Parametros)) {
-            Parametros = new Parametros(Login, true);
+            Parametros = new Parametros();
             Parametros.setVisible(true);
         } else {
             Parametros.setVisible(true);

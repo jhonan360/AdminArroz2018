@@ -15,7 +15,7 @@ import Logica.Extras.validaciones;
  *
  * @author Lizeth
  */
-public class Parametros extends javax.swing.JDialog {
+public class Parametros extends javax.swing.JFrame {
 
     /**
      * Creates new form Parametros
@@ -23,8 +23,7 @@ public class Parametros extends javax.swing.JDialog {
     public static parametros parametros;
     public static validaciones vali;
 
-    public Parametros(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Parametros() {
         initComponents();
         setLocationRelativeTo(null);
         parametros = new parametros();
@@ -450,7 +449,7 @@ public class Parametros extends javax.swing.JDialog {
     }//GEN-LAST:event_mnReporGeneralActionPerformed
 
     private void mnReporEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporEstadisticasActionPerformed
-        //gerente.mnReporEstadisticas(this);
+        gerente.mnReporEstadisticas(this);
     }//GEN-LAST:event_mnReporEstadisticasActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
@@ -505,14 +504,7 @@ public class Parametros extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Parametros dialog = new Parametros(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new Parametros().setVisible(true);
             }
         });
     }
