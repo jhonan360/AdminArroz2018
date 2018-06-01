@@ -34,18 +34,19 @@ public class TiqueteVarios extends javax.swing.JFrame {
      * Creates new form TiqueteVarios
      */
     public TiqueteVarios() {
-        setLayout(null);
-        initComponents();
+        //setLayout(null);
+        initComponents();        
+        setLocationRelativeTo(null);
+        this.setResizable(false);
         T = Toolkit.getDefaultToolkit();
         D = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println("La resolución es " + D.width + " X " + D.height);
         //this.setExtendedState(MAXIMIZED_BOTH);
-        setSize(D.width, D.height);
-        setLocationRelativeTo(null);
+        //setSize(D.width, D.height)
         tiqVarios = new tiqueteVarios();
         vali = new validaciones();
         vali.TELEFONOS(txtCantidad);
-        jPanel7.setBounds(6, 200, 355, 650);
+        //jPanel7.setBounds(6, 200, 355, 650);
         System.out.println(jPanel7.getBounds());
         //(task = new aTask()).execute();
         repaint();
@@ -134,8 +135,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1366, 725));
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -531,7 +536,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -786,6 +791,25 @@ public class TiqueteVarios extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/user.png"))); // NOI18N
+        jMenu2.setText("Cuenta");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(195, 32));
+
+        menuSalir.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        menuSalir.setText("Cerrar Sesión");
+        menuSalir.setPreferredSize(new java.awt.Dimension(195, 22));
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalirActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSalir);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -907,8 +931,8 @@ public class TiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
-        bascula.abrirTiqueteVarios();
-        hide();
+        //bascula.abrirTiqueteVarios();
+        //hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
@@ -920,6 +944,11 @@ public class TiqueteVarios extends javax.swing.JFrame {
         bascula.abrirVerTiqueteVarios();
         hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
+
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+        bascula.salir();
+        dispose();
+    }//GEN-LAST:event_menuSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1001,6 +1030,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     public static javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1017,6 +1047,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JLabel lblNumeroTiquete;
+    private javax.swing.JMenuItem menuSalir;
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnLote;
     public static javax.swing.JMenuItem mnTipo_Arroz;

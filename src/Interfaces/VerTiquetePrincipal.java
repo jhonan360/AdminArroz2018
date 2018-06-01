@@ -792,8 +792,8 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
-        bascula.abrirVerTiqueteMateriaPrima();
-        hide();
+        //bascula.abrirVerTiqueteMateriaPrima();
+        //hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
@@ -802,6 +802,7 @@ public class VerTiquetePrincipal extends javax.swing.JFrame {
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         bascula.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void chCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCuentaItemStateChanged

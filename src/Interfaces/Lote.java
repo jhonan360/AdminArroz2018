@@ -732,8 +732,8 @@ public class Lote extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
-        bascula.abrirLote();
-        hide();
+        //bascula.abrirLote();
+        //hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
@@ -758,6 +758,7 @@ public class Lote extends javax.swing.JFrame {
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         bascula.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     public void municipio() {

@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
@@ -55,8 +56,9 @@ public class almacenarInventario {
     double B6[][] = new double[6][4];
     double B7[][] = new double[6][4];
     String estados[] = new String[7];
-
     currencyFormat cu;
+    public static JFrame Ventanas[] = new JFrame[]{AlmacenarI,ProcedI,EtapaI};
+
 
     public almacenarInventario() {
         tbl = new tablas();
@@ -70,34 +72,47 @@ public class almacenarInventario {
     }
 
     public static void abrirProcedimiento() {
-        if (!(ProcedI instanceof ProcedimientosInventario)) {
+        if (ProcedI != null) {
+            ProcedI.dispose();
             ProcedI = new ProcedimientosInventario();
-            ProcedI.setVisible(true);
         } else {
-            ProcedI.setVisible(true);
+            ProcedI = new ProcedimientosInventario();
         }
+        ProcedI.setVisible(true);
     }
 
     public static void abrirEtapa() {
-        if (!(EtapaI instanceof EtapaInventario)) {
+        if (EtapaI != null) {
+            EtapaI.dispose();
             EtapaI = new EtapaInventario();
-            EtapaI.setVisible(true);
         } else {
-            EtapaI.setVisible(true);
+            EtapaI = new EtapaInventario();
         }
+        EtapaI.setVisible(true);
     }
 
     public static void abrirVerProcedimiento() {
-        if (!(VerProcedI instanceof VerProcedimientoInventario)) {
+        if (VerProcedI !=null) {
+            VerProcedI.dispose();
             VerProcedI = new VerProcedimientoInventario();
-            VerProcedI.setVisible(true);
         } else {
-            VerProcedI.setVisible(true);
+            VerProcedI = new VerProcedimientoInventario();
         }
+            VerProcedI.setVisible(true);
     }
 
-    public static void salir() {
-        Login = new Login();
+    public static void salir() {    
+        for (int i = 0; i < Ventanas.length; i++) {
+            if (Ventanas[i] != null) {
+                Ventanas[i].dispose();
+            }
+        }
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
     }
 

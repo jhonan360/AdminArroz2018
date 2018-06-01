@@ -807,12 +807,13 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
-        bascula.abrirVerTiqueteVarios();
-        hide();
+        //bascula.abrirVerTiqueteVarios();
+        //hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         bascula.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void chDescripcionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chDescripcionItemStateChanged

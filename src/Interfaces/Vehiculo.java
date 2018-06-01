@@ -1,4 +1,5 @@
 package Interfaces;
+
 import static Interfaces.Conductor.cargar;
 import Logica.Bascula.bascula;
 import Logica.Bascula.vehiculo;
@@ -8,6 +9,7 @@ import Logica.Extras.cargarCombo;
 import Logica.Extras.tablas;
 import Logica.Extras.validaciones;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+
 /**
  *
  * @author Lizeth
@@ -17,26 +19,25 @@ public class Vehiculo extends javax.swing.JFrame {
     public static vehiculo vhc;
     //Extras
     public static tablas tbl;
-    public static validaciones val,vali;
+    public static validaciones val, vali;
     public static cargarCombo cargar;
     public static bascula bascula;
-   
+
     public Vehiculo() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         vhc = new vehiculo();
-        cargar=new cargarCombo();
+        cargar = new cargarCombo();
         cargar.marcas(cmbMarca);
-        
+
         //Validaciones de las cajas de texto
-        vali=new validaciones();
+        vali = new validaciones();
         vali.DIRECCION(txtPlaca);
         vali.NOMBRES(txtColor);
         vali.DIRECCION(txtModelo);
         //vali.NOMBRES(txtMarca);
-        
-        
+
         vali.DIRECCION(txtBPlaca);
         vali.DIRECCION(txtBModelo);
         vali.NOMBRES(txtBMarca);
@@ -641,27 +642,27 @@ public class Vehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void chMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chMarcaItemStateChanged
-        if (chMarca.isSelected()==true){
+        if (chMarca.isSelected() == true) {
             txtBMarca.setEditable(true);
-        }else{
+        } else {
             txtBMarca.setEditable(false);
             txtBMarca.setText("");
         }
     }//GEN-LAST:event_chMarcaItemStateChanged
 
     private void chModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chModeloItemStateChanged
-        if (chModelo.isSelected()==true){
+        if (chModelo.isSelected() == true) {
             txtBModelo.setEditable(true);
-        }else{
+        } else {
             txtBModelo.setEditable(false);
             txtBModelo.setText("");
         }
     }//GEN-LAST:event_chModeloItemStateChanged
 
     private void chPlacaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPlacaItemStateChanged
-        if (chPlaca.isSelected()==true){
+        if (chPlaca.isSelected() == true) {
             txtBPlaca.setEditable(true);
-        }else{
+        } else {
             txtBPlaca.setEditable(false);
             txtBPlaca.setText("");
         }
@@ -672,10 +673,10 @@ public class Vehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMarcaActionPerformed
 
     private void txtPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaKeyTyped
-        char c=evt.getKeyChar();
-        if(Character.isLowerCase(c)){
-            String cad=(""+c).toUpperCase();
-            c=cad.charAt(0);
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cad = ("" + c).toUpperCase();
+            c = cad.charAt(0);
             evt.setKeyChar(c);
         }
     }//GEN-LAST:event_txtPlacaKeyTyped
@@ -696,54 +697,54 @@ public class Vehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        hide();
         bascula.abrirAgricultor();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
-        hide();
         bascula.abrirConductor();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnTipo_ArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipo_ArrozActionPerformed
-        hide();
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipo_ArrozActionPerformed
 
     private void mnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVehiculoActionPerformed
-        hide();
-        bascula.abrirVehiculo();
+        //bascula.abrirVehiculo();
+        //hide();
     }//GEN-LAST:event_mnVehiculoActionPerformed
 
     private void mnLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLoteActionPerformed
-        hide();
         bascula.abrirLote();
+        hide();
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
-        hide();
         bascula.abrirTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
-        hide();
         bascula.abrirTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnTiqueteVariosActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
-        hide();
         bascula.abrirVerTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnVerTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVariosActionPerformed
-        hide();
         bascula.abrirVerTiqueteVarios();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteVariosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         bascula.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     /**

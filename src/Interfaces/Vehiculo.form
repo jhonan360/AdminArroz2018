@@ -343,7 +343,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel6" pref="1419" max="32767" attributes="0"/>
+                  <Component id="jPanel6" pref="1415" max="32767" attributes="0"/>
                   <Component id="jPanel4" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -428,7 +428,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel29" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
-                      <Component id="jPanel3" pref="962" max="32767" attributes="0"/>
+                      <Component id="jPanel3" pref="954" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -517,7 +517,7 @@
                           <Component id="jLabel5" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="cmbMarca" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                      <EmptySpace pref="232" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -856,7 +856,7 @@
                           <Component id="btnLimpiar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="btnGuardar" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

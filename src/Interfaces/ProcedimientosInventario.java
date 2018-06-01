@@ -638,15 +638,18 @@ public class ProcedimientosInventario extends javax.swing.JFrame {
 
     private void mnProcediminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProcediminetoActionPerformed
         almacenarI.abrirProcedimiento();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_mnProcediminetoActionPerformed
 
     private void mnEtapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEtapaActionPerformed
         almacenarI.abrirEtapa();
+        hide();
     }//GEN-LAST:event_mnEtapaActionPerformed
 
     private void mnVerProcedimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerProcedimientoActionPerformed
         almacenarI.abrirVerProcedimiento();
+        hide();
     }//GEN-LAST:event_mnVerProcedimientoActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed

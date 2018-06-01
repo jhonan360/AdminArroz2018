@@ -25,6 +25,10 @@ public class AlmacenarInventario extends javax.swing.JFrame {
         almacenarI = new almacenarInventario();
 
     }
+    
+    void close() {
+        super.dispose();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1916,15 +1920,18 @@ public class AlmacenarInventario extends javax.swing.JFrame {
 
     private void mnEtapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEtapaActionPerformed
         almacenarI.abrirEtapa();
+        hide();
     }//GEN-LAST:event_mnEtapaActionPerformed
 
     private void mnProcediminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProcediminetoActionPerformed
         almacenarI.abrirProcedimiento();
+        hide();
         //setVisible(false);
     }//GEN-LAST:event_mnProcediminetoActionPerformed
 
     private void mnVerProcedimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerProcedimientoActionPerformed
         almacenarI.abrirVerProcedimiento();
+        hide();
     }//GEN-LAST:event_mnVerProcedimientoActionPerformed
 
     private void tblMateriaPrimaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriaPrimaMouseClicked
