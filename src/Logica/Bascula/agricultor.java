@@ -52,12 +52,12 @@ public class agricultor {
         ext = new extras();
         // logs = new log();
         crearModelo();
-        Agr.btnEliminar.setVisible(false);
+        //Agr.btnEliminar.setVisible(false);
         ocultarbtnEliminar();
     }
 
     public void botones() {
-        Agr.btnEliminar.setVisible(false);
+        //Agr.btnEliminar.setVisible(false);
     }
 
     public void ocultarbtnEliminar() {
@@ -65,9 +65,9 @@ public class agricultor {
 
         if (login.getPrivilegio(usuario).equals("administracion")) {
             //System.out.println("administracion");
-            Agr.btnEliminar.setVisible(true);
+            //Agr.btnEliminar.setVisible(true);
         } else {
-            Agr.btnEliminar.setVisible(false);
+            //Agr.btnEliminar.setVisible(false);
         }
     }
 

@@ -6,15 +6,10 @@
 package Interfaces;
 
 //import Logica.Bascula.lote;
-
-
 import Logica.Bascula.bascula;
 import Logica.Bascula.lote;
 import Logica.Extras.cargarCombo;
 import Logica.Extras.validaciones;
-
-
-
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +18,9 @@ import java.awt.event.ActionListener;
  *
  * @author jhonansmith
  */
-
 public class Lote extends javax.swing.JFrame {
 
 //public static lote lote;
-
-
     public static lote lote;
     public static validaciones vali;
     public static cargarCombo cargar;
@@ -39,7 +31,8 @@ public class Lote extends javax.swing.JFrame {
      */
     public Lote() {
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        this.setResizable(false);
         lote = new lote();
         cargar = new cargarCombo();
         cargar.CargarDepa(cmbDepartamento);
@@ -62,8 +55,6 @@ public class Lote extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel8 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -94,6 +85,7 @@ public class Lote extends javax.swing.JFrame {
         btnRefrescar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,34 +102,13 @@ public class Lote extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 725));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel8.setPreferredSize(new java.awt.Dimension(1116, 114));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/zona.png"))); // NOI18N
-        jLabel17.setText("REGISTRO DE LOTES DE CULTIVOS");
-        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
-        );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.setPreferredSize(new java.awt.Dimension(939, 458));
@@ -361,11 +332,11 @@ public class Lote extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chNombre)
                             .addComponent(txtBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chDepartamento)
                             .addComponent(txtBDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chCiudad))
@@ -413,39 +384,46 @@ public class Lote extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))))
+                .addGap(6, 6, 6))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                .addGap(8, 8, 8))
         );
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/zona.png"))); // NOI18N
+        jLabel17.setText("REGISTRO DE LOTES DE CULTIVOS");
+        jLabel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel17.setPreferredSize(new java.awt.Dimension(593, 132));
 
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -605,17 +583,17 @@ public class Lote extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE))
-                .addGap(10, 10, 10))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1248, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -628,7 +606,6 @@ public class Lote extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //lote.crear_Zona();
-
         lote.crearLote();
     }//GEN-LAST:event_btnCrearActionPerformed
 
@@ -644,7 +621,6 @@ public class Lote extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //lote.consultar();
-
         lote.crearModelo();
 
     }//GEN-LAST:event_btnRefrescarActionPerformed
@@ -653,7 +629,6 @@ public class Lote extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //lote.limpiar_campos();
-
         lote.limpiar_registros();
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -672,9 +647,9 @@ public class Lote extends javax.swing.JFrame {
 
     private void chNombreItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chNombreItemStateChanged
         // TODO add your handling code here:
-        if (chNombre.isSelected()==true){
+        if (chNombre.isSelected() == true) {
             txtBNombre.setEditable(true);
-        }else{
+        } else {
             txtBNombre.setEditable(false);
             txtBNombre.setText("");
         }
@@ -682,9 +657,9 @@ public class Lote extends javax.swing.JFrame {
 
     private void chDepartamentoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chDepartamentoItemStateChanged
         // TODO add your handling code here:
-        if (chDepartamento.isSelected()==true){
+        if (chDepartamento.isSelected() == true) {
             txtBDepartamento.setEditable(true);
-        }else{
+        } else {
             txtBDepartamento.setEditable(false);
             txtBDepartamento.setText("");
         }
@@ -692,9 +667,9 @@ public class Lote extends javax.swing.JFrame {
 
     private void chCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chCiudadItemStateChanged
         // TODO add your handling code here:
-        if (chCiudad.isSelected()==true){
+        if (chCiudad.isSelected() == true) {
             txtBCiudad.setEditable(true);
-        }else{
+        } else {
             txtBCiudad.setEditable(false);
             txtBCiudad.setText("");
         }
@@ -765,13 +740,13 @@ public class Lote extends javax.swing.JFrame {
         cmbDepartamento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
-               //lote.cargarMunicipio((String) cmbDepartamento.getSelectedItem());
-
+                //lote.cargarMunicipio((String) cmbDepartamento.getSelectedItem());
                 cargar.cargarMunicipio(String.valueOf(cmbDepartamento.getSelectedIndex() + 1), cmbMunicipio);
 
             }
         });
     }
+
     /**
      * @param args the command line arguments
      */
@@ -839,7 +814,6 @@ public class Lote extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
