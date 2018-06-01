@@ -9,6 +9,7 @@ import Interfaces.BusquedasTiqueteInicial;
 import Interfaces.LaboratorioTiquete;
 import Interfaces.LaboratorioTiqueteInicial;
 import Interfaces.Login;
+import Logica.Bascula.bascula;
 import Logica.Extras.currencyFormat;
 import Logica.Extras.extras;
 import Logica.Extras.login;
@@ -20,6 +21,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,7 +29,7 @@ import javax.swing.JOptionPane;
  * @author uriel
  */
 public class laboratorioTiqueteInicial {
-
+    public static bascula bascula;
     public static login login;
     public String user;
     public static extras ext;
@@ -43,7 +45,7 @@ public class laboratorioTiqueteInicial {
     public static LaboratorioTiqueteInicial LaboTiquete;
     public static BusquedasTiqueteInicial busTiquete;
     public static Login Login;
-    
+    public static JFrame Ventanas[] = new JFrame[]{LaboTiquete,Labo,busTiquete,bascula.Agricultor,bascula.Arroz};
     public laboratorioTiqueteInicial() {
         ext = new extras();
         cu = new currencyFormat();
@@ -52,34 +54,42 @@ public class laboratorioTiqueteInicial {
     }
 
     public static void tiquete1() {
-        if (!(LaboTiquete instanceof LaboratorioTiqueteInicial)) {
+        if (LaboTiquete != null) {
+            LaboTiquete.dispose();
             LaboTiquete = new LaboratorioTiqueteInicial();
-            LaboTiquete.setVisible(true);
         } else {
-           LaboTiquete.setVisible(true);
+            LaboTiquete = new LaboratorioTiqueteInicial();
         }
+        LaboTiquete.setVisible(true);
     }
     
     public static void tiquete2() {
-        if (!(Labo instanceof LaboratorioTiquete)) {
+        if (Labo != null) {
+            Labo.dispose();
             Labo = new LaboratorioTiquete();
-            Labo.setVisible(true);
         } else {
-            Labo.setVisible(true);
+            Labo = new LaboratorioTiquete();
         }
+        Labo.setVisible(true);
     }
 
     public static void busquedaTiq() {
-        if(!(busTiquete instanceof BusquedasTiqueteInicial)) {
+        if (busTiquete != null) {
+            busTiquete.dispose();
             busTiquete = new BusquedasTiqueteInicial();
-            busTiquete.setVisible(true);
-        }else {
-            busTiquete .setVisible(true);
+        } else {
+            busTiquete = new BusquedasTiqueteInicial();
         }
+        busTiquete.setVisible(true);
     }
 
     public static void salir() {
-        Login = new Login();
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
     }
     

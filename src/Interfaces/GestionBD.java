@@ -61,7 +61,7 @@ public class GestionBD extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1270, 708));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -345,15 +345,17 @@ public class GestionBD extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         admin.abrirUsuario();
-        //setVisible(false);
+        hide();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         admin.abrirEmpleado();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void mnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGestionBDActionPerformed
-        admin.abrirGestionBD();
+        /*admin.abrirGestionBD();
+        hide();*/
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
@@ -365,8 +367,8 @@ public class GestionBD extends javax.swing.JFrame {
     }//GEN-LAST:event_mnReporEmpleadosActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         admin.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     /**

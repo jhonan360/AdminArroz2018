@@ -79,6 +79,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnPorAprobar = new javax.swing.JMenuItem();
         mnTiqueteLaboratorio = new javax.swing.JMenuItem();
         mnAgricultor = new javax.swing.JMenuItem();
         mnTipoArroz = new javax.swing.JMenuItem();
@@ -325,6 +326,17 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(195, 32));
 
+        mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnPorAprobar.setText("Tiquete Entrada");
+        mnPorAprobar.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnPorAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnPorAprobarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnPorAprobar);
+
         mnTiqueteLaboratorio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnTiqueteLaboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnTiqueteLaboratorio.setText("Tiquete Laboratorio");
@@ -453,37 +465,38 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         labo.guardar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mnTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteLaboratorioActionPerformed
         labo.tiquete2();
-        //dispose();
+        hide();
     }//GEN-LAST:event_mnTiqueteLaboratorioActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labo.salir();
-        bascula.Agricultor=null;
-        //bascula.Arroz=null;
-        labo=null;
-        System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
-        super.dispose();
-        //dispose();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         labo.busquedaTiq();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
+        hide();
     }//GEN-LAST:event_mnAgricultorActionPerformed
 
     private void mnTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipoArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipoArrozActionPerformed
+
+    private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
+        /*labo.tiquete1();
+        hide();*/
+    }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -555,6 +568,7 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JMenuItem menuSalir;
     public static javax.swing.JMenuItem mnAgricultor;
+    public static javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnTipoArroz;
     public static javax.swing.JMenuItem mnTiqueteLaboratorio;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;

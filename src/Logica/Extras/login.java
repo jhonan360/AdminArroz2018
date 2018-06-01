@@ -336,7 +336,7 @@ public class login {
                         cambioContrasena = new CambioContrasena(jFrame,true);
                     } 
                     else {
-                        cambioContrasena = new CambioContrasena(jFrame,true);//PREGUNTAR A LUCHO SI SE SOBRECARGA LA MEMORIA
+                        cambioContrasena = new CambioContrasena(jFrame,true);
                     }
                     cambioContrasena.setVisible(true);
                 }

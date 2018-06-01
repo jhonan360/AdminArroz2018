@@ -33,22 +33,23 @@ public class administracion {
     }*/
 
     public static void abrirEmpleado() {
-        if (!(Empleado instanceof Empleado)) {
+        if (Empleado != null) {
+            Empleado.dispose();
             Empleado = new Empleado();
-            Empleado.setVisible(true);
         } else {
-            Empleado.setVisible(true);
+            Empleado = new Empleado();
         }
-
+        Empleado.setVisible(true);
     }
 
     public static void abrirUsuario() {
-        if (!(Usuario instanceof Usuarios)) {
+        if (Usuario != null) {
+            Usuario.dispose();
             Usuario = new Usuarios();
-            Usuario.setVisible(true);
         } else {
-            Usuario.setVisible(true);
+            Usuario = new Usuarios();
         }
+        Usuario.setVisible(true);
     }
 
     public static void abrirReportes() {
@@ -57,13 +58,22 @@ public class administracion {
     }
 
     public static void abrirGestionBD() {
-        GestionBD = new GestionBD();
+        if (GestionBD != null) {
+            GestionBD.dispose();
+            GestionBD = new GestionBD();
+        } else {
+            GestionBD = new GestionBD();
+        }
         GestionBD.setVisible(true);
     }
 
     public static void salir() {
-        Login = new Login();
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
-
     }   
 }

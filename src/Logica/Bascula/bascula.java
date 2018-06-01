@@ -188,7 +188,6 @@ public class bascula {
             VerTiqVarios = new VerTiqueteVarios();
         }
         VerTiqVarios.setVisible(true);
-       
     }
 
     public static void salir() {

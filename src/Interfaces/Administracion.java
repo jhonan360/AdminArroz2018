@@ -443,31 +443,33 @@ public class Administracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         admin.abrirEmpleado();
+        admin.abrirEmpleado();
+        hide();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
          admin.abrirUsuario();
+         hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         admin.abrirUsuario();
-        //setVisible(false);
+        hide();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnConductorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnConductorActionPerformed
         admin.abrirEmpleado();
+        hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        dispose();
         admin.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGestionBDActionPerformed
         admin.abrirGestionBD();
+        hide();
     }//GEN-LAST:event_mnGestionBDActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
@@ -476,6 +478,7 @@ public class Administracion extends javax.swing.JFrame {
 
     private void btnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionBDActionPerformed
         admin.abrirGestionBD();
+        hide();
     }//GEN-LAST:event_btnGestionBDActionPerformed
 
     private void btnReporUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporUserActionPerformed

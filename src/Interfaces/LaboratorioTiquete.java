@@ -133,6 +133,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnPorAprobar = new javax.swing.JMenuItem();
+        mnTiqueteLaboratorio = new javax.swing.JMenuItem();
         mnAgricultor = new javax.swing.JMenuItem();
         mnTipoArroz = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -140,7 +141,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -547,7 +548,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -868,6 +869,17 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
         });
         jMenu1.add(mnPorAprobar);
 
+        mnTiqueteLaboratorio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnTiqueteLaboratorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnTiqueteLaboratorio.setText("Tiquete Laboratorio");
+        mnTiqueteLaboratorio.setPreferredSize(new java.awt.Dimension(195, 22));
+        mnTiqueteLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTiqueteLaboratorioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnTiqueteLaboratorio);
+
         mnAgricultor.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnAgricultor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnAgricultor.setText("Crear Agricultor");
@@ -1009,14 +1021,17 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
         labor.tiquete1();
+        hide();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         labor.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed
         labor.busquedaTiq();
+        hide();
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1025,11 +1040,18 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
 
     private void mnAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgricultorActionPerformed
         bascula.abrirAgricultor();
+        hide();
     }//GEN-LAST:event_mnAgricultorActionPerformed
 
     private void mnTipoArrozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTipoArrozActionPerformed
         bascula.tipo_de_arroz();
+        hide();
     }//GEN-LAST:event_mnTipoArrozActionPerformed
+
+    private void mnTiqueteLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteLaboratorioActionPerformed
+        /*labo.tiquete2();
+        hide();*/
+    }//GEN-LAST:event_mnTiqueteLaboratorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1159,6 +1181,7 @@ public class LaboratorioTiquete extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnAgricultor;
     public static javax.swing.JMenuItem mnPorAprobar;
     public static javax.swing.JMenuItem mnTipoArroz;
+    public static javax.swing.JMenuItem mnTiqueteLaboratorio;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JLabel txtIdTiquete;
     // End of variables declaration//GEN-END:variables
