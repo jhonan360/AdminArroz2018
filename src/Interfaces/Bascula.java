@@ -25,7 +25,7 @@ public class Bascula extends javax.swing.JFrame {
     public static BusquedasTiquete busTiquete;
     public static cargarCombo cargar;
     //private aTask task;
-    private notify notify;
+    public notify notify;
     public static Tipo_Arroz Arroz;
     public static Conductor Conductor;
     public static Agricultor Agricultor;
@@ -46,6 +46,8 @@ public class Bascula extends javax.swing.JFrame {
          * this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) -
          * (this.getHeight() / 2), 500, 500);
          */
+        System.out.println(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width+' '+java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
+        
         initComponents();
         setLocationRelativeTo(null);
         this.setResizable(false);

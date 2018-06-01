@@ -162,7 +162,10 @@ public class Agricultor extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         setResizable(false);
+
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -810,8 +813,8 @@ public class Agricultor extends javax.swing.JFrame {
     }//GEN-LAST:event_mnLoteActionPerformed
 
     private void mnTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteMateriaPrimaActionPerformed
-       bascula.abrirTiqueteMateriaPrima();
-       hide();
+        bascula.abrirTiqueteMateriaPrima();
+        hide();
     }//GEN-LAST:event_mnTiqueteMateriaPrimaActionPerformed
 
     private void mnTiqueteVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTiqueteVariosActionPerformed
@@ -845,9 +848,9 @@ public class Agricultor extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteMateriaPrimaActionPerformed
 
     private void mnPorAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPorAprobarActionPerformed
-       labo.tiquete1();
-       hide();
-        //dispose();
+        labo.tiquete1();
+        hide();
+        //hide();
     }//GEN-LAST:event_mnPorAprobarActionPerformed
 
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost

@@ -720,12 +720,13 @@ public class Tipo_Arroz extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void btnVariedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVariedadActionPerformed
-        if (!(Variedad instanceof Variedad)) {
-            Variedad = new Variedad(this, rootPaneCheckingEnabled);
-            Variedad.setVisible(true);
+        if (Variedad != null) {
+            Variedad.dispose();
+            Variedad = new Variedad(this, true);
         } else {
-            Variedad.setVisible(true);
+            Variedad = new Variedad(this, true);//PREGUNTAR A LUCHO SI SE SOBRECARGA LA MEMORIA
         }
+        Variedad.setVisible(true);
     }//GEN-LAST:event_btnVariedadActionPerformed
 
     private void cmbVariedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVariedadActionPerformed
