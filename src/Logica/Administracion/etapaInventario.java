@@ -86,15 +86,12 @@ public class etapaInventario {
             Con = new Conexion();
 
             st = Con.conexion.createStatement();
-            System.out.println("idprocedimiento=" +idProcedimiento);
+            System.out.println("idprocedimiento=" + idProcedimiento);
             st.executeUpdate("Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
             ext.logs("INSERT", "Insert Into etapa (idHistorialEtapa,idProcedimiento,etapa,fecha,hora,humedad) values (0,'" + idProcedimiento + "','" + estado + "','" + fecha + "','" + hora + "','" + humedad + "')");
-            
 
             st.executeUpdate("UPDATE procedimiento SET tipoAlmacenamiento='trincho' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
             ext.logs("UPDATE", "UPDATE procedimiento SET tipoAlmacenamiento='trincho' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
-
-            
 
             refrescar();
             crearModeloProcedimiento();
@@ -247,7 +244,6 @@ public class etapaInventario {
         Procedimiento.TxtSilo.setText("");
         Procedimiento.txtHumedad.setText("");
         Procedimiento.TxtBateria.setText("");
-       
 
         // crearModeloEtapasSeco("0");
     }
@@ -257,20 +253,20 @@ public class etapaInventario {
         String silo = Procedimiento.TxtSilo.getText();
 
         String observacion = Procedimiento.TxtObs.getText();
-     
+
         if (estado.equals("Seco")) {
-            
+
             try {
                 Con = new Conexion();
 
                 st = Con.conexion.createStatement();
-                
+
                 st.executeUpdate("UPDATE procedimiento SET observacion='" + observacion + "' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
                 ext.logs("UPDATE", "UPDATE procedimiento SET observacion='" + observacion + "' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
                 st.executeUpdate("UPDATE silos SET kilos='0.00', estado='vacio' Where silos.idSilos='" + idsilo + "'");
                 st.executeUpdate("UPDATE tiqueteensilos SET estado='seco' Where tiqueteensilos.idSilos='" + idsilo + "' and tiqueteensilos.estado='secamiento'");
                 st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
-                    ext.logs("UPDATE", "UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
+                ext.logs("UPDATE", "UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
 
                 JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
 
@@ -333,7 +329,7 @@ public class etapaInventario {
     public void guardar_actualizar() {
 
         String observacion = Procedimiento.TxtObs.getText();
-        if (Procedimiento.cmbestado.getSelectedIndex()==0) {
+        if (Procedimiento.cmbestado.getSelectedIndex() == 0) {
             guardar();
             idProcedimiento = "";
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
@@ -355,8 +351,8 @@ public class etapaInventario {
                     Con = new Conexion();
 
                     st = Con.conexion.createStatement();
-                    System.out.println("idsilo"+idsilo);
-                    System.out.println("idsilo2"+idsilo2);
+                    System.out.println("idsilo" + idsilo);
+                    System.out.println("idsilo2" + idsilo2);
                     st.executeUpdate("UPDATE tiqueteensilos SET estado='trilla' Where tiqueteensilos.idSilos='" + idsilo2 + "' and tiqueteensilos.estado='seco'");
 
                     JOptionPane.showMessageDialog(null, "El silo ha sido trillado");

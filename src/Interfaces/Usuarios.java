@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaces;
+
 import Logica.Administracion.administracion;
 import Logica.Administracion.usuarios;
 import Logica.Extras.cargarCombo;
@@ -24,22 +25,23 @@ public class Usuarios extends javax.swing.JFrame {
     public static cargarCombo cargar;
     public static administracion admin;
     public static logicaReportes reportes;
-    public static boolean cerrar=false;
+    public static boolean cerrar = false;
     public static validaciones vali;
+
     public Usuarios() {
-        
+
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        this.setResizable(false);
         usu = new usuarios();
         admin = new administracion();
         reportes = new logicaReportes();
         cargar = new cargarCombo();
         cargar.privilegios(cmbPrivilegio);
-        vali= new validaciones();
+        vali = new validaciones();
         vali.NOMBRES(txtBEstado);
         vali.NOMBRES(txtBPrivilegio);
-        
+
     }
 
     /**
@@ -91,6 +93,7 @@ public class Usuarios extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        mnAdmonSistema = new javax.swing.JMenuItem();
         mnGestionBD = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnReporUsuarios = new javax.swing.JMenuItem();
@@ -99,6 +102,7 @@ public class Usuarios extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 725));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -112,7 +116,9 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +228,7 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(lbliIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chContrasena)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         cmbPrivilegio.getAccessibleContext().setAccessibleName("cmbPrivilegio");
@@ -373,7 +379,7 @@ public class Usuarios extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chEstado))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -423,38 +429,36 @@ public class Usuarios extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addGap(3, 3, 3)))
+                .addGap(3, 3, 3))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                .addGap(8, 8, 8))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 255));
@@ -497,6 +501,17 @@ public class Usuarios extends javax.swing.JFrame {
         jMenu3.setText("Sistema");
         jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu3.setPreferredSize(new java.awt.Dimension(175, 32));
+
+        mnAdmonSistema.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAdmonSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAdmonSistema.setText("Admon del sistema");
+        mnAdmonSistema.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnAdmonSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAdmonSistemaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnAdmonSistema);
 
         mnGestionBD.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnGestionBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
@@ -566,12 +581,12 @@ public class Usuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +595,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
+                .addContainerGap())
         );
 
         pack();
@@ -593,7 +608,7 @@ public class Usuarios extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
         usu.crear_usuario();
-        if(cerrar){
+        if (cerrar) {
             dispose();
         }
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -606,8 +621,8 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-            // TODO add your handling code here:
-            usu.limpiar_campos();
+        // TODO add your handling code here:
+        usu.limpiar_campos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -620,18 +635,18 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void chUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chUsuarioItemStateChanged
-        if (chUsuario.isSelected()==true){
+        if (chUsuario.isSelected() == true) {
             txtBUsuario.setEditable(true);
-        }else{
+        } else {
             txtBUsuario.setEditable(false);
             txtBUsuario.setText("");
         }
     }//GEN-LAST:event_chUsuarioItemStateChanged
 
     private void chPrivilegioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chPrivilegioItemStateChanged
-        if (chPrivilegio.isSelected()==true){
+        if (chPrivilegio.isSelected() == true) {
             txtBPrivilegio.setEditable(true);
-        }else{
+        } else {
             txtBPrivilegio.setEditable(false);
             txtBPrivilegio.setText("");
         }
@@ -639,9 +654,9 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void chEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chEstadoItemStateChanged
         // TODO add your handling code here:
-        if (chEstado.isSelected()==true){
+        if (chEstado.isSelected() == true) {
             txtBEstado.setEditable(true);
-        }else{
+        } else {
             txtBEstado.setEditable(false);
             txtBEstado.setText("");
         }
@@ -656,7 +671,7 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_tblUsuarioKeyReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       /* admin.abrirUsuario();
+        /* admin.abrirUsuario();
         hide();*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -686,6 +701,11 @@ public class Usuarios extends javax.swing.JFrame {
     private void chContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chContrasenaActionPerformed
+
+    private void mnAdmonSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAdmonSistemaActionPerformed
+        admin.abrirAdmon();
+        hide();
+    }//GEN-LAST:event_mnAdmonSistemaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -758,6 +778,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JLabel lbliIdEmpleado;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnAdmonSistema;
     public static javax.swing.JMenuItem mnConductor;
     public static javax.swing.JMenuItem mnGestionBD;
     public static javax.swing.JMenuItem mnReporEmpleados;

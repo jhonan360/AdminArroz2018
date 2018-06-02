@@ -162,10 +162,7 @@ public class Agricultor extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         setResizable(false);
-
-
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -779,7 +776,7 @@ public class Agricultor extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
-        setBounds(0, 0, 1296, 735);
+        setBounds(0, 0, 1296, 725);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

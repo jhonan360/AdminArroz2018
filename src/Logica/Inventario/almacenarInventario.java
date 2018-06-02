@@ -57,8 +57,7 @@ public class almacenarInventario {
     double B7[][] = new double[6][4];
     String estados[] = new String[7];
     currencyFormat cu;
-    public static JFrame Ventanas[] = new JFrame[]{AlmacenarI,ProcedI,EtapaI};
-
+    public static JFrame Ventanas[] = new JFrame[]{AlmacenarI, ProcedI, EtapaI};
 
     public almacenarInventario() {
         tbl = new tablas();
@@ -69,6 +68,16 @@ public class almacenarInventario {
         cargarSilos();
         print();
         cargarSecadoras();
+    }
+
+    public static void abrirAlmacenarInventario() {
+        if (AlmacenarI != null) {
+            AlmacenarI.dispose();
+            AlmacenarI = new AlmacenarInventario();
+        } else {
+            AlmacenarI = new AlmacenarInventario();
+        }
+        AlmacenarI.setVisible(true);
     }
 
     public static void abrirProcedimiento() {
@@ -92,16 +101,16 @@ public class almacenarInventario {
     }
 
     public static void abrirVerProcedimiento() {
-        if (VerProcedI !=null) {
+        if (VerProcedI != null) {
             VerProcedI.dispose();
             VerProcedI = new VerProcedimientoInventario();
         } else {
             VerProcedI = new VerProcedimientoInventario();
         }
-            VerProcedI.setVisible(true);
+        VerProcedI.setVisible(true);
     }
 
-    public static void salir() {    
+    public static void salir() {
         for (int i = 0; i < Ventanas.length; i++) {
             if (Ventanas[i] != null) {
                 Ventanas[i].dispose();

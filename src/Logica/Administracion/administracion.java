@@ -31,6 +31,17 @@ public class administracion {
          Cargo = new Cargo();
          Cargo.setVisible(true);
     }*/
+    
+    public static void abrirAdmon() {
+        if (Admin != null) {
+            Admin.dispose();
+            Admin = new Administracion();
+        } else {
+            Admin = new Administracion();
+        }
+        Admin.setVisible(true);
+    }
+    
 
     public static void abrirEmpleado() {
         if (Empleado != null) {

@@ -20,8 +20,8 @@ public class GestionBD extends javax.swing.JFrame {
      */
     public GestionBD() {
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
+        this.setResizable(false);
         gestionBD = new gestionBD();
         reportes = new logicaReportes();
     }
@@ -54,7 +54,8 @@ public class GestionBD extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         mnConductor = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        mnGestionBD = new javax.swing.JMenuItem();
+        mnAdmonSistema = new javax.swing.JMenuItem();
+        mnGestionBD1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnReporUsuarios = new javax.swing.JMenuItem();
         mnReporEmpleados = new javax.swing.JMenuItem();
@@ -62,7 +63,7 @@ public class GestionBD extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1270, 708));
+        setPreferredSize(new java.awt.Dimension(1280, 725));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -154,7 +155,7 @@ public class GestionBD extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -167,7 +168,7 @@ public class GestionBD extends javax.swing.JFrame {
                             .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
                         .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,8 +179,8 @@ public class GestionBD extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -243,16 +244,27 @@ public class GestionBD extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu3.setPreferredSize(new java.awt.Dimension(175, 32));
 
-        mnGestionBD.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        mnGestionBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
-        mnGestionBD.setText("Gestion BD");
-        mnGestionBD.setPreferredSize(new java.awt.Dimension(175, 22));
-        mnGestionBD.addActionListener(new java.awt.event.ActionListener() {
+        mnAdmonSistema.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnAdmonSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnAdmonSistema.setText("Admon del sistema");
+        mnAdmonSistema.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnAdmonSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnGestionBDActionPerformed(evt);
+                mnAdmonSistemaActionPerformed(evt);
             }
         });
-        jMenu3.add(mnGestionBD);
+        jMenu3.add(mnAdmonSistema);
+
+        mnGestionBD1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnGestionBD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnGestionBD1.setText("Gestion BD");
+        mnGestionBD1.setPreferredSize(new java.awt.Dimension(175, 22));
+        mnGestionBD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGestionBD1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnGestionBD1);
 
         jMenuBar1.add(jMenu3);
 
@@ -353,10 +365,10 @@ public class GestionBD extends javax.swing.JFrame {
         hide();
     }//GEN-LAST:event_mnConductorActionPerformed
 
-    private void mnGestionBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGestionBDActionPerformed
-        /*admin.abrirGestionBD();
-        hide();*/
-    }//GEN-LAST:event_mnGestionBDActionPerformed
+    private void mnAdmonSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAdmonSistemaActionPerformed
+       admin.abrirAdmon();
+        hide();
+    }//GEN-LAST:event_mnAdmonSistemaActionPerformed
 
     private void mnReporUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporUsuariosActionPerformed
         reportes.reporteUsuarios();
@@ -370,6 +382,10 @@ public class GestionBD extends javax.swing.JFrame {
         admin.salir();
         dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void mnGestionBD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGestionBD1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnGestionBD1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,8 +443,9 @@ public class GestionBD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuSalir;
+    public static javax.swing.JMenuItem mnAdmonSistema;
     public static javax.swing.JMenuItem mnConductor;
-    public static javax.swing.JMenuItem mnGestionBD;
+    public static javax.swing.JMenuItem mnGestionBD1;
     public static javax.swing.JMenuItem mnReporEmpleados;
     public static javax.swing.JMenuItem mnReporUsuarios;
     public static javax.swing.JTable tblDB;
