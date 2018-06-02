@@ -46,7 +46,6 @@ public class Bascula extends javax.swing.JFrame {
          * this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) -
          * (this.getHeight() / 2), 500, 500);
          */
-        System.out.println(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width+' '+java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
         
         initComponents();
         setLocationRelativeTo(null);

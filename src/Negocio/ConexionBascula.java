@@ -36,7 +36,7 @@ public class ConexionBascula {
 
     public ConexionBascula() {
         try {
-            Arduino.ArduinoRXTX("/dev/cu.usbmodem1411", 2000, 9600, evento);
+            Arduino.ArduinoRXTX("/dev/cu.usbmodem1421", 2000, 9600, evento);
 
         } catch (Exception ex) {
             Logger.getLogger(ConexionBascula.class.getName()).log(Level.SEVERE, null, ex);

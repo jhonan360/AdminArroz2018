@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
 import Interfaces.Auditoria;
+import Interfaces.Login;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,6 +35,7 @@ import java.util.Date;
 public class auditoria {
 
     public static Auditoria Auditoria;
+    public static Login Login;
     public static currencyFormat cu;
     static final Logger LOGGER = Logger.getAnonymousLogger();
     String path = System.getProperty("user.dir");
@@ -64,6 +66,16 @@ public class auditoria {
         cu = new currencyFormat();
         LeerArchivos();
 
+    }
+    
+    public static void salir() {
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
+        Login.setVisible(true);
     }
 
     public void DatosArchivoNumero1() {//metodo encargado de obtener los datos del archivo 1
