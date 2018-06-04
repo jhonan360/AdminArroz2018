@@ -68,8 +68,8 @@ public class liquidacion {
         limpiar();
     }
 
-    public static void abrirBusquedasTiquete(String TiqLiqui) {
-        BusTiquete = new BusquedasTiquete(TiqLiqui);
+    public static void abrirBusquedasTiquete(String TiqLiqui,JFrame form) {
+        BusTiquete = new BusquedasTiquete(form,true,TiqLiqui);
         BusTiquete.setVisible(true);
         //panel agricultor
         BusTiquete.panel.setEnabledAt(0, true);
@@ -77,6 +77,32 @@ public class liquidacion {
         BusTiquete.panel.setEnabledAt(2, false);;
         BusTiquete.panel.setSelectedIndex(0);
         ext = new extras();
+
+    }
+
+    public static void mnCrearliquidacion() {
+        if (Liqui != null) {
+            Liqui.dispose();
+            Liqui = new Liquidacion();
+        } else {
+            Liqui = new Liquidacion();
+        }
+        Liqui.setVisible(true);
+    }
+
+    public static void mnReporCuotaFomento(JFrame form) {
+        if (Fomento != null) {
+            Fomento.dispose();
+            Fomento = new CuotaFomento(form, true);
+        } else {
+            Fomento = new CuotaFomento(form, true);
+        }
+        Fomento.setVisible(true);
+    }
+
+    public static void salir() {
+        Login = new Login();
+        Login.setVisible(true);
 
     }
 
@@ -350,8 +376,8 @@ public class liquidacion {
     public void insertarLiquidacion() {
         try {
             Con = new Conexion();
-            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'"+user+"','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
-            ext.logs("INSERT", "INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'"+user+"','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
+            PreparedStatement ps = Con.conexion.prepareStatement("INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + user + "','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')", PreparedStatement.RETURN_GENERATED_KEYS);
+            ext.logs("INSERT", "INSERT INTO liquidaciones(idLiquidaciones,user, fecha, humedadIdeal, impurezaIdeal, kilosNeto, kilosCompra, subTotal, fomArrocero, valorFomArrocero, impuesto, porcenImpuesto, valorImpuesto, descuentoAnticipo, estado, netoPagar) VALUES (0,'" + user + "','" + fecha + "','" + humedadIdeal + "','" + impurezaIdeal + "','" + kiloNetos + "','" + totalKilosCompra + "','" + subTotal + "','" + FomArroz + "','" + valorFomArrocero + "','" + tipoImpuesto + "','" + impuesto + "','" + valorImpuesto + "','" + desAnticipo + "','en proceso','" + netoPagar + "')");
             ps.execute();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -433,30 +459,6 @@ public class liquidacion {
             }
         };
         Liqui.tblSeleccionLiquidacion.setModel(modeloSeleccionLiquidacion);
-    }
-
-    public static void mnGenerarLiquiacion() {
-        if (!(LiqAprobadas instanceof LiquidacionesAprobadas)) {
-            LiqAprobadas = new LiquidacionesAprobadas();
-            LiqAprobadas.setVisible(true);
-        } else {
-            LiqAprobadas.setVisible(true);
-        }
-    }
-    
-    public static void mnReporCuotaFomento(JFrame form){
-        if (!(Fomento instanceof CuotaFomento)) {
-            Fomento =new CuotaFomento(form, true);
-            Fomento.setVisible(true);
-        } else {
-            Fomento.setVisible(true);
-        }
-    }
-
-    public static void salir() {
-        Login = new Login();
-        Login.setVisible(true);
-
     }
 
     public void encabezadoLiquidacion() {

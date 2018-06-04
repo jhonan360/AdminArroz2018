@@ -992,12 +992,12 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCapturarFinalActionPerformed
 
     private void btnEditarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAgricultorActionPerformed
-        //bascula.abrirBusquedasTiquete(1, "TiqPrincipal");
+        bascula.abrirBusquedasTiquete(1, "TiqPrincipal",this);
         String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
             int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Agricultor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
-                bascula.abrirBusquedasTiquete(1, "TiqPrincipal");
+                bascula.abrirBusquedasTiquete(1, "TiqPrincipal",this);
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
@@ -1013,12 +1013,12 @@ public class Bascula extends javax.swing.JFrame {
             if (!estado.equals("")) {
                 int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Conductor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (valor == JOptionPane.YES_OPTION) {
-                    bascula.abrirBusquedasTiquete(2, "TiqPrincipal");
+                    bascula.abrirBusquedasTiquete(2, "TiqPrincipal",this);
                 } else {
                     JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
                 }
             } else {
-                bascula.abrirBusquedasTiquete(2, "TiqPrincipal");
+                bascula.abrirBusquedasTiquete(2, "TiqPrincipal",this);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");
@@ -1033,12 +1033,12 @@ public class Bascula extends javax.swing.JFrame {
             if (!estado.equals("")) {
                 int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar la placa del Vehiculo?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (valor == JOptionPane.YES_OPTION) {
-                    bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
+                    bascula.abrirBusquedasTiquete(3, "TiqPrincipal",this);
                 } else {
                     JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
                 }
             } else {
-                bascula.abrirBusquedasTiquete(3, "TiqPrincipal");
+                bascula.abrirBusquedasTiquete(3, "TiqPrincipal",this);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tiquete en espera para editar.");

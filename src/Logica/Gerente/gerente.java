@@ -57,9 +57,9 @@ public class gerente {
     public static Statement st, stNotify;
     public DefaultTableModel modelo, modelobuscar;
     public static Gerente Ger;
-    public String columnas[] = new String[]{"N° Tiquete","Cuenta", "Agricultor", "Fecha Creación"};
-    public String headerColumnas[] = new String[]{"30","default", "150", "45"};
-    public String camposColumnas[] = new String[]{"center","right", "left", "center"};
+    public String columnas[] = new String[]{"N° Tiquete", "Cuenta", "Agricultor", "Fecha Creación"};
+    public String headerColumnas[] = new String[]{"30", "default", "150", "45"};
+    public String camposColumnas[] = new String[]{"center", "right", "left", "center"};
     public tablas tbl;
     public String tiquete, valor;
     public static currencyFormat cu;
@@ -72,63 +72,85 @@ public class gerente {
         crearModeloTabla();
         ext = new extras();
     }
+    
+    public static void mnAbrirValorCarga() {
+        if (Ger != null) {
+            Ger.dispose();
+            Ger = new Gerente();
+        } else {
+            Ger = new Gerente();
+        }
+        Ger.setVisible(true);
+    }
 
     public static void mnAbrirLiqPorAprobar() {
-        if (!(GApruebaL instanceof GerenteApruebaLiquidaciones)) {
+        if (GApruebaL != null) {
+            GApruebaL.dispose();
             GApruebaL = new GerenteApruebaLiquidaciones();
-            GApruebaL.setVisible(true);
         } else {
-            GApruebaL.setVisible(true);
+            GApruebaL = new GerenteApruebaLiquidaciones();
         }
+        GApruebaL.setVisible(true);
     }
 
     public static void mnGenerarLiquidacion() {
-        if (!(LiqAprobada instanceof LiquidacionesAprobadas)) {
+        if (LiqAprobada != null) {
+            LiqAprobada.dispose();
             LiqAprobada = new LiquidacionesAprobadas();
-            LiqAprobada.setVisible(true);
         } else {
-            LiqAprobada.setVisible(true);
+            LiqAprobada = new LiquidacionesAprobadas();
         }
+        LiqAprobada.setVisible(true);
     }
 
     public static void mnAgendar() {
-        if (!(Agendar instanceof AgendarAgricultor)) {
+        if (Agendar != null) {
+            Agendar.dispose();
             Agendar = new AgendarAgricultor();
-            Agendar.setVisible(true);
         } else {
-            Agendar.setVisible(true);
+            Agendar = new AgendarAgricultor();
         }
-    }
-    public static void cuentas_Terceros() {
-        if (!(Cuentas_Terceros instanceof Cuentas_Terceros)) {
-            Cuentas_Terceros = new Cuentas_Terceros();
-            Cuentas_Terceros.setVisible(true);
-        } else {
-            Cuentas_Terceros.setVisible(true);
-        }
+        Agendar.setVisible(true);
     }
 
-        public static void mnParametros() {
-        if (!(Parametros instanceof Parametros)) {
-            Parametros = new Parametros();
-            Parametros.setVisible(true);
+    public static void cuentas_Terceros() {
+        if (Cuentas_Terceros != null) {
+            Cuentas_Terceros.dispose();
+            Cuentas_Terceros = new Cuentas_Terceros();
         } else {
-            Parametros.setVisible(true);
+            Cuentas_Terceros = new Cuentas_Terceros();
         }
+        Cuentas_Terceros.setVisible(true);
     }
-    
+
+    public static void mnParametros() {
+        if (Parametros != null) {
+            Parametros.dispose();
+            Parametros = new Parametros();
+        } else {
+            Parametros = new Parametros();
+        }
+        Parametros.setVisible(true);
+    }
+
     public static void salir() {
-        Login = new Login();
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
     }
-    
-    public static void mnReporEstadisticas(JFrame form){
-        if (!(Estadisticas instanceof GerenteEstadisticas)) {
-            Estadisticas =new GerenteEstadisticas(form, true);
-            Estadisticas.setVisible(true);
+
+    public static void mnReporEstadisticas(JFrame form) {
+        if (Estadisticas !=null) {
+            Estadisticas.dispose();
+            Estadisticas = new GerenteEstadisticas(form, true);
         } else {
-            Estadisticas.setVisible(true);
+            Estadisticas = new GerenteEstadisticas(form, true);
         }
+            Estadisticas.setVisible(true);
     }
 
     public void crearModeloTabla() {// crea los modelos de las tablas
@@ -227,7 +249,7 @@ public class gerente {
         Ger.TxtValor.setText("");
         Ger.txtConductor.setText("");
         Ger.txtLote.setText("");
-        
+
         crearModeloTabla();
     }
 
@@ -323,7 +345,7 @@ public class gerente {
                 String fecha = rs.getString(4);
                 String diasAntes = rs.getString(5);
                 String fechaAntes = rs.getString(6);
-                if (fechaAntes.equals(cu.dateNotTime(date))&&!diasAntes.equals("0")) {
+                if (fechaAntes.equals(cu.dateNotTime(date)) && !diasAntes.equals("0")) {
                     createNotify(rs, "antes");
                 }
                 if (fecha.equals(cu.dateNotTime(date))) {
@@ -347,12 +369,12 @@ public class gerente {
                 String diasAntes = rs.getString(5);
                 rsNotify = stNotify.executeQuery("SELECT idNotificacion FROM notificaciones WHERE id='" + idRecordatorio + "' AND origen='gerente' AND titulo LIKE '%Día%'");
                 if (!rsNotify.next()) {
-                    if (Integer.parseInt(diasAntes)>1) {
+                    if (Integer.parseInt(diasAntes) > 1) {
                         stNotify.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar A " + agricultor + " En " + diasAntes + " Días','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
-                    }else{
+                    } else {
                         stNotify.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Recuerde Llamar A " + agricultor + " En " + diasAntes + " Día','" + observacion + "','tip','" + cu.getDateTimeNow() + "',NULL,'gerente','" + idRecordatorio + "')");
                     }
-                    
+
                 }
                 //tenga palabra Días
                 break;
@@ -365,5 +387,5 @@ public class gerente {
                 break;
         }
         Con.Desconectar();
-    } 
+    }
 }

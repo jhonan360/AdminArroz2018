@@ -91,7 +91,7 @@ public class bascula {
     public static JFrame Ventanas[] = new JFrame[]{Arroz,Conductor,Agricultor,Vehiculo,Lote,Bas,TiqVarios,VerTiqPrincipal,VerTiqVarios,};
 
     public bascula() {
-        //ConBascula = new ConexionBascula();
+        ConBascula = new ConexionBascula();
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
@@ -370,8 +370,9 @@ public class bascula {
         }
     }
 
-    public static void abrirBusquedasTiquete(int num, String TiqPrincipal) {
-        BusTiquete = new BusquedasTiquete(TiqPrincipal);
+    public static void abrirBusquedasTiquete(int num, String TiqPrincipal,JFrame form) {
+        BusTiquete = new BusquedasTiquete(form,true,TiqPrincipal);
+        //BusTiquete = new BusquedasTiquete(form,true);
         BusTiquete.setVisible(true);
 
         switch (num) {
@@ -412,8 +413,8 @@ public class bascula {
         switch (opc) {
             case 1:
                 Bas.txtPesoInicial.setText("");
-                //Bas.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
-                Bas.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
+                Bas.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
+                //Bas.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.btnCapturarInicial.setEnabled(false);
                 }
@@ -421,8 +422,8 @@ public class bascula {
             case 2:
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.txtPesoFinal.setText("");
-                    Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    //Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))));
+                    //Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))));
                     double ini = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoInicial.getText()));
                     if (!Bas.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoFinal.getText()));

@@ -425,12 +425,12 @@ public class LaboratorioTiqueteInicial extends javax.swing.JFrame {
         if (!texto.equals("")) {
             int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Agricultor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (valor == JOptionPane.YES_OPTION) {
-                labo.abrirBusquedasTiquete("TiqLab");
+                labo.abrirBusquedasTiquete("TiqLab",this);
             } else {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la operación.");
             }
         } else {
-            labo.abrirBusquedasTiquete("TiqLab");
+            labo.abrirBusquedasTiquete("TiqLab",this);
         }
     }//GEN-LAST:event_btnBuscarAgricultorActionPerformed
 

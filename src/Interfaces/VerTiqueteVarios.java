@@ -108,6 +108,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
         mnVerTiqueteMateriaPrima = new javax.swing.JMenuItem();
         mnVerTiqueteVarios = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        mnValorCarga = new javax.swing.JMenuItem();
         mnPorAprobar = new javax.swing.JMenuItem();
         mnGenerar = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -505,6 +506,17 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
         jMenu5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu5.setPreferredSize(new java.awt.Dimension(200, 32));
 
+        mnValorCarga.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        mnValorCarga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
+        mnValorCarga.setText("Valor carga");
+        mnValorCarga.setPreferredSize(new java.awt.Dimension(200, 22));
+        mnValorCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnValorCargaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnValorCarga);
+
         mnPorAprobar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         mnPorAprobar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/derechaN.png"))); // NOI18N
         mnPorAprobar.setText("Por Aprobar");
@@ -832,8 +844,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     }//GEN-LAST:event_mnVerTiqueteMateriaPrima1ActionPerformed
 
     private void mnVerTiqueteVarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteVarios1ActionPerformed
-        bascula.abrirVerTiqueteVarios();
-        hide();
+
     }//GEN-LAST:event_mnVerTiqueteVarios1ActionPerformed
 
     private void mnReporAgricultoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReporAgricultoresActionPerformed
@@ -851,6 +862,11 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     private void mnEstandaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEstandaresActionPerformed
         gerente.mnParametros();
     }//GEN-LAST:event_mnEstandaresActionPerformed
+
+    private void mnValorCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnValorCargaActionPerformed
+        gerente.mnAbrirValorCarga();
+        hide();
+    }//GEN-LAST:event_mnValorCargaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -932,6 +948,7 @@ public class VerTiqueteVarios extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnTipo_Arroz;
     public static javax.swing.JMenuItem mnTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnTiqueteVarios;
+    private javax.swing.JMenuItem mnValorCarga;
     public static javax.swing.JMenuItem mnVehiculo;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima1;

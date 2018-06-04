@@ -93,8 +93,8 @@ public class laboratorioTiqueteInicial {
         Login.setVisible(true);
     }
     
-    public static void abrirBusquedasTiquete(String TiqLab) {
-        BusTiquete = new BusquedasTiquete(TiqLab);
+    public static void abrirBusquedasTiquete(String TiqLab,JFrame form) {
+        BusTiquete = new BusquedasTiquete(form,true,TiqLab);
         BusTiquete.setVisible(true);
         BusTiquete.panel.setEnabledAt(0, true);
         BusTiquete.panel.setEnabledAt(1, false);

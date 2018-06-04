@@ -43,15 +43,18 @@ public class BusquedasTiquete extends javax.swing.JDialog {
     public static ResultSet rsconsecutivo;
     public static extras ext;
     public static Liquidacion Liqui;
+    private String tiquete;
 
     /**
      * Creates new form BusquedasTiquete
      */
-    public BusquedasTiquete(String tiquete) {
-        claseTiquete = tiquete;
-        System.out.println(claseTiquete);
+    public BusquedasTiquete(java.awt.Frame parent, boolean modal,String tiquete) {
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.setResizable(false);
+        claseTiquete = tiquete;
+        System.out.println(claseTiquete);
         busTiquete = new busquedasTiquete(claseTiquete);
         ext = new extras();
         vali = new validaciones();
@@ -62,12 +65,11 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         vali.NOMBRES(txtBApellidosConductor);
         vali.NOMBRES(txtBCiudadConductor);
         vali.NOMBRES(txtBMarcaVehiculo);
-        
+
     }
-    
-    public BusquedasTiquete(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    private BusquedasTiquete(JFrame jFrame, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -254,7 +256,6 @@ public class BusquedasTiquete extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel16))
@@ -335,7 +336,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         panelAgricultorLayout.setHorizontalGroup(
             panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAgricultorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +345,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardarAgricultor, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                .addGap(6, 6, 6))
         );
         panelAgricultorLayout.setVerticalGroup(
             panelAgricultorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,7 +541,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         panelConductorLayout.setHorizontalGroup(
             panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConductorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelConductorLayout.createSequentialGroup()
@@ -550,7 +551,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
                     .addGroup(panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
         panelConductorLayout.setVerticalGroup(
             panelConductorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,7 +736,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         panelVehiculoLayout.setHorizontalGroup(
             panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVehiculoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelVehiculoLayout.createSequentialGroup()
@@ -745,7 +746,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
                     .addGroup(panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
         panelVehiculoLayout.setVerticalGroup(
             panelVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,7 +768,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 699, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -792,8 +793,8 @@ public class BusquedasTiquete extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 711, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,7 +804,7 @@ public class BusquedasTiquete extends javax.swing.JDialog {
                 .addGap(19, 19, 19))
         );
 
-        setBounds(0, 0, 747, 539);
+        setBounds(0, 0, 731, 539);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

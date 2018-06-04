@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import Negocio.ConexionBascula;
+import javax.swing.JFrame;
 
 /**
  *
@@ -180,9 +181,9 @@ public class tiqueteVarios {
         }
     }
 
-    public static void abrirBusquedasTiquete(int num, String tiquete) {
+    public static void abrirBusquedasTiquete(int num, String tiquete,JFrame form) {
 
-        BusTiquete = new BusquedasTiquete(tiquete);
+        BusTiquete = new BusquedasTiquete(form,true,tiquete);
         BusTiquete.setVisible(true);
 
         switch (num) {

@@ -19,6 +19,7 @@ public static gerenteEstadisticas estadisticas;
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.setResizable(false);
         estadisticas = new gerenteEstadisticas();
     }
 
