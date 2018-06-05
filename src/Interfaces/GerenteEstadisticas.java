@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaces;
+
 import Logica.Gerencia.gerenteEstadisticas;
 
 /**
@@ -11,7 +12,9 @@ import Logica.Gerencia.gerenteEstadisticas;
  * @author Lizeth
  */
 public class GerenteEstadisticas extends javax.swing.JDialog {
-public static gerenteEstadisticas estadisticas;
+
+    public static gerenteEstadisticas estadisticas;
+
     /**
      * Creates new form cuotaFometo
      */
@@ -22,7 +25,6 @@ public static gerenteEstadisticas estadisticas;
         this.setResizable(false);
         estadisticas = new gerenteEstadisticas();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,6 +161,7 @@ public static gerenteEstadisticas estadisticas;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setModal(false);
         estadisticas.capturar();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
