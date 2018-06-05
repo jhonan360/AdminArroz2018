@@ -992,7 +992,7 @@ public class Bascula extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCapturarFinalActionPerformed
 
     private void btnEditarAgricultorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAgricultorActionPerformed
-        bascula.abrirBusquedasTiquete(1, "TiqPrincipal",this);
+        //bascula.abrirBusquedasTiquete(1, "TiqPrincipal",this);
         String texto = lblNumeroTiquete.getText();
         if (!texto.equals("")) {
             int valor = JOptionPane.showConfirmDialog(null, "Desea realmente editar el nombre del Agricultor?", "", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Logica.Laboratorio;
+
 import Interfaces.BusquedasTiquete;
 import Interfaces.BusquedasTiqueteInicial;
 import Interfaces.LaboratorioTiquete;
@@ -29,6 +30,7 @@ import javax.swing.JOptionPane;
  * @author uriel
  */
 public class laboratorioTiqueteInicial {
+
     public static bascula bascula;
     public static login login;
     public String user;
@@ -45,7 +47,8 @@ public class laboratorioTiqueteInicial {
     public static LaboratorioTiqueteInicial LaboTiquete;
     public static BusquedasTiqueteInicial busTiquete;
     public static Login Login;
-    public static JFrame Ventanas[] = new JFrame[]{LaboTiquete,Labo,busTiquete,bascula.Agricultor,bascula.Arroz};
+    public static JFrame Ventanas[] = new JFrame[]{LaboTiquete, Labo, busTiquete, bascula.Agricultor, bascula.Arroz};
+
     public laboratorioTiqueteInicial() {
         ext = new extras();
         cu = new currencyFormat();
@@ -62,7 +65,7 @@ public class laboratorioTiqueteInicial {
         }
         LaboTiquete.setVisible(true);
     }
-    
+
     public static void tiquete2() {
         if (Labo != null) {
             Labo.dispose();
@@ -92,14 +95,21 @@ public class laboratorioTiqueteInicial {
         }
         Login.setVisible(true);
     }
-    
-    public static void abrirBusquedasTiquete(String TiqLab,JFrame form) {
-        BusTiquete = new BusquedasTiquete(form,true,TiqLab);
-        BusTiquete.setVisible(true);
+
+    public static void abrirBusquedasTiquete(String TiqLab, JFrame form) {
+        if (BusTiquete != null) {
+            BusTiquete.dispose();
+            BusTiquete = new BusquedasTiquete(form, true, TiqLab);
+        } else {
+            BusTiquete = new BusquedasTiquete(form, true, TiqLab);
+        }
+
         BusTiquete.panel.setEnabledAt(0, true);
         BusTiquete.panel.setEnabledAt(1, false);
         BusTiquete.panel.setEnabledAt(2, false);
         BusTiquete.panel.setSelectedIndex(0);
+        BusTiquete.setVisible(true);
+        //BusTiquete = new BusquedasTiquete(form, true, TiqLab);
     }
 
     public static void limpiarCampos() {
@@ -140,8 +150,8 @@ public class laboratorioTiqueteInicial {
             Con = new Conexion();
             st2 = Con.conexion.createStatement();
             st2.executeUpdate("INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
-            ext.logs("INSERT","INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
-            st2.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'basculista',NULL,'Nuevo Tiquete De Entrada De Materia Prima','Tiquete Nº "+idTiquete+" del agricultor "+labo.txtAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'laboratorio','"+idTiquete+"')");
+            ext.logs("INSERT", "INSERT INTO tiquete (idTiquete,idAgricultor,idTipoDeArroz,user,fecha,humedadUno,impurezaUno) VALUES ('" + idTiquete + "','" + idAgricultor + "','" + idTipoDeArroz + "','" + user + "','" + fecha + "','" + humedadUno + "','" + impurezaUno + "')");
+            st2.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'basculista',NULL,'Nuevo Tiquete De Entrada De Materia Prima','Tiquete Nº " + idTiquete + " del agricultor " + labo.txtAgricultor.getText() + "','tip','" + cu.getDateTimeNow() + "',NULL,'laboratorio','" + idTiquete + "')");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
             labo.Tiquete.setText(String.valueOf(ext.getNextIndex("tiquete")));
             Con.Desconectar();

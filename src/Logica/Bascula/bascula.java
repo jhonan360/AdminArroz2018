@@ -70,7 +70,7 @@ public class bascula {
     public static String headerSegundoPesaje[] = new String[]{"7", "175", "60"};
     public static String camposSegundoPesaje[] = new String[]{"center", "left", "right"};
     public static DefaultTableModel modeloentrada, modeloSegundoPesaje;
-    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos, empaque, kilos,cuentas;
+    public static String idTiquete, fecha, lote, tipoArroz, placa, idAgricultor, agricultor, idConductor, conductor, user, ccAgricultor, ccConductor, idVehiculo, observacion, kilosBrutos, destare, kilosNetos, empaque, kilos, cuentas;
     public static ResultSet rs, rsbus, rsagricultor;
     public static ResultSet rslote, rslote2, rslotes;
     public static ResultSet rstipo, rstipo2, rstipos;
@@ -82,16 +82,16 @@ public class bascula {
     public static Statement st;
     public static Conexion Con;
     public static tablas tbl;
-   // public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
+    // public static int row1 = 0, row2 = 0; //variables para notificaciones de tiquetes en espera
     public static String idTiqueteEspera = "", estadoTiquete;
     public static boolean estado;
     public static ConexionBascula ConBascula;
     public static currencyFormat cu;
     //public static Double kilosBrutoss,destare,kilosNetos;
-    public static JFrame Ventanas[] = new JFrame[]{Arroz,Conductor,Agricultor,Vehiculo,Lote,Bas,TiqVarios,VerTiqPrincipal,VerTiqVarios,};
+    public static JFrame Ventanas[] = new JFrame[]{Arroz, Conductor, Agricultor, Vehiculo, Lote, Bas, TiqVarios, VerTiqPrincipal, VerTiqVarios,};
 
     public bascula() {
-        ConBascula = new ConexionBascula();
+        //ConBascula = new ConexionBascula();
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
@@ -145,8 +145,8 @@ public class bascula {
             Lote = new Lote();
         } else {
             Lote = new Lote();
-        } 
-       Lote.setVisible(true);
+        }
+        Lote.setVisible(true);
     }
 
     public static void abrirTiqueteMateriaPrima() {
@@ -155,8 +155,8 @@ public class bascula {
             Bas = new Bascula();
         } else {
             Bas = new Bascula();
-        } 
-       Bas.setVisible(true);
+        }
+        Bas.setVisible(true);
     }
 
     public static void abrirTiqueteVarios() {
@@ -266,7 +266,7 @@ public class bascula {
         String tipoArroz = Bas.tblEspera.getValueAt(rec, 2).toString();
         Bas.cmbTipoArroz.setSelectedItem(tipoArroz);
         Bas.txtFecha.setText(cu.dateNotTime(ext.fecha()));
-        
+
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
@@ -330,9 +330,9 @@ public class bascula {
         }
     }
 
-    public void cambiarTiq(int rec,String idTiquete){
+    public void cambiarTiq(int rec, String idTiquete) {
         limpiarRegistros();
-        idTiqueteEspera=idTiquete;
+        idTiqueteEspera = idTiquete;
         Bas.btnCapturarInicial.setEnabled(false);
         Bas.btnCapturarFinal.setEnabled(true);
         Bas.cmbCuenta.setEnabled(false);
@@ -349,7 +349,7 @@ public class bascula {
             while (rsTiquete.next()) {
                 Bas.cmbTipoArroz.setSelectedItem(rsTiquete.getString(1));
                 tipoArroz = String.valueOf(Bascula.cmbTipoArroz.getSelectedIndex() + 1);
-                System.out.println("tipoar "+tipoArroz);
+                System.out.println("tipoar " + tipoArroz);
                 Bas.cmbLote.setSelectedItem(rsTiquete.getString(2));
                 Bas.txtPlaca.setText(rsTiquete.getString(3));
                 Bas.txtConductor.setText(rsTiquete.getString(4));
@@ -370,10 +370,14 @@ public class bascula {
         }
     }
 
-    public static void abrirBusquedasTiquete(int num, String TiqPrincipal,JFrame form) {
-        BusTiquete = new BusquedasTiquete(form,true,TiqPrincipal);
-        //BusTiquete = new BusquedasTiquete(form,true);
-        BusTiquete.setVisible(true);
+    public static void abrirBusquedasTiquete(int num, String TiqPrincipal, JFrame form) {
+        if (BusTiquete != null) {
+            BusTiquete.dispose();
+            BusTiquete = new BusquedasTiquete(form, true, TiqPrincipal);
+        } else {
+            BusTiquete = new BusquedasTiquete(form, true, TiqPrincipal);
+        }
+
 
         switch (num) {
             case 1:
@@ -384,6 +388,7 @@ public class bascula {
                 Bas.btnBuscarConductor.setEnabled(false);
                 Bas.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(0);
+                BusTiquete.setVisible(true);
                 break;
             case 2:
                 //panel vehiculo
@@ -393,6 +398,7 @@ public class bascula {
                 Bas.btnEditarAgricultor.setEnabled(false);
                 Bas.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(1);
+                BusTiquete.setVisible(true);
                 break;
 
             case 3:
@@ -403,6 +409,7 @@ public class bascula {
                 Bas.btnEditarAgricultor.setEnabled(false);
                 Bas.btnBuscarConductor.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(2);
+                BusTiquete.setVisible(true);
                 break;
         }
     }
@@ -413,8 +420,8 @@ public class bascula {
         switch (opc) {
             case 1:
                 Bas.txtPesoInicial.setText("");
-                Bas.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
-                //Bas.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
+                //Bas.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
+                Bas.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.btnCapturarInicial.setEnabled(false);
                 }
@@ -422,8 +429,8 @@ public class bascula {
             case 2:
                 if (!Bas.txtPesoInicial.getText().equals("")) {
                     Bas.txtPesoFinal.setText("");
-                    //Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))));
+                    Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    //Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))));
                     double ini = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoInicial.getText()));
                     if (!Bas.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoFinal.getText()));
@@ -454,7 +461,7 @@ public class bascula {
         kilosBrutos = cu.notThousandsFormat(Bas.txtPesoInicial.getText());
         destare = cu.notThousandsFormat(Bas.txtPesoFinal.getText());
         kilosNetos = cu.notThousandsFormat(Bas.txtPesoNeto.getText());
-        cuentas=String.valueOf(Bascula.cmbCuenta.getSelectedIndex()+1);
+        cuentas = String.valueOf(Bascula.cmbCuenta.getSelectedIndex() + 1);
         if (destare.equals("")) {
             destare = "0.00";
         }
@@ -484,7 +491,7 @@ public class bascula {
                     if (!fecha.equals("") && agricultor != null && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && conductor != null && !placa.equals("") && !kilosBrutos.equals("") && !empaque.equals("") && !cuentas.equals("")) {
                         placa = ext.getIdPlaca(placa);
                         System.out.println("placa " + placa);
-                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque,cuentas);//Llamado al metodo insertar
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque, cuentas);//Llamado al metodo insertar
                         limpiarRegistros();
                         tiquetes_en_espera();
                         tiquetesEsperandoSegundoPesaje(true);
@@ -497,7 +504,7 @@ public class bascula {
                     if (!fecha.equals("") && !agricultor.equals("") && !lote.equals("") && !tipoArroz.equals("") && !user.equals("") && !conductor.equals("") && !placa.equals("") && !kilosBrutos.equals("0.00") && !kilosNetos.equals("0.00") && !destare.equals("0.00") && !empaque.equals("")) {
                         placa = ext.getIdPlaca(placa);
                         System.out.println("placa " + placa);
-                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque,cuentas);//Llamado al metodo insertar 
+                        insertar(idTiquete, fecha, agricultor, lote, tipoArroz, user, conductor, placa, observacion, kilosBrutos, destare, kilosNetos, empaque, cuentas);//Llamado al metodo insertar 
                         limpiarRegistros();
                         tiquetes_en_espera();
                         tiquetesEsperandoSegundoPesaje(true);
@@ -511,11 +518,11 @@ public class bascula {
         }
     }
 
-    public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos, String empaque,String cuentas) {
+    public static void insertar(String idTiquete, String fecha, String agricultor, String lote, String tipoArroz, String usuario, String conductor, String placa, String observacion, String kilosBrutos, String destare, String kilosNetos, String empaque, String cuentas) {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE tiquete SET idAgricultor='" + agricultor + "',idLote='" + lote + "',idVehiculo='" + placa + "',idConductor='" + conductor + "',user='" + user + "',fecha='" + fecha + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "',observacion='" + observacion + "',empaque='" + empaque + "',idCuenta='"+cuentas+"' WHERE idTiquete='" + idTiquete + "'");
+            st.executeUpdate("UPDATE tiquete SET idAgricultor='" + agricultor + "',idLote='" + lote + "',idVehiculo='" + placa + "',idConductor='" + conductor + "',user='" + user + "',fecha='" + fecha + "',kilosBrutos='" + kilosBrutos + "',destare='" + destare + "',kilosNetos='" + kilosNetos + "',observacion='" + observacion + "',empaque='" + empaque + "',idCuenta='" + cuentas + "' WHERE idTiquete='" + idTiquete + "'");
             JOptionPane.showMessageDialog(null, "Tiquete registrado");
         } catch (Exception e) {
             e.printStackTrace();
@@ -536,26 +543,26 @@ public class bascula {
         Bas.txtPesoInicial.setText("");
         Bas.txtPesoFinal.setText("");
         Bas.txtPesoNeto.setText("");
-        idTiqueteEspera="";
-        idTiquete=fecha=lote=tipoArroz=placa=idAgricultor=agricultor=idConductor=conductor=user=ccAgricultor=ccConductor=idVehiculo=observacion=kilosBrutos=destare=kilosNetos=empaque=kilos=cuentas="";
+        idTiqueteEspera = "";
+        idTiquete = fecha = lote = tipoArroz = placa = idAgricultor = agricultor = idConductor = conductor = user = ccAgricultor = ccConductor = idVehiculo = observacion = kilosBrutos = destare = kilosNetos = empaque = kilos = cuentas = "";
     }
 
     void cerrarVentana(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void reporteBasculaTiqPrincipal(){
+
+    public void reporteBasculaTiqPrincipal() {
         try {
             Con = new Conexion();
-            Connection c= Con.ConectarReport();
+            Connection c = Con.ConectarReport();
 
-            JasperReport reporte=null;
-            String path="src\\reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
-            reporte=(JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
-            JasperPrint jprint = JasperFillManager.fillReport(path,null,c);//enviamos parametros
-            JasperViewer view= new JasperViewer(jprint,false);//vista del reporte
+            JasperReport reporte = null;
+            String path = "src\\reportes\\BasculaTiquePrincipal.jasper";//aqui se encuentra el archivo del reporte
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);//igualamos la variable reporte y enviamos el path para cargar el reporte
+            JasperPrint jprint = JasperFillManager.fillReport(path, null, c);//enviamos parametros
+            JasperViewer view = new JasperViewer(jprint, false);//vista del reporte
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            
+
         } catch (JRException ex) {
             Logger.getLogger(bascula.class.getName()).log(Level.SEVERE, null, ex);
         }

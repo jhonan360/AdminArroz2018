@@ -68,14 +68,19 @@ public class liquidacion {
         limpiar();
     }
 
-    public static void abrirBusquedasTiquete(String TiqLiqui,JFrame form) {
-        BusTiquete = new BusquedasTiquete(form,true,TiqLiqui);
-        BusTiquete.setVisible(true);
+    public static void abrirBusquedasTiquete(String TiqLiqui, JFrame form) {
+        if (BusTiquete != null) {
+            BusTiquete.dispose();
+            BusTiquete = new BusquedasTiquete(form, true, TiqLiqui);
+        } else {
+            BusTiquete = new BusquedasTiquete(form, true, TiqLiqui);
+        }
         //panel agricultor
         BusTiquete.panel.setEnabledAt(0, true);
         BusTiquete.panel.setEnabledAt(1, false);
         BusTiquete.panel.setEnabledAt(2, false);;
         BusTiquete.panel.setSelectedIndex(0);
+        BusTiquete.setVisible(true);
         ext = new extras();
 
     }

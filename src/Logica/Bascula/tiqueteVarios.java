@@ -54,7 +54,7 @@ public class tiqueteVarios {
     public static currencyFormat cu;
 
     public tiqueteVarios() {
-        ConBascula=bas.ConBascula;
+        //ConBascula=bas.ConBascula;
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
@@ -183,8 +183,13 @@ public class tiqueteVarios {
 
     public static void abrirBusquedasTiquete(int num, String tiquete,JFrame form) {
 
-        BusTiquete = new BusquedasTiquete(form,true,tiquete);
-        BusTiquete.setVisible(true);
+        if (BusTiquete != null) {
+            BusTiquete.dispose();
+            BusTiquete = new BusquedasTiquete(form, true, tiquete);
+        } else {
+            BusTiquete = new BusquedasTiquete(form, true, tiquete);
+        }
+        
 
         switch (num) {
             case 2:
@@ -194,6 +199,7 @@ public class tiqueteVarios {
                 TiqVarios.btnBuscarConductor.setEnabled(false);
                 TiqVarios.btnBuscarPlaca.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(1);
+                BusTiquete.setVisible(true);
                 break;
 
             case 3:
@@ -202,6 +208,7 @@ public class tiqueteVarios {
                 BusTiquete.panel.setEnabledAt(2, true);
                 TiqVarios.btnBuscarConductor.setEnabled(false);
                 BusTiquete.panel.setSelectedIndex(2);
+                BusTiquete.setVisible(true);
                 break;
         }
     }
@@ -244,8 +251,8 @@ public class tiqueteVarios {
         switch (opc) {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
-                TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
-                //TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
+                //TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
+                TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
                 }
@@ -253,8 +260,8 @@ public class tiqueteVarios {
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.txtPesoFinal.setText("");
-                    //TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))));
+                    TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    //TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))));
                     double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText()));
