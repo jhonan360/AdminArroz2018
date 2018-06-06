@@ -249,7 +249,7 @@ public class gerente {
         Ger.TxtValor.setText("");
         Ger.txtConductor.setText("");
         Ger.txtLote.setText("");
-
+        Ger.lblValorCarga.setText("");
         crearModeloTabla();
     }
 
@@ -270,7 +270,7 @@ public class gerente {
             st = Con.conexion.createStatement();
             st.executeUpdate("Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
             ext.logs("INSERT", "Insert Into detalleliquidacion (idDetalleLiquidacion,idTiquete,valorCarga) Values (0,'" + tiquete + "','" + valor + "')");
-
+            st.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'contador',NULL,'Tiquete Listo Para Generar Liquidación','Tiquete Nº "+tiquete+" del agricultor "+Ger.TxtNombre.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'gerente','"+tiquete+"')");
             JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             limpiarRegistros();
             crearModeloTabla();

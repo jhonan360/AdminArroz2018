@@ -10,6 +10,7 @@ import Logica.Extras.validaciones;
 import javax.swing.JOptionPane;
 import Logica.Liquidacion.liquidacion;
 import Reportes.logicaReportes;
+import Logica.Extras.notify;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Liquidacion extends javax.swing.JFrame {
     public static liquidacion liqui;
     public static validaciones vali;
     public static logicaReportes reportes;
-
+    public notify notify;
     /**
      * Creates new form Liquidacion
      */
@@ -35,6 +36,7 @@ public class Liquidacion extends javax.swing.JFrame {
         vali.DECIMAL(txtImpurezaIdeal);
         vali.DECIMAL(txtFomArroz);
         vali.DECIMAL(txtImpuesto);
+        notify = new notify("contador", liqui.login.enviarUsuario());
     }
     
     public void cerrar() {

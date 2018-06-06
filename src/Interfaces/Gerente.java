@@ -8,6 +8,7 @@ package Interfaces;
 import Interfaces.AgricultorGerencia;
 import Interfaces.ConductorGerencia;
 import Logica.Bascula.bascula;
+import Logica.Extras.currencyFormat;
 import Logica.Extras.notify;
 import Logica.Extras.validaciones;
 import Logica.Gerencia.agendarAgricultor;
@@ -28,7 +29,7 @@ public class Gerente extends javax.swing.JFrame {
     public static verProcedimientoInventario verProcedI;
     private notify notify;
     public static logicaReportes reportes;
-
+    public static currencyFormat currentFormat;
     /**
      * Creates new form Gerencia
      */
@@ -39,6 +40,7 @@ public class Gerente extends javax.swing.JFrame {
         gerente = new gerente();
         vali = new validaciones();
         reportes = new logicaReportes();
+        currentFormat= new currencyFormat();
         vali.DECIMAL(TxtValor);
         vali.IDENTIFICACION(cedula);
         gerente.checkReminder();
@@ -125,6 +127,7 @@ public class Gerente extends javax.swing.JFrame {
         TxtValor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
+        lblValorCarga = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnValorCarga = new javax.swing.JMenuItem();
@@ -598,6 +601,12 @@ public class Gerente extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/pesos.png"))); // NOI18N
         jLabel2.setText("Valor de la carga*:");
 
+        TxtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtValorKeyReleased(evt);
+            }
+        });
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
         jButton1.setText("Asignar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -610,6 +619,9 @@ public class Gerente extends javax.swing.JFrame {
         jLabel30.setForeground(new java.awt.Color(0, 0, 153));
         jLabel30.setText("*Digite el valor de la carga acordado con el agricultor.");
 
+        lblValorCarga.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblValorCarga.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -620,8 +632,11 @@ public class Gerente extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(TxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(TxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblValorCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -630,13 +645,18 @@ public class Gerente extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtValor))
-                .addContainerGap())
+
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblValorCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10))
+
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -980,9 +1000,19 @@ public class Gerente extends javax.swing.JFrame {
         hide();
     }//GEN-LAST:event_mnEstandaresActionPerformed
 
+
     private void mnValorCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnValorCargaActionPerformed
 
     }//GEN-LAST:event_mnValorCargaActionPerformed
+
+    private void TxtValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtValorKeyReleased
+        if (!TxtValor.getText().equals("")) {
+            lblValorCarga.setText(currentFormat.moneyFormat(Double.valueOf(TxtValor.getText())));
+        }else{
+            lblValorCarga.setText("");
+        }
+    }//GEN-LAST:event_TxtValorKeyReleased
+
 
     /**
      * @param args the command line arguments
@@ -991,7 +1021,7 @@ public class Gerente extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1080,6 +1110,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    public static javax.swing.JLabel lblValorCarga;
     private javax.swing.JMenuItem menuSalir;
     private javax.swing.JMenuItem mnAgendar;
     public static javax.swing.JMenuItem mnEstandares;

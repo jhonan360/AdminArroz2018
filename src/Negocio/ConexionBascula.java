@@ -36,7 +36,11 @@ public class ConexionBascula {
 
     public ConexionBascula() {
         try {
+<<<<<<< Updated upstream
             Arduino.ArduinoRXTX("COM3", 2000, 9600, evento);
+=======
+            Arduino.ArduinoRXTX("/dev/cu.usbmodem1411", 2000, 9600, evento);
+>>>>>>> Stashed changes
 
         } catch (Exception ex) {
             Logger.getLogger(ConexionBascula.class.getName()).log(Level.SEVERE, null, ex);

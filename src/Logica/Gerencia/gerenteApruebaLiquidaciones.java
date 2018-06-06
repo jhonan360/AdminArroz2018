@@ -298,6 +298,7 @@ public class gerenteApruebaLiquidaciones {
             st = Con.conexion.createStatement();
             st.executeUpdate("UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
             ext.logs("UPDATE","UPDATE liquidaciones SET kilosNeto='" + kilosNetos + "',kilosCompra='" + kilosCompra + "',subTotal='" + subtotal + "',valorFomArrocero='" + vlrFomento + "',valorImpuesto='" + vlrImpuesto + "',descuentoAnticipo='" + descuento + "',netoPagar='" + netoPagar + "',estado='aprobado' WHERE idLiquidaciones='" + idLiquidacion + "'");
+            st.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'contador',NULL,'Nueva Liquidación Aprobada','Liquidación Nº "+idLiquidacion+" del agricultor "+GApruebaL.lblNomAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'gernete','"+idLiquidacion+"')");
             Con.Desconectar();
         } catch (Exception e) {
             e.printStackTrace();

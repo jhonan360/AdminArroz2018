@@ -399,6 +399,7 @@ public class liquidacion {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
+            st.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Nueva Liquidación Generada','Liquidación Nº "+idLiquidaciones+" del agricultor "+Liqui.txtAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'contador','"+idLiquidaciones+"')");
             for (int i = 0; i < row; i++) {
                 String idTiquete = Liqui.tblSeleccionLiquidacion.getValueAt(i, 0).toString();
                 String kilosNetos = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString());
@@ -411,7 +412,6 @@ public class liquidacion {
                 String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString());
                 st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "'");
                 ext.logs("UPDATE", "UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "'");
-
                 if (i == row - 1) {
                     JOptionPane.showMessageDialog(null, "Creación exitosa");
                 }

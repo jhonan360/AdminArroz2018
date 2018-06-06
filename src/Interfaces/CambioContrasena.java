@@ -66,10 +66,10 @@ public class CambioContrasena extends javax.swing.JDialog {
         jLabel7.setText("Contraseña *:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel11.setText("Contraseña *:");
+        jLabel11.setText("Confirmar Contraseña *:");
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save.png"))); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Cambiar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
