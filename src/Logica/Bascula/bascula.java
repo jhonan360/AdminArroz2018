@@ -191,11 +191,10 @@ public class bascula {
     }
 
     public static void salir() {
-        for (int i = 0; i < Ventanas.length; i++) {
-            if (Ventanas[i] != null) {
-                Ventanas[i].dispose();
-            }
+        if (login.bas!=null) {
+            login.bas.notify.stop();
         }
+        
         if (Login != null) {
             Login.dispose();
             Login = new Login();

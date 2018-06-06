@@ -106,7 +106,21 @@ public class liquidacion {
     }
 
     public static void salir() {
-        Login = new Login();
+        if (login.bas!=null) {
+            login.bas.notify.stop();
+        }
+        if (login.ger!=null) {
+            login.ger.notify.stop();
+        }
+        if (login.Liqui!=null) {
+            login.Liqui.notify.stop();
+        }
+        if (Login != null) {
+            Login.dispose();
+            Login = new Login();
+        } else {
+            Login = new Login();
+        }
         Login.setVisible(true);
 
     }

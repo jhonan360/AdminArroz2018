@@ -70,8 +70,8 @@ public class Bascula extends javax.swing.JFrame {
         btnCapturarFinal.setEnabled(true);
         lblHumedad.setText("");
         lblImpureza.setText("");
-        notify.stop();
-        notify = null;
+        //notify.stop();
+        //notify = null;
         bascula.salir();
        /* bascula.login.bas=null;
         bascula = null;

@@ -40,14 +40,13 @@ public class Liquidacion extends javax.swing.JFrame {
     }
     
     public void cerrar() {
-        liqui.salir();
-        gerente.login.ger = null;
+      /*  gerente.login.ger = null;
         gerente = null;
         gerente.Cuentas_Terceros=null;
         liqui = null;
         System.gc(); //metodo para liberar memoria
         System.runFinalization(); //metodo para liberar memoria
-        super.dispose();
+        super.dispose();*/
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -929,8 +928,8 @@ public class Liquidacion extends javax.swing.JFrame {
     }//GEN-LAST:event_mnGenerarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
-        this.cerrar();
+        liqui.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void txtAgricultorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAgricultorMouseClicked

@@ -27,7 +27,7 @@ public class Gerente extends javax.swing.JFrame {
     public static gerente gerente;
     public static validaciones vali;
     public static verProcedimientoInventario verProcedI;
-    private notify notify;
+    public notify notify;
     public static logicaReportes reportes;
     public static currencyFormat currentFormat;
     /**
@@ -48,16 +48,14 @@ public class Gerente extends javax.swing.JFrame {
     }
 
      public void cerrar() {
-        notify.stop();
-        notify = null;
-        gerente.salir();
-        gerente.login.ger = null;
+       
+       /* gerente.login.ger = null;
         gerente = null;
         gerente.Cuentas_Terceros=null;
         bascula.VerTiqPrincipal = null;
         bascula.VerTiqVarios = null;
         System.gc(); //metodo para liberar memoria
-        System.runFinalization(); //metodo para liberar memoria
+        System.runFinalization(); //metodo para liberar memoria*/
         super.dispose();
     }
 
@@ -939,7 +937,7 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        this.cerrar();
+        gerente.salir();
         dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
