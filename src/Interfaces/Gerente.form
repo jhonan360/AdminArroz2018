@@ -378,9 +378,9 @@
                       <Component id="jPanel5" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -1347,7 +1347,7 @@
                               <Component id="lblValorCarga" min="-2" pref="196" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel30" pref="703" max="32767" attributes="0"/>
+                          <Component id="jLabel30" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="118" max="-2" attributes="0"/>
@@ -1359,26 +1359,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-<<<<<<< Updated upstream
-                      <Component id="jLabel30" min="-2" pref="20" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" pref="47" max="32767" attributes="0"/>
-                          <Component id="jLabel2" max="32767" attributes="0"/>
-                          <Component id="TxtValor" max="32767" attributes="0"/>
-=======
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jButton1" min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jLabel30" min="-2" pref="20" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="TxtValor" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="lblValorCarga" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="TxtValor" alignment="0" pref="40" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" pref="40" max="32767" attributes="0"/>
+                                  <Component id="lblValorCarga" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
->>>>>>> Stashed changes
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1398,7 +1389,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="TxtValor">
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtValorActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtValorKeyReleased"/>
               </Events>
               <AuxValues>
@@ -1432,7 +1427,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="1"/>
                 </Property>
-                <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
