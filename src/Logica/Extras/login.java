@@ -40,10 +40,11 @@ public class login {
     public static LaboratorioTiqueteInicial labor;
     public static Conexion Con;
     public static String usu, con, priv, estado, usua;
-    public static Statement st,stc;
-    public static ResultSet rs, rsusu, rsbas,rsc;
+    public static Statement st, stc;
+    public static ResultSet rs, rsusu, rsbas, rsc;
     public static ResultSet rs1;
     public static ResultSet rs2;
+    public static ResultSet rs3;
     public static Bascula bas;
     public static bascula Bas;
     public static conductor cond;
@@ -54,7 +55,7 @@ public class login {
     public static Gerencia Ger;
     public boolean bandera = false;
     public static int contIntentos = 0;
-    private static String usuario2 = "",user="";
+    private static String usuario2 = "", user = "";
     public static log logs;
     public static CambioContrasena cambioContrasena;
     public static Auditor audi;
@@ -87,16 +88,41 @@ public class login {
     }
 
     boolean Validar(String usuario, String Contraseña) {
+
+        boolean bandera = false;
+        boolean bandera_entra = false;
+        int intentos_global = 0;
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
+            //select solo usuario y colocar bandera en verdad si usuario existe
+            rs3 = st.executeQuery("SELECT * FROM usuario WHERE usuario.user = '" + usuario + "'");
+            while (rs3.next()) {
+                if (rs3.getString(1) != null) {
+                    intentos_global = rs3.getInt("intentos");
+                    bandera = true;
+                }
+            }
+
             String cadenatemporal = "SELECT * FROM usuario WHERE usuario.user = '" + usuario + "' AND usuario.contrasena = '" + Contraseña + "'";
             rs = st.executeQuery("SELECT * FROM usuario WHERE usuario.user = '" + usuario + "' AND usuario.contrasena = '" + Contraseña + "'");
             while (rs.next()) {
+                bandera_entra = true;
                 if (rs.getString(1) == null) {
+                    if(bandera){
+                        int intentos = rs.getInt("intentos");
+                        st.executeUpdate("UPDATE usuario SET intentos = " +( intentos + 1 ) + " WHERE user='" + usuario + "'");
+                        if(intentos == 3){
+                            st.executeUpdate("UPDATE usuario SET estado='inactivo'WHERE user='" + usuario + "'");
+                            JOptionPane.showMessageDialog(null, "Usuario bloqueado");
+                        }
+                    }
+                    //si bandera es verdad intentos + 1 al usuario
                     return false;
                 } else {
                     System.out.println("Usuario encontrado");
+
+                    //intentos = 3 cambiar estado y mensaje de usuario bloqueado
                     rs = st.executeQuery("SELECT * FROM usuario,empleado WHERE usuario.user=empleado.user AND usuario.user = '" + usuario + "'");
                     if (!rs.next()) {
                         JOptionPane.showMessageDialog(null, "El usuario no existe o esta inhabilitado");
@@ -108,8 +134,9 @@ public class login {
                         estado = rs1.getObject(2) + "";
                         System.out.println("Privilegio encontrado " + priv);
                         System.out.print("estado" + estado);
+                        //actualizar intentos 0 
                     }
-                  /*  rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
+                    /*  rs2 = st.executeQuery("SELECT usuario.estado FROM usuario WHERE usuario.user='" + usu + "'");
                     if (rs2.next()) {
                         estado = rs2.getObject(1) + "";
                         System.out.print("estado" + estado);
@@ -123,10 +150,10 @@ public class login {
                         }
                         bas.setVisible(true);
                         cambiarContrasena(bas);
-                            /*
+                        /*
                             Envia al metodo usuario en la clase bascula el nombre del usuario
                             que ingreso con privilegio 2 para realizar un tiquete
-                             */
+                         */
                         enviarUsuario();
                         bandera = true;
                     } else if (priv.equals("administrador") && estado.equals("activo")) {
@@ -217,7 +244,14 @@ public class login {
                 }
                 //Con.Desconectar();
             }
-
+            if(!bandera_entra && bandera){
+                
+                        st.executeUpdate("UPDATE usuario SET intentos = " +( intentos_global + 1 ) + " WHERE user='" + usuario + "'");
+                        if(intentos_global == 3){
+                            st.executeUpdate("UPDATE usuario SET estado='inactivo'WHERE user='" + usuario + "'");
+                            JOptionPane.showMessageDialog(null, "Usuario bloqueado");
+                        }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -323,6 +357,7 @@ public class login {
             e.printStackTrace();
         }
     }
+
     public void cambiarContrasena(JFrame jFrame) {
         try {
             Con = new Conexion();
@@ -333,10 +368,9 @@ public class login {
                     Con.Desconectar();
                     if (cambioContrasena != null) {
                         cambioContrasena.dispose();
-                        cambioContrasena = new CambioContrasena(jFrame,true);
-                    } 
-                    else {
-                        cambioContrasena = new CambioContrasena(jFrame,true);
+                        cambioContrasena = new CambioContrasena(jFrame, true);
+                    } else {
+                        cambioContrasena = new CambioContrasena(jFrame, true);
                     }
                     cambioContrasena.setVisible(true);
                 }
@@ -345,6 +379,6 @@ public class login {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 }

@@ -215,9 +215,9 @@ public class usuarios {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena='"+cambioContrasena+"' WHERE usuario.user='" + usuario + "'");
-            ext.logs("UPDATE", "UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena'"+cambioContrasena+"' WHERE usuario.user='" + usuario + "'");
-
+            st.executeUpdate("UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena='"+cambioContrasena+"',intentos='0' WHERE usuario.user='" + usuario + "'");
+            ext.logs("UPDATE", "UPDATE usuario SET contrasena='" + contrasena + "',idPrivilegios='" + privilegio + "',estado='" + estado + "',cambioContrasena'"+cambioContrasena+"',intentos='0' WHERE usuario.user='" + usuario + "'");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
