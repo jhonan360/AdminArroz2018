@@ -89,7 +89,7 @@ public class login {
 
     boolean Validar(String usuario, String Contraseña) {
 
-        boolean bandera = false;
+        boolean bandera1 = false;
         boolean bandera_entra = false;
         int intentos_global = 0;
         try {
@@ -100,7 +100,7 @@ public class login {
             while (rs3.next()) {
                 if (rs3.getString(1) != null) {
                     intentos_global = rs3.getInt("intentos");
-                    bandera = true;
+                    bandera1 = true;
                 }
             }
 
@@ -109,7 +109,7 @@ public class login {
             while (rs.next()) {
                 bandera_entra = true;
                 if (rs.getString(1) == null) {
-                    if(bandera){
+                    if(bandera1){
                         int intentos = rs.getInt("intentos");
                         st.executeUpdate("UPDATE usuario SET intentos = " +( intentos + 1 ) + " WHERE user='" + usuario + "'");
                         if(intentos == 3){
@@ -244,7 +244,7 @@ public class login {
                 }
                 //Con.Desconectar();
             }
-            if(!bandera_entra && bandera){
+            if(!bandera_entra && bandera1){
                 
                         st.executeUpdate("UPDATE usuario SET intentos = " +( intentos_global + 1 ) + " WHERE user='" + usuario + "'");
                         if(intentos_global == 3){
