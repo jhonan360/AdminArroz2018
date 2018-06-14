@@ -294,7 +294,7 @@ public class gerente {
         Date Fechainicial, FechaFinal;
 
         SimpleDateFormat formatoI = new SimpleDateFormat("yyy-MM-dd 00:00:00");
-        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd 23:59:59");
         Fechainicial = Ger.jDateinicial.getDate();
         FechaFinal = Ger.jDatefinal.getDate();
 

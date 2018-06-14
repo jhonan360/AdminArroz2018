@@ -692,8 +692,9 @@ public class AgendarAgricultor extends javax.swing.JFrame {
         agendar = null;
         reportes = null;
         Gerente.gerente.Agendar = null;
-        Gerente.gerente.login.ger.cerrar();
-        super.dispose();
+        //Gerente.gerente.login.ger.cerrar();
+        gerente.salir();
+        dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void mnVerTiqueteMateriaPrimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVerTiqueteMateriaPrimaActionPerformed

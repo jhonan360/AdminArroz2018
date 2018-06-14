@@ -46,7 +46,7 @@ public class busquedaLaboratorio {
     public static DefaultTableModel mdelolab, modeloestufa;
     public static String columnasAgr[] = new String[]{"id", "Cedula", "Nombres", "Apellidos", "Direccion", "Municipio"};
     public static String columnasAgri[] = new String[]{"N° Tiq Lab", "N° Tiq Bas", "Agricultor", "Fecha", "Humedad", "Impureza", "Integral", "Cascarilla", "Blanco", "Partido", "Entero", "Yeso", "Dañado", "Ip"};
-    public static String headerColumnasAgri[] = new String[]{"30", "30", "150", "40", "30", "30", "20", "30", "20", "20", "20", "20", "20", "20"};
+    public static String headerColumnasAgri[] = new String[]{"30", "30", "150", "60", "30", "30", "20", "30", "20", "20", "20", "20", "20", "20"};
     public static String camposColumnasAgri[] = new String[]{"center", "center", "left", "center", "right", "right", "right", "right", "right", "right", "right", "right", "right", "right"};
     public static currencyFormat cu;
 
@@ -64,7 +64,7 @@ public class busquedaLaboratorio {
                 return false;
             }
         };
-        tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno and laboratorio.estado='cerrado'");
+        tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno and laboratorio.estado='cerrado' ORDER BY fecha DESC");
         tbl.alinearHeaderTable(BusT.tblLaboratorio, headerColumnasAgri);
         tbl.alinearCamposTable(BusT.tblLaboratorio, camposColumnasAgri);
         tbl.alinearHeaderTable(BusT.jTable3, headerColumnas2);
@@ -130,7 +130,7 @@ public class busquedaLaboratorio {
         Date fecha, fecha2;
 
         SimpleDateFormat formatoI = new SimpleDateFormat("yyy-MM-dd 00:00:00");
-        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formato2 = new SimpleDateFormat("yyy-MM-dd 23:59:59");
         fecha = BusT.jDateinicial.getDate();
         fecha2 = BusT.jDatefinal.getDate();
 
@@ -153,7 +153,7 @@ public class busquedaLaboratorio {
 
         if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true && BusT.chcedula.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("") && !cedula.equals("") && !numtiquete.equals("")) {
-                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND personalexterno.cedula='" + cedula + "' and laboratorio.idTiquete='" + numtiquete + "' AND laboratorio.fecha > '" + FechaIni + "' AND laboratorio.fecha <'" + FechaFin + "'");
+                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND personalexterno.cedula='" + cedula + "' and laboratorio.idTiquete='" + numtiquete + "' AND laboratorio.fecha >= '" + FechaIni + "' AND laboratorio.fecha <='" + FechaFin + "'");
                 tbl.alinearHeaderTable(BusT.tblLaboratorio, headerColumnasAgri);
                 tbl.alinearCamposTable(BusT.tblLaboratorio, camposColumnasAgri);
                 tbl.alinearHeaderTable(BusT.jTable3, headerColumnas2);
@@ -163,7 +163,7 @@ public class busquedaLaboratorio {
             }
         } else if (BusT.chfecha.isSelected() == true && BusT.chtiquete.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("") && !numtiquete.equals("")) {
-                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND laboratorio.idTiquete='" + numtiquete + "' AND laboratorio.fecha > '" + FechaIni + "' AND laboratorio.fecha <'" + FechaFin + "'");
+                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND laboratorio.idTiquete='" + numtiquete + "' AND laboratorio.fecha >= '" + FechaIni + "' AND laboratorio.fecha <='" + FechaFin + "'");
                 tbl.alinearHeaderTable(BusT.tblLaboratorio, headerColumnasAgri);
                 tbl.alinearCamposTable(BusT.tblLaboratorio, camposColumnasAgri);
                 tbl.alinearHeaderTable(BusT.jTable3, headerColumnas2);
@@ -173,7 +173,7 @@ public class busquedaLaboratorio {
             }
         } else if (BusT.chfecha.isSelected() == true && BusT.chcedula.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("") && !cedula.equals("")) {
-                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND personalexterno.cedula='" + cedula + "' AND laboratorio.fecha > '" + FechaIni + "' AND laboratorio.fecha <'" + FechaFin + "'");
+                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND personalexterno.cedula='" + cedula + "' AND laboratorio.fecha >= '" + FechaIni + "' AND laboratorio.fecha <='" + FechaFin + "'");
                 tbl.alinearHeaderTable(BusT.tblLaboratorio, headerColumnasAgri);
                 tbl.alinearCamposTable(BusT.tblLaboratorio, camposColumnasAgri);
                 tbl.alinearHeaderTable(BusT.jTable3, headerColumnas2);
@@ -193,7 +193,7 @@ public class busquedaLaboratorio {
             }
         } else if (BusT.chfecha.isSelected() == true) {
             if (!FechaIni.equals("") && !FechaFin.equals("")) {
-                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND laboratorio.fecha > '" + FechaIni + "' AND laboratorio.fecha <'" + FechaFin + "'");
+                tbl.llenarTabla(BusT.tblLaboratorio, mdelolab, columnasAgri.length, "SELECT idLaboratorio,tiquete.idTiquete,CONCAT(personalexterno.nombres,' ',personalexterno.apellidos),laboratorio.fecha,humedad,impureza,integralRes,cascarillaRes,blancoRes,partidoRes,enteroRes,yeso,danado,ip FROM laboratorio,tiquete,personalexterno WHERE laboratorio.estado='cerrado' and laboratorio.idTiquete=tiquete.idTiquete and tiquete.idAgricultor=personalexterno.idPersonalExterno AND laboratorio.fecha >= '" + FechaIni + "' AND laboratorio.fecha <='" + FechaFin + "'");
                 tbl.alinearHeaderTable(BusT.tblLaboratorio, headerColumnasAgri);
                 tbl.alinearCamposTable(BusT.tblLaboratorio, camposColumnasAgri);
                 tbl.alinearHeaderTable(BusT.jTable3, headerColumnas2);

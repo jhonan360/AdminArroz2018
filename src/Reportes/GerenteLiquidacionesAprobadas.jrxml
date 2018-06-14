@@ -2,8 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7ddaba3-0f15-458f-8f5d-7b698c9aa7e3">
 	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
 	<property name="ireport.zoom" value="1.464100000000001"/>
-	<property name="ireport.x" value="420"/>
-	<property name="ireport.y" value="450"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="136"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -49,7 +49,7 @@
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
-			<![CDATA[SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,CONCAT(tipodearroz.nombre,' - ',variedad.nombre),tiquete.empaque,tiquete.kilosNetos,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete,tipodearroz,variedad WHERE liquidaciones.idLiquidaciones=$P!{id_liquidacion_tbl} AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones and detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad]]>
+			<![CDATA[SELECT detalleliquidacion.idTiquete,tiquete.fecha,CONCAT(tipodearroz.nombre,' - ',variedad.nombre),tiquete.empaque,tiquete.kilosNetos,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete,tipodearroz,variedad WHERE liquidaciones.idLiquidaciones=$P!{id_liquidacion_tbl} AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones and detalleliquidacion.idTiquete=tiquete.idTiquete AND tiquete.idTipoDeArroz=tipodearroz.idTipoDeArroz AND tipodearroz.idVariedad=variedad.idVariedad]]>
 		</queryString>
 		<field name="idTiquete" class="java.lang.Integer">
 			<fieldDescription><![CDATA[]]></fieldDescription>

@@ -346,6 +346,7 @@ public class laboratorioTiquete {
 
     //cierra un tiquete de laboratorio
     public void estado() {
+        user = login.enviarUsuario();
         int aceptar = JOptionPane.showConfirmDialog(null, "Esta seguro que quiere cerrar el tiquete", "Confirmacion", JOptionPane.CANCEL_OPTION);
         if (aceptar == JOptionPane.YES_OPTION) {
             try {

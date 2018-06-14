@@ -119,8 +119,8 @@ public class variedad {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("UPDATE variedad SET nombre ='" + nombre + "'WHERE idTipoDeArroz = '" + idVariedad + "'");
-            ext.logs("UPDATE","UPDATE variedad SET nombre ='" + nombre + "'WHERE idTipoDeArroz = '" + idVariedad + "'");
+            st.executeUpdate("UPDATE variedad SET nombre ='" + nombre + "'WHERE idVariedad = '" + idVariedad + "'");
+            ext.logs("UPDATE","UPDATE variedad SET nombre ='" + nombre + "'WHERE idVariedad = '" + idVariedad + "'");
     
             JOptionPane.showMessageDialog(null, "EL tipo de arroz ha sido modificado ");
             Con.Desconectar();

@@ -48,9 +48,9 @@ public class liquidacion {
     public String columnasSeleccionTiquete[] = new String[]{"N° Tiquete", "Fecha", "Agricultor", "Valor Carga", "Kilos Netos"};
     public String headeColumnasSeleccionTiquete[] = new String[]{"30", "30", "170", "40", "40"};
     public String camposCcolumnasSeleccionTiquete[] = new String[]{"center", "center", "left", "right", "right"};
-    public String columnasLiquidacion[] = new String[]{"N° Tiquete", "Kg Brutos", "Humedad", "Impureza", "% Castigo H", "% Castigo I", "Peso Compra", "Vlr Kg", "Vlr Total"};
-    public String headerColumnasLiquidacion[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default"};
-    public String camposColumnasLiquidacion[] = new String[]{"center", "right", "riht", "right", "right", "right", "right", "right", "right"};
+    public String columnasLiquidacion[] = new String[]{"N° Tiq", "Fecha", "Kg Brutos", "Hum", "Imp", "% H Castigo", "% I Castigo", "Peso Compra", "Vlr Carga", "Vlr Kg", "Vlr Total"};
+    public String headerColumnasLiquidacion[] = new String[]{"25", "65", "60", "30", "30", "45", "45", "70", "70", "60", "70"};
+    public String camposColumnasLiquidacion[] = new String[]{"center", "center", "right", "right", "right", "right", "right", "right", "right", "right", "right"};
     public static tablas tbl;
     public String idAgricultor, user;
     public static String idLiquidaciones, fecha, humedadIdeal, impurezaIdeal, FomArroz, impuesto, tipoImpuesto;
@@ -106,13 +106,13 @@ public class liquidacion {
     }
 
     public static void salir() {
-        if (login.bas!=null) {
+        if (login.bas != null) {
             login.bas.notify.stop();
         }
-        if (login.ger!=null) {
+        if (login.ger != null) {
             login.ger.notify.stop();
         }
-        if (login.Liqui!=null) {
+        if (login.Liqui != null) {
             login.Liqui.notify.stop();
         }
         if (Login != null) {
@@ -155,6 +155,8 @@ public class liquidacion {
 
             switch (movimiento) {
                 case "todoDerecha":
+
+                    tbl.alinearHeaderTable(Liqui.tblSeleccionLiquidacion, headerColumnasLiquidacion);
                     int row = Liqui.tblSeleccionTiquete.getRowCount();
                     if (row > 0) {
                         for (int i = 0; i < row; i++) {
@@ -171,6 +173,7 @@ public class liquidacion {
                     }
                     break;
                 case "unoDerecha":
+                    tbl.alinearHeaderTable(Liqui.tblSeleccionLiquidacion, headerColumnasLiquidacion);
                     int filaSeleccionadaD = Liqui.tblSeleccionTiquete.getSelectedRow();
                     if (filaSeleccionadaD >= 0) {
                         String Vector[] = new String[columnasSeleccionTiquete.length];
@@ -186,8 +189,10 @@ public class liquidacion {
                 case "todoIzquierda":
                     crearModelo();
                     completarTablaTiquete();
+
                     break;
                 case "unoIzquierda":
+                    tbl.alinearHeaderTable(Liqui.tblSeleccionLiquidacion, headerColumnasLiquidacion);
                     int filaSeleccionadaI = Liqui.tblSeleccionLiquidacion.getSelectedRow();
                     if (filaSeleccionadaI >= 0) {
                         String Vector[] = new String[columnasSeleccionTiquete.length];
@@ -234,7 +239,7 @@ public class liquidacion {
                 st = Con.conexion.createStatement();
                 for (int i = 0; i < row; i++) {
                     String idTiquete = Liqui.tblSeleccionLiquidacion.getValueAt(i, 0).toString();
-                    rs = st.executeQuery("SELECT detalleliquidacion.idDetalleLiquidacion,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.valorCarga,tiquete.kilosNetos FROM tiquete,detalleliquidacion WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND tiquete.idTiquete='" + idTiquete + "'");
+                    rs = st.executeQuery("SELECT detalleliquidacion.idDetalleLiquidacion,tiquete.humedadUno,tiquete.impurezaUno,detalleliquidacion.valorCarga,tiquete.kilosNetos,tiquete.fecha FROM tiquete,detalleliquidacion WHERE tiquete.idTiquete=detalleliquidacion.idTiquete AND tiquete.idTiquete='" + idTiquete + "'");
                     if (rs.next()) {
                         String Vector[] = new String[columnasLiquidacion.length];
                         String idDetalleLiquidacion = rs.getString(1);
@@ -242,35 +247,38 @@ public class liquidacion {
                         String impureza = rs.getString(3);
                         String valorCarga = rs.getString(4);
                         String kilosNetos = rs.getString(5);
+                        String fecha = cu.dateNotTime(rs.getString(6));
                         Vector[0] = idTiquete;
-                        Vector[1] = cu.thousandsFormat(Double.parseDouble(kilosNetos));
-                        Vector[2] = humedad;
-                        Vector[3] = impureza;
+                        Vector[1] = fecha;
+                        Vector[2] = cu.thousandsFormat(Double.parseDouble(kilosNetos));
+                        Vector[3] = humedad;
+                        Vector[4] = impureza;
                         double castigoHumedad;
                         if (Double.parseDouble(humedad) > Double.parseDouble(humedadIdeal)) {
                             castigoHumedad = (100 - Double.parseDouble(humedad)) / (100 - Double.parseDouble(humedadIdeal));
                             double totalHumedad = Math.round(castigoHumedad * 100);
-                            Vector[4] = String.valueOf(totalHumedad / 100);//castigo humedad
+                            Vector[5] = String.valueOf(totalHumedad / 100);//castigo humedad
                         } else {
-                            Vector[4] = "1.00";
+                            Vector[5] = "1.00";
                             castigoHumedad = 1.00;
                         }
                         double castigoImpureza;
                         if (Double.parseDouble(impureza) > Double.parseDouble(impurezaIdeal)) {
                             castigoImpureza = (100 - Double.parseDouble(impureza)) / (100 - Double.parseDouble(impurezaIdeal));
                             double totalImpureza = Math.round(castigoImpureza * 100);
-                            Vector[5] = String.valueOf(totalImpureza / 100);//castigo impureza
+                            Vector[6] = String.valueOf(totalImpureza / 100);//castigo impureza
                         } else {
-                            Vector[5] = "1.00";
+                            Vector[6] = "1.00";
                             castigoImpureza = 1.00;
                         }
                         double kiloNetos = Double.parseDouble(kilosNetos);
                         double pesoCompra = Math.round(castigoHumedad * castigoImpureza * kiloNetos);
-                        Vector[6] = String.valueOf(cu.thousandsFormat(pesoCompra));
+                        Vector[7] = String.valueOf(cu.thousandsFormat(pesoCompra));
+                        Vector[8] = cu.moneyFormat(Double.parseDouble(valorCarga));
                         double valorKilo = Double.parseDouble(valorCarga) / 125;
-                        Vector[7] = String.valueOf(cu.moneyFormat(valorKilo));
+                        Vector[9] = String.valueOf(cu.moneyFormat(valorKilo));
                         long valorTotal = (long) (pesoCompra * valorKilo);
-                        Vector[8] = String.valueOf(cu.moneyFormat(valorTotal));
+                        Vector[10] = String.valueOf(cu.moneyFormat(valorTotal));
                         this.kiloNetos += kiloNetos;
                         this.totalKilosCompra += pesoCompra;
                         this.subTotal += valorTotal;
@@ -413,17 +421,17 @@ public class liquidacion {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Nueva Liquidación Generada','Liquidación Nº "+idLiquidaciones+" del agricultor "+Liqui.txtAgricultor.getText()+"','tip','"+cu.getDateTimeNow()+"',NULL,'contador','"+idLiquidaciones+"')");
+            st.executeUpdate("INSERT INTO notificaciones (idNotificacion, privilegio, usuario, titulo, texto, tipo, fechaCreacion, fechaVisualizacion, origen,id) VALUES (0,'gerente',NULL,'Nueva Liquidación Generada','Liquidación Nº " + idLiquidaciones + " del agricultor " + Liqui.txtAgricultor.getText() + "','tip','" + cu.getDateTimeNow() + "',NULL,'contador','" + idLiquidaciones + "')");
             for (int i = 0; i < row; i++) {
                 String idTiquete = Liqui.tblSeleccionLiquidacion.getValueAt(i, 0).toString();
-                String kilosNetos = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 1).toString());
-                String humedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 2).toString();
-                String impureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 3).toString();
-                String castigoHumedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 4).toString();
-                String castigoImpureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 5).toString();
-                String pesoCompra = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString());
-                String valorKilo = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString());
-                String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 8).toString());
+                String kilosNetos = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 2).toString());
+                String humedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 3).toString();
+                String impureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 4).toString();
+                String castigoHumedad = Liqui.tblSeleccionLiquidacion.getValueAt(i, 5).toString();
+                String castigoImpureza = Liqui.tblSeleccionLiquidacion.getValueAt(i, 6).toString();
+                String pesoCompra = cu.notThousandsFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 7).toString());
+                String valorKilo = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 9).toString());
+                String valorTotal = cu.notMoneyFormat(Liqui.tblSeleccionLiquidacion.getValueAt(i, 10).toString());
                 st.executeUpdate("UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "'");
                 ext.logs("UPDATE", "UPDATE detalleliquidacion SET idliquidaciones='" + idLiquidaciones + "',humedad='" + humedad + "',impureza='" + impureza + "',castigoHumedad='" + castigoHumedad + "',castigoImpureza='" + castigoImpureza + "',pesoCompra='" + pesoCompra + "',valorKilo='" + valorKilo + "',valorTotal='" + valorTotal + "' WHERE idTiquete='" + idTiquete + "'");
                 if (i == row - 1) {

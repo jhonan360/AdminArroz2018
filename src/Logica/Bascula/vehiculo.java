@@ -31,7 +31,7 @@ public class vehiculo {
     public static String placa, color, modelo, marca, idVehiculo;
     public static DefaultTableModel modelVhc;
     public static String columnas[] = new String[]{"N°", "Placa", "Marca", "Modelo", "Color"};
-    public static String headerColumnas[] = new String[]{"20", "200", "200", "200", "200"};
+    public static String headerColumnas[] = new String[]{"40", "180", "200", "200", "200"};
     public static String camposColumnas[] = new String[]{"center", "left", "left", "left", "left"};
     public static int row;
     //public static log logs;

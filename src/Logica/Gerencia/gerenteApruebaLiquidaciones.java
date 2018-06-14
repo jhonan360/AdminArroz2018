@@ -47,8 +47,8 @@ public class gerenteApruebaLiquidaciones {
     public static String columPendientes[] = new String[]{"N°", "Agricultor", "Subtotal", "Neto Pagar"};
     public static String alinearHeaderPendientes[] = new String[]{"10", "default", "default", "default"};
     public static String alinearCamposPendientes[] = new String[]{"center", "left", "right", "right"};
-    public static String columTiquetes[] = new String[]{"N° Tiquete", "Fecha Tiquete", "Kg Brutos", "Humedad O", "Impureza O", "% Castigo H", "% Castigo I", "Peso Compra", "Vlr Carga", "Vlr Kg", "Vlr Total"};
-    public static String alinearHeaderTiquetes[] = new String[]{"default", "default", "default", "default", "default", "default", "default", "default", "default", "default", "default"};
+    public static String columTiquetes[] = new String[]{"N° Tiq", "Fecha ", "Kg Brutos", "Hum", "Imp", "% H Castigo", "% I Castigo", "Peso Compra", "Vlr Carga", "Vlr Kg", "Vlr Total"};
+    public static String alinearHeaderTiquetes[] = new String[]{"45", "75","70", "50", "50", "80", "70","90", "90", "90", "100"};
     public static String alinearCamposTiquetes[] = new String[]{"center", "center", "right", "right", "right", "right", "right", "right", "right", "right", "right"};
     public static login login;
     long kiloNetos, subTotal, valorImpuesto, valorFomArrocero, desAnticipo, netoPagar, humedadObtenida, impurezaObtenida, castigoHumedad, castigoImpureza, pesoCompra, valorTotal, netoAPagar, totalKilosCompra, vlrFomentoArrocero;
@@ -85,6 +85,7 @@ public class gerenteApruebaLiquidaciones {
     }
 
     public void tablaCamposLiquidacion() {
+        tbl.alinearHeaderTable(GApruebaL.tblDetalleL, alinearHeaderTiquetes);
         tbl.alinearCamposTable(GApruebaL.tblDetalleL, alinearCamposTiquetes);
         int rec = GApruebaL.tblLiquidaciones.getSelectedRow();
         idLiquidacion = GApruebaL.tblLiquidaciones.getValueAt(rec, 0).toString();
@@ -118,7 +119,7 @@ public class gerenteApruebaLiquidaciones {
                 Double descuento = klNetos - klCompra;
                 GApruebaL.lblKilosDescuento.setText(String.valueOf(cu.thousandsFormat(descuento)));
             }
-            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,liquidaciones.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorCarga,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
+            tbl.llenarTabla(GApruebaL.tblDetalleL, modelTiquetes, columTiquetes.length, "SELECT detalleliquidacion.idTiquete,tiquete.fecha,tiquete.kilosNetos,detalleliquidacion.humedad,detalleliquidacion.impureza,detalleliquidacion.castigoHumedad, detalleliquidacion.castigoImpureza,detalleliquidacion.pesoCompra,detalleliquidacion.valorCarga,detalleliquidacion.valorKilo,detalleliquidacion.valorTotal FROM detalleliquidacion,liquidaciones,tiquete WHERE liquidaciones.idLiquidaciones='" + idLiquidacion + "' AND liquidaciones.idLiquidaciones=detalleliquidacion.idliquidaciones AND detalleliquidacion.idTiquete=tiquete.idTiquete");
             formatoTblDetalle();
             Con.Desconectar();
         } catch (Exception e) {
