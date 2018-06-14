@@ -19,6 +19,7 @@ import java.io.File;
 import java.text.ParseException;
 
 public class extras {
+
     final static Logger logger = Logger.getLogger(extras.class);
     public static Conexion Con;
     public static Statement st, st1;
@@ -26,7 +27,7 @@ public class extras {
     public static Date fecha;
     public static currencyFormat cu;
     String path = System.getProperty("user.dir");
-    
+
     File Dir = null;
 
     public String getIdMunicipio(String nombre, String idDeparta) { // Metodo que retorna el id del municipio recibe el nombre del municipio y el ID del depatamento
@@ -265,25 +266,38 @@ public class extras {
         }
         return true;
     }
-    
+
     public static String fecha() {
         SimpleDateFormat formato = new SimpleDateFormat("yyy-MM-dd hh:mm:ss");
         java.util.Date fecha = new Date();
         String fec = formato.format(fecha);
         return fec;
     }
-    public void logs(String evento,String log) throws ParseException{
-         Dir = new File(path + "/logs");
-        if (!Dir.exists()) {
-            Dir.mkdirs();
-        }
-        PropertyConfigurator.configure("log4j.properties");
+
+    public void logs(String evento, String log) throws ParseException {
+        // Dir = new File(path + "/logs");
+        //if (!Dir.exists()) {
+        //  Dir.mkdirs();
+        //}
+        //PropertyConfigurator.configure("log4j.properties");
         cu = new currencyFormat();
         String user = login.enviarUsuario();
         String fecha = cu.getDateTimeNow();
-       // fecha = new Date();
-        logger.info(";"+evento+";"+log+";"+user+";"+fecha);
-       
+        //fecha = new Date();
+        // logger.info(";"+evento+";"+log+";"+user+";"+fecha);
+        //String a = ('"');
+        String logp = log.replace("'"," ");
+        //System.out.println("INSERT INTO logsAuditoria(id,evento,log,user,fecha) VALUES (0,'" + evento + "','("+ logp + ")','" + user + "','" + fecha + "')");
+
+        try {
+            Con = new Conexion();
+            st = Con.conexion.createStatement();
+            st.executeUpdate("INSERT INTO logsAuditoria(id,evento,log,user,fecha) VALUES (0,'" + evento + "','"+ logp + "','" + user + "','" + fecha + "')");
+            
+            //JOptionPane.showMessageDialog(null, "El empleado ha sido ingresado");
+            Con.Desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
 }

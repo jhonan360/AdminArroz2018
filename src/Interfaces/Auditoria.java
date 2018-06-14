@@ -9,6 +9,7 @@ package Interfaces;
 import javax.swing.JOptionPane;
 import Logica.Auditor.auditoria;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,6 +109,11 @@ public class Auditoria extends javax.swing.JFrame {
                 ChUsuarioItemStateChanged(evt);
             }
         });
+        ChUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChUsuarioActionPerformed(evt);
+            }
+        });
 
         CmbEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INSERT", "UPDATE" }));
         CmbEvento.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +138,16 @@ public class Auditoria extends javax.swing.JFrame {
 
         ChEvento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ChEvento.setText("Evento");
+        ChEvento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChEventoItemStateChanged(evt);
+            }
+        });
+        ChEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChEventoActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
         jButton4.setText("Actualizar");
@@ -316,16 +332,24 @@ public class Auditoria extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        auditoria.CopiarArchivo();
+        //auditoria.CopiarArchivo();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            // TODO add your handling code here:
-            auditoria.BuscarRegistros();
-        } catch (ParseException ex) {
-            Logger.getLogger(Auditoria.class.getName()).log(Level.SEVERE, null, ex);
+        if (dcFechaFinal.getDate() == null && dcFechaInicial.getDate() == null) {
+            auditoria.buscar();
+        } else {
+            if (dcFechaFinal.getDate() == null) {
+                Date FechaInicial = dcFechaInicial.getDate();
+                dcFechaFinal.setDate(FechaInicial);
+            } else {
+                if (dcFechaInicial.getDate() == null) {
+                    Date FechaFinal = dcFechaFinal.getDate();
+                    dcFechaInicial.setDate(FechaFinal);
+                }
+            }
         }
+        auditoria.buscar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void CmbEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbEventoActionPerformed
@@ -348,7 +372,7 @@ public class Auditoria extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        auditoria.CargarTablas();
+        auditoria.crearModelo();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void chFechaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chFechaItemStateChanged
@@ -368,6 +392,24 @@ public class Auditoria extends javax.swing.JFrame {
         auditoria.salir();
         dispose();
     }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void ChEventoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChEventoItemStateChanged
+        if (ChEvento.isSelected() == true) {
+            CmbEvento.setEnabled(true);
+
+        } else {
+            CmbEvento.setEnabled(false);
+            CmbEvento.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_ChEventoItemStateChanged
+
+    private void ChEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChEventoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChEventoActionPerformed
+
+    private void ChUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
