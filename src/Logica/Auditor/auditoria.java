@@ -25,6 +25,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import Logica.Extras.currencyFormat;
 import Logica.Extras.tablas;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,6 +66,7 @@ public class auditoria {
     public tablas tbl;
     public DefaultTableModel Modelo1;//declara el midelo de la tabla 1 para el archivo 1
     public String columnas[] = new String[]{"N°", "Evento", "Cambios", "Usuario", "Fecha"};//declara el nombre de cada una de las columnas para las dos tablas
+    static String pathDownload = System.getProperty("user.home");
 
     public auditoria() {
         cu = new currencyFormat();
@@ -188,5 +192,34 @@ public class auditoria {
             JOptionPane.showMessageDialog(null, "Ninguno de los campos de busqueda esta seleccionado");
         }
         //desactivar_checkbox();*/
+    }
+    
+    public void CopiarArchivo(){
+        try {
+            java.util.Date date = new Date();
+            String dates = cu.DateTime(date);
+            dates = dates.replace(" ", "_");
+            dates = dates.replace(":", "-");
+            String nameFile = "Logs_" + dates;
+            String pathFile = pathDownload + "/Downloads/" + nameFile + ".txt";
+            FileWriter flwriter = null;
+            flwriter = new FileWriter(pathFile);
+            BufferedWriter bfwriter = new BufferedWriter(flwriter);
+            for (int i = 0 ; i < Auditoria.TablaArchivo1.getRowCount(); i++) //realiza un barrido por filas.
+            {
+                for(int j = 0 ; j < Auditoria.TablaArchivo1.getColumnCount();j++) //realiza un barrido por columnas.
+                {
+                    bfwriter.write((String)(Auditoria.TablaArchivo1.getValueAt(i,j)));
+                    if (j < Auditoria.TablaArchivo1.getColumnCount() -1) { //agrega separador "," si no es el ultimo elemento de la fila.
+                        bfwriter.write(",");
+                    }
+                }
+                bfwriter.newLine(); //inserta nueva linea.
+            }
+            bfwriter.close();
+            JOptionPane.showMessageDialog(null, "Exportación finalizada archivo alojado en descargas "+nameFile + ".txt");
+        } catch (IOException e) {
+            
+        }
     }
 }
