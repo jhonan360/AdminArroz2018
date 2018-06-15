@@ -430,7 +430,7 @@ public class bascula {
                     Bas.txtPesoFinal.setText("");
                  //   Bas.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina*10000)));
                     Bas.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(Bas.txtPesoInicial.getText()))*10000));
-                    double ini = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoInicial.getText()));
+                     double ini = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoInicial.getText()));
                     if (!Bas.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(Bas.txtPesoFinal.getText()));
                         Bas.txtPesoNeto.setText(String.valueOf(cu.thousandsFormat(ini - fina)));
