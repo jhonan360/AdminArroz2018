@@ -292,7 +292,7 @@ public class extras {
         try {
             Con = new Conexion();
             st = Con.conexion.createStatement();
-            st.executeUpdate("INSERT INTO logsAuditoria(id,evento,log,user,fecha) VALUES (0,'" + evento + "','"+ logp + "','" + user + "','" + fecha + "')");
+            st.executeUpdate("INSERT INTO logsauditoria(id,evento,log,user,fecha) VALUES (0,'" + evento + "','"+ logp + "','" + user + "','" + fecha + "')");
             
             //JOptionPane.showMessageDialog(null, "El empleado ha sido ingresado");
             Con.Desconectar();
