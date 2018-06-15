@@ -247,8 +247,8 @@ public class tiqueteVarios {
     }
 
     public static void capturarPeso(int opc) {
-        double inicial = (double) Math.floor(Math.random() * (5000 - 1500 + 1) + 1500);
-        double fina = (double) Math.floor(Math.random() * (1400 - 800) + 800);
+        double inicial = (double) Math.floor(Math.random() * (18000 - 7000 + 1) + 7000);
+        double fina = (double) Math.floor(Math.random() * (3600 - 3000) + 3000);
 
         switch (opc) {
             case 1:
@@ -257,7 +257,7 @@ public class tiqueteVarios {
                 if (bas.ConBascula!=null) {
                     TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))*10000));
                 }else{
-                    TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial*10000)));
+                    TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 }
                 //
                // TiqVarios.realbrutos.setText(String.valueOf(cu.thousandsFormat(inicial)));
@@ -273,7 +273,7 @@ public class tiqueteVarios {
                         String second=String.valueOf(Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()))/10000);
                         TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(second))*10000));
                    }else{
-                       TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina*10000)));
+                       TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
                    }
                     double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
