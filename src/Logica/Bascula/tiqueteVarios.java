@@ -54,7 +54,9 @@ public class tiqueteVarios {
     public static currencyFormat cu;
 
     public tiqueteVarios() {
-        //ConBascula=bas.ConBascula;
+        if (bas.ConBascula!=null) {
+            ConBascula=bas.ConBascula;
+        }
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
@@ -252,8 +254,12 @@ public class tiqueteVarios {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
                 //
-               TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))*10000));
-                //TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial*10000)));
+                if (bas.ConBascula!=null) {
+                    TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))*10000));
+                }else{
+                    TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial*10000)));
+                }
+                //
                // TiqVarios.realbrutos.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
@@ -261,10 +267,14 @@ public class tiqueteVarios {
                 break;
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
-                    TiqVarios.txtPesoFinal.setText("");
-                   // TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina*10000)));
+                    TiqVarios.txtPesoFinal.setText(""); 
                    // TiqVarios.realdestare.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))*10000));
+                   if (bas.ConBascula!=null) {
+                        String second=String.valueOf(Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()))/10000);
+                        TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(second))*10000));
+                   }else{
+                       TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina*10000)));
+                   }
                     double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText()));
