@@ -97,6 +97,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
         btnCapturarDestare = new javax.swing.JButton();
         txtPesoNeto = new javax.swing.JTextField();
         lblNumeroTiquete = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        realbrutos = new javax.swing.JTextField();
+        realdestare = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        realnetos = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblEntradas = new javax.swing.JTable();
@@ -311,6 +317,22 @@ public class TiqueteVarios extends javax.swing.JFrame {
         lblNumeroTiquete.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNumeroTiquete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel20.setText("Real:");
+        jLabel20.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setText("Real:");
+        jLabel21.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        realbrutos.setEditable(false);
+
+        realdestare.setEditable(false);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setText("Real:");
+        jLabel25.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -318,20 +340,41 @@ public class TiqueteVarios extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPesoNeto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPesoFinal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPesoInicial, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtPesoFinal, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPesoInicial))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(realbrutos)
+                                    .addComponent(realdestare, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(txtPesoNeto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(realnetos, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCapturarKilosBrutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnCapturarDestare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNumeroTiquete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblNumeroTiquete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel25))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel20))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(6, 6, 6))
         );
         jPanel5Layout.setVerticalGroup(
@@ -342,22 +385,33 @@ public class TiqueteVarios extends javax.swing.JFrame {
                     .addComponent(lblNumeroTiquete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
-                .addComponent(jLabel9)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel20))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCapturarKilosBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(txtPesoInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                    .addComponent(txtPesoInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(realbrutos))
                 .addGap(6, 6, 6)
-                .addComponent(jLabel10)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel21))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCapturarDestare, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(realdestare, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtPesoFinal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
                 .addGap(6, 6, 6)
-                .addComponent(jLabel12)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel25))
                 .addGap(4, 4, 4)
-                .addComponent(txtPesoNeto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPesoNeto, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(realnetos))
+                .addGap(11, 11, 11))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -641,7 +695,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)))
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -834,7 +888,7 @@ public class TiqueteVarios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1039,9 +1093,12 @@ public class TiqueteVarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
@@ -1072,6 +1129,9 @@ public class TiqueteVarios extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnVehiculo;
     public static javax.swing.JMenuItem mnVerTiqueteMateriaPrima;
     public static javax.swing.JMenuItem mnVerTiqueteVarios;
+    public static javax.swing.JTextField realbrutos;
+    public static javax.swing.JTextField realdestare;
+    public static javax.swing.JTextField realnetos;
     public static javax.swing.JTable tblEntradas;
     public static javax.swing.JTable tblSegundoPesaje;
     public static javax.swing.JTextField txtCantidad;

@@ -341,7 +341,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel8" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel8" alignment="1" pref="1287" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -420,7 +420,7 @@
                       <Component id="jPanel2" min="-2" pref="287" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnGuardar" pref="116" max="32767" attributes="0"/>
+                          <Component id="btnGuardar" max="32767" attributes="0"/>
                           <Component id="jPanel6" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -466,7 +466,7 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel11" alignment="0" pref="137" max="32767" attributes="0"/>
+                                      <Component id="jLabel11" alignment="0" pref="136" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblNumeroTiquete" min="-2" pref="128" max="-2" attributes="0"/>

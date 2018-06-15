@@ -251,8 +251,10 @@ public class tiqueteVarios {
         switch (opc) {
             case 1:
                 TiqVarios.txtPesoInicial.setText("");
-                //TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))));
-                TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial)));
+                //
+               TiqVarios.txtPesoInicial.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso("0"))*10000));
+                //TiqVarios.txtPesoInicial.setText(String.valueOf(cu.thousandsFormat(inicial*10000)));
+                TiqVarios.realbrutos.setText(String.valueOf(cu.thousandsFormat(inicial)));
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.btnCapturarKilosBrutos.setEnabled(false);
                 }
@@ -260,11 +262,13 @@ public class tiqueteVarios {
             case 2:
                 if (!TiqVarios.txtPesoInicial.getText().equals("")) {
                     TiqVarios.txtPesoFinal.setText("");
-                    TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina)));
-                    //TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))));
+                   // TiqVarios.txtPesoFinal.setText(String.valueOf(cu.thousandsFormat(fina*10000)));
+                    TiqVarios.realdestare.setText(String.valueOf(cu.thousandsFormat(fina)));
+                    TiqVarios.txtPesoFinal.setText(cu.thousandsFormat(Double.parseDouble(ConBascula.getPeso(TiqVarios.txtPesoInicial.getText()))*10000));
                     double ini = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoInicial.getText()));
                     if (!TiqVarios.txtPesoFinal.getText().equals("")) {
                         fina = Double.parseDouble(cu.notThousandsFormat(TiqVarios.txtPesoFinal.getText()));
+                        TiqVarios.txtPesoNeto.setText(String.valueOf(cu.thousandsFormat(ini - fina)));
                         TiqVarios.txtPesoNeto.setText(String.valueOf(cu.thousandsFormat(ini - fina)));
                         TiqVarios.btnCapturarDestare.setEnabled(false);
                     }
