@@ -540,10 +540,13 @@ public class ProcedimientosInventario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         procedI.accionProcedimiento("crear");
         procedI.numeroProcedimiento();
+        if (cerrar) {
+            dispose();
+        }
 
     }//GEN-LAST:event_btnCrearActionPerformed
 

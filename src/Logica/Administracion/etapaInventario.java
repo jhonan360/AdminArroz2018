@@ -33,14 +33,14 @@ public class etapaInventario {
     public static cargarCombo cargar;
     public String idsilo, secadora, numsilo, idsilo2, numsilo2, secadora2;
     //public String columnas[] = new String[]{"N° procedimiento", "N° silo", "Fecha", "Hora", "estado"};
-    public String columnas2[] = new String[]{"N°", "Etapa", "Fecha", "Hora", "Humedad"};
-    public String headerEtapasProedimiento[] = new String[]{"10", "30", "30", "30", "30"};
+    public String columnas2[] = new String[]{"Etapa", "Fecha", "Hora", "Hum"};
+    public String headerEtapasProedimiento[] = new String[]{"10", "30", "30", "30"};
     public String columnas1[] = new String[]{"N°", "Bateria", "Secadora", "Silo", "Fecha", "Hora"};
-    public String headerProcedimiento[] = new String[]{"6", "20", "30", "10", "40", "30"};
-    public String columnas3[] = new String[]{"N°", "Bateria", "Secadora", "Silo", "Almacenamiento"};
-    public String headerSilo[] = new String[]{"10", "20", "35", "10", "30"};
-    public String columnas5[] = new String[]{"N°", "Etapa", "Fecha", "Hora", "H"};
-    public String headerEtapaSilo[] = new String[]{"5", "30", "40", "40", "10"};
+    public String headerProcedimiento[] = new String[]{"5", "10", "10", "10", "50", "40"};
+    public String columnas3[] = new String[]{"N°", "Bateria", "Secadora", "Silo"};
+    public String headerSilo[] = new String[]{"10", "20", "35", "10"};
+    public String columnas5[] = new String[]{"Etapa", "Fecha", "Hora", "Hum"};
+    public String headerEtapaSilo[] = new String[]{"40", "40", "20", "5"};
     public static tablas tbl;
     public static String idSilos, idProcedimiento, idProcedimiento2;
 
@@ -69,6 +69,7 @@ public class etapaInventario {
         String estado = Procedimiento.cmbestado.getSelectedItem().toString();
         if (!humedad.equals("")) {
             insertar_procedimiento(fecha, hora, humedad, estado);
+            JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             crearModeloProcedimentosSecamiento();
             //Procedimiento.cmbestado.setSelectedIndex(0);
             limpiar_campos();
@@ -156,14 +157,14 @@ public class etapaInventario {
         };
         tbl = new tablas();
         tbl.llenarTabla(Procedimiento.jtablecreadas, modeloemp, columnas1.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.fecha,procedimiento.hora from bateria,procedimiento,silos,secadora where procedimiento.idSilos=silos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.estado='proceso' and procedimiento.observacion is null");
-
+        tbl.alinearHeaderTable(Procedimiento.jtablecreadas, headerProcedimiento);
     }
 
     public void Datos_Campos_Procedimientos() {
         int rec = Procedimiento.jtablecreadas.getSelectedRow();
         idProcedimiento = "";
         idProcedimiento = Procedimiento.jtablecreadas.getValueAt(rec, 0).toString();
-        System.out.println("El id del procedimiento  es: " + idProcedimiento);
+        //System.out.println("El id del procedimiento  es: " + idProcedimiento);
         Procedimiento.TxtBateria.setText(Procedimiento.jtablecreadas.getValueAt(rec, 1).toString());
         Procedimiento.TxtSecadora.setText(Procedimiento.jtablecreadas.getValueAt(rec, 2).toString());
         Procedimiento.TxtSilo.setText(Procedimiento.jtablecreadas.getValueAt(rec, 3).toString());
@@ -194,8 +195,8 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jtablependiente, modeloemp2, columnas2.length, "SELECT idHistorialEtapa,etapa,fecha,hora,humedad FROM etapa WHERE etapa = 'secamiento' and idProcedimiento='" + idProcedimiento + "' ");
-
+        tbl.llenarTabla(Procedimiento.jtablependiente, modeloemp2, columnas2.length, "SELECT etapa,fecha,hora,humedad FROM etapa WHERE etapa = 'secamiento' and idProcedimiento='" + idProcedimiento + "' ");
+        tbl.alinearHeaderTable(Procedimiento.jtablependiente, headerEtapasProedimiento);
     }
 
     public void crearModeloProcedimentosSecamiento() {
@@ -205,8 +206,8 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero,procedimiento.tipoAlmacenamiento from bateria,procedimiento,silos,secadora,etapa,tiqueteensilos where procedimiento.idSilos=silos.idSilos and silos.idSilos=tiqueteensilos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='finalizado' and tiqueteensilos.estado='seco' GROUP BY procedimiento.idProcedimiento");
-
+        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero from bateria,procedimiento,silos,secadora,etapa,tiqueteensilos where procedimiento.idSilos=silos.idSilos and silos.idSilos=tiqueteensilos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='finalizado' and tiqueteensilos.estado='seco' GROUP BY procedimiento.idProcedimiento");
+        tbl.alinearHeaderTable(Procedimiento.jTable1, headerSilo);
     }
 
     public void crearModeloEtapasSeco(String id) {
@@ -216,8 +217,8 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jTable2, modeloemp5, columnas5.length, "SELECT idHistorialEtapa,etapa,fecha,hora,humedad FROM etapa WHERE etapa.idProcedimiento='" + id + "'");
-
+        tbl.llenarTabla(Procedimiento.jTable2, modeloemp5, columnas5.length, "SELECT etapa,fecha,hora,humedad FROM etapa WHERE etapa.idProcedimiento='" + id + "'");
+        tbl.alinearHeaderTable(Procedimiento.jTable2, headerEtapaSilo);
     }
 
     public void llenarTabla(String idPro) {
@@ -332,11 +333,18 @@ public class etapaInventario {
         if (Procedimiento.cmbestado.getSelectedIndex() == 0) {
             guardar();
             idProcedimiento = "";
-            JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
             crearModelo2();
         } else {
             guardar();
             actualizar_procedimiento();
+        }
+    }
+    
+    public void desactivarBtnAgregar(){
+        if (!Procedimiento.TxtBateria.getText().equals("")) {
+            Procedimiento.btnguardar.setEnabled(true);
+        }else{
+            Procedimiento.btnguardar.setEnabled(false);
         }
     }
 

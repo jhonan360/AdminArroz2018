@@ -28,6 +28,7 @@ public class EtapaInventario extends javax.swing.JFrame {
         initComponents();
         //CmbAlmacenamiento.setEnabled(false);
         TxtObs.setEnabled(false);
+        btnguardar.setEnabled(false);
         //LblObs.setEnabled(false);
         //  LblAlma.setEnabled(false);
         setLocationRelativeTo(null);
@@ -172,6 +173,8 @@ public class EtapaInventario extends javax.swing.JFrame {
 
         TxtSilo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TxtSilo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jhora.setShowSeconds(false);
 
         cmbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Secamiento", "Seco" }));
         cmbestado.addItemListener(new java.awt.event.ItemListener() {
@@ -318,13 +321,13 @@ public class EtapaInventario extends javax.swing.JFrame {
 
         jtablependiente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
         jScrollPane1.setViewportView(jtablependiente);
@@ -368,7 +371,7 @@ public class EtapaInventario extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,13 +423,13 @@ public class EtapaInventario extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "N°", "Etapa", "Fecha", "Hora", "Humedad"
+                "Etapa", "Fecha", "Hora", "Hum"
             }
         ));
         jScrollPane4.setViewportView(jTable2);
@@ -437,18 +440,26 @@ public class EtapaInventario extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(jTable1);
@@ -485,22 +496,26 @@ public class EtapaInventario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(192, 192, 192)
+                                .addComponent(btnguardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-                                    .addComponent(btnguardar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane5)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addGap(6, 6, 6))
         );
         jPanel2Layout.setVerticalGroup(
@@ -649,6 +664,7 @@ public class EtapaInventario extends javax.swing.JFrame {
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
         etapa.guardar_actualizar();
+        etapa.desactivarBtnAgregar();
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void txtHumedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHumedadActionPerformed
@@ -657,11 +673,13 @@ public class EtapaInventario extends javax.swing.JFrame {
 
     private void jtablecreadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtablecreadasMouseClicked
         etapa.Datos_Campos_Procedimientos();// TODO add your handling code here:
+        etapa.desactivarBtnAgregar();
     }//GEN-LAST:event_jtablecreadasMouseClicked
 
     private void jtablecreadasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablecreadasKeyPressed
         // TODO add your handling code here:
         etapa.Datos_Campos_Procedimientos();
+        etapa.desactivarBtnAgregar();
     }//GEN-LAST:event_jtablecreadasKeyPressed
 
     private void cmbestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbestadoActionPerformed
@@ -687,7 +705,8 @@ public class EtapaInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jtablecreadasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtablecreadasKeyReleased
-        // TODO add your handling code here:
+        etapa.Datos_Campos_Procedimientos();
+        etapa.desactivarBtnAgregar();
     }//GEN-LAST:event_jtablecreadasKeyReleased
 
     private void cmbestadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbestadoItemStateChanged
@@ -697,8 +716,7 @@ public class EtapaInventario extends javax.swing.JFrame {
          * // CmbAlmacenamiento.setEnabled(true); TxtObs.setEnabled(true);
          * LblObs.setEnabled(true); // LblAlma.setEnabled(true); } else {
          * //CmbAlmacenamiento.setEnabled(false); TxtObs.setEnabled(false);
-         * LblObs.setEnabled(false); //LblAlma.setEnabled(false);
-        }*
+         * LblObs.setEnabled(false); //LblAlma.setEnabled(false); }*
          */
     }//GEN-LAST:event_cmbestadoItemStateChanged
 
@@ -733,6 +751,14 @@ public class EtapaInventario extends javax.swing.JFrame {
         // TODO add your handling code here:
         etapa.trillar();
     }//GEN-LAST:event_btnguardar1ActionPerformed
+
+    private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
+        etapa.Datos_Campos_Procedimientos2();
+    }//GEN-LAST:event_jTable1KeyPressed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        etapa.Datos_Campos_Procedimientos2();
+    }//GEN-LAST:event_jTable1KeyReleased
 
     /**
      * @param args the command line arguments

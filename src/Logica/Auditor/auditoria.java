@@ -66,12 +66,14 @@ public class auditoria {
     public tablas tbl;
     public DefaultTableModel Modelo1;//declara el midelo de la tabla 1 para el archivo 1
     public String columnas[] = new String[]{"N°", "Evento", "Cambios", "Usuario", "Fecha"};//declara el nombre de cada una de las columnas para las dos tablas
+    public static String headerColumnas[] = new String[]{"5", "20", "750", "30", "80"};
+    public static String camposColumnas[] = new String[]{"left", "left", "left", "left", "left"};
     static String pathDownload = System.getProperty("user.home");
 
     public auditoria() {
         cu = new currencyFormat();
+        tbl = new tablas();
         crearModelo();
-        //LeerArchivos();
 
     }
 
@@ -91,11 +93,9 @@ public class auditoria {
                 return false;
             }
         };
-        tbl = new tablas();
-        tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria ORDER BY fecha DESC ");
-        //tbl.alinearHeaderTable(Cdt.jTable1, headerColumnas);
-        //tbl.alinearCamposTable(Cdt.jTable1, camposColumnas);
-        //tbl.rowNumberTabel(Cdt.jTable1);
+        tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria ORDER BY id DESC ");
+        tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+        tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
     }
 
     public void buscar() {
@@ -124,12 +124,12 @@ public class auditoria {
             }
         };
         tbl = new tablas();
-        
+
         if (Auditoria.ChEvento.isSelected() == true && Auditoria.ChUsuario.isSelected() == true && Auditoria.chFecha.isSelected()) {
             if (!evento.equals("") && !usuario.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE evento='" + evento + "' AND user LIKE '%" + usuario + "%' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -137,8 +137,8 @@ public class auditoria {
         } else if (Auditoria.ChEvento.isSelected() == true && Auditoria.ChUsuario.isSelected() == true) {
             if (!evento.equals("") && !usuario.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE evento='" + evento + "' AND user LIKE '%" + usuario + "%'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -146,8 +146,8 @@ public class auditoria {
         } else if (Auditoria.ChEvento.isSelected() == true && Auditoria.chFecha.isSelected()) {
             if (!evento.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE evento='" + evento + "' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -155,8 +155,8 @@ public class auditoria {
         } else if (Auditoria.ChUsuario.isSelected() == true && Auditoria.chFecha.isSelected() == true) {
             if (!usuario.equals("") && !fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE user LIKE '%" + usuario + "%' AND fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -164,8 +164,8 @@ public class auditoria {
         } else if (Auditoria.ChEvento.isSelected() == true) {
             if (!evento.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE evento='" + evento + "'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -173,8 +173,8 @@ public class auditoria {
         } else if (Auditoria.ChUsuario.isSelected() == true) {
             if (!usuario.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE user LIKE '%" + usuario + "%'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -182,8 +182,8 @@ public class auditoria {
         } else if (Auditoria.chFecha.isSelected() == true) {
             if (!fechaI.equals("") && !fechaF.equals("")) {
                 tbl.llenarTabla(Auditoria.TablaArchivo1, Modelo1, columnas.length, "SELECT id,evento,log,user,fecha FROM logsauditoria WHERE fecha >= '" + fechaI + "' AND fecha<='" + fechaF + "'  ORDER BY fecha DESC ");
-                //tbl.alinearHeaderTable(Auditoria.tblAuditoria, headerColumnas);
-                //tbl.alinearCamposTable(Auditoria.tblAuditoria, camposColumnas);
+                tbl.alinearHeaderTable(Auditoria.TablaArchivo1, headerColumnas);
+                tbl.alinearCamposTable(Auditoria.TablaArchivo1, camposColumnas);
                 //formatoTabla();
             } else {
                 JOptionPane.showMessageDialog(null, "Uno de los campos que selecciono para la busqueda esta vacio");
@@ -193,8 +193,8 @@ public class auditoria {
         }
         //desactivar_checkbox();*/
     }
-    
-    public void CopiarArchivo(){
+
+    public void CopiarArchivo() {
         try {
             java.util.Date date = new Date();
             String dates = cu.DateTime(date);
@@ -205,21 +205,21 @@ public class auditoria {
             FileWriter flwriter = null;
             flwriter = new FileWriter(pathFile);
             BufferedWriter bfwriter = new BufferedWriter(flwriter);
-            for (int i = 0 ; i < Auditoria.TablaArchivo1.getRowCount(); i++) //realiza un barrido por filas.
+            for (int i = 0; i < Auditoria.TablaArchivo1.getRowCount(); i++) //realiza un barrido por filas.
             {
-                for(int j = 0 ; j < Auditoria.TablaArchivo1.getColumnCount();j++) //realiza un barrido por columnas.
+                for (int j = 0; j < Auditoria.TablaArchivo1.getColumnCount(); j++) //realiza un barrido por columnas.
                 {
-                    bfwriter.write((String)(Auditoria.TablaArchivo1.getValueAt(i,j)));
-                    if (j < Auditoria.TablaArchivo1.getColumnCount() -1) { //agrega separador "," si no es el ultimo elemento de la fila.
+                    bfwriter.write((String) (Auditoria.TablaArchivo1.getValueAt(i, j)));
+                    if (j < Auditoria.TablaArchivo1.getColumnCount() - 1) { //agrega separador "," si no es el ultimo elemento de la fila.
                         bfwriter.write(",");
                     }
                 }
                 bfwriter.newLine(); //inserta nueva linea.
             }
             bfwriter.close();
-            JOptionPane.showMessageDialog(null, "Exportación finalizada archivo alojado en descargas "+nameFile + ".txt");
+            JOptionPane.showMessageDialog(null, "Exportación finalizada archivo alojado en descargas " + nameFile + ".txt");
         } catch (IOException e) {
-            
+
         }
     }
 }

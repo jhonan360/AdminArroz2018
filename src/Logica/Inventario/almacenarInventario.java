@@ -42,7 +42,7 @@ public class almacenarInventario {
     public static ResultSet rs;
     public static Statement st;
     String columnasTabla[] = new String[]{"N", "Fecha", "Agricultor", "Kilos Netos", "Cuenta"};
-    String alineaHeader[] = new String[]{"10", "40", "150", "40", "40"};
+    String alineaHeader[] = new String[]{"10", "70", "60", "40", "40"};
     String alineaCampo[] = new String[]{"center", "center", "left", "right", "right"};
     DefaultTableModel modeloTabla;
     String idTiquete = "", movimientos = "";
@@ -131,7 +131,7 @@ public class almacenarInventario {
                 return false;
             }
         };
-        tbl.llenarTabla(AlmacenarI.tblMateriaPrima, modeloTabla, columnasTabla.length, "SELECT tiquete.idTiquete, tiquete.fecha, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosNetos,cuentas.nombre FROM personalexterno,tiquete,cuentas  WHERE tiquete.idTiquete NOT IN (SELECT idTiquete FROM tiqueteensilos) AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.kilosNetos>0.00 AND tiquete.idCuenta=cuentas.idCuenta");
+        tbl.llenarTabla(AlmacenarI.tblMateriaPrima, modeloTabla, columnasTabla.length, "SELECT tiquete.idTiquete, tiquete.fecha, CONCAT(personalexterno.nombres,' ',personalexterno.apellidos), tiquete.kilosNetos,cuentas.nombre FROM personalexterno,tiquete,cuentas  WHERE tiquete.idTiquete NOT IN (SELECT idTiquete FROM tiqueteensilos) AND personalexterno.idPersonalExterno=tiquete.idAgricultor AND tiquete.kilosNetos>0.00 AND tiquete.idCuenta=cuentas.idCuenta ORDER BY tiquete.fecha ASC");
         tbl.alinearHeaderTable(AlmacenarI.tblMateriaPrima, alineaHeader);
         tbl.alinearCamposTable(AlmacenarI.tblMateriaPrima, alineaCampo);
         formatoTabla();
