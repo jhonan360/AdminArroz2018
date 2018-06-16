@@ -91,7 +91,9 @@ public class bascula {
     public static JFrame Ventanas[] = new JFrame[]{Arroz, Conductor, Agricultor, Vehiculo, Lote, Bas, TiqVarios, VerTiqPrincipal, VerTiqVarios,};
 
     public bascula() {
-       //ConBascula = new ConexionBascula();
+        if (ConBascula==null) {
+            ConBascula = new ConexionBascula();
+        }
         ext = new extras();
         tbl = new tablas();
         cu = new currencyFormat();
@@ -194,7 +196,6 @@ public class bascula {
         if (login.bas!=null) {
             login.bas.notify.stop();
         }
-        
         if (Login != null) {
             Login.dispose();
             Login = new Login();
