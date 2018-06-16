@@ -206,7 +206,7 @@ public class etapaInventario {
             }
         };
         tbl = new tablas();
-        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero from bateria,procedimiento,silos,secadora,etapa,tiqueteensilos where procedimiento.idSilos=silos.idSilos and silos.idSilos=tiqueteensilos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='finalizado' and tiqueteensilos.estado='seco' GROUP BY procedimiento.idProcedimiento");
+        tbl.llenarTabla(Procedimiento.jTable1, modeloemp3, columnas3.length, "SELECT procedimiento.idProcedimiento,bateria.nombre,secadora.nombre,silos.numero from bateria,procedimiento,silos,secadora,etapa,tiqueteensilos where procedimiento.idSilos=silos.idSilos and silos.idSilos=tiqueteensilos.idSilos and silos.idSecadora=secadora.idSecadora and secadora.idBateria=bateria.idBateria and procedimiento.idProcedimiento=etapa.idProcedimiento and procedimiento.estado='proceso' and tiqueteensilos.estado='seco' GROUP BY procedimiento.idProcedimiento");
         tbl.alinearHeaderTable(Procedimiento.jTable1, headerSilo);
     }
 
@@ -264,9 +264,7 @@ public class etapaInventario {
 
                 st.executeUpdate("UPDATE procedimiento SET observacion='" + observacion + "' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
                 ext.logs("UPDATE", "UPDATE procedimiento SET observacion='" + observacion + "' Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
-                st.executeUpdate("UPDATE silos SET kilos='0.00', estado='vacio' Where silos.idSilos='" + idsilo + "'");
                 st.executeUpdate("UPDATE tiqueteensilos SET estado='seco' Where tiqueteensilos.idSilos='" + idsilo + "' and tiqueteensilos.estado='secamiento'");
-                st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
                 ext.logs("UPDATE", "UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento + "'");
 
                 JOptionPane.showMessageDialog(null, "El registro ha sido agregado");
@@ -361,6 +359,8 @@ public class etapaInventario {
                     st = Con.conexion.createStatement();
                     System.out.println("idsilo" + idsilo);
                     System.out.println("idsilo2" + idsilo2);
+                    st.executeUpdate("UPDATE procedimiento SET estado='finalizado'  Where procedimiento.idProcedimiento='" + idProcedimiento2 + "'");
+                    st.executeUpdate("UPDATE silos SET kilos='0.00', estado='vacio' Where silos.idSilos='" + idsilo2 + "'");
                     st.executeUpdate("UPDATE tiqueteensilos SET estado='trilla' Where tiqueteensilos.idSilos='" + idsilo2 + "' and tiqueteensilos.estado='seco'");
 
                     JOptionPane.showMessageDialog(null, "El silo ha sido trillado");
